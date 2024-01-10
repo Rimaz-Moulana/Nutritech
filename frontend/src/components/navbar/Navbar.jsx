@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <nav className="border--200 bg-black w-full">
       <div className="flex p-4 w-full">
-        <img src={logo} className="h-8 place-items-start width-full" alt="NutriTech Logo" />  
+        <img src={logo} className="h-8 place-items-start width-full ml-7.5" alt="NutriTech Logo" />  
      </div>
   </nav>
   )

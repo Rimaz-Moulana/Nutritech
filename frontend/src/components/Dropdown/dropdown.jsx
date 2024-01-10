@@ -46,7 +46,7 @@ export default function Example() {
                   href="#"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm hover:text-green-500'
+                    'block px-4 py-2 text-sm hover:text-darkGreen'
                   )}
                 >
                   Annotated Videos
