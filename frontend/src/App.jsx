@@ -1,12 +1,28 @@
 import './App.css'
+import Navbar from './components/navbar/Navbar'
+import {RouterProvider, createBrowserRouter} from 'react-router-dom'
 
 function App() {
   
+  const Nav = () => {
+    return (
+      <div>
+        <Navbar />
+      </div>
+    )
+  }
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Nav />,
+    }
+  ])
 
   return (
-    <>
-      <h1 className='font-bold font-sans p-9 w-12'>Hello World</h1>
-    </>
+    <div>
+      <RouterProvider router={router} />
+    </div>
   )
 }
 
