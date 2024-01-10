@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthProvider'
 import Navbar from './components/navbar/Navbar'
 import Dropdown from './components/dropdown/Dropdown'
 import VideoContainer from './components/videoContainer/VideoContainer'
+import TimeStampdropdown from './components/dropdown/TimeStampdropdown'
 
 // function App(){
 const App =()=> (
@@ -14,6 +15,7 @@ const App =()=> (
       <Route path="/" element={<Navbar />} />
       <Route path="/drop" element={<Dropdown/>} />
       <Route path="/grid" element={<VideoContainer/>} />
+      <Route path="/time" element={<TimeStampdropdown/>} />
       </Routes>
     </Router>
   </AuthProvider>
