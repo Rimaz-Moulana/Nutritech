@@ -14,6 +14,7 @@
     extend: {
       colors:{
         darkGreen: '#8EA174',
+        backgroundGreen: '#E5EBD6',
       },
 
       margin:{

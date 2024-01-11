@@ -6,11 +6,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+function Dropdown() {
   return (
-    <Menu as="div" className="ml-52 mt-32 relative inline-block text-left">
+    <Menu as="div" className="ml-56 mt-16 relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full focus:ring-white justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ">
+        <Menu.Button className="inline-flex w-full focus:ring-white justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 ">
           All Videos
           <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
         </Menu.Button>
@@ -32,8 +32,8 @@ export default function Example() {
                 <a
                   href="#"
                   className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm  hover:text-green-500'
+                    active ? 'bg-backgroundGreen text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm  hover:text-darkGreen'
                   )}
                 >
                   All Videos
@@ -45,7 +45,7 @@ export default function Example() {
                 <a
                   href="#"
                   className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    active ? 'bg-backgroundGreen text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm hover:text-darkGreen'
                   )}
                 >
@@ -58,8 +58,8 @@ export default function Example() {
                 <a
                   href="#"
                   className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm  hover:text-green-500'
+                    active ? 'bg-backgroundGreen text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm  hover:text-darkGreen'
                   )}
                 >
                   Unannotated Videos
@@ -73,3 +73,5 @@ export default function Example() {
     </Menu>
   )
 }
+
+export default Dropdown

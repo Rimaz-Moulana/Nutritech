@@ -7,7 +7,7 @@ function VideoContainer() {
       ];
     
       return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 ml-7.5 mr-7.5 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-5 mt-8 ml-7.5 mr-7.5 mb-8">
           {videoSources.map((videoSrc, index) => (
             <div key={index}>
               <video className="h-auto max-w-full rounded-lg" controls>
