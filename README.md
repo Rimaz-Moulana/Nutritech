@@ -1,5 +1,5 @@
 #if you want to clone sub branches use this command
-*git clone -b <branch name> <link>
+*git clone -b <branchName> <link>
 
 #it woll be run using this command 
 * initially install the npm packages : npm install
