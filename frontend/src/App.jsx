@@ -4,20 +4,28 @@ import { AuthProvider } from './context/AuthProvider'
 import SideBar from './components/sidebar/AnnotatorSideBar';
 import TimeStampdropdown from './components/dropdown/TimeStampdropdown'
 import Allvideos from './pages/Allvideos';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import './App.css'
+import Log from './pages/Log'
+import Login from './pages/login'
 
-// function App(){
-const App =()=> (
-  <AuthProvider>
-    <Router>
-      <Routes>
-      <Route path="/all" element={<Allvideos/>} />
-      <Route path="/time" element={<TimeStampdropdown/>} />
-      <Route path="/side" element={<SideBar />} />
-      </Routes>
-    </Router>
-  </AuthProvider>
-  
-);
+function App(){
+// const App =()=> (
+  return (
+    <BrowserRouter>
+        <Routes>
+            {/* <Route path='/'  > */}
+              {/* <Route path='/' element={<Nabra/>} /> */}
+              <Route path='/login' element={<Login />} />
+              <Route path='/log' element={<Log />} />
+              <Route path="/all" element={<Allvideos/>} />
+              <Route path="/time" element={<TimeStampdropdown/>} />
+              <Route path="/side" element={<SideBar />} />
+            {/* </Route> */}
+        </Routes>
+    </BrowserRouter>
+  )
+}
 
 export default App;
 
