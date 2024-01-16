@@ -6,6 +6,7 @@ import BlankPage from './components/theme/BlankPage';
 import Allvideos from './pages/Allvideos';
 import Log from './pages/Log';
 import Login from './pages/Login';
+import ProductDetails from './pages/ProductDetails';
 
 function App(){
 
@@ -17,6 +18,8 @@ function App(){
               <Route path='/login' element={<Login />} />
               <Route path='/log' element={<Log />} />
               <Route path='/blankPages' element={<BlankPage />} />
+              <Route path='/product' element={<ProductDetails />} />
+              
 
               <Route path="/all" element={<Allvideos/>} />
               <Route path="/time" element={<TimeStampdropdown/>} />
