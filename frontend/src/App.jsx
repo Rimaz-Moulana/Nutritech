@@ -1,6 +1,3 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-// import {RouterProvider, createBrowserRouter} from 'react-router-dom'
-import { AuthProvider } from './context/AuthProvider'
 import SideBar from './components/sidebar/AnnotatorSideBar';
 import TimeStampdropdown from './components/dropdown/TimeStampdropdown'
 import Allvideos from './pages/Allvideos';
