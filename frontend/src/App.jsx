@@ -1,12 +1,21 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
+import Log from './pages/Log'
+import Login from './pages/login'
 
 function App() {
   
 
   return (
-    <>
-      <h1 className='font-bold font-sans p-9 w-12'>Hello World</h1>
-    </>
+    <BrowserRouter>
+        <Routes>
+            {/* <Route path='/'  > */}
+              {/* <Route path='/' element={<Nabra/>} /> */}
+              <Route path='/login' element={<Login />} />
+              <Route path='/log' element={<Log />} />
+            {/* </Route> */}
+        </Routes>
+    </BrowserRouter>
   )
 }
 
