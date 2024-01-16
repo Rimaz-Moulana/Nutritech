@@ -2,7 +2,7 @@ import SideBar from './components/sidebar/AnnotatorSideBar';
 import TimeStampdropdown from './components/dropdown/TimeStampdropdown'
 import Allvideos from './pages/Allvideos';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
+// import './App.css'
 import Log from './pages/Log'
 import Login from './pages/login'
 
