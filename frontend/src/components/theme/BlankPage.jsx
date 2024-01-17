@@ -7,7 +7,7 @@ export default function BlankPage() {
     <>
     <Navbar />
     {/* <AnnotatorSideBar />  */}
-    <div className='bg-[#E5EBD6] relative w-full h-full flex'>
+    <div className='bg-[#E5EBD6] md:flex absolute w-full h-full'>
      
         
     </div>

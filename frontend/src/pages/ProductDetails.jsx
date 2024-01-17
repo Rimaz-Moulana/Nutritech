@@ -5,8 +5,8 @@ export default function ProductDetails() {
   return (
     <>
     <BlankPage/>
-    <h1 className="absolute text-left mx-48 text-5xl inset-x-0 top-20 font-semibold text-[#3C6339]">Product Deatils</h1>
-    <div className="absolute mx-10 md:w-1/2 inset-x-0 top-40">
+    <h1 className="relative text-left mx-48 text-5xl inset-x-0 top-8 font-semibold text-[#3C6339]">Product Deatils</h1>
+    <div className="relative flex-inline  mx-10 md:w-1/2 inset-x-0 top-12">
         <div className="p-2">
             <input
                 type="text" id="username"
@@ -152,6 +152,14 @@ export default function ProductDetails() {
          </div>
          
          
+    </div>
+    <div className="flex-inline inset-x-40 top-12 absolute mx-10 md:w-1/2 float-right">
+        <div className="p-2">
+            <input
+                type="text" id="username"
+                className="shadow appearance-none border rounded w-[70%] h-12 py-2 px-3 bg-[#BDC69A]  text-black leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter your username" />
+        </div>
     </div>
         
        
