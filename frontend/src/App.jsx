@@ -20,8 +20,6 @@ function App(){
               <Route path='/log' element={<Log />} />
               <Route path="/all" element={<Allvideos/>} />
               <Route path="/time" element={<TimeStampdropdown/>} />
-              <Route path="/side" element={<SideBar />} />
-              <Route path="/all-videos" element={<AllVideos/> }/>
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
 

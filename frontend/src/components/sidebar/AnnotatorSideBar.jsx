@@ -6,9 +6,6 @@ import arrow from '../../assets/Images/arrowgreen.png';
 import home from '../../assets/Images/home.png';
 import video from '../../assets/Images/video.png';
 import foodproducts from '../../assets/Images/products.png';
-import AllVideos from '../../pages/Annotator/Allvideos';
-import AnnotatedVideos from '../../pages/Annotator/AnnotatedVideos';
-import UnannotatedVideos from '../../pages/Annotator/UnannotatedVideos';
 
 const Annotatorsidebar = () => {
   const [selected, setSelected] = useState(0);
@@ -83,7 +80,7 @@ const Annotatorsidebar = () => {
               </a>
               {link.text === 'Video  ' && isDropdownOpen && (
                   <div className="absolute top-full left-0 bg-darkGreen shadow rounded mt-2">
-                    <Link to="/all-videos" className="block px-4 py-2 text-sm text-gray-700 hover:text-white">
+                    <Link to="/all" className="block px-4 py-2 text-sm text-gray-700 hover:text-white">
                       All Videos
                     </Link>
                     <Link to="/annotated-videos" className="block px-4 py-2 text-sm text-gray-700 hover:text-white">
