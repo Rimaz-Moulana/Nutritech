@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AllVideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
+import TimeStamp from './components/AnnotationTable/TimeStamp';
 // import './App.css'
 import Log from './pages/Log'
 import Login from './pages/login'
@@ -19,9 +20,7 @@ function App(){
               <Route path='/login' element={<Login />} />
               <Route path='/log' element={<Log />} />
               <Route path="/all" element={<Allvideos/>} />
-              <Route path="/time" element={<TimeStampdropdown/>} />
-              <Route path="/side" element={<SideBar />} />
-              <Route path="/all-videos" element={<AllVideos/> }/>
+              <Route path="/time" element={<TimeStamp/>} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
 
