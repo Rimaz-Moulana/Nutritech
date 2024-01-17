@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar';
-import VideoContainer from '../components/videoContainer/VideoContainer';
-import AnnotatorSideBar from '../components/sidebar/AnnotatorSideBar';
+import Navbar from '../../components/navbar/Navbar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
+import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 
 function Allvideos() {
   return (
