@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from '../components/navbar/Navbar';
-import Dropdown from '../components/dropdown/Dropdown';
 import VideoContainer from '../components/videoContainer/VideoContainer';
 import AnnotatorSideBar from '../components/sidebar/AnnotatorSideBar';
 
