@@ -6,6 +6,9 @@ import arrow from '../../assets/Images/arrowgreen.png';
 import home from '../../assets/Images/home.png';
 import video from '../../assets/Images/video.png';
 import foodproducts from '../../assets/Images/products.png';
+import AllVideos from '../../pages/Annotator/Allvideos';
+import AnnotatedVideos from '../../pages/Annotator/AnnotatedVideos';
+import UnannotatedVideos from '../../pages/Annotator/UnannotatedVideos';
 
 const Annotatorsidebar = () => {
   const [selected, setSelected] = useState(0);
@@ -41,12 +44,12 @@ const Annotatorsidebar = () => {
 
   const handleItemClick = (index) => {
     setSelected(index);
-
     // Toggle the dropdown when the "Video" item is clicked
     if (index === nav.findIndex(item => item.text === 'Video  ')) {
       setDropdownOpen(!isDropdownOpen);
     } else {
       setDropdownOpen(false);
+      setSelected(index);
     }
   };
 
