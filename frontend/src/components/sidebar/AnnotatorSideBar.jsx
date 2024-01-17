@@ -1,42 +1,108 @@
-import { Sidebar } from 'flowbite-react';
-import menu from '../../assets/Images/menu.png';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import backarrow from '../../assets/Images/backarrowgreen.png';
+import arrow from '../../assets/Images/arrowgreen.png';
 import home from '../../assets/Images/home.png';
 import video from '../../assets/Images/video.png';
 import foodproducts from '../../assets/Images/products.png';
-import annotate from '../../assets/Images/edit.png';
-import dropdownIcon from '../../assets/Images/triangledropdown.png';
-// import Dropdown from '../Dropdown/annotatorvideosdropdown'
-import { Dropdown as FlowbiteDropdown } from 'flowbite-react';
-import { useState } from 'react';
 
-function AnnotatorSideBar() {
-
-  
+const Annotatorsidebar = () => {
+  const [selected, setSelected] = useState(0);
+  const [isEnlarge, setEnlarge] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleDropdownToggle = () => {
-    setDropdownOpen(!isDropdownOpen);
-  }; 
-  return (
-    <Sidebar className='h-full bg-sidebarGreen w-32 items-center whitespace-normal px-0 py-0 '>
-      <Sidebar.Items className="h-full bg-sidebarGreen px-0 py-0">
-        <Sidebar.ItemGroup className='px-0 py-0'>
-          <Sidebar.Item href="#"><img src={menu} alt="Menu" className='h-8 w-8 mt-7 mr-7 ml-2 items-center'/></Sidebar.Item>
-          <Sidebar.Item href="#"><img src={home} alt="Menu" className='h-8 w-8 mt-9 mb-9 mr-7 ml-2 items-center'/></Sidebar.Item>
-          <div className='relative'>
-           <FlowbiteDropdown className='w-52 border-hidden' placement="right-start" label={<img src={video} alt="Menu" className='h-8 w-8 ml-3' />}>
-              <FlowbiteDropdown.Item>All Videos</FlowbiteDropdown.Item>
-              <FlowbiteDropdown.Item>Annotated Videos</FlowbiteDropdown.Item>
-              <FlowbiteDropdown.Item>Unannotated Videos</FlowbiteDropdown.Item>
-            </FlowbiteDropdown>
-          </div>
-          {/* <Dropdown/> */}
-          <Sidebar.Item href="#"><img src={foodproducts} alt="Menu" className='h-8 w-8 mt-10 mr-7 ml-2 items-center'/></Sidebar.Item>
-          <Sidebar.Item href="#"><img src={annotate} alt="Menu" className='h-8 w-8 mt-10 mr-7 ml-2 items-center'/></Sidebar.Item>
-        </Sidebar.ItemGroup>
-      </Sidebar.Items>
-    </Sidebar>
-  );
-}
+  const nav = [
+    {
+      icon: home,
+      selectedIcon: home,
+      text: 'Home',
+    },
 
-export default AnnotatorSideBar
+    {
+      icon: foodproducts,
+      selectedIcon: foodproducts,
+      text: 'Products',
+    },
+
+    {
+      icon: video,
+      selectedIcon: video,
+      text: 'Video  ',
+    },
+    
+  ];
+
+  const enlarge = {
+    decrease: arrow, 
+    enlarge: backarrow,
+    text: 'Group Manager',
+  };
+
+  const handleItemClick = (index) => {
+    setSelected(index);
+
+    // Toggle the dropdown when the "Video" item is clicked
+    if (index === nav.findIndex(item => item.text === 'Video  ')) {
+      setDropdownOpen(!isDropdownOpen);
+    } else {
+      setDropdownOpen(false);
+    }
+  };
+
+  const handleEnlargeClick = () => {
+    setEnlarge(!isEnlarge);
+  };
+
+  return (
+    <div id="app" className="min-h-screen bg-sidebarGreen">
+      <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
+        <nav className=" inline-flex flex-col space-y-2">
+          {nav.map((link, index) => (
+            <div key={index} className="relative">
+              <a
+                className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${isEnlarge ? 'pl-2 pr-6 rounded-lg' : 'px-2 rounded-full'} ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
+                onClick={() => handleItemClick(index)}
+              >
+                <img
+                  src={isEnlarge ? link.selectedIcon : link.icon}
+                  alt={link.text}
+                  className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-4' : ''}`}
+                />
+                {isEnlarge && <span className="font-medium select-none">{link.text}</span>}
+                {link.text === 'Video  ' && link.image && (
+                  <img
+                    src={link.image}
+                    alt="Video"
+                    className="w-8 h-8 p-1 ml-2 rounded-full"
+                  />
+                )}
+              </a>
+              {link.text === 'Video  ' && isDropdownOpen && (
+                  <div className="absolute top-full left-0 bg-darkGreen shadow rounded mt-2">
+                    <Link to="/all-videos" className="block px-4 py-2 text-sm text-gray-700 hover:text-white">
+                      All Videos
+                    </Link>
+                    <Link to="/annotated-videos" className="block px-4 py-2 text-sm text-gray-700 hover:text-white">
+                      Annotated Videos
+                    </Link>
+                    <Link to="/unannotated-videos" className="block px-4 py-2 text-sm text-gray-700 hover:text-white">
+                      Unannotated Videos
+                    </Link>
+                  </div>
+              )}
+            </div>
+          ))}
+        </nav>
+        <button
+          className="h-8 w-8 p-1 bg-darkGreen text-sidebarGreen rounded-lg mx-auto border border-solid border-gray-200 hover:border-gray-300"
+          onClick={handleEnlargeClick}
+        >
+          <img src={isEnlarge ? enlarge.decrease : enlarge.enlarge} alt="Enlarge/Decrease" />
+        </button>
+      </header>
+    </div>
+  );
+};
+
+export default Annotatorsidebar;
