@@ -8,14 +8,14 @@ function Allvideos() {
   return (
     <div className='bg-backgroundGreen flex'>
       {/* Sidebar */}
-      <div className="w-1/8">
+      <div className="w-3/8">
         <AnnotatorSideBar />
       </div>
       <div>
         
       </div>
       {/* Content */}
-      <div className="w-7/8 ml-0">
+      <div className="w-5/8 ml-0">
         <Navbar />
         <h1 className='ml-20 mb-8 mt-8 text-3xl font-semibold text-sidebarGreen'>
            All Videos
