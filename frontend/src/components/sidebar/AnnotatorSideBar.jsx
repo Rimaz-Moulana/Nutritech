@@ -18,8 +18,8 @@ function AnnotatorSideBar() {
     setDropdownOpen(!isDropdownOpen);
   }; 
   return (
-    <Sidebar className='h-screen bg-sidebarGreen w-32 items-center whitespace-normal px-0 py-0'>
-      <Sidebar.Items className="h-screen bg-sidebarGreen px-0 py-0">
+    <Sidebar className='h-full bg-sidebarGreen w-32 items-center whitespace-normal px-0 py-0 '>
+      <Sidebar.Items className="h-full bg-sidebarGreen px-0 py-0">
         <Sidebar.ItemGroup className='px-0 py-0'>
           <Sidebar.Item href="#"><img src={menu} alt="Menu" className='h-8 w-8 mt-7 mr-7 ml-2 items-center'/></Sidebar.Item>
           <Sidebar.Item href="#"><img src={home} alt="Menu" className='h-8 w-8 mt-9 mb-9 mr-7 ml-2 items-center'/></Sidebar.Item>
