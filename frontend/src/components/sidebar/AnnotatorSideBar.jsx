@@ -9,7 +9,6 @@ import dropdownIcon from '../../assets/Images/triangledropdown.png';
 import { Dropdown as FlowbiteDropdown } from 'flowbite-react';
 import { useState } from 'react';
 
-
 function AnnotatorSideBar() {
 
   
@@ -31,6 +30,7 @@ function AnnotatorSideBar() {
               <FlowbiteDropdown.Item>Unannotated Videos</FlowbiteDropdown.Item>
             </FlowbiteDropdown>
           </div>
+          {/* <Dropdown/> */}
           <Sidebar.Item href="#"><img src={foodproducts} alt="Menu" className='h-8 w-8 mt-10 mr-7 ml-2 items-center'/></Sidebar.Item>
           <Sidebar.Item href="#"><img src={annotate} alt="Menu" className='h-8 w-8 mt-10 mr-7 ml-2 items-center'/></Sidebar.Item>
         </Sidebar.ItemGroup>
