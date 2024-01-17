@@ -48,13 +48,13 @@ const Annotatorsidebar = () => {
           {nav.map((link, index) => (
             <a
               key={index}
-              className={`flex items-left text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''} ${isEnlarge ? 'pl-2 pr-6 rounded-lg' : 'pt-2 rounded-full'}`}
+              className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''} ${isEnlarge ? 'pl-2 pr-6 rounded-lg' : 'px-2 rounded-full'}`}
               onClick={() => handleItemClick(index)}
             >
               <img
                 src={isEnlarge ? link.selectedIcon : link.icon}
                 alt={link.text}
-                className={`w-8 h-8 p-0 ${isEnlarge ? 'mr-4' : ''}`}
+                className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-4' : ''}`}
               />
               {isEnlarge && <span className="font-medium select-none">{link.text}</span>}
             </a>
