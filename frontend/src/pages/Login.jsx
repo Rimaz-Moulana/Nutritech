@@ -8,7 +8,7 @@ export default function login() {
 <div className="md:flex ">
 	<div
     //class="flex md:w-1/2 justify-center items-center"
-		className="flex-inline md:w-1/2 justify-center items-cente">
+		className="flex-inline md:w-1/2 justify-center items-center">
         <img  className='h-screen w-full' src={Image1} /> 
 	</div>
     {/* //class="block md:w-1/2 h-screen justify-center items-center bg-gradient-to-br from-[#B8C294] to-white " */}
