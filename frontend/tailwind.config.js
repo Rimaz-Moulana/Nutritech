@@ -15,6 +15,7 @@
       colors:{
         darkGreen: '#8EA174',
         backgroundGreen: '#E5EBD6',
+        sidebarGreen : '#284625'
       },
 
       margin:{

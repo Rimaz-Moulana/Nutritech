@@ -7,6 +7,8 @@ import Allvideos from './pages/Allvideos';
 import Log from './pages/Log';
 import Login from './pages/Login';
 import ProductDetails from './pages/ProductDetails';
+// import './App.css'
+
 
 function App(){
 
@@ -15,7 +17,7 @@ function App(){
         <Routes>
             {/* <Route path='/'  > */}
               {/* <Route path='/' element={<Nabra/>} /> */}
-              <Route path='/login' element={<Login />} />
+              <Route path='/' element={<Login />} />
               <Route path='/log' element={<Log />} />
               <Route path='/blankPages' element={<BlankPage />} />
               <Route path='/product' element={<ProductDetails />} />
