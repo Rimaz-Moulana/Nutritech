@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import backarrow from '../../assets/Images/backarrowgreen.png';
 import arrow from '../../assets/Images/arrowgreen.png';
+import backarrow from '../../assets/Images/backarrowgreen.png';
 import home from '../../assets/Images/home.png';
-import video from '../../assets/Images/video.png';
 import foodproducts from '../../assets/Images/products.png';
+import video from '../../assets/Images/video.png';
 
 const Annotatorsidebar = () => {
   const [selected, setSelected] = useState(0);
@@ -55,7 +55,7 @@ const Annotatorsidebar = () => {
   };
 
   return (
-    <div id="app" className="min-h-screen bg-sidebarGreen">
+    <div id="app" className="min-h-screen fixed bg-sidebarGreen">
       <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
         <nav className=" inline-flex flex-col space-y-2">
           {nav.map((link, index) => (
