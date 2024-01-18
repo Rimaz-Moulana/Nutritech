@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar';
-import VideoContainer from '../components/videoContainer/VideoContainer';
-import AnnotatorSideBar from '../components/sidebar/AnnotatorSideBar';
+import Navbar from '../../components/navbar/Navbar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
+import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 
-function Allvideos() {
+function Annotatedvideos() {
   return (
     <div className='bg-backgroundGreen flex'>
       {/* Sidebar */}
@@ -16,8 +16,8 @@ function Allvideos() {
       {/* Content */}
       <div className="w-3/4 ml-64">
         <Navbar />
-        <h1 className='ml-20 mb-8 mt-8 text-3xl font-semibold text-sidebarGreen'>
-           All Videos
+        <h1 className='ml-20 mb-8 mt-24 text-3xl font-semibold text-sidebarGreen'>
+           Annotated Videos
         </h1>
         <VideoContainer />
       </div>
@@ -25,4 +25,4 @@ function Allvideos() {
   );
 }
 
-export default Allvideos;
+export default Annotatedvideos;
