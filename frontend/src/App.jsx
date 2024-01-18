@@ -3,7 +3,7 @@ import './App.css';
 
 import TimeStamp from './components/AnnotationTable/TimeStamp';
 import BlankPage from './components/theme/BlankPage';
-import Allvideos from './pages/Allvideos';
+import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
 import Log from './pages/Log';
