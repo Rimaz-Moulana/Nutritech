@@ -16,7 +16,7 @@ function Annotatedvideos() {
       {/* Content */}
       <div className="w-3/4 ml-64">
         <Navbar />
-        <h1 className='ml-20 mb-8 mt-8 text-3xl font-semibold text-sidebarGreen'>
+        <h1 className='ml-20 mb-8 mt-24 text-3xl font-semibold text-sidebarGreen'>
            Annotated Videos
         </h1>
         <VideoContainer />
