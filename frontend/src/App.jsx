@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import TimeStamp from './components/AnnotationTable/TimeStamp';
 import BlankPage from './components/theme/BlankPage';
 import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
