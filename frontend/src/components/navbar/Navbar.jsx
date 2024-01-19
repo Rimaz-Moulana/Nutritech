@@ -1,12 +1,48 @@
-import React from 'react'
-import logo from '../../../src/assets/Images/NutriTechLogo11.png'
+import React, { useState } from 'react';
+import logo from '../../../src/assets/Images/NutriTechLogo08.png';
+import menuIcon from '../../../src/assets/Images/blackmenu.png';
+import Sidebar from '../../components/sidebar/AnnotatorSideBar';
 
-export default function Navbar() {
+function Navbar() {
+  const [isSidebarVisible, setSidebarVisible] = useState(false);
+
+  const handleMenuClick = () => {
+    setSidebarVisible(!isSidebarVisible);
+  };
+
   return (
-    <nav className="border--200 bg-black w-full">
-      <div className="flex p-4 w-full">
-        <img src={logo} className="h-8 place-items-start width-full ml-7.5" alt="NutriTech Logo" />  
-     </div>
-  </nav>
-  )
+    <div>
+      <nav className="mt-0 mb-12 fixed w-full">
+        <div className="flex p-4 bg-backgroundGreen">
+          {/* Menu Icon for Small Screens */}
+          <img
+            src={menuIcon}
+            className="h-8 w-8 ml-1 mt-4 sm:hidden cursor-pointer"
+            alt="Menu Icon"
+            onClick={handleMenuClick}
+          />
+
+          {/* Logo */}
+          <img src={logo} className="h-16 w-44 place-items-start width-full ml-4" alt="NutriTech Logo" />
+        </div>
+
+          {/* Sidebar */}
+      {isSidebarVisible && (
+        <div className="sm:hidden fixed h-1/2 w-1/2 inset-0 bg-opacity-0 z-50 mt-24 ">
+          <div className="flex">
+            <Sidebar />
+            <div className="flex-1" onClick={handleMenuClick}></div>
+          </div>
+        </div>
+      )} 
+
+      </nav>
+
+    
+    </div>
+  );
 }
+
+export default Navbar;
+
+

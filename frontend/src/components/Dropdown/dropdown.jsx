@@ -9,13 +9,6 @@ function classNames(...classes) {
 function Dropdown() {
   return (
     <Menu as="div" className="ml-56 mt-16 relative inline-block text-left">
-      <div>
-        <Menu.Button className="inline-flex w-full focus:ring-white justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 ">
-          All Videos
-          <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"

@@ -1,23 +1,35 @@
-import SideBar from './components/sidebar/AnnotatorSideBar';
-import TimeStampdropdown from './components/dropdown/TimeStampdropdown'
-import Allvideos from './pages/Allvideos';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
+
+import TimeStamp from './components/AnnotationTable/TimeStamp';
+import BlankPage from './components/theme/BlankPage';
+import Allvideos from './pages/Annotator/Allvideos';
+import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
+import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
+import Log from './pages/Log';
+import Login from './pages/Login';
+import ProductDetails from './pages/ProductDetails';
 // import './App.css'
-import Log from './pages/Log'
-import Login from './pages/login'
+
 
 function App(){
-// const App =()=> (
+
   return (
     <BrowserRouter>
         <Routes>
             {/* <Route path='/'  > */}
               {/* <Route path='/' element={<Nabra/>} /> */}
-              <Route path='/login' element={<Login />} />
+              <Route path='/' element={<Login />} />
               <Route path='/log' element={<Log />} />
+              <Route path='/blankPages' element={<BlankPage />} />
+              <Route path='/product' element={<ProductDetails />} />
+              
+
               <Route path="/all" element={<Allvideos/>} />
-              <Route path="/time" element={<TimeStampdropdown/>} />
-              <Route path="/side" element={<SideBar />} />
+              <Route path="/time" element={<TimeStamp/>} />
+              <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
+              <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
+
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
