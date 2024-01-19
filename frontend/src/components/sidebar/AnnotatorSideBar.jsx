@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import home from '../../assets/Images/home.png';
+import menu from '../../assets/Images/menu.png';
 import foodproducts from '../../assets/Images/products.png';
+import video from '../../assets/Images/video.png';
 
 const Annotatorsidebar = () => {
   const [isEnlarge, setEnlarge] = useState(true);
@@ -58,7 +60,7 @@ const Annotatorsidebar = () => {
   };
 
   return (
-    <div id="app" className="min-h-screen bg-sidebarGreen">
+    <div id="app" className="min-h-screen fixed bg-sidebarGreen">
       <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
         <nav className=" inline-flex flex-col space-y-2">
           <button
