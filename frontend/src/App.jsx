@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
+
 import TimeStamp from './components/AnnotationTable/TimeStamp';
 import TextField from './components/fields/textfield';
+
 import BlankPage from './components/theme/BlankPage';
 import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
@@ -22,6 +24,7 @@ function App(){
             {/* <Route path='/'  > */}
               {/* <Route path='/' element={<Nabra/>} /> */}
               <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
               <Route path='/log' element={<Log />} />
               <Route path='/blankPages' element={<BlankPage />} />
               <Route path='/product' element={<ProductDetails />} />
