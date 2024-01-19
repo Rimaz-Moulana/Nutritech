@@ -66,7 +66,7 @@ const Annotatorsidebar = () => {
       <header className="pos-r h-screen inline-flex flex-col bg-sidebarGreen p-6">
         <nav className=" inline-flex flex-col space-y-2">
           <button
-            className="h-8 w-8 p-1 mb-8 hidden sm:block bg-sidebarGreen text-sidebarGreen rounded-lg mx-auto border border-solid border-gray-200 hover:border-gray-300"
+            className="h-8 w-8 p-1 mb-8 hidden sm:block bg-sidebarGreen text-sidebarGreen rounded-lg mx-auto hover:border-gray-300"
             onClick={handleEnlargeClick}
           >
             <img src={isEnlarge ? enlarge.decrease : enlarge.enlarge} alt="Enlarge/Decrease" />
