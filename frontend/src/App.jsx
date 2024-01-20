@@ -8,7 +8,8 @@ import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
 import Log from './pages/Log';
 import Login from './pages/Login';
 import ProductDetails from './pages/ProductDetails';
-import TimeStamp from './pages/Annotator/AnnotationTable';
+import Annotation from './pages/Annotator/AnnotationTable';
+import Row from './components/AnnotationTable/Row';
 // import './App.css'
 
 
@@ -27,7 +28,7 @@ function App(){
               
 
               <Route path="/all" element={<Allvideos/>} />
-              <Route path="/time" element={<TimeStamp/>} />
+              <Route path="/annotation" element={<Annotation/>} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
 

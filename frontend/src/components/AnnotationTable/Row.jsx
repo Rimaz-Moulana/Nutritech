@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TimeStamp() {
+function Row() {
   return (
     <div className='flex'>  
     <div className="relative h-full bg-backgroundGreen w-64 min-w-[200px] ml-12 border-gray-200 border-1 rounded-sm">
@@ -32,13 +32,13 @@ function TimeStamp() {
       </select>
     </div>
     <div>
-    <div className="relative h-full bg-backgroundGreen w-64 min-w-[200px] ml-12 border-gray-200 border-1 rounded-sm">
+    <div className="relative h-full mb-6 bg-backgroundGreen w-64 min-w-[200px] ml-12 border-gray-200 border-1 rounded-sm">
     <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
       <input type="text" id="small-input" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></input>
     </div>
       </div>
 
-      <div className="relative h-full bg-backgroundGreen w-72 min-w-[200px] ml-12 border-gray-200 border-1 rounded-sm">
+      <div className="relative h-full mb-6 bg-backgroundGreen w-72 min-w-[200px] ml-12 border-gray-200 border-1 rounded-sm">
           <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
             <input type="text" id="small-input" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></input>
           </div>
@@ -46,5 +46,5 @@ function TimeStamp() {
   );
 }
 
-export default TimeStamp;
+export default Row;
 
