@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import ProductDetails from './pages/ProductDetails';
 import Annotation from './pages/Annotator/AnnotationTable';
 import Row from './components/AnnotationTable/Row';
+import Buttons from './components/AnnotationTable/Buttons';
 // import './App.css'
 
 
@@ -31,6 +32,7 @@ function App(){
               <Route path="/annotation" element={<Annotation/>} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
+              <Route path="/button" element={<Buttons/>} />
 
             {/* </Route> */}
         </Routes>

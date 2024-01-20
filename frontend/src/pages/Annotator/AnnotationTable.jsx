@@ -1,8 +1,11 @@
 import React from 'react'
-import TimeStamp from '../../components/AnnotationTable/TimeStamp'
+// import TimeStamp from '../../components/AnnotationTable/TimeStamp'
 import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar'
 import Navbar from '../../components/navbar/Navbar'
 import Rownames from '../../components/AnnotationTable/Rownames'
+import Row from '../../components/AnnotationTable/Row'
+import Buttons from '../../components/AnnotationTable/Buttons'
+import { Button } from 'flowbite-react'
 
 function AnnotationTable() {
   return (  
@@ -14,9 +17,12 @@ function AnnotationTable() {
         <Navbar />
         <div className='ml-4 h-full sm:ml-20 mb-8 mt-64 text-3xl font-semibold text-sidebarGreen'>
           <Rownames />
-        <TimeStamp />
-        <TimeStamp />
-        <TimeStamp />
+        <Row />
+        <Row />
+        <Row />
+      </div>
+      <div className='flex items-end justify-center h-full'>
+        <Buttons />
       </div>
       </div>
     </div>
