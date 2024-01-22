@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link} from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import home from '../../assets/Images/home.png';
-import video from '../../assets/Images/video.png';
-import foodproducts from '../../assets/Images/products.png';
 import menu from '../../assets/Images/menu.png';
-
+import foodproducts from '../../assets/Images/products.png';
+import video from '../../assets/Images/video.png';
 
 const Annotatorsidebar = () => {
   const [isEnlarge, setEnlarge] = useState(true);
@@ -62,8 +60,8 @@ const Annotatorsidebar = () => {
   };
 
   return (
-    <div id="app" className="min-h-screen bg-sidebarGreen">
-      <header className="pos-r h-screen inline-flex flex-col bg-sidebarGreen p-6">
+    <div id="app" className="min-h-screen fixed bg-sidebarGreen">
+      <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
         <nav className=" inline-flex flex-col space-y-2">
           <button
             className="h-8 w-8 p-1 mb-8 hidden sm:block bg-sidebarGreen text-sidebarGreen rounded-lg mx-auto hover:border-gray-300"
