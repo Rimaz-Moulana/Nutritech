@@ -26,7 +26,7 @@ function AnnotationTable() {
     setAddedRows((prevRows) => {
       if (prevRows.includes(index) && prevRows.length > 0) {
         setRowcount((prevcount) => prevcount - 1);
-        setRowcount((prevcount) => prevcount - 1);
+        setAddedRows((prevRows) => prevRows - 1);
         return prevRows.filter((rowIndex) => rowIndex !== index);
       }
       return prevRows;
@@ -40,7 +40,7 @@ function AnnotationTable() {
 
 
   return (  
-    <div className='bg-backgroundGreen flex h-full'>
+    <div className='bg-backgroundGreen flex h-screen w-screen'>
 
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <Annotatorsidebar />
