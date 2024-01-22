@@ -5,11 +5,11 @@ export default function Modal() {
   return (
     <>
       <button
-        className="bg-[#3C6339] hover:bg-[#B8C294] text-white text-center active:bg-[#3C6339] font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="bg-[#3C6339] hover:bg-[#B8C294] text-white text-center active:bg-[#3C6339] uppercase text-sm px-2 py-2 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Open regular modal
+        View Product Details
       </button>
       {showModal ? (
         <>
@@ -25,7 +25,7 @@ export default function Modal() {
                     Modal Title
                   </h3>
                   <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right leading-none outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
                   >
                     <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
