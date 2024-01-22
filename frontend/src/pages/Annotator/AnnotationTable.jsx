@@ -5,7 +5,6 @@ import Navbar from '../../components/navbar/Navbar'
 import Rownames from '../../components/AnnotationTable/Rownames'
 import Row from '../../components/AnnotationTable/Row'
 import Buttons from '../../components/AnnotationTable/Buttons'
-import { Button } from 'flowbite-react'
 import Videowithtext from '../../components/AnnotationTable/Videowithtext'
 import plus from '../../assets/Images/plus.png'
 import minus from '../../assets/Images/minus.png'
@@ -40,7 +39,7 @@ function AnnotationTable() {
 
 
   return (  
-    <div className='bg-backgroundGreen flex'>
+    <div className='bg-backgroundGreen flex h-full'>
 
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <Annotatorsidebar />
