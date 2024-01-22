@@ -5,71 +5,63 @@ import Navbar from '../../components/navbar/Navbar'
 import Rownames from '../../components/AnnotationTable/Rownames'
 import Row from '../../components/AnnotationTable/Row'
 import Buttons from '../../components/AnnotationTable/Buttons'
+import { Button } from 'flowbite-react'
 import Videowithtext from '../../components/AnnotationTable/Videowithtext'
 import plus from '../../assets/Images/plus.png'
 import minus from '../../assets/Images/minus.png'
 
 function AnnotationTable() {
-  const [addedRows, setAddedRows] = useState(() => {
-    const storedRows = localStorage.getItem('addedRows');
-    return storedRows ? JSON.parse(storedRows) : [];
-  });
-
-  const [rowcount, setRowcount] = useState(() => addedRows.length);
+  const [addedrows, setAddedRows] = useState(() => {
+        const storedrows = localStorage.getItem('addedrows');
+        return storedrows ? JSON.parse(storedrows) : [];
+      });
+  const [rowCount, setRowCount] = useState(() => addedrows.length); 
 
   const addRow = () => {
-    setRowcount((prevcount) => prevcount + 1);
-    setAddedRows((prevRows) => [...prevRows, rowcount]);
-  };
+    setRowCount((prevCount) => prevCount + 1);
+    setAddedRows((prevRows) => [...prevRows, rowCount]);
+  };  
 
   const removeRow = (index) => {
-    setAddedRows((prevRows) => {
-      if (prevRows.includes(index) && prevRows.length > 0) {
-        setRowcount((prevcount) => prevcount - 1);
-        setAddedRows((prevRows) => prevRows - 1);
-        return prevRows.filter((rowIndex) => rowIndex !== index);
-      }
-      return prevRows;
-    });
+    if (addedrows.includes(index) && rowCount > 0) {
+      setRowCount((prevCount) => prevCount - 1);
+      setAddedRows((prevRows) => prevRows.filter((rowIndex) => rowIndex !== index));
+    }
   };
-  
 
-  useEffect(() => {
-    localStorage.setItem('addedRows', JSON.stringify(addedRows));
-  }, [addedRows]);
-
+    useEffect(() => {
+    localStorage.setItem('addedrows', JSON.stringify(addedrows));
+  }, [addedrows]);
 
   return (  
-    <div className='bg-backgroundGreen flex h-screen w-screen'>
-
+    <div className='bg-backgroundGreen h-full flex'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <Annotatorsidebar />
       </div>
       <div className="w-full h-full sm:w-3/4 ml-0 sm:ml-64">
         <Navbar />
-        <div className='w-full mt-32'>
+        <div className='w-full mt-28'>
             <Videowithtext />
         </div>
-        <div className='ml-4 h-full sm:ml-20 mb-8 mt-10 text-3xl font-semibold text-sidebarGreen'>
+        <div className='ml-16 h-full sm:ml-20 mb-8 mt-10 text-3xl font-semibold text-sidebarGreen'>
           <Rownames />
           <Row />
           <Row />
           <Row />
-      
-            {[...Array(rowcount)].map((_, index) => (
-              <div key={index} className='relative'>
-                <Row />
-                {addedRows.includes(index) && (
-                  <button 
-                    className='rounded-full p-2 absolute right-0 bottom-0 left-156 top-3/4'
-                    onClick={() => removeRow(index)}
-                  >
-                    <img src={minus} alt="Remove" />
-                  </button>
-                )}
-              </div>
-            ))}
-          <div className='flex absolute right-4 bottom-4'>
+          {[...Array(rowCount)].map((_, index) => (
+            <div key={index} className='flex'>
+              <Row />
+              {addedrows.includes(index) && (
+                <button 
+                  className='rounded-full p-2 justify-end ml-8'
+                  onClick={() => removeRow(index)}
+                >
+                  <img src={minus} alt="Remove" />
+                </button>
+              )}
+            </div>
+          ))}
+          <div className='flex fixed right-32 bottom-20'>
             <button 
               className='rounded-full bg-gradient-to-r from-buttonGreen to-darkGreen hover:bg-gradient-to-br p-2 mr-2 mb-8'
               onClick={addRow}
@@ -77,10 +69,11 @@ function AnnotationTable() {
               <img src={plus} alt="Add" />
             </button>
           </div>
-      </div>
-      <div className='flex items-end justify-center h-full'>
+          <div className='flex items-end justify-center mt-4 h-full'>
         <Buttons />
       </div>
+      </div>
+      
       </div>
     </div>
   )
