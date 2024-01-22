@@ -13,10 +13,10 @@
   theme: {
     theme: {
       screens: {
-        'sm': '640px',
+        'sm': '340px',
         // => @media (min-width: 640px) { ... }
   
-        'md': '768px',
+        'md': '568px',
         // => @media (min-width: 768px) { ... }
   
         'lg': '1024px',

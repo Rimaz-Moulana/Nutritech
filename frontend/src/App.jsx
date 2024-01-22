@@ -3,9 +3,9 @@ import './App.css';
 
 
 import TimeStamp from './components/AnnotationTable/TimeStamp';
-import TextField from './components/fields/textfield';
 
 import BlankPage from './components/theme/BlankPage';
+import AddedProduct from './pages/Annotator/AddedProduct';
 import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
@@ -29,7 +29,7 @@ function App(){
               <Route path='/blankPages' element={<BlankPage />} />
               <Route path='/product' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />
-              <Route path='/input' element={<TextField />} />
+              <Route path='/addedproduct' element={<AddedProduct />} />
               
 
               <Route path="/all" element={<Allvideos/>} />

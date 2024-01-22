@@ -1,9 +1,9 @@
-mport React, { useState } from 'react';
+import React, { useState } from 'react';
 import logo from '../../../src/assets/Images/NutriTechLogo08.png';
 import menuIcon from '../../../src/assets/Images/blackmenu.png';
 import Sidebar from '../../components/sidebar/AnnotatorSideBar';
 
-function Navbar() {
+export default function Navbar() {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
 
   const handleMenuClick = () => {
