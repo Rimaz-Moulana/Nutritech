@@ -26,6 +26,7 @@ function AnnotationTable() {
     setAddedRows((prevRows) => {
       if (prevRows.includes(index) && prevRows.length > 0) {
         setRowcount((prevcount) => prevcount - 1);
+        setRowcount((prevcount) => prevcount - 1);
         return prevRows.filter((rowIndex) => rowIndex !== index);
       }
       return prevRows;
