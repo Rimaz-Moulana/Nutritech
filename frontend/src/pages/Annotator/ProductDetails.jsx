@@ -17,7 +17,7 @@ export default function test() {
   return (
     <div className='w-full h-full overflow-x-hidden bg-[#E5EBD6]'>
         <BlankPage />
-        <h1 className="lg:ml-20 sm:ml-40 mb-8 mt-24 lg:mr-[750px] md:mr-50 sm:mr  text-3xl font-semibold text-sidebarGreen">Product Deatils</h1>
+        <h1 className="lg:ml-20 sm:ml-40 mb-8 mt-24 lg:mr-[750px] md:mr-50 sm:mr  text-xl font-semibold text-sidebarGreen">Product Deatils</h1>
         <div className='md:flex ml-5 relative'>
             <div className='flex-inline mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
                 <TextFiled />
