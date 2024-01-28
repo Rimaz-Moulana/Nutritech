@@ -33,7 +33,8 @@
       colors:{
         darkGreen: '#8EA174',
         backgroundGreen: '#E5EBD6',
-        sidebarGreen : '#284625'
+        sidebarGreen : '#284625',
+        buttonGreen : '#3C6849'
       },
 
       margin:{

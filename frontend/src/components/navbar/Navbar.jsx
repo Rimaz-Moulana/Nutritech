@@ -12,8 +12,8 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav className="mt-0 mb-12 fixed w-full z-10">
-        <div className="flex p-4 bg-backgroundGreen">
+      <nav className="mt-0 mb-6 fixed w-3/4 z-10">
+        <div className="flex p-2 bg-backgroundGreen">
           {/* Menu Icon for Small Screens */}
           <img
             src={menuIcon}

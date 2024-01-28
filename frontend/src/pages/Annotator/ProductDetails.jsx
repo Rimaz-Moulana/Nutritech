@@ -17,9 +17,9 @@ export default function test() {
   return (
     <div className='w-full h-full overflow-x-hidden bg-[#E5EBD6]'>
         <BlankPage />
-        <h1 className="ml-4 sm:ml-20 mb-8 mt-24 text-5xl font-semibold text-sidebarGreen">Product Deatils</h1>
+        <h1 className="lg:ml-20 sm:ml-40 mb-8 mt-24 lg:mr-[750px] md:mr-50 sm:mr  text-3xl font-semibold text-sidebarGreen">Product Deatils</h1>
         <div className='md:flex ml-5 relative'>
-            <div className='flex-inline mt-4 md:w-1/2 ml-10'>
+            <div className='flex-inline mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
                 <TextFiled />
                 <TextFiled />
                 <TextFiled />
@@ -43,72 +43,72 @@ export default function test() {
                 <div className='p-2'>
                     <input
                             type="text" id="username"
-                            className="shadow appearance-none border rounded w-[60%] h-20 py-2 px-5 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-[70%] h-10 py-2 px-5 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Enter your username" />
                 </div>
             </div>
             </div>
             <div className='flex-inline mt-4 md:w-1/2'>
             <div className='inline-block'>
-                <img className='inline-block px-5' src={Astra1} />
-                <img className='inline-block px-5' src={Astra2} />
-                <img className='inline-block px-5' src={Astra3} />
-                <img className='inline-block px-5' src={Astra4} />
+                <img className='inline-block px-1 h-20 w-28' src={Astra1} />
+                <img className='inline-block px-1 h-20 w-28' src={Astra2} />
+                <img className='inline-block px-1 h-20 w-28' src={Astra3} />
+                <img className='inline-block px-1 h-20 w-28' src={Astra4} />
             </div>
-            <div className='ml-52'>
-            <label className='inline-block pt-5 text-2xl font-semibold'>Per 100g/ml</label>
-            <label className='inline-block px-32 pt-5 text-2xl font-semibold'>Per Serving</label>
+            <div className='text ml-64'>
+            <label className='inline-block pt-5 text-xl '>Per 100g/ml</label>
+            <label className='inline-block px-16 pt-5 text-xl '>Per Serving</label>
             </div>
                 <div className='grid float-start gap-0 grid-cols-3 p-3'>
-                <label className='inline-block py-1 text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1  ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1 text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1  ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1  text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1   ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1 text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1  ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1 text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1  ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1 text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1  ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1  text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1   ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1 text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1  ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1  text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1   ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
-                <label className='inline-block py-1 text-lg font-semibold' >Energy(kcal)</label>
+                <label className='inline-block py-1  ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
                 </div>
                 <div className='grid float-start gap-0 grid-cols-2 w-full p-2 sm:w-full'>
-                <label className='inline-block text-justify ml-8 py-3 text-lg font-semibold' >WHO_WPRO_foodcode Product</label>
+                <label className='inline-block text-justify ml-8 py-3  ' >WHO_WPRO_foodcode Product</label>
                 <TextFiledWhite2 />
-                <label className='inline-block text-justify ml-8 py-3  text-lg font-semibold' >WHO_WPRO_permitted</label>
+                <label className='inline-block text-justify ml-8 py-3   ' >WHO_WPRO_permitted</label>
                 <TextFiledWhite2 />
-                <label className='inline-block text-justify ml-8 py-3  text-lg font-semibold' >WHO_WPRO_permitted Remark</label>
+                <label className='inline-block text-justify ml-8 py-3   ' >WHO_WPRO_permitted Remark</label>
                 <TextFiledWhite2 />
-                <label className='inline-block text-justify ml-8 py-3  text-lg font-semibold' >WHO_SEARO_foodcode_Product</label>
+                <label className='inline-block text-justify ml-8 py-3   ' >WHO_SEARO_foodcode_Product</label>
                 <TextFiledWhite2 />
-                <label className='inline-block text-justify ml-8 py-3  text-lg font-semibold' >WHO_SEARO_permitted</label>
+                <label className='inline-block text-justify ml-8 py-3   ' >WHO_SEARO_permitted</label>
                 <TextFiledWhite2 />
-                <label className='inline-block text-justify ml-8 py-3 text-lg font-semibold' >WHO_SEARO_permitted Remark</label>
+                <label className='inline-block text-justify ml-8 py-3  ' >WHO_SEARO_permitted Remark</label>
                 <TextFiledWhite2 />
-                <label className='inline-block text-justify ml-8 py-3  text-lg font-semibold' >SL food Code</label>
+                <label className='inline-block text-justify ml-8 py-3   ' >SL food Code</label>
                 <TextFiledWhite2 />
-                <label className='inline-block text-justify ml-8 py-3  text-lg font-semibold' >SL_permitted</label>
+                <label className='inline-block text-justify ml-8 py-3   ' >SL_permitted</label>
                 <TextFiledWhite2 />
-                <label className='inline-block text-justify ml-8 py-3 text-lg font-semibold' >SL_foodcode__permitted Remark</label>
+                <label className='inline-block text-justify ml-8 py-3  ' >SL_foodcode__permitted Remark</label>
                 <TextFiledWhite2 />
                 </div>
             </div>
