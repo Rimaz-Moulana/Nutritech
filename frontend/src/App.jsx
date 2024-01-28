@@ -33,8 +33,6 @@ function App(){
               <Route path='/product' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />
               <Route path='/addedproduct' element={<AddedProduct />} />
-              
-
               <Route path="/all" element={<Allvideos/>} />
               <Route path="/annotation" element={<AnnotationTable />} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
