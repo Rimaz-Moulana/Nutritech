@@ -42,7 +42,6 @@ function AnnotationTable() {
             <Videowithtext />
         </div>
         <div className='ml-16 h-full sm:ml-20 mb-8 mt-10 text-3xl font-semibold text-sidebarGreen'>
-          <Rownames />
           <Row />
           <Row />
           <Row />
@@ -59,16 +58,17 @@ function AnnotationTable() {
               )}
             </div>
           ))}
-          <div className='flex fixed right-32 bottom-20'>
+          
+          <div className='flex items-end justify-center mt-4 h-full'>
+        <Buttons />
+        <div className='flex fixed right-32 bottom-20'>
             <button 
-              className='rounded-full bg-gradient-to-r from-buttonGreen to-darkGreen hover:bg-gradient-to-br p-2 mr-2 mb-8'
+              className='rounded-full bg-gradient-to-r from-buttonGreen to-darkGreen hover:bg-gradient-to-br p-2 ml-[850px] mb-8'
               onClick={addRow}
             >
               <img src={plus} alt="Add" />
             </button>
           </div>
-          <div className='flex items-end justify-center mt-4 h-full'>
-        <Buttons />
       </div>
       </div>
       

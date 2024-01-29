@@ -20,6 +20,7 @@ import NewVideos from './pages/SensorManager/NewVideos';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules'
 import EditRule from './components/Popup/EditRule'
+import Row from './components/AnnotationTable/Row';
 
 import Test from './components/theme/test';
 
@@ -52,6 +53,7 @@ function App(){
               <Route path="/test" element={<Product/>} />
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
+              <Route path="/row" element={<Row/>} />
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
               <Route path="/reviewvideos" element={<ReviewVideos/>} />
