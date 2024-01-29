@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import logo from '../../../src/assets/Images/NutriTechLogo08.png';
 import menuIcon from '../../../src/assets/Images/blackmenu.png';
-import Sidebar from '../../components/sidebar/AnnotatorSideBar';
+import AnnotatorSidebar from '../../components/sidebar/AnnotatorSideBar';
+import SensorManagerSidebar from '../sidebar/SensorManagerSidebar';
 
-export default function Navbar() {
+export default function Navbar(type) {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
 
   const handleMenuClick = () => {
@@ -29,10 +30,18 @@ export default function Navbar() {
           {/* Sidebar */}
       {isSidebarVisible && (
         <div className="sm:hidden fixed h-1/2 w-1/2 inset-0 bg-opacity-0 z-50 mt-24 ">
+          {type==='sensormanager' && (
           <div className="flex">
-            <Sidebar />
+            <SensorManagerSidebar />
             <div className="flex-1" onClick={handleMenuClick}></div>
           </div>
+)}
+{type==='annotator' && (
+          <div className="flex">
+            <SensorManagerSidebar />
+            <div className="flex-1" onClick={handleMenuClick}></div>
+          </div>
+)}
         </div>
       )} 
 

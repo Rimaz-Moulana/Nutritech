@@ -37,7 +37,7 @@ function AnnotationTable() {
         <Annotatorsidebar />
       </div>
       <div className="w-full h-full sm:w-3/4 ml-0 sm:ml-64">
-        <Navbar />
+        <Navbar type='annotator'/>
         <div className='w-full mt-28'>
             <Videowithtext />
         </div>

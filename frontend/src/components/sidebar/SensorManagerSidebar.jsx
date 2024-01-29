@@ -5,10 +5,10 @@ import home from '../../assets/Images/home.png';
 import menu from '../../assets/Images/menu.png';
 import foodproducts from '../../assets/Images/products.png';
 import video from '../../assets/Images/video.png';
+import edit from '../../assets/Images/edit.png';
 
 const SensorManagerSidebar = () => {
   const [isEnlarge, setEnlarge] = useState(true);
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate(); 
 
 
@@ -35,7 +35,12 @@ const SensorManagerSidebar = () => {
     {
       icon: video,
       selectedIcon: video,
-      text: 'Video',
+      text: 'Videos',
+    },
+    {
+      icon: edit,
+      selectedIcon: edit,
+      text: 'Rules & Regulations',
     },
   ];
 
@@ -47,11 +52,12 @@ const SensorManagerSidebar = () => {
 
   const handleItemClick = (index) => {
     setSelected(index);
-    if (index === nav.findIndex((item) => item.text === 'Video')) {
-      setDropdownOpen(!isDropdownOpen);
+    if (index === nav.findIndex((item) => item.text === 'Videos')) {
+      navigate('/sensormanagernewvideo')
     } else if (index === nav.findIndex((item) => item.text === 'Products')){
       navigate('/product');
-      
+    }else if (index === nav.findIndex((item) => item.text === 'Rules & Regulations')){
+      console.log('Rules')
     } else{
       navigate('/home');
     }
@@ -63,7 +69,7 @@ const SensorManagerSidebar = () => {
 
   return (
     <div id="app" className="min-h-screen fixed bg-sidebarGreen">
-      <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
+      <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-3">
         <nav className=" inline-flex flex-col space-y-2">
           <button
             className="h-8 w-8 p-1 mb-8 hidden sm:block bg-sidebarGreen text-sidebarGreen rounded-lg mx-auto hover:border-gray-300"
@@ -75,7 +81,7 @@ const SensorManagerSidebar = () => {
             <div key={index} className="relative">
               <a
                 className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
-                  isEnlarge ? 'pl-2 pr-6 rounded-lg' : 'px-2 rounded-full'
+                  isEnlarge ? 'pl-1 pr-6 rounded-lg' : 'px-1 rounded-full'
                 } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
                 onClick={() => handleItemClick(index)}
               >
@@ -93,31 +99,6 @@ const SensorManagerSidebar = () => {
                   />
                 )}
               </a>
-              {link.text === 'Video' && isDropdownOpen && (
-                <div className="absolute top-full left-0 bg-darkGreen shadow rounded mt-2">
-              <Link
-                  to="/all"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                  onClick={() => handleItemClick(2)}
-                >
-                  All Videos
-                </Link>
-                <Link
-                  to="/annotated-videos"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                  onClick={() => handleItemClick(2)}
-                >
-                  Annotated Videos
-                </Link>
-                <Link
-                  to="/unannotated-videos"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                  onClick={() => handleItemClick(2)}
-                >
-                  Unannotated Videos
-                </Link>
-                </div>
-              )}
             </div>
           ))}
         </nav>
