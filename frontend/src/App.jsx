@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 
 
 
@@ -12,10 +12,23 @@ import ProductDetails from './pages/Annotator/ProductDetails';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
 import Log from './pages/Log';
 import Login from './pages/Login';
+<<<<<<< HEAD
 // import ProductDetails from './pages/Annotator/ProductDetails';
 import AnnotationTable from './pages/Annotator/AnnotationTable';
 import Row from './components/AnnotationTable/Row';
 import Buttons from './components/AnnotationTable/Buttons';
+=======
+import AnnotationTable from './pages/Annotator/AnnotationTable';
+// import Row from './components/AnnotationTable/Row';
+// import Buttons from './components/AnnotationTable/Buttons';
+import Videowithtext from './components/AnnotationTable/Videowithtext';
+import Annotation from './pages/Annotator/AnnotationTable';
+import Product from './pages/Annotator/Product'
+import Home from './pages/Annotator/Home';
+import History from './pages/MediaStation/History'
+import UploadVideo from './pages/MediaStation/UploadVideo';
+
+>>>>>>> 730bdcada3101b535a709056ad241b7dde691692
 import Videowithtext from './components/AnnotationTable/Videowithtext';
 import Test from './components/theme/test';
 
@@ -30,18 +43,24 @@ function App(){
             {/* <Route path='/'  > */}
               {/* <Route path='/' element={<Nabra/>} /> */}
               <Route path='/' element={<Login />} />
+              <Route path='/home' element={<Home />} />
               <Route path='/login' element={<Login />} />
               <Route path='/log' element={<Log />} />
               <Route path='/blankPages' element={<BlankPage />} />
               <Route path='/product' element={<ProductDetails />} />
-              <Route path='/test' element={<Test />} />
+              {/* <Route path='/test' element={<Test />} /> */}
+               {/* <Route path='/addedproduct' element={<AddedProduct />} />    */}
+
+               {/* <Route path='/test' element={<Test />} /> */}
               <Route path='/addedproduct' element={<AddedProduct />} />
               <Route path="/all" element={<Allvideos/>} />
               <Route path="/annotation" element={<AnnotationTable />} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
               <Route path="/text" element={<Videowithtext/>} />
-
+              <Route path="/test" element={<Product/>} />
+              <Route path="/history" element={<History/>} />
+              <Route path="/uploadvideo" element={<UploadVideo/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

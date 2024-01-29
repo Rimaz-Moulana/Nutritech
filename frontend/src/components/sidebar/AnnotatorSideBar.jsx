@@ -52,6 +52,8 @@ const Annotatorsidebar = () => {
     } else if (index === nav.findIndex((item) => item.text === 'Products')){
       navigate('/product');
       
+    } else{
+      navigate('/home');
     }
   };
 
