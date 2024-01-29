@@ -67,7 +67,7 @@ export default class test extends React.Component {
             <label className='inline-block px-16 pt-5 text-xl '>Per Serving</label>
             </div>
                 <div className='grid float-start gap-0 grid-cols-3 p-3'>
-                <label className='inline-block py-1 text-justify ' >Energy(kcal)</label>
+                <label className='inline-block py-1 text-justify text-black ' >Energy(kcal)</label>
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
                 <label className='inline-block py-1  text-justify' >Protein(g)</label>
