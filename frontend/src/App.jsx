@@ -5,13 +5,14 @@ import BlankPage from './components/theme/BlankPage';
 import AddedProduct from './pages/Annotator/AddedProduct';
 import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
+import AnnotationTable from './pages/Annotator/AnnotationTable';
 import ProductDetails from './pages/Annotator/ProductDetails';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
 import Log from './pages/Log';
 import Login from './pages/Login';
 import AnnotationTable from './pages/Annotator/AnnotationTable';
-import Row from './components/AnnotationTable/Row';
-import Buttons from './components/AnnotationTable/Buttons';
+// import Row from './components/AnnotationTable/Row';
+// import Buttons from './components/AnnotationTable/Buttons';
 import Videowithtext from './components/AnnotationTable/Videowithtext';
 // import AnnotationTable from './pages/Annotator/AnnotationTable';
 // import Row from './components/AnnotationTable/Row';
@@ -24,6 +25,9 @@ import History from './pages/MediaStation/History'
 import UploadVideo from './pages/MediaStation/UploadVideo';
 import NewVideos from './pages/SensorManager/NewVideos';
 import VideowithReview from './components/SensorManager/VideowithReview';
+
+import Videowithtext from './components/AnnotationTable/Videowithtext';
+import Test from './components/theme/test';
 
 // import './App.css'
 
@@ -42,8 +46,10 @@ function App(){
               <Route path='/blankPages' element={<BlankPage />} />
               <Route path='/product' element={<ProductDetails />} />
               {/* <Route path='/test' element={<Test />} /> */}
-              <Route path='/addedproduct' element={<AddedProduct />} />   
+               {/* <Route path='/addedproduct' element={<AddedProduct />} />    */}
 
+               {/* <Route path='/test' element={<Test />} /> */}
+              <Route path='/addedproduct' element={<AddedProduct />} />
               <Route path="/all" element={<Allvideos/>} />
               <Route path="/annotation" element={<AnnotationTable />} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
