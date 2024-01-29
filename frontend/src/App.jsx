@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// import './App.css';
+import './App.css';
 
 import BlankPage from './components/theme/BlankPage';
 import AddedProduct from './pages/Annotator/AddedProduct';
@@ -19,7 +19,6 @@ import UploadVideo from './pages/MediaStation/UploadVideo';
 import NewVideos from './pages/SensorManager/NewVideos';
 import VideowithReview from './components/SensorManager/VideowithReview';
 
-import Videowithtext from './components/AnnotationTable/Videowithtext';
 import Test from './components/theme/test';
 
 // import './App.css'
