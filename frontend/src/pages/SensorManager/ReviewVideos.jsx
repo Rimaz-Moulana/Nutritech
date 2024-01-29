@@ -6,7 +6,7 @@ import VideowithReview from '../../components/SensorManager/VideowithReview';
 
 function ReviewVideos() {
   return (
-    <div className='bg-backgroundGreen flex h-screen'>
+    <div className='bg-backgroundGreen flex h-full'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <SensorManagerSidebar />
       </div>
