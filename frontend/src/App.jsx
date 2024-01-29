@@ -19,6 +19,7 @@ import Login from './pages/Login';
 import Product from './pages/Annotator/Product';
 import History from './pages/MediaStation/History';
 import UploadVideo from './pages/MediaStation/UploadVideo';
+import NewVideos from './pages/SensorManager/NewVideos';
 
 
 // import './App.css'
@@ -46,6 +47,9 @@ function App(){
               <Route path="/test" element={<Product/>} />
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
+
+              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

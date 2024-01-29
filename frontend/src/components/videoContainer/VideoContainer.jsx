@@ -16,12 +16,12 @@ function VideoContainer({type}) {
       }
 
       const handleReview= () =>{
-        navigate('/sensormanagernewvideo')
+        navigate('/reviewvideos')
       }
     
     
       return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ml-4 mt-8 mr-5 mb-8 h-full bg-backgroundGreen">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ml-16 mt-8 mr-5 mb-8 h-full bg-backgroundGreen">
           {videoSources.map((videoSrc, index) => (
             <div key={index} className='relative'>
               <video className="h-auto max-w-full rounded-lg" controls>
