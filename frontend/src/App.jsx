@@ -17,7 +17,7 @@ import Home from './pages/Annotator/Home';
 import History from './pages/MediaStation/History'
 import UploadVideo from './pages/MediaStation/UploadVideo';
 import NewVideos from './pages/SensorManager/NewVideos';
-import VideowithReview from './components/SensorManager/VideowithReview';
+import ReviewVideos from './pages/SensorManager/ReviewVideos';
 
 import Test from './components/theme/test';
 
@@ -52,7 +52,7 @@ function App(){
               <Route path="/uploadvideo" element={<UploadVideo/>} />
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
-              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+              <Route path="/reviewvideos" element={<ReviewVideos/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
