@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import './App.css';
 
-
-
 import BlankPage from './components/theme/BlankPage';
 import AddedProduct from './pages/Annotator/AddedProduct';
 import Allvideos from './pages/Annotator/Allvideos';
@@ -15,6 +13,10 @@ import AnnotationTable from './pages/Annotator/AnnotationTable';
 import Row from './components/AnnotationTable/Row';
 import Buttons from './components/AnnotationTable/Buttons';
 import Videowithtext from './components/AnnotationTable/Videowithtext';
+// import AnnotationTable from './pages/Annotator/AnnotationTable';
+// import Row from './components/AnnotationTable/Row';
+// import Buttons from './components/AnnotationTable/Buttons';
+// import Videowithtext from './components/AnnotationTable/Videowithtext';
 import Annotation from './pages/Annotator/AnnotationTable';
 import Product from './pages/Annotator/Product'
 import Home from './pages/Annotator/Home';
