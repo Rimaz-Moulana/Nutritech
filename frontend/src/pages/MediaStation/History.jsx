@@ -13,7 +13,7 @@ function History() {
     <div className="w-full ml-20 mr-24 h-full ">
       <NavbarMediaStation />
       <div className='flex justify-between'>
-      <h1 className=' mb-8 mt-24 text-3xl ml-4 font-semibold text-sidebarGreen justify-start '>
+      <h1 className=' mb-8 mt-24 text-3xl lg:mr-[820px] ml-4 font-semibold text-sidebarGreen justify-start '>
          Upload History
       </h1>
       <div className=' flex items-end mt-24 mr-4'>
