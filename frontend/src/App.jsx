@@ -18,6 +18,8 @@ import History from './pages/MediaStation/History'
 import UploadVideo from './pages/MediaStation/UploadVideo';
 import NewVideos from './pages/SensorManager/NewVideos';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
+import Rules from './pages/SensorManager/Rules'
+import EditRule from './components/Popup/EditRule'
 
 import Test from './components/theme/test';
 
@@ -53,6 +55,8 @@ function App(){
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
               <Route path="/reviewvideos" element={<ReviewVideos/>} />
+              <Route path="/rules" element={<Rules/>} />
+              <Route path="/editrules" element={<EditRule/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
