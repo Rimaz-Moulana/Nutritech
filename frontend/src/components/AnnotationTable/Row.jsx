@@ -2,7 +2,7 @@ import React from 'react';
 
 function Row() {
   return (
-    <div className='flex ml-16'>  
+    <div className='flex ml-0 mt-12'>  
     <div className=''>
     <div className="relative justify-center border-gray-200 border-1 rounded-sm">
       <label id='timestamp' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Stamp</label>
@@ -32,8 +32,8 @@ function Row() {
         <option >Rule 06</option>
       </select>
     </div>
-    <div className='mt-4 border border-gray-200 border-1 rounded-sm h-24 '>
-      <p>Rule 01</p>
+    <div className='mt-4 border-2 text-left border-gray-300 rounded-sm h-24 '>
+      <p className=''>Rule 01</p>
     </div>
     </div>
 <div className='flex'>

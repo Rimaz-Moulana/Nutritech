@@ -11,7 +11,7 @@ function Allvideos() {
       </div>
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
         <Navbar type='annotator' />
-        <h1 className=' mb-8 mt-24 lg:mr-[960px] text-3xl font-semibold text-sidebarGreen left-0'>
+        <h1 className=' mb-8 mt-24 lg:mr-[880px] text-3xl font-semibold text-sidebarGreen left-0'>
            All Videos
         </h1>
         <VideoContainer />
