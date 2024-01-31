@@ -19,6 +19,7 @@ import Login from './pages/Login';
 import Product from './pages/Annotator/Product';
 import History from './pages/MediaStation/History';
 import UploadVideo from './pages/MediaStation/UploadVideo';
+import UploadVideo2 from './pages/MediaStation/UploadVideo2';
 import NewVideos from './pages/SensorManager/NewVideos';
 
 import Row from './components/AnnotationTable/Row';
@@ -56,6 +57,8 @@ function App(){
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+              <Route path="/uploadvideo2" element={<UploadVideo2 />} />
+              
 
               <Route path="/reviewvideos" element={<ReviewVideos/>} />
               <Route path="/rules" element={<Rules/>} />
