@@ -55,11 +55,11 @@ const SensorManagerSidebar = () => {
     if (index === nav.findIndex((item) => item.text === 'Videos')) {
       navigate('/sensormanagernewvideo')
     } else if (index === nav.findIndex((item) => item.text === 'Products')){
-      navigate('/product');
+      // navigate('/product');
     }else if (index === nav.findIndex((item) => item.text === 'Rules & Regulations')){
-      console.log('Rules')
+      navigate('/rules')
     } else{
-      navigate('/home');
+      // navigate('/home');
     }
   };
 

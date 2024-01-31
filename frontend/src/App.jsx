@@ -21,6 +21,11 @@ import History from './pages/MediaStation/History';
 import UploadVideo from './pages/MediaStation/UploadVideo';
 import NewVideos from './pages/SensorManager/NewVideos';
 
+import Row from './components/AnnotationTable/Row';
+import EditRule from './components/Popup/EditRule';
+import ReviewVideos from './pages/SensorManager/ReviewVideos';
+import Rules from './pages/SensorManager/Rules';
+
 
 // import './App.css'
 
@@ -47,9 +52,14 @@ function App(){
               <Route path="/test" element={<Product/>} />
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
+              <Route path="/row" element={<Row/>} />
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+
+              <Route path="/reviewvideos" element={<ReviewVideos/>} />
+              <Route path="/rules" element={<Rules/>} />
+              <Route path="/editrules" element={<EditRule/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

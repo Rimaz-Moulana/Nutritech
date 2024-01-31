@@ -12,7 +12,7 @@ function VideowithReview() {
         </video>
         </div>
       
-        <form className="w-full max-w-sm justify-left ml-36">
+        <form className="w-full max-w-sm lg:ml-36">
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4" for="inline-full-name">

@@ -41,34 +41,36 @@ function AnnotationTable() {
         <div className='w-full mt-28'>
             <Videowithtext />
         </div>
-        <div className='ml-16 h-full sm:ml-20 mb-8 mt-10 text-3xl font-semibold text-sidebarGreen'>
-          <Rownames />
+        <div className='ml-16 h-full sm:ml-20 mb-8 mt-10 text-sm font-semibold text-black'>
           <Row />
           <Row />
           <Row />
           {[...Array(rowCount)].map((_, index) => (
-            <div key={index} className='flex'>
+            <div key={index} className='flex-end'>
               <Row />
               {addedrows.includes(index) && (
                 <button 
-                  className='rounded-full p-2 justify-end ml-8'
+                  className='rounded-full mt-4 justify-end h-24 w-24'
                   onClick={() => removeRow(index)}
                 >
-                  <img src={minus} alt="Remove" />
+                  <img className='mr-0 mt-0 h-12 w-12' src={minus} alt="Remove" />
                 </button>
               )}
             </div>
           ))}
-          <div className='flex fixed right-32 bottom-20'>
+          
+          
+          <div className='flex items-end justify-center mt-4 h-full'>
+          <div className='flex fixed right-12 bottom-20'>
             <button 
-              className='rounded-full bg-gradient-to-r from-buttonGreen to-darkGreen hover:bg-gradient-to-br p-2 mr-2 mb-8'
+              className='rounded-full bg-gradient-to-r from-buttonGreen to-darkGreen hover:bg-gradient-to-br p-2 ml-[950px] mb-8'
               onClick={addRow}
             >
               <img src={plus} alt="Add" />
             </button>
           </div>
-          <div className='flex items-end justify-center mt-4 h-full'>
         <Buttons />
+        
       </div>
       </div>
       
