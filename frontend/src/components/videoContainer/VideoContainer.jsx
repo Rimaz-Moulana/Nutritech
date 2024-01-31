@@ -1,6 +1,7 @@
 import React from 'react'
 import astra from '../../../src/assets/videos/astra.mp4'
 import pen from '../../../src/assets/Images/pen.png'
+import history from '../../../src/assets/Images/history.png'
 import { useNavigate } from 'react-router-dom';
 import review from '../../assets/Images/review.png'
 
@@ -17,6 +18,10 @@ function VideoContainer({type}) {
 
       const handleReview= () =>{
         navigate('/reviewvideos')
+      }
+
+      const ViewAnnotate= () =>{
+        navigate('/annotationhistory')
       }
     
     
@@ -45,11 +50,19 @@ function VideoContainer({type}) {
               </div>
             )}  
 
+            {type === 'annotated' && (
+              <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+                <img src={history} alt="Annotate" onClick={ViewAnnotate} />
+              </div>
+            )}  
+
             {type === 'sensormanagernewvideos' && (
               <div className="h-24 w-8 icon-overlay absolute top-0 right-0 cursor-pointer ">
                 <img src={review} alt="Review" onClick={handleReview} />
               </div>
             )}  
+
+           
   </div>
            
           ))}

@@ -5,7 +5,7 @@ export default function Modal() {
   return (
     <>
       <button
-        className="bg-[#3C6339] hover:bg-[#B8C294] text-white text-center active:bg-[#3C6339] uppercase text-sm px-2 py-2 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 hover:bg-[#B8C294] text-white text-center active:bg-[#3C6339] uppercase text-sm px-2 py-2 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >

@@ -21,6 +21,9 @@ import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules'
 import EditRule from './components/Popup/EditRule'
 import Row from './components/AnnotationTable/Row';
+import AnnotationHistory from './pages/Annotator/History'
+
+import HomeSwiper from './components/Annotator/HomeSwiper'
 
 import Test from './components/theme/test';
 
@@ -54,11 +57,13 @@ function App(){
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
               <Route path="/row" element={<Row/>} />
+              <Route path="/homeswiper" element={<HomeSwiper/>} />
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
               <Route path="/reviewvideos" element={<ReviewVideos/>} />
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
+              <Route path="/annotationhistory" element={<AnnotationHistory/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

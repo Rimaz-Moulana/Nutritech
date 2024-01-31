@@ -14,7 +14,7 @@ function AnnotatedVideos() {
         <h1 className=' mb-8 mt-24 lg:mr-[780px] text-3xl font-semibold text-sidebarGreen left-0'>
            Annotated Videos
         </h1>
-        <VideoContainer />
+        <VideoContainer type={'annotated'}/>
       </div>
     </div>
   );
