@@ -13,7 +13,7 @@ import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
 import Log from './pages/Log';
 import Login from './pages/Login';
 // import ProductDetails from './pages/Annotator/ProductDetails';
-import AnnotationTable from './pages/Annotator/AnnotationTable';
+// import AnnotationTable from './pages/Annotator/AnnotationTable';
 import Row from './components/AnnotationTable/Row';
 import Buttons from './components/AnnotationTable/Buttons';
 import Videowithtext from './components/AnnotationTable/Videowithtext';
