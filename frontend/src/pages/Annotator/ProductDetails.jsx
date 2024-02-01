@@ -14,6 +14,7 @@ import Navbar from '../../components/navbar/Navbar'
 import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar'
 
 export default class test extends React.Component {
+    
     render(){
   return (
     <div className='bg-backgroundGreen overflow-x-hidden'>
