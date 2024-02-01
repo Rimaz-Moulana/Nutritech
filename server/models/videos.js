@@ -2,14 +2,14 @@
 
  const VideoSchema = new mongoose.Schema({
     video_id: Number,
-    Uploader: String,
-    Brand_Name:String,
-    Product: String,
+    uploader: String,
+    brandname:String,
+    product: String,
     variation:String,
     date: String,
     time:String,
     status: String,
-    timeStamp: String,
+    timestamp: String,
     rule:String,
     details:String,
     recommendation:String,

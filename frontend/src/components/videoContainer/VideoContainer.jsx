@@ -5,12 +5,8 @@ import history from '../../../src/assets/Images/history.png'
 import { useNavigate } from 'react-router-dom';
 import review from '../../assets/Images/review.png'
 
-function VideoContainer({type}) {
-  const navigate = useNavigate(); 
-
-    const videoSources = [
-        astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, 
-      ];
+function VideoContainer({ type, videoData }) {
+  const navigate = useNavigate();
 
       const handleAnnotate= () =>{
         navigate('/annotation')
@@ -27,22 +23,20 @@ function VideoContainer({type}) {
     
       return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 h-full bg-backgroundGreen">
-          {videoSources.map((videoSrc, index) => (
-            <div key={index} className='relative'>
-              
-              <div className=''>
-              <video className="h-auto max-w-full rounded-lg" controls>
-                <source src={videoSrc} type="video/mp4" />
-                
-                Your browser does not support the video tag.
-              </video>
-              <div className='border-2 mt-2 border-gray-300 text-left'>
-              <p>Date :</p>
-              <p>Time :</p>
-              <p>Uploader :</p>
-              <p>Status   :</p>
-              </div>
-              </div>
+           {videoData.map((video, index) => (
+        <div key={index} className='relative'>
+          <div className=''>
+            <video className="h-auto max-w-full rounded-lg" controls>
+              <source src={astra} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className='border-2 mt-2 border-gray-300 text-left'>
+              <p>Date: {video.date}</p>
+              <p>Time: {video.time}</p>
+              <p>Uploader: {video.uploader}</p>
+              <p>Status: {video.status}</p>
+            </div>
+          </div>
               
               {type === 'unannotated' && (
               <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">

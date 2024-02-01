@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
@@ -6,6 +6,63 @@ import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 
 
 function UploadVideo() {
+
+  const [formData, setFormData] = useState({
+    brandname: '',
+    product: '',
+    variation: '',
+    // Add other form fields as needed
+  });
+
+  const getCurrentDateTime = () => {
+    const currentDate = new Date();
+  
+    // Format the date and time as needed (e.g., "2024-02-01 12:30:45")
+    const formattedDateTime = `${currentDate.getFullYear()}-${padZero(currentDate.getMonth() + 1)}-${padZero(currentDate.getDate())} ${padZero(currentDate.getHours())}:${padZero(currentDate.getMinutes())}:${padZero(currentDate.getSeconds())}`;
+  
+    return formattedDateTime;
+  };
+  
+  // Helper function to pad a single digit number with a leading zero
+  const padZero = (num) => (num < 10 ? `0${num}` : num);
+  
+  
+  const saveVideo = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/uploadvideo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...formData, uploader: 'ITN', time: getCurrentDateTime(), date: new Date().toLocaleDateString(), status: 'unannotated' }),
+    });
+
+  
+      if (!response.ok) {
+        console.error(`Failed to save video. Status: ${response.status}`);
+        return;
+      }
+  
+      const data = await response.json();
+      console.log(data); // Log the parsed JSON data
+    } catch (error) {
+      console.error('Error while saving video:', error);
+    }
+  };
+  
+  
+  
+
+  const handleFormChange = (e) => {
+    console.log('handleFormChange called'); // Check if this log appears
+    const { name, value } = e.target;
+    const updatedFormData = { ...formData, [name]: value };
+    console.log(updatedFormData); // Log the updated form data
+    setFormData(updatedFormData); // Update the state immediately
+  };
+  
+  
+ 
   return (
     <div className='bg-backgroundGreen flex h-screen'>
     <div className="w-full ml-12 mr-4 ">
