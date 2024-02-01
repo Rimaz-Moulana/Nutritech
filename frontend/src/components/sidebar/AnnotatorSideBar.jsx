@@ -14,9 +14,9 @@ const Annotatorsidebar = () => {
 
   const [selected, setSelected] = useState(() => {
     const storedSelected = JSON.parse(localStorage.getItem('selectedSidebarItem'));
-    return storedSelected || 0;
+    return storedSelected !== null ? storedSelected : nav.findIndex((item) => item.text === 'Home');
   });
-
+  
   useEffect(() => {
     localStorage.setItem('selectedSidebarItem', JSON.stringify(selected));
   }, [selected]);
