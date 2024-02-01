@@ -28,7 +28,7 @@ exports.getVideos = async(req,res) => {
     }
 }
 
-exports.addVideo = async (req,res) => {
+exports.addvideo = async (req,res) => {
     try{
         const newVideo = await videoService.addVideo(req.body);
         res.status(201).json(newVideo);
@@ -36,5 +36,5 @@ exports.addVideo = async (req,res) => {
     catch(err){
         res.status(400).json({error: err.message});
     }
-}
+};
 
