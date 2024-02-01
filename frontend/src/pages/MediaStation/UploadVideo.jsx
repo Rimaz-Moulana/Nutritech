@@ -18,7 +18,7 @@ function UploadVideo() {
     const currentDate = new Date();
   
     // Format the date and time as needed (e.g., "2024-02-01 12:30:45")
-    const formattedDateTime = `${currentDate.getFullYear()}-${padZero(currentDate.getMonth() + 1)}-${padZero(currentDate.getDate())} ${padZero(currentDate.getHours())}:${padZero(currentDate.getMinutes())}:${padZero(currentDate.getSeconds())}`;
+    const formattedDateTime = `${padZero(currentDate.getHours())}:${padZero(currentDate.getMinutes())}:${padZero(currentDate.getSeconds())}`;
   
     return formattedDateTime;
   };
@@ -44,7 +44,8 @@ function UploadVideo() {
       }
   
       const data = await response.json();
-      console.log(data); // Log the parsed JSON data
+      window.alert('Video uploaded successfully!');
+     
     } catch (error) {
       console.error('Error while saving video:', error);
     }

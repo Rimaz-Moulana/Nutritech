@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar';
 import Navbar from '../../components/navbar/Navbar';
@@ -6,10 +7,13 @@ import Videowithtext from '../../components/AnnotationTable/Videowithtext';
 import plus from '../../assets/Images/plus.png';
 import minus from '../../assets/Images/minus.png';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 function AnnotationTable() {
   const navigate = useNavigate();
+  const { videoId } = useParams(); 
+
   const viewdetails = () => {
     navigate('/product');
   };
@@ -49,10 +53,20 @@ function AnnotationTable() {
     );
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/annotation', rowsData);
+    try {
+      // Send both videoId and annotations to the backend
+      const response = await axios.post(`http://localhost:3001/annotation/${videoId}`, { annotations: rowsData });
+  
+      console.log('Response from server:', response.data);  // Log the response from the server
+  
+      window.alert('Annotations saved successfully!');
+    } catch (error) {
+      console.error('Error saving annotations:', error);
+    }
   };
+  
 
   return (
     <div className='bg-backgroundGreen h-full flex'>

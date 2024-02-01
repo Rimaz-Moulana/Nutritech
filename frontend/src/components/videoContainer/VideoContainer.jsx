@@ -1,29 +1,25 @@
-import React from 'react'
-import astra from '../../../src/assets/videos/astra.mp4'
-import pen from '../../../src/assets/Images/pen.png'
-import history from '../../../src/assets/Images/history.png'
+import React from 'react';
+import astra from '../../../src/assets/videos/astra.mp4';
+import pen from '../../../src/assets/Images/pen.png';
+import history from '../../../src/assets/Images/history.png';
 import { useNavigate } from 'react-router-dom';
-import review from '../../assets/Images/review.png'
+import review from '../../assets/Images/review.png';
 
 function VideoContainer({ type, videoData }) {
   const navigate = useNavigate();
 
-      const handleAnnotate= () =>{
-        navigate('/annotation')
-      }
+  const handleAnnotate = (videoId) => {
+    navigate(`/annotation/${videoId}`);
+  };
 
-      const handleReview= () =>{
-        navigate('/reviewvideos')
-      }
+  const ViewAnnotate = (videoId) => {
+    navigate(`/annotationhistory/${videoId}`)
+  };
+  
 
-      const ViewAnnotate= () =>{
-        navigate('/annotationhistory')
-      }
-    
-    
-      return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 h-full bg-backgroundGreen">
-           {videoData.map((video, index) => (
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 h-screen bg-backgroundGreen">
+      {videoData.map((video, index) => (
         <div key={index} className='relative'>
           <div className=''>
             <video className="h-auto max-w-full rounded-lg" controls>
@@ -37,31 +33,27 @@ function VideoContainer({ type, videoData }) {
               <p>Status: {video.status}</p>
             </div>
           </div>
-              
-              {type === 'unannotated' && (
-              <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
-                <img src={pen} alt="Annotate" onClick={handleAnnotate} />
-              </div>
-            )}  
 
-            {type === 'annotated' && (
-              <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
-                <img src={history} alt="Annotate" onClick={ViewAnnotate} />
-              </div>
-            )}  
+          {type === 'unannotated' && (
+            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+              <img
+                src={pen}
+                alt="Annotate"
+                onClick={() => handleAnnotate(video._id)} // Pass video ID to handleAnnotate
+              />
+            </div>
+          )}
 
-            {type === 'sensormanagernewvideos' && (
-              <div className="h-24 w-8 icon-overlay absolute top-0 right-0 cursor-pointer ">
-                <img src={review} alt="Review" onClick={handleReview} />
-              </div>
-            )}  
+          {type === 'annotated' && (
+            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+              <img src={history} alt="Annotate" onClick={() => ViewAnnotate(video._id)}/>
+            </div>
+          )}
 
-           
-  </div>
-           
-          ))}
         </div>
-      );
-    }
+      ))}
+    </div>
+  );
+}
 
-export default VideoContainer
+export default VideoContainer;

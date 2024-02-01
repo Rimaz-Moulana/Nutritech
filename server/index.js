@@ -9,12 +9,50 @@ app.use(express.json())
 
 mongoose.connect("mongodb://127.0.0.1:27017/NutriTech")
 
-app.post("/annotation",(req,res)=>{
-    VideoModel.create(req.body)
-    .then(videos =>res.json(videos))
-    .catch(err=>res.json(err))
-})
-
+app.post("/annotation/:videoId", async (req, res) => {
+    const videoId = req.params.videoId;
+  
+    try {
+      // Log the annotations data on the server
+      console.log('Annotations data received on the server:', req.body.annotations);
+  
+      // Assuming VideoModel has a field called annotations, update it accordingly
+      const updatedVideo = await VideoModel.findByIdAndUpdate(
+        videoId,
+        { $set: { annotations: req.body.annotations } ,
+        status: 'annotated',
+    },
+        { new: true }
+      );
+  
+      res.json(updatedVideo);
+    } catch (error) {
+      console.error('Error saving annotations:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  app.get('/annotationhistory/:videoId', async (req, res) => {
+    try {
+      const videoId = req.params.videoId;
+  
+      // Find annotations based on the videoId
+      const video = await VideoModel.findOne({ _id: videoId });
+  
+      if (!video) {
+        return res.status(404).json({ success: false, message: 'Video not found' });
+      }
+  
+      const annotations = video.annotations;
+  
+      res.json({ success: true, annotations });
+    } catch (error) {
+      console.error('Error fetching annotations:', error);
+      res.status(500).json({ success: false, message: 'Error fetching annotations' });
+    }
+  });
+  
+  
 app.post("/uploadvideo", (req, res) => {
     VideoModel.create(req.body)
         .then(videos => res.json(videos))

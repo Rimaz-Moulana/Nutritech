@@ -49,7 +49,7 @@ function App(){
                {/* <Route path='/test' element={<Test />} /> */}
               <Route path='/addedproduct' element={<AddedProduct />} />
               <Route path="/all" element={<Allvideos/>} />
-              <Route path="/annotation" element={<AnnotationTable />} />
+              <Route path="/annotation/:videoId" element={<AnnotationTable />} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
               <Route path="/text" element={<Videowithtext/>} />
@@ -63,7 +63,7 @@ function App(){
               <Route path="/reviewvideos" element={<ReviewVideos/>} />
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
-              <Route path="/annotationhistory" element={<AnnotationHistory/>} />
+              <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

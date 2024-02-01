@@ -4,6 +4,10 @@ import VideoContainer from '../../components/videoContainer/VideoContainer';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 
 function History() {
+
+  const itnVideos = videoData.filter(video => video.uploader === 'ITN');
+  console.log(itnVideos)
+
   const navigate = useNavigate(); 
   const videoupload= () => {
     navigate('/uploadvideo');
@@ -21,7 +25,6 @@ function History() {
       </div>
       
       </div>
-      
       <VideoContainer />
     </div>
   </div>

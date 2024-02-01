@@ -22,7 +22,7 @@ function Allvideos() {
   }, []);
 
   return (
-    <div className='bg-backgroundGreen flex'>
+    <div className='bg-backgroundGreen flex h-full'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col">
         <AnnotatorSideBar />
       </div>

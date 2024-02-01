@@ -24,7 +24,7 @@ function Unannotatedvideos() {
   }, []);
 
   return (
-    <div className='bg-backgroundGreen flex'>
+    <div className='bg-backgroundGreen flex h-full'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <AnnotatorSideBar />
       </div>
@@ -33,7 +33,7 @@ function Unannotatedvideos() {
         <h1 className=' mb-8 mt-24 lg:mr-[760px] text-3xl font-semibold text-sidebarGreen left-0'>
            Unannotated Videos
         </h1>
-        <VideoContainer videoData={unannotatedVideoData}/>
+        <VideoContainer type="unannotated" videoData={unannotatedVideoData}/>
       </div>
     </div>
   );
