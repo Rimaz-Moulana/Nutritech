@@ -89,6 +89,16 @@ app.get("/annotated-videos", async (req, res) => {
     }
 });
 
+app.get("/history", async (req, res) => {
+    try {
+        const ITNVideos = await VideoModel.find({ uploader: 'ITN' });
+        res.json(ITNVideos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 app.listen(3001,()=>{
     console.log("server is running")
