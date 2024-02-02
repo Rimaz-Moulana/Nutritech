@@ -126,7 +126,7 @@ export default class test extends React.Component {
                 <TextFiledsmall />
                 <TextFiledsmallWhite />
                 <label className='inline-block py-1 text-justify ' >Total Fat(g)</label>
-                <TextFiledsmallWhite />
+                <TextFiledsmall />
                 <TextFiledsmallWhite  />
                 <label className='inline-block py-1 text-justify  ' >SFA(g)</label>
                 <TextFiledsmall  />
