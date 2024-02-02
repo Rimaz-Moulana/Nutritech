@@ -1,5 +1,5 @@
 const multer = require('multer')
-const videoService = require('../services/userService');
+const videoService = require('../services/videoService');
 
 const storage = multer.diskStorage({
     destination: function(req,file,cb){
