@@ -146,8 +146,8 @@ mongoose.connect(config.mongoURI)
   // Routes
   app.use('/videos', videoRoutes);
   app.use('/annotations', annotationsRoutes);
-  app.use('/api',userRoutes);
-  app.use('/api/video', vidoeRoutes)
+  // app.use('/api',userRoutes);
+  // app.use('/api/video', vidoeRoutes)
   
   // Start the server
   app.listen(PORT, () => {

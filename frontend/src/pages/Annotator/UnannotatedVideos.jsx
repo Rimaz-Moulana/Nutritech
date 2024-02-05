@@ -9,7 +9,7 @@ function Unannotatedvideos() {
   useEffect(() => {
     const fetchUnannotatedVideos = async () => {
       try {
-        const response = await fetch('http://localhost:3001/videos/unannotated-videos');
+        const response = await fetch('http://localhost:3000/videos/unannotated-videos');
         if (!response.ok) {
           throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
         }

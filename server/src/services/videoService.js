@@ -32,7 +32,7 @@ exports.getUnannotatedVideo = async () => {
 };
 
 
-exports.addVideo = async (videoData) => {
-    const newVideo = new Video(videoData);
-    return await newVideo.save()
-}
+// exports.addVideo = async (videoData) => {
+//     const newVideo = new Video(videoData);
+//     return await newVideo.save()
+// }

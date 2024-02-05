@@ -58,7 +58,7 @@ function AnnotationTable() {
     e.preventDefault();
     try {
       // Send both videoId and annotations to the backend
-      const response = await axios.post(`http://localhost:3001/annotations/annotation/${videoId}`, { annotations: rowsData });
+      const response = await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, { annotations: rowsData });
   
       console.log('Response from server:', response.data);  // Log the response from the server
   

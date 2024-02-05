@@ -10,7 +10,7 @@ import axios from 'axios';
       useEffect(() => {
         const fetchAnnotations = async () => {
           try {
-            const response = await axios.get(`http://localhost:3001/annotations/annotationhistory/${videoId}`);
+            const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`);
             setAnnotations(response.data.annotations);
             console.log(annotations)
           } catch (error) {

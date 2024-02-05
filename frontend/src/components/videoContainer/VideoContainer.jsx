@@ -27,10 +27,12 @@ function VideoContainer({ type, videoData }) {
               Your browser does not support the video tag.
             </video>
             <div className='border-2 mt-2 border-gray-300 text-left'>
-              <p>Date: {video.date}</p>
-              <p>Time: {video.time}</p>
+              <p>Uploaded Date: {video.date}</p>
+              <p>Uploaded Time: {video.time}</p>
               <p>Uploader: {video.uploader}</p>
               <p>Status: {video.status}</p>
+              <p>Annotated Date: {video.annotateddate}</p>
+              <p>Annotated Time: {video.annotatedtime}</p>
             </div>
           </div>
 

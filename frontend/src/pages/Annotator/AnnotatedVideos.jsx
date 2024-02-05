@@ -11,7 +11,7 @@ function AnnotatedVideos() {
     const fetchData = async () => {
       // try {
         // Allvideos.jsx
-        const response = await fetch('http://localhost:3001/videos/annotated-videos');
+        const response = await fetch('http://localhost:3000/videos/annotated-videos');
         const data = await response.json();
         setannotatedVideoData(data);
 
