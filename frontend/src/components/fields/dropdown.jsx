@@ -1,16 +1,30 @@
-import React from 'react'
+import React from 'react';
 
-export default function dropdown() {
+export default function dropdown({ value,id,name, onChange}) {
+  const optionsArray = [
+    { value: 'US', label: 'United States' },
+    { value: 'CA', label: 'Canada' },
+    { value: 'FR', label: 'France' },
+    { value: 'DE', label: 'Germany' },
+  ];
+  
   return (
     <div className='p-2'>
-        <select id="countries" className=" border rounded w-[70%] h-8 py-0 px-3 bg-[#BDC69A] text-black dark:bg-gray-700 ">
-            <option disabled value="">Choose an option</option>
+        <select
+        id={id} // Use the provided id
+        name={name} // Use the provided name
+        className="border rounded w-[70%] h-8 py-0 px-3 bg-[#BDC69A] text-gray-600 dark:bg-gray-700"
+        value={value} // Set the selected value
+        onChange={onChange} // Handle changes
+      >
             <option selected>Variation</option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
-        </select>
+            
+            {optionsArray.map((option) => (
+            <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </div>
   )
 }

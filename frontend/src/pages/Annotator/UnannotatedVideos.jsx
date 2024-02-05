@@ -10,8 +10,8 @@ function Unannotatedvideos() {
         <AnnotatorSideBar />
       </div>
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
-        <Navbar />
-        <h1 className=' mb-8 mt-24 text-3xl font-semibold text-sidebarGreen left-0'>
+        <Navbar type='annotator'/>
+        <h1 className=' mb-8 mt-24 lg:mr-[760px] text-3xl font-semibold text-sidebarGreen left-0'>
            Unannotated Videos
         </h1>
         <VideoContainer type={"unannotated"}/>

@@ -3,7 +3,9 @@ import './App.css';
 
 
 
+import Videowithtext from './components/AnnotationTable/Videowithtext';
 import BlankPage from './components/theme/BlankPage';
+import Test from './components/theme/test';
 import AddedProduct from './pages/Annotator/AddedProduct';
 import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
@@ -12,12 +14,19 @@ import ProductDetails from './pages/Annotator/ProductDetails';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
 import Log from './pages/Log';
 import Login from './pages/Login';
-// import ProductDetails from './pages/Annotator/ProductDetails';
-// import AnnotationTable from './pages/Annotator/AnnotationTable';
+// import Row from './components/AnnotationTable/Row';
+// import Buttons from './components/AnnotationTable/Buttons';
+import Product from './pages/Annotator/Product';
+import History from './pages/MediaStation/History';
+import UploadVideo from './pages/MediaStation/UploadVideo';
+import UploadVideo2 from './pages/MediaStation/UploadVideo2';
+import NewVideos from './pages/SensorManager/NewVideos';
+
 import Row from './components/AnnotationTable/Row';
-import Buttons from './components/AnnotationTable/Buttons';
-import Videowithtext from './components/AnnotationTable/Videowithtext';
-import Test from './components/theme/test';
+import EditRule from './components/Popup/EditRule';
+import ReviewVideos from './pages/SensorManager/ReviewVideos';
+import Rules from './pages/SensorManager/Rules';
+
 
 // import './App.css'
 
@@ -41,7 +50,19 @@ function App(){
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
               <Route path="/text" element={<Videowithtext/>} />
+              <Route path="/test" element={<Product/>} />
+              <Route path="/history" element={<History/>} />
+              <Route path="/uploadvideo" element={<UploadVideo/>} />
+              <Route path="/row" element={<Row/>} />
 
+              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+              <Route path="/uploadvideo2" element={<UploadVideo2 />} />
+              
+
+              <Route path="/reviewvideos" element={<ReviewVideos/>} />
+              <Route path="/rules" element={<Rules/>} />
+              <Route path="/editrules" element={<EditRule/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
