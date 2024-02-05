@@ -30,3 +30,9 @@ exports.getUnannotatedVideo = async () => {
       res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+
+exports.addVideo = async (videoData) => {
+    const newVideo = new Video(videoData);
+    return await newVideo.save()
+}

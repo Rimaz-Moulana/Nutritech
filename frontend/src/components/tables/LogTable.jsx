@@ -3,7 +3,7 @@ import Model from '../button/ProductDetailsModel'
 
 export default function LogTable() {
   return (
-    <div className='w-[100%] lg:ml-60 sm:ml-20 md:ml-40 justify-center justify-items-center'>
+    <div className='w-[100%] lg:ml-72 sm:ml-20 md:ml-40 justify-center justify-items-center'>
         <table className="min-w-[80%] justify-center table-auto divide-y  divide-gray-200">
                 <thead className="bg-gray-50 text-center">
                     <tr>

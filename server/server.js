@@ -134,7 +134,7 @@ const mongoURI = require('./config/databaseMongo')
 const annotationsRoutes = require('./src/routes/annotationRoutes')
 
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 mongoose.connect(config.mongoURI)
   .then(() => console.log('MongoDB Connected'))
@@ -146,8 +146,12 @@ mongoose.connect(config.mongoURI)
   // Routes
   app.use('/videos', videoRoutes);
   app.use('/annotations', annotationsRoutes);
+  app.use('/api',userRoutes);
+  app.use('/api/video', vidoeRoutes)
   
   // Start the server
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
+
+

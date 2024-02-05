@@ -29,7 +29,7 @@ function UploadVideo() {
   
   const saveVideo = async () => {
     try {
-      const response = await fetch('http://localhost:3001/videos/uploadvideo', {
+      const response = await fetch('http://localhost:3000/videos/uploadvideo', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
