@@ -55,15 +55,15 @@ function Row({
       </select>
     </div>
     <div className="relative mt-4 min-w-[200px] border-gray-200 border-1 rounded-sm">
-      <label id='rules' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rule</label>
+      <label id='rules' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regulation</label>
       <select className="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleRuleChange}>
       <option >Select</option>
-        <option >Rule 01</option>
-        <option >Rule 02</option>
-        <option >Rule 03</option>
-        <option >Rule 04</option>
-        <option >Rule 05</option>
-        <option >Rule 06</option>
+        <option >Regulation 01</option>
+        <option >Regulation 02</option>
+        <option >Regulation 03</option>
+        <option >Regulation 04</option>
+        <option >Regulation 05</option>
+        <option >Regulation 06</option>
       </select>
     </div>
     <div className='mt-4 border-2 text-left border-gray-300 rounded-sm h-24 '>

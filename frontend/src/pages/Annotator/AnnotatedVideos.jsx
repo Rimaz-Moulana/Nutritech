@@ -7,20 +7,17 @@ function AnnotatedVideos() {
   const [annotatedVideoData, setannotatedVideoData] = useState([]);
 
   useEffect(() => {
-    const fetchannotatedVideos = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/annotated-videos');
-        if (!response.ok) {
-          throw new Error(`Failed to fetch annotated videos. Status: ${response.status}`);
-        }
+    // Fetch data from your backend API
+    const fetchData = async () => {
+      // try {
+        // Allvideos.jsx
+        const response = await fetch('http://localhost:3001/videos/annotated-videos');
         const data = await response.json();
         setannotatedVideoData(data);
-      } catch (error) {
-        console.error(error);
-      }
+
     };
 
-    fetchannotatedVideos();
+    fetchData();
   }, []);
   return (
     <div className='bg-backgroundGreen flex'>

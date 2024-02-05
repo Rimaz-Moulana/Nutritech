@@ -9,7 +9,7 @@ function History() {
   useEffect(() => {
     const fetchITNVideos = async () => {
       try {
-        const response = await fetch('http://localhost:3001/history');
+        const response = await fetch('http://localhost:3001/videos/history');
         if (!response.ok) {
           throw new Error(`Failed to fetch unannotated videos. Status: ${response.uploader}`);
         }

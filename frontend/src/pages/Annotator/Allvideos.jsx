@@ -9,13 +9,12 @@ function Allvideos() {
   useEffect(() => {
     // Fetch data from your backend API
     const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/all');
+      // try {
+        // Allvideos.jsx
+        const response = await fetch('http://localhost:3001/videos/all');
         const data = await response.json();
-        setVideoData(data);
-      } catch (error) {
-        console.error('Error fetching video data:', error);
-      }
+      setVideoData(data);
+
     };
 
     fetchData();

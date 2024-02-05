@@ -11,16 +11,6 @@ const Annotatorsidebar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate(); 
 
-
-  const [selected, setSelected] = useState(() => {
-    const storedSelected = JSON.parse(localStorage.getItem('selectedSidebarItem'));
-    return storedSelected !== null ? storedSelected : nav.findIndex((item) => item.text === 'Home');
-  });
-  
-  useEffect(() => {
-    localStorage.setItem('selectedSidebarItem', JSON.stringify(selected));
-  }, [selected]);
-
   const nav = [
     {
       icon: home,
@@ -45,6 +35,16 @@ const Annotatorsidebar = () => {
     text: 'Group Manager',
   };
 
+  const [selected, setSelected] = useState(() => {
+    const storedSelected = JSON.parse(localStorage.getItem('selectedSidebarItem'));
+    return storedSelected !== null ? storedSelected : nav.findIndex((item) => item.text === 'Home');
+  }); 
+
+  useEffect(() => {
+    localStorage.setItem('selectedSidebarItem', JSON.stringify(selected));
+  }, [selected]);
+
+  
   const handleItemClick = (index) => {
     setSelected(index);
     if (index === nav.findIndex((item) => item.text === 'Video')) {
