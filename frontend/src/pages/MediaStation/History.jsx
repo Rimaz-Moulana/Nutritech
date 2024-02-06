@@ -11,7 +11,7 @@ function History() {
       try {
         const response = await fetch('http://localhost:3000/videos/history');
         if (!response.ok) {
-          throw new Error(`Failed to fetch unannotated videos. Status: ${response.uploader}`);
+          throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
         }
         const data = await response.json();
         setITNVideoData(data);
@@ -19,9 +19,10 @@ function History() {
         console.error(error);
       }
     };
-
+  
     fetchITNVideos();
   }, []);
+  
 
   const navigate = useNavigate(); 
   const videoupload= () => {
