@@ -28,6 +28,7 @@ import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules';
 
 import AnnotationHistory from '../src/pages/Annotator/History'
+import AnnotatorHome from '../src/pages/Annotator/Home'
 
 
 // import './App.css'
@@ -56,6 +57,7 @@ function App(){
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
               <Route path="/row" element={<Row/>} />
+              <Route path="/home" element={<AnnotatorHome/>} />
               {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />

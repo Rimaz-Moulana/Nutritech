@@ -3,7 +3,6 @@ import astra from '../../../src/assets/videos/astra.mp4';
 import pen from '../../../src/assets/Images/pen.png';
 import history from '../../../src/assets/Images/history.png';
 import { useNavigate } from 'react-router-dom';
-import review from '../../assets/Images/review.png';
 
 function VideoContainer({ type, videoData }) {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ function VideoContainer({ type, videoData }) {
   
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 h-screen bg-backgroundGreen">
+    <div className="grid h-full grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 bg-backgroundGreen">
       {videoData.map((video, index) => (
         <div key={index} className='relative'>
           <div className=''>
@@ -27,12 +26,17 @@ function VideoContainer({ type, videoData }) {
               Your browser does not support the video tag.
             </video>
             <div className='border-2 mt-2 border-gray-300 text-left'>
+              <p className='font-semibold'>Status: {video.status}</p>
               <p>Uploaded Date: {video.date}</p>
               <p>Uploaded Time: {video.time}</p>
               <p>Uploader: {video.uploader}</p>
-              <p>Status: {video.status}</p>
+              
+           {type==='annotated' &&(
+            <>
               <p>Annotated Date: {video.annotateddate}</p>
               <p>Annotated Time: {video.annotatedtime}</p>
+              </>
+            )}
             </div>
           </div>
 
