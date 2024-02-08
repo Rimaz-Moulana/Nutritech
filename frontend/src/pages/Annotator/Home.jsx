@@ -24,11 +24,11 @@ function Home() {
         <AnnotatorSideBar />
       </div>
       <div className="w-full sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
-        <div>
+        <div className='p-1'>
         <Navbar type='annotator' />
         </div>
      
-        <div className='flex justify-between z-9999'>
+        <div className='flex justify-between z-9999 mt-24'>
         <h1 className='ml-8 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
            Videos
         </h1>
@@ -36,7 +36,7 @@ function Home() {
         </div>
         
         <HomeSwiper/>
-        <div className='flex mt-16 justify-between'>
+        <div className='flex mt-24 justify-between'>
         <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
                   Products
                 </h1>

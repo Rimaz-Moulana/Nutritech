@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
+import GridListView from '../../components/Toggle/GridListView';
 
 function Unannotatedvideos() {
   const [unannotatedVideoData, setUnannotatedVideoData] = useState([]);
@@ -33,7 +34,7 @@ function Unannotatedvideos() {
         <h1 className=' mb-8 mt-24 lg:mr-[760px] text-3xl font-semibold text-sidebarGreen left-0'>
            Unannotated Videos
         </h1>
-        <VideoContainer type="unannotated" videoData={unannotatedVideoData}/>
+        <GridListView type="unannotated" videoData={unannotatedVideoData}/>
       </div>
     </div>
   );
