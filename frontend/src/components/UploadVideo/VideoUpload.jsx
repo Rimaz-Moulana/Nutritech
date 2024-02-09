@@ -1,6 +1,6 @@
 import React from 'react'
 
-function VideoUpload() {
+function VideoUpload({handleFileChange}) {
   return (
     
 <div className="flex w-1/2 items-center justify-center">
@@ -12,7 +12,7 @@ function VideoUpload() {
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
             <p className="text-xs text-gray-500 dark:text-gray-400">MP4</p>
         </div>
-        <input id="dropzone-file" type="file" className="hidden" handleFileChange={} />
+        <input id="dropzone-file" type="file" accept="video/*" className="hidden" onChange={handleFileChange} />
     </label>
 </div> 
   )

@@ -22,10 +22,9 @@ exports.getVideos = async(req,res) => {
 exports.addvideo = async (req,res) => {
 
     try{
-        console.log(req.body,req.file)
         const { brand, product , variation , createdAt} = req.body;
         const videoPath = req.file.path
-        console.log(req.body,req.file)
+        console.log(req.body)
         const newVideo = new Video({brand,product,variation, videoPath, createdAt});
         console.log(newVideo)
         await newVideo.save();

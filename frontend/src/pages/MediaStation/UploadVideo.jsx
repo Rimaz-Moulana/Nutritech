@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { default as React, default as useState } from 'react';
+import { React, useState } from 'react';
 import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
@@ -7,8 +7,9 @@ import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 
 
 function UploadVideo() {
+  const [uploadStatus, setUploadStatus] = useState('');
     const [formData, setFormData] = useState({
-        brandName: '',
+        brand: '',
         product: '',
         variation: '',
         createdAt: Date.now() ,
@@ -25,13 +26,23 @@ function UploadVideo() {
       };
     
       const handleSubmit = async () => {
+        const formD = new FormData();
+        formD.append('brand', formData.brand);
+        formD.append('product', formData.product);
+        formD.append('variation', formData.variation);
+        formD.append('createdAt', formData.createdAt);
+        formD.append('video', formData.videoFile);
+        
         try {
-          // Make POST request to the backend
-          const response = await axios.post("http://localhost:3000/api/videos/upload", formData);
-          console.log(response.data); // Handle response accordingly
-        } catch (error) {
-          console.error('Error:', error);
-        }
+          console.log(formData)
+          console.log(formD)
+          const response  = await axios.post("http://localhost:3000/api/videos/upload", formD);
+          console.log(response.data);
+          setUploadStatus("Video uploaded successfully!");
+          }catch(error){
+            console.error('Error uploading video:', error);
+            setUploadStatus('Error uploading video.');
+          }
       };
 
   return (
@@ -47,6 +58,9 @@ function UploadVideo() {
       <div className='flex mt-16 mr-12'>
       <UploadForm handleChange={handleChange} />
       <VideoUpload handleFileChange={handleFileChange}  />
+      </div>
+      <div className='mt-10'>
+      {uploadStatus && <h3>{uploadStatus}</h3>}
       </div>
       <div className=''>
       <UploadNewVideoUIBtnSet handleSubmit={handleSubmit} />
