@@ -91,11 +91,11 @@ function AnnotationTable() {
   };
 
   return (
-    <div className='bg-backgroundGreen h-full flex'>
+    <div className='bg-backgroundGreen h-full min-h-screen flex z-10'>
       <div className='w-2/8 fixed h-full hidden sm:flex flex-col'>
         <Annotatorsidebar />
       </div>
-      <div className='w-full h-full sm:w-3/4 ml-0 sm:ml-64'>
+      <div className='w-full h-full sm:w-3/4 ml-0 z-10 sm:ml-64'>
         <Navbar type='annotator' />
         <div className='w-full mt-28'>
           <Videowithtext />
@@ -162,7 +162,7 @@ function AnnotationTable() {
           </div>
 
           {!isChecked && (
-            <div className='flex items-end justify-center mt-4 h-full'>
+            <div className='flex items-end justify-center mt-4 z-10 h-full'>
               <div className='flex fixed right-12 bottom-20'>
                 <button
                   className='rounded-full bg-gradient-to-r from-buttonGreen to-darkGreen hover:bg-gradient-to-br p-2 ml-[950px] mb-8'
@@ -171,7 +171,7 @@ function AnnotationTable() {
                   <img src={plus} alt='Add' />
                 </button>
               </div>
-              <div className='flex'>
+              <div className='flex z-10'>
                 <button
                   className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 '
                   onClick={submit}

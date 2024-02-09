@@ -22,7 +22,8 @@ console.log(videoData)
 
   return (
     <div>
-      <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-white '>
+      <div className='flex-row-reverse lg:ml-[900px]'>
+      <label className='themeSwitcherTwo shadow-card relative  inline-flex  cursor-pointer select-none rounded-md bg-white '>
         <input
           type='checkbox'
           className='sr-only'
@@ -30,7 +31,7 @@ console.log(videoData)
           onChange={handleCheckboxChange}
         />
         <span
-          className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+          className={`flex space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
             !isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
           }`}
         >
@@ -38,13 +39,14 @@ console.log(videoData)
           List View
         </span>
         <span
-          className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+          className={`flex space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
             isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
           }`}
         >
           Grid View
         </span>
       </label>
+      </div>
       <VideoContainer 
         type={type}
         videoData={videoData}

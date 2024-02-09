@@ -7,6 +7,9 @@ router.get('/annotated-videos', videoController.getAnnotatedVideos);
 router.get('/unannotated-videos', videoController.getUnannotatedVideos);
 router.post('/uploadvideo', videoController.postVideoDetails);
 router.get('/history',videoController.getuploadhistory)
+router.get('/sensormanagernewvideo',videoController.getpendingvideos)
+
+
 
 // router.post('/upload',videoController.upload.single('file'), videoController.postVideo);
 

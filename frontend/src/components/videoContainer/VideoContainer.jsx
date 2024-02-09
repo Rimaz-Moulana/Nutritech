@@ -5,6 +5,7 @@ import pen from '../../../src/assets/Images/pen.png';
 import history from '../../../src/assets/Images/history.png';
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
+import review from '../../../src/assets/Images/review.png'
 
 function VideoContainer({ type,videoData,viewType }) {
   console.log(videoData)
@@ -20,6 +21,9 @@ function VideoContainer({ type,videoData,viewType }) {
     navigate(`/annotationhistory/${videoId}`)
   };
 
+  const handleReview = () => {
+    navigate('/reviewvideos');
+  };
 
   const filteredVideos = videoData.filter((video) => {
     const productMatch =
@@ -30,9 +34,9 @@ function VideoContainer({ type,videoData,viewType }) {
       return productMatch && dateMatch;
   });
   return (
-    <div className='w-full'> 
+    <div className='w-full ml-12'> 
     {viewType=== 'Grid' &&(
-      <div className='mt-12'>
+      <div className='mt-12 right-0'>
       <select
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
@@ -47,7 +51,7 @@ function VideoContainer({ type,videoData,viewType }) {
                 <option value='Confectionary'>Confectionary</option>
                 <option value='Other'>Other</option>
               </select>
-    <div className="grid h-full grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 bg-backgroundGreen">
+    <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 bg-backgroundGreen">
       {filteredVideos.map((video, index) => (
         <div key={index} className='relative'>
           <div className=''>
@@ -87,6 +91,13 @@ function VideoContainer({ type,videoData,viewType }) {
             </div>
           )}
 
+          
+{type === 'pending' && (
+            <div className="h-24 w-8 icon-overlay absolute top-0 right-0 cursor-pointer ">
+              <img src={review} alt="Review" onClick={handleReview} />
+            </div>
+          )}
+
         </div>
       ))}
       </div>
@@ -94,13 +105,14 @@ function VideoContainer({ type,videoData,viewType }) {
   )}
 
  {viewType==="List" && (
-   <div className='h-full mt-12'>
+   <div className='h-full h-min-screen mt-12'>
    <table className='w-full'>
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>
-       <tr className=''>
-         <th> Product{' '}
+       <tr className='mt-12'>
+         <th className=''> Product{' '}
               <select
+              className='text-center w-24 bg-darkGreen'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
@@ -109,7 +121,7 @@ function VideoContainer({ type,videoData,viewType }) {
                 <option value='Dairy'>Dairy</option>
                 <option value='Margarine'>Margarine</option>
                 <option value='Noodles'>Noodles</option>
-                <option value='Soft drinks'>Soft Drinks</option>
+                <option value='Soft Drinks'>Soft Drinks</option>
                 <option value='Bakery items'>Bakery Items</option>
                 <option value='Confectionary'>Confectionary</option>
                 <option value='Other'>Other</option>
@@ -118,28 +130,27 @@ function VideoContainer({ type,videoData,viewType }) {
          <th>
            Status
          </th>
-         <th>
+         <th className='text-center mt-12'>
            Uploaded Date{' '}
            <DatePicker
+           className='bg-darkGreen w-28 text-sm'
              selected={startDate}
              onChange={(date) => setStartDate(date)}
              isClearable
-             dateFormat='yyyy/MM/dd'
+             dateFormat='dd/mm/yyyy'
            />
          </th>
-         <th>Uploaded Time</th>
-         <th>Uploader</th>
+         <th className='mt-12'>Uploaded Time</th>
+         <th className='mt-12'>Uploader</th>
          {type === 'annotated' && (
            <>
              <th>Annotated Date</th>
              <th>Annotated Time</th>
            </>
          )}
-         <th>Actions</th>
+         <th className='mt-12'>Actions</th>
        </tr>
      </thead>
-
-     {/* Table body */}
      <tbody className='mt-8'>
        {filteredVideos.map((video, index) => (
          <tr key={index} className='border-b-1'>
@@ -159,21 +170,22 @@ function VideoContainer({ type,videoData,viewType }) {
              {video.status === 'unannotated' && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-11 py-2.5 text-center me-2 mb-2 "
-                //  src={pen}
-                //  alt='Annotate'
                  onClick={() => handleAnnotate(video._id)}
                >Annotate</button>
              )}
              {video.status === 'annotated' && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
-                //  src={pen}
-                //  alt='Annotate'
-                //  src={history}
-                //  alt='View Annotations'
                  onClick={() => ViewAnnotate(video._id)}
              >View History</button>
              )}
+
+             {video.status === 'pending' && (
+             <button
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-12 py-2.5 "
+                 onClick={() => handleReview(video._id)}
+             >Review</button>
+          )}
            </td>
          </tr>
        ))}

@@ -61,7 +61,7 @@ function App(){
               {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
-              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+              {/* <Route path="/sensormanagernewvideo" element={<NewVideos/>} /> */}
               <Route path="/uploadvideo2" element={<UploadVideo2 />} />
               
 

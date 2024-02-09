@@ -34,7 +34,7 @@ function UploadVideo() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...formData, uploader: 'ITN', time: getCurrentDateTime(), date: new Date().toLocaleDateString(), status: 'unannotated' }),
+      body: JSON.stringify({ ...formData, uploader: 'ITN', time: getCurrentDateTime(), date: new Date().toLocaleDateString(), status: 'pending' }),
     });
 
   

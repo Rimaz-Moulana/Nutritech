@@ -52,3 +52,12 @@ exports.getuploadhistory= async (req,res)=>{
     }
 }
 
+exports.getpendingvideos= async (req,res)=>{
+  try {
+        const pendingVideos = await VideoService.getsensormanagernewvideos();
+        res.json(pendingVideos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
