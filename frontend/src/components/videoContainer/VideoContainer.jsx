@@ -1,8 +1,9 @@
-import React from 'react'
-import astra from '../../../src/assets/videos/astra.mp4'
-import pen from '../../../src/assets/Images/pen.png'
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import review from '../../assets/Images/review.png'
+import pen from '../../../src/assets/Images/pen.png';
+import astra from '../../../src/assets/videos/astra.mp4';
+import review from '../../assets/Images/review.png';
+// import newvideo from '../../assets/videos/1707385712918-WhatsApp Video 2023-11-27 at 21.36.34.mp4';
 
 function VideoContainer({type}) {
   const navigate = useNavigate(); 

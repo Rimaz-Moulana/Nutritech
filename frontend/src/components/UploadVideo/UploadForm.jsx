@@ -1,12 +1,12 @@
 import React from 'react'
 import TextFiledWhiteForm from '../../components/fields/TextFieldWhiteForm'
 
-function UploadForm() {
+function UploadForm({handleChange}) {
   return (
       <div className='flex-inline mt-12 md:w-1/2 ml-4'>
-                <TextFiledWhiteForm type={1} />
-                <TextFiledWhiteForm type={2}/>
-                <TextFiledWhiteForm type={3}/>
+                <TextFiledWhiteForm type={1} name='brandName' onChange={handleChange} />
+                <TextFiledWhiteForm type={2} name='product' onChange={handleChange} />
+                <TextFiledWhiteForm type={3} name='description' onChange={handleChange} />
     </div>
   )
 }
