@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import Swal from 'sweetalert2';
 import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
-import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 
 
@@ -44,8 +44,16 @@ function UploadVideo() {
       }
   
       const data = await response.json();
-      window.alert('Video uploaded successfully!');
-     
+      Swal.fire({
+        icon: 'success',
+        title: 'Video uploaded successfully!',
+        showConfirmButton: false,
+        timer: 2000, 
+        customClass: {
+          popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+        },
+        iconColor: '#294B29',
+      });
     } catch (error) {
       console.error('Error while saving video:', error);
     }

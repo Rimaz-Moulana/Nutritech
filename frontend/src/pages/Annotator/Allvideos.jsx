@@ -44,7 +44,7 @@ function Allvideos() {
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64 z-10">
         <Navbar type='annotator' />
         <div className='flex'>
-          <h1 className=' mb-8 ml-24 mt-32 text-3xl lg:mr-[1000px] font-semibold text-sidebarGreen left-0'>
+          <h1 className=' mb-8 ml-24 mt-32 text-3xl lg:mr-[960px] font-semibold text-sidebarGreen left-0'>
                   All Videos
                 </h1>
 

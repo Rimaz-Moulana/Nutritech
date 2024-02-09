@@ -7,20 +7,20 @@ import plus from '../../assets/Images/plus.png';
 import minus from '../../assets/Images/minus.png';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function AnnotationTable() {
   const navigate = useNavigate();
   const { videoId } = useParams();
 
-  const [isChecked, setIsChecked] = useState(() => {
-    return JSON.parse(localStorage.getItem('isChecked')) || false;
-  });
+  const [isYesSelected, setIsYesSelected] = useState(true);
 
-  const handleCheckboxChange = () => {
-    const newCheckedState = !isChecked;
-    setIsChecked(newCheckedState);
+  const handleYesClick = () => {
+    setIsYesSelected(true);
+  };
 
-    localStorage.setItem('isChecked', JSON.stringify(newCheckedState));
+  const handleNoClick = () => {
+    setIsYesSelected(false);
   };
 
   const viewdetails = () => {
@@ -84,7 +84,16 @@ function AnnotationTable() {
       });
 
       console.log('Response from server:', response.data);
-      window.alert('Annotations saved successfully!');
+      Swal.fire({
+        icon: 'success',
+        title: 'Annotations saved successfully!',
+        showConfirmButton: false,
+        timer: 2000, 
+        customClass: {
+          popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+        },
+        iconColor: '#294B29',
+      });
     } catch (error) {
       console.error('Error saving annotations:', error);
     }
@@ -102,34 +111,63 @@ function AnnotationTable() {
         </div>
         <div className='ml-16 h-full sm:ml-20 mb-8 mt-10 text-sm font-semibold text-black'>
           <div className='flex-end'>
-            <p>Is this video violated advertising rules and regulations?</p>
+            <p className='text-lg'>Does this video violated advertising rules and regulations?</p>
             
-            <div>
-              <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-white '>
-                <input
-                  type='checkbox'
-                  className='sr-only'
-                  checked={isChecked}
-                  onChange={handleCheckboxChange}
-                />
-                <span
-                  className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                    !isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
-                  }`}
-                >
-                  Yes
-                </span>
-                <span
-                  className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                    isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
-                  }`}
-                >
-                  No
-                </span>
-              </label>
+            <div className='flex place-content-center'>
+              <button
+                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                  isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
+                }`}
+                onClick={handleYesClick}
+              >
+                Yes
+              </button>
+              <button
+                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                  !isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
+                }`}
+                onClick={handleNoClick}
+              >
+                No
+              </button>
             </div>
+            {!isYesSelected && (
+              <>
+              <div className='mt-12 w-1/2 ml-52 bg-white p-2 place-content-center item-center'>
+              <div className='mt-4 text-lg'>Are you sure?</div>
+              <div className='flex mt-4 place-content-center'>
+              <button
+                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                  isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
+                }`}
+                onClick={submit}
+              >
+                Yes
+              </button>
+              
+              <button
+                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                  !isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
+                }`}
+                onClick={handleYesClick}
+              >
+                No
+              </button>
+            </div>
+              </div>
+             
 
-            {!isChecked && (
+            <div>
+            <button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+               onClick={() => window.history.back()}>
+                Cancel
+                </button>
+            </div>
+            </>
+            )
+            }
+
+            {isYesSelected && (
               <>
                 {[...Array(rowCount)].map((_, index) => (
                   <div key={index}>
@@ -161,7 +199,7 @@ function AnnotationTable() {
             )}
           </div>
 
-          {!isChecked && (
+          {isYesSelected && (
             <div className='flex items-end justify-center mt-4 z-10 h-full'>
               <div className='flex fixed right-12 bottom-20'>
                 <button
@@ -183,6 +221,11 @@ function AnnotationTable() {
                   onClick={viewdetails}
                 >
                   View Product Details
+                </button>
+
+                <button className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                 onClick={() => window.history.back()}>
+                  Cancel
                 </button>
               </div>
             </div>
