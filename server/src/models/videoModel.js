@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 const videoSchema = new mongoose.Schema({
-    brand : {type: String},
-    description: String,
+    brand : String,
+    product: String,
+    variation: String,
     flag: Boolean,
-    url: String,
+    videoPath: String,
     createdAt : {type: Date, default: Date.now()}
 })
 
