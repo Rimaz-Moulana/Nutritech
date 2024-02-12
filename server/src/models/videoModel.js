@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const videoSchema = new mongoose.Schema({
     brand : String,
@@ -9,6 +9,31 @@ const videoSchema = new mongoose.Schema({
     createdAt : {type: Date, default: Date.now()}
 })
 
+const VideoSchema = new mongoose.Schema({
+  video_id: Number,
+  uploader: String,
+  brandname: String,
+  product: String,
+  variation: String,
+  date: String,
+  time: String,
+  status: String,
+  timestamp: String,
+  rule: String,
+  details: String,
+  recommendation: String,
+  annotatedtime:String,
+  annotateddate:String,
+  annotations: [
+    {
+      timestamp: String,
+      rule: String,
+      details: String,
+      recommendation: String,
+    },
+  ],
+});
 
 
-module.exports = mongoose.model('Video' , videoSchema);
+const VideoModel = mongoose.model("videos", VideoSchema);
+module.exports = VideoModel;

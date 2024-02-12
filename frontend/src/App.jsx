@@ -27,6 +27,9 @@ import EditRule from './components/Popup/EditRule';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules';
 
+import AnnotationHistory from '../src/pages/Annotator/History'
+import AnnotatorHome from '../src/pages/Annotator/Home'
+
 
 // import './App.css'
 
@@ -46,7 +49,7 @@ function App(){
               <Route path='/test' element={<Test />} />
               <Route path='/addedproduct' element={<AddedProduct />} />
               <Route path="/all" element={<Allvideos/>} />
-              <Route path="/annotation" element={<AnnotationTable />} />
+              <Route path="/annotation/:videoId" element={<AnnotationTable />} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
               <Route path="/text" element={<Videowithtext/>} />
@@ -54,15 +57,18 @@ function App(){
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
               <Route path="/row" element={<Row/>} />
+              <Route path="/home" element={<AnnotatorHome/>} />
+              {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
-              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+              {/* <Route path="/sensormanagernewvideo" element={<NewVideos/>} /> */}
               <Route path="/uploadvideo2" element={<UploadVideo2 />} />
               
 
               <Route path="/reviewvideos" element={<ReviewVideos/>} />
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
+              <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
