@@ -5,10 +5,10 @@ import AllProductBtn from '../button/ProductBarButtonAll'
 export default function ProductBar() {
   return (
     <div className='  w-[80%] lg:ml-72 sm:ml-20 md:ml-[200px] py-2'>
-        <div className='flex px-2 py-2 text-sidebarGreer border rounded h-[40px] bg-white'>
-         <span className='text-left font-bold'>Product</span>
-         <div className='inline-flex lg:ml-[708px] md:ml-[200px] sm:ml-[50px]'>
-         <AllProductBtn />
+        <div className='w-[100%] justify-center px-2 flex py-4 text-sidebarGreer border rounded h-[80px] bg-white '>
+         <span className='text-left w-[60%] font-bold text-2xl text-black'>Previously added products</span>
+         <div className='inline-flex w-[40%] float-right justify-end '>
+         <AllProductBtn /> 
          <UpdateProductBtn />
          <LastProductBtn />
          </div>

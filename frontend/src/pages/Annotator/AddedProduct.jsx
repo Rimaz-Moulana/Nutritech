@@ -6,10 +6,10 @@ import BlankPage from '../../components/theme/BlankPage'
 
 export default function AddedProduct() {
   return (
-    <div className='w-full h-screen overflow-x-hidden bg-[#E5EBD6]'>
+    <div className='w-full h-screen overflow-x-auto xl:overflow-hidden bg-[#E5EBD6]'>
     <BlankPage />
-    <div className='inline-flex'>
-    <h1 className="lg:ml-[270px] sm:ml-40 mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Previously added products</h1>
+    <div className='inline-flex ml-[11%] w-[80%]'>
+    <h1 className="mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Product</h1>
     <AddNewProduct />
     </div>
     <ProductBar />
