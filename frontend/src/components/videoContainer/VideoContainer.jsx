@@ -1,46 +1,3 @@
-
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import pen from '../../../src/assets/Images/pen.png';
-import astra from '../../../src/assets/videos/astra.mp4';
-import review from '../../assets/Images/review.png';
-// import newvideo from '../../assets/videos/1707385712918-WhatsApp Video 2023-11-27 at 21.36.34.mp4';
-
-function VideoContainer({type}) {
-  const navigate = useNavigate(); 
-
-    const videoSources = [
-        astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, astra, 
-      ];
-
-      const handleAnnotate= () =>{
-        navigate('/annotation')
-      }
-
-      const handleReview= () =>{
-        navigate('/reviewvideos')
-      }
-    
-    
-      return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 h-full bg-backgroundGreen">
-          {videoSources.map((videoSrc, index) => (
-            <div key={index} className='relative'>
-              
-              <div className=''>
-              <video className="h-auto max-w-full rounded-lg" controls>
-                <source src={videoSrc} type="video/mp4" />
-                
-                Your browser does not support the video tag.
-              </video>
-              <div className='border-2 mt-2 border-gray-300 text-left'>
-              <p>Date :</p>
-              <p>Time :</p>
-              <p>Uploader :</p>
-              <p>Status   :</p>
-              </div>
-              </div>
-
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker'
 import astra from '../../../src/assets/videos/astra.mp4';
@@ -80,7 +37,7 @@ function VideoContainer({ type,videoData,viewType }) {
     <div className='w-full ml-12'> 
     {viewType=== 'Grid' &&(
       <div className='mt-12 right-0'>
-      <select
+      <select className='bg-'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
@@ -148,7 +105,7 @@ function VideoContainer({ type,videoData,viewType }) {
   )}
 
  {viewType==="List" && (
-   <div className='h-full h-min-screen mt-12'>
+   <div className='h-full h-min-screen mt-12 text-black'>
    <table className='w-full'>
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>
@@ -159,15 +116,15 @@ function VideoContainer({ type,videoData,viewType }) {
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
-                <option value='all'>All</option>
-                <option value='Biscuits'>Biscuits</option>
-                <option value='Dairy'>Dairy</option>
-                <option value='Margarine'>Margarine</option>
-                <option value='Noodles'>Noodles</option>
-                <option value='Soft Drinks'>Soft Drinks</option>
-                <option value='Bakery items'>Bakery Items</option>
-                <option value='Confectionary'>Confectionary</option>
-                <option value='Other'>Other</option>
+                <option className='bg-darkGreen' value='all'>All</option>
+                <option className='bg-darkGreen' value='Biscuits'>Biscuits</option>
+                <option className='bg-darkGreen' value='Dairy'>Dairy</option>
+                <option className='bg-darkGreen' value='Margarine'>Margarine</option>
+                <option className='bg-darkGreen' value='Noodles'>Noodles</option>
+                <option className='bg-darkGreen' value='Soft Drinks'>Soft Drinks</option>
+                <option className='bg-darkGreen' value='Bakery items'>Bakery Items</option>
+                <option className='bg-darkGreen' value='Confectionary'>Confectionary</option>
+                <option className='bg-darkGreen' value='Other'>Other</option>
               </select>
               </th>
          <th>
@@ -194,7 +151,7 @@ function VideoContainer({ type,videoData,viewType }) {
          <th className='mt-12'>Actions</th>
        </tr>
      </thead>
-     <tbody className='mt-8'>
+     <tbody className='mt-8 text-black'>
        {filteredVideos.map((video, index) => (
          <tr key={index} className='border-b-1'>
            <td>{video.product}</td>

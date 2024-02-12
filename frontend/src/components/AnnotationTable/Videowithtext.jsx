@@ -10,7 +10,7 @@ function Videowithtext() {
         Your browser does not support the video tag.
         </video>
         </div>
-      <div className='bg-white lg:w-1/2 lg:ml-12 sm:w-full p-3  text-justify border rounded-lg'>
+      <div className='bg-white lg:w-1/2 lg:ml-12 sm:w-full p-3 text-justify border rounded-lg'>
         <p>
         Cake? Bake!
         Cake Bake Cake Bake Cake Bake Cake Bake cake bake cake bake with Astra 
