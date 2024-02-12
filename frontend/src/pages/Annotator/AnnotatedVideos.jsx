@@ -28,7 +28,7 @@ function AnnotatedVideos() {
     const fetchData = async () => {
       // try {
         // Allvideos.jsx
-        const response = await fetch('http://localhost:3000/videos/annotated-videos');
+        const response = await fetch('http://localhost:3000/api/videos/annotated-videos');
         const data = await response.json();
         setannotatedVideoData(data);
 
@@ -44,7 +44,7 @@ function AnnotatedVideos() {
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
         <Navbar type='annotator'/>
         <div className='flex'>
-        <h1 className=' mb-8 ml-20 mt-32 lg:mr-[910px] text-3xl font-semibold text-sidebarGreen left-0'>
+        <h1 className=' mb-8 ml-20 mt-32 mr-5.5 text-3xl font-semibold text-sidebarGreen left-0'>
            Annotated Videos
         </h1>
         <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white '>
