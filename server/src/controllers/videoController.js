@@ -1,3 +1,7 @@
+
+const videoService = require('../services/videoService');
+const Video = require('../models/videoModel')
+
 const VideoService = require('../services/videoService')
 
 exports.getAllVideos = async (req, res) => {
@@ -30,6 +34,7 @@ exports.getAnnotatedVideos = async (req, res) => {
     }
   };
 
+
   exports.postVideoDetails= async (req,res)=>{
     try {
           const ITNVideos = await VideoService.postmediavideodetails(req);
@@ -52,6 +57,29 @@ exports.getuploadhistory= async (req,res)=>{
     }
 }
 
+
+// exports.getVideosById = async(req,res) ={
+
+
+exports.addvideo = async (req,res) => {
+
+    try{
+        const { brand, product , variation , createdAt} = req.body;
+        const videoPath = req.file.path
+        console.log(req.body)
+        const newVideo = new Video({brand,product,variation, videoPath, createdAt});
+        console.log(newVideo)
+        await newVideo.save();
+       
+        return res.status(201).json({success: true, newVideo});
+
+    } catch(error){
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Server Error'});
+    }
+
+}
+
 exports.getpendingvideos= async (req,res)=>{
   try {
         const pendingVideos = await VideoService.getsensormanagernewvideos();
@@ -61,3 +89,4 @@ exports.getpendingvideos= async (req,res)=>{
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+

@@ -7,7 +7,7 @@ export default function BlankPage() {
     <>
    
  
-    <div className='bg-backgroundGreen flex'>
+    <div className='bg-backgroundGreen flex overflow-x-auto'>
     <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <Annotatorsidebar />
       </div>

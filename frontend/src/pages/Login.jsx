@@ -19,12 +19,12 @@ export default function login() {
         <div className='flex items-center justify-between mb-4'>
         <input
             type="text" id="username"
-            className="shadow appearance-none border rounded w-[70%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-[70%] py-2 px-3 text-gray-700 leading-tight bg-white focus:outline-none focus:shadow-outline"
             placeholder="Enter your username" />
         </div>
         <div className='flex  mb-4'>
         <input type="password" id="password"
-            className="shadow appearance-none border rounded w-[70%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border  bg-white rounded w-[70%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Enter your password" />
         </div>
         <div><Loginbutton/></div>
