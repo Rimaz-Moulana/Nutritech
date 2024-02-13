@@ -26,7 +26,7 @@ function Allvideos() {
   useEffect(() => {
     // Fetch data from your backend API
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/videos/all');
+       const response = await fetch('http://localhost:3000/api/videos/all');
       const data = await response.json();
       setVideoData(data);
     };
@@ -44,7 +44,7 @@ function Allvideos() {
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64 z-10">
         <Navbar type='annotator' />
         <div className='flex'>
-          <h1 className=' mb-8 ml-24 mt-32 text-3xl lg:mr-[960px] font-semibold text-sidebarGreen left-0'>
+          <h1 className=' mb-8 ml-24 mt-32 text-3xl mr-6.5 font-semibold text-sidebarGreen left-0'>
                   All Videos
                 </h1>
 
@@ -77,8 +77,7 @@ function Allvideos() {
 <VideoContainer 
         type={'all'}
         videoData={videoData}
-        viewType={isChecked ? 'Grid' : 'List'} 
-        
+        viewType={isChecked ? 'Grid' : 'List'}         
       /> 
        
       </div>

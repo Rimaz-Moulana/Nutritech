@@ -21,7 +21,7 @@ function Unannotatedvideos() {
   useEffect(() => {
     const fetchUnannotatedVideos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/videos/unannotated-videos');
+        const response = await fetch('http://localhost:3000/api/videos/unannotated-videos');
         if (!response.ok) {
           throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
         }
@@ -43,7 +43,7 @@ function Unannotatedvideos() {
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
         <Navbar type='annotator'/>
         <div className='flex'>
-        <h1 className=' mb-8 ml-24 mt-32 lg:mr-[800px] text-3xl font-semibold text-sidebarGreen left-0'>
+        <h1 className=' mb-8 ml-24 mt-32 mr-4.5 text-3xl font-semibold text-sidebarGreen left-0'>
            Unannotated Videos
         </h1>
         {/* <GridListView type="annotated" videoData={annotatedVideoData}/> */}

@@ -26,15 +26,4 @@ router.get('/history',videoController.getuploadhistory)
 router.get('/sensormanagernewvideo',videoController.getpendingvideos)
 
 
-
-
-// router.post('/upload',videoController.upload.single('file'), videoController.postVideo);
-// router.post('/upload',videoController.upload.single('file'), videoController.postVideo);
-
-// router.get('/videos', videoController.getVideos);
-// router.post('/addvideo' , videoController.addvideo);
-// router.get('/videos', videoController.getVideos);
-// router.post('/addvideo' , videoController.addvideo);
-
-
 module.exports = router;

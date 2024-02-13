@@ -1,3 +1,4 @@
+
 import React from 'react'
 import TextFiledWhiteForm from '../fields/TextFieldWhiteForm'
 
@@ -11,4 +12,8 @@ export  default function UploadForm({handleChange}) {
 
 
 )
+
 }
+
+export default UploadForm;
+
