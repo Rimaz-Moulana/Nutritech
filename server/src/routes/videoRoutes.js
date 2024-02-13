@@ -6,7 +6,7 @@ const multer =require('multer');
 //video uploading
 const storage = multer.diskStorage({
     destination: function(req, file , cb){
-        cb(null, '/NutriTech/Nutritech/frontend/src/assets/videos');
+        cb(null, '/Nutritech/frontend/src/assets/videos');
     },
     filename: function(req, file, cb){
         cb(null, Date.now() + '-' + file.originalname);
