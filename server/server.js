@@ -35,7 +35,7 @@ app.use(express.json());
 // app.use('/api/video', vidoeRoutes)
 
 app.use('/api/videos', vidoeRoutes);
-app.use('/api/videos', videoRoutes);
+// app.use('/api/videos', videoRoutes);
 // Routes
   // app.use('/videos', videoRoutes);
   app.use('/annotations', annotationsRoutes);

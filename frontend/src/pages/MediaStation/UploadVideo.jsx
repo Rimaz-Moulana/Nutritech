@@ -7,7 +7,7 @@ import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 
 
 function UploadVideo() {
-    const [uploadStatus, setUploadStatus] = useState('');
+    // const [uploadStatus, setUploadStatus] = useState('');
   const [uploadStatus, setUploadStatus] = useState('');
     const [formData, setFormData] = useState({
         brand: '',
@@ -70,7 +70,7 @@ function UploadVideo() {
       
     </div>
   </div>
-  </div>
+  // </div>
 );
 }
 
