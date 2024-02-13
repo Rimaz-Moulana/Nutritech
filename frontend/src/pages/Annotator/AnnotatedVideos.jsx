@@ -43,8 +43,8 @@ function AnnotatedVideos() {
       </div>
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
         <Navbar type='annotator'/>
-        <div className='flex'>
-        <h1 className=' mb-8 ml-20 mt-32 mr-5.5 text-3xl font-semibold text-sidebarGreen left-0'>
+        <div className='flex justify-between'>
+        <h1 className=' mb-8 ml-20 mt-32 text-3xl font-semibold text-sidebarGreen left-0'>
            Annotated Videos
         </h1>
         <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white '>

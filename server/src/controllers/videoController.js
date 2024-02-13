@@ -67,7 +67,7 @@ exports.addvideo = async (req,res) => {
         const { brand, product , variation , createdAt} = req.body;
         const videoPath = req.file.path
         console.log(req.body)
-        const newVideo = new Video({brand,product,variation, videoPath, createdAt});
+        const newVideo = new Video({brand,product,variation, videoPath, createdAt, status: 'pending', uploader:'Sirasa'});
         console.log(newVideo)
         await newVideo.save();
        
