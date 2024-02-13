@@ -1,20 +1,62 @@
+
 const videoService = require('../services/videoService');
 const Video = require('../models/videoModel')
 
-exports.postVideo = (req,res) =>{
-    console.log(req.body)
-    console.log(req.file)
+const VideoService = require('../services/videoService')
+
+exports.getAllVideos = async (req, res) => {
+  try {
+    const videos = await VideoService.getAnnotatorAllVideos();
+    res.status(200).json(videos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+exports.getAnnotatedVideos = async (req, res) => {
+    try {
+      const videos = await VideoService.getAnnotatorAnnotatedVideos();
+      res.status(200).json(videos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+  
+  exports.getUnannotatedVideos = async (req, res) => {
+    try {
+      const videos = await VideoService.getAnnotatorUnannotatedVideos();
+      res.status(200).json(videos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
+
+  exports.postVideoDetails= async (req,res)=>{
+    try {
+          const ITNVideos = await VideoService.postmediavideodetails(req);
+          console.log("itn videos: ",ITNVideos)
+          res.json(ITNVideos);
+      } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Internal Server Error' });
+      }
+  }
+
+exports.getuploadhistory= async (req,res)=>{
+  try {
+        const ITNVideos = await VideoService.getmediahistory();
+        console.log("itn videos: ",ITNVideos)
+        res.json(ITNVideos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
-exports.getVideos = async(req,res) => {
-    try{
-        const videos = await videoService.getAllVideos();
-        res.json(videos);
-    }
-    catch(err){
-        res.status(500).json({error: err.message});
-    }
-}
 
 // exports.getVideosById = async(req,res) ={
 
@@ -37,3 +79,14 @@ exports.addvideo = async (req,res) => {
     }
 
 }
+
+exports.getpendingvideos= async (req,res)=>{
+  try {
+        const pendingVideos = await VideoService.getsensormanagernewvideos();
+        res.json(pendingVideos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+

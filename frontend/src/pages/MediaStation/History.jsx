@@ -1,9 +1,33 @@
+
 import React from 'react';
+
+import React, { useEffect, useState } from 'react'
+
 import { useNavigate } from 'react-router-dom';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function History() {
+  const [ITNVideoData, setITNVideoData] = useState([]);
+
+  useEffect(() => {
+    const fetchITNVideos = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/videos/history');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
+        }
+        const data = await response.json();
+        setITNVideoData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchITNVideos();
+  }, []);
+  
+
   const navigate = useNavigate(); 
   const videoupload= () => {
     navigate('/uploadvideo');
@@ -21,8 +45,7 @@ function History() {
       </div>
       
       </div>
-      
-      <VideoContainer />
+      <VideoContainer videoData={ITNVideoData}/>
     </div>
   </div>
 );

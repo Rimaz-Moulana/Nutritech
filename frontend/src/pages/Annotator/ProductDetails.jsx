@@ -13,6 +13,7 @@ import Navbar from '../../components/navbar/Navbar'
 import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar'
 
 export default class test extends React.Component {
+    
     render(){
         const [productName, setProductName] = useState('');
         const [brand, setBrand] = useState('');
