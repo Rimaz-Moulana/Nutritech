@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
@@ -69,10 +69,12 @@ function UploadVideo() {
       </div>
       <div className=''>
       <UploadNewVideoUIBtnSet handleSubmit={handleSubmit} />
+
       </div>
       
     </div>
   </div>
+  // </div>
 );
 }
 

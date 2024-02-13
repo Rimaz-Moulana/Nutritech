@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker'
-import astra from '../../../src/assets/videos/astra.mp4';
-import pen from '../../../src/assets/Images/pen.png';
-import history from '../../../src/assets/Images/history.png';
-import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import review from '../../../src/assets/Images/review.png'
+import { useNavigate } from 'react-router-dom';
+import history from '../../../src/assets/Images/history.png';
+import pen from '../../../src/assets/Images/pen.png';
+import review from '../../../src/assets/Images/review.png';
+import astra from '../../../src/assets/videos/astra.mp4';
 
 function VideoContainer({ type,videoData,viewType }) {
   console.log(videoData)

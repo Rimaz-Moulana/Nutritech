@@ -2,7 +2,7 @@ const express = require('express');
 const config = require('./config/databaseMongo');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const videoRoutes = require('./src/routes/videoRoutes');
+const vidoeRoutes = require('./src/routes/videoRoutes');
 const annotationsRoutes = require('./src/routes/annotationRoutes')
 const userRoutes = require('./src/routes/userRoutes')
 
@@ -33,12 +33,12 @@ mongoose.connect(config.mongoURI, {
 app.use(express.json());
 // app.use('/api',userRoutes);
 // app.use('/api/video', vidoeRoutes)
-app.use('/api/videos', videoRoutes);
+
+app.use('/api/videos', vidoeRoutes);
+// app.use('/api/videos', videoRoutes);
 // Routes
   // app.use('/videos', videoRoutes);
   app.use('/annotations', annotationsRoutes);
-
-  
   // Start the server
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

@@ -27,6 +27,5 @@ const VideoSchema = new mongoose.Schema({
   ],
 });
 
-
-const VideoModel = mongoose.model("videos", VideoSchema);
+const VideoModel = mongoose.model("videos", videoSchema);
 module.exports = VideoModel;
