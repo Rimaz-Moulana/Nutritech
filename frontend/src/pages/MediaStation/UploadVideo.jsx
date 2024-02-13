@@ -7,7 +7,8 @@ import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 
 
 function UploadVideo() {
-
+  const padZero = (num) => (num < 10 ? `0${num}` : num);
+  
   const formattedDate = `${padZero(new Date().getFullYear())}:${padZero(new Date().getMonth())}:${padZero(new Date().getDay())}`;
   const formattedTime = `${padZero(new Date().getHours())}:${padZero(new Date().getMinutes())}:${padZero(new Date().getSeconds())}`;
   
