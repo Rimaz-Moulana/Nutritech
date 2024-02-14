@@ -15,8 +15,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-router.post('/upload', upload.single('video'), videoController.addvideo);
-
+router.post('/upload', upload.single('video'), videoController.addvideo); // video upload
 router.get('/all', videoController.getAllVideos);
 router.get('/annotated-videos', videoController.getAnnotatedVideos);
 router.get('/unannotated-videos', videoController.getUnannotatedVideos);
@@ -24,17 +23,6 @@ router.post('/uploadvideo', videoController.postVideoDetails);
 router.post('/uploadvideo', videoController.postVideoDetails);
 router.get('/history',videoController.getuploadhistory)
 router.get('/sensormanagernewvideo',videoController.getpendingvideos)
-
-
-
-
-// router.post('/upload',videoController.upload.single('file'), videoController.postVideo);
-// router.post('/upload',videoController.upload.single('file'), videoController.postVideo);
-
-// router.get('/videos', videoController.getVideos);
-// router.post('/addvideo' , videoController.addvideo);
-// router.get('/videos', videoController.getVideos);
-// router.post('/addvideo' , videoController.addvideo);
 
 
 module.exports = router;

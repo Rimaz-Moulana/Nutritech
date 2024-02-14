@@ -2,10 +2,10 @@ import React from 'react';
 
 export default function dropdownWhite({value, id, name , onChange, defOptions}) {
   const optionsArray = [
-    { value: 'US', label: 'United States' },
-    { value: 'CA', label: 'Canada' },
-    { value: 'FR', label: 'France' },
-    { value: 'DE', label: 'Germany' },
+    { value: 'United States', label: 'United States' },
+    { value: 'Canada', label: 'Canada' },
+    { value: 'France', label: 'France' },
+    { value: 'Germany', label: 'Germany' },
   ];
   
   return (
