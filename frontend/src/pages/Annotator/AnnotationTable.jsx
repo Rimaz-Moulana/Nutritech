@@ -134,7 +134,9 @@ function AnnotationTable() {
             {!isYesSelected && (
               <>
               <div className='mt-12 w-1/2 ml-52 bg-white p-2 place-content-center item-center'>
-              <div className='mt-4 text-lg'>Are you sure?</div>
+              <div className='mt-4 text-lg'>Are you sure?
+              <p>You can't annotate this video again.</p>
+              </div>
               <div className='flex mt-4 place-content-center'>
               <button
                 className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
@@ -151,7 +153,7 @@ function AnnotationTable() {
                 }`}
                 onClick={handleYesClick}
               >
-                No
+                Cancel
               </button>
             </div>
               </div>

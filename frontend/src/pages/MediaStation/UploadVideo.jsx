@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import React, { useState } from 'react';
 import UploadForm from '../../components/UploadVideo/UploadForm';
@@ -9,6 +8,7 @@ import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 
 function UploadVideo() {
     const [uploadStatus, setUploadStatus] = useState('');
+  const [uploadStatus, setUploadStatus] = useState('');
     const [formData, setFormData] = useState({
         brand: '',
         product: '',
@@ -57,7 +57,6 @@ function UploadVideo() {
       
       </div>
       <div className='flex mt-16 mr-12'>
-
       <UploadForm handleChange={handleChange} />
       <VideoUpload handleFileChange={handleFileChange}  />
       </div>
@@ -66,6 +65,8 @@ function UploadVideo() {
       </div>
       <div className=''>
       <UploadNewVideoUIBtnSet handleSubmit={handleSubmit} />
+
+      </div>
       
     </div>
   </div>
