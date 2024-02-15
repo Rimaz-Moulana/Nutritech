@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EditRule from '../Popup/EditRule';
-import DeletePopup from './DeletePopup';
+import Popup from './Popup';
 
 
 function Rule() {
@@ -29,7 +29,7 @@ function Rule() {
         </button>
       </div>
 
-      <DeletePopup openModal={openModal} setOpenModal={setOpenModal}/>
+      <Popup text1={"delete"} text2={"rule"} button={"Delete"} openModal={openModal} setOpenModal={setOpenModal}/>
 
     </div>
   );

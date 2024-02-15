@@ -1,5 +1,14 @@
 const VideoModel = require('../models/videoModel');
 
+const getCurrentDateTime = () => {
+  const currentDate = new Date();
+  const formattedDateTime = `${padZero(currentDate.getHours())}:${padZero(currentDate.getMinutes())}:${padZero(currentDate.getSeconds())}`;
+  return formattedDateTime;
+};
+
+const padZero = (num) => (num < 10 ? `0${num}` : num);
+
+
 exports.getAnnotatorAllVideos = async (req, res) => { 
     return await VideoModel.find({ status: { $in: ['annotated', 'unannotated'] } });
 };
@@ -26,10 +35,36 @@ exports.getsensormanagernewvideos= async(req,res)=>{
 
 }
 
-
 exports.getSensorManagerReviewVideos = async(videoId)=>{
   return await VideoModel.findOne({ _id: videoId })
 }
+
+exports.saveSensorManagerReviewStatus = async (videoId) => {
+  try {
+    return await VideoModel.findByIdAndUpdate(
+      videoId,
+      {
+        status: 'unannotated',
+        reviewedtime: getCurrentDateTime(),
+        revieweddate: new Date().toLocaleDateString(),
+      },
+      { new: true }
+    );
+  } catch (error) {
+    console.error(`Error saving annotations: ${error.message}`);
+    throw error;
+  }
+};
+
+exports.deleteVideo = async (videoId) => {
+  try {
+    const deletedVideo = await VideoModel.findByIdAndRemove(videoId);
+    return deletedVideo;
+  } catch (error) {
+    console.error(`Error deleting video: ${error.message}`);
+    throw error;
+  }
+};
 
 
 

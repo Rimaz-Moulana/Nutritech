@@ -14,6 +14,8 @@ const VideoSchema = new mongoose.Schema({
   timestamp: String,
   rule: String,
   details: String,
+  reviewedtime:String,
+  revieweddate:String,
   recommendation: String,
   annotatedtime:String,
   annotateddate:String,

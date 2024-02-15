@@ -83,7 +83,6 @@ function AnnotationTable() {
         annotations: rowsData,
       });
 
-      console.log('Response from server:', response.data);
       Swal.fire({
         icon: 'success',
         title: 'Annotations saved successfully!',
@@ -94,6 +93,7 @@ function AnnotationTable() {
         },
         iconColor: '#294B29',
       });
+      window.history.back();
     } catch (error) {
       console.error('Error saving annotations:', error);
     }

@@ -38,7 +38,6 @@ exports.getAnnotatedVideos = async (req, res) => {
   exports.postVideoDetails= async (req,res)=>{
     try {
           const ITNVideos = await VideoService.postmediavideodetails(req);
-          console.log("itn videos: ",ITNVideos)
           res.json(ITNVideos);
       } catch (error) {
           console.error(error);
@@ -90,18 +89,43 @@ exports.getpendingvideos= async (req,res)=>{
     }
 }
 
-exports.getSensorManagerReview = async (req, res) => {
+exports.saveSensorManagerReview= async (req,res)=>{
+  try {
+        const videoId = req.params.videoId;
+        const videoStatus = await VideoService.saveSensorManagerReviewStatus(videoId);
+        res.json(videoStatus);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.fetchSensorManagerReview = async (req, res) => {
   try {
     const videoId = req.params.videoId;
     const video = await VideoService.getSensorManagerReviewVideos(videoId);
-
+    console.log(video)
     if (!video) {
       return res.status(404).json({ success: false, message: 'Video not found' });
     }
 
     res.json({ success: true, video });
   } catch (error) {
-    console.error('Error fetching annotations:', error);
+    console.error('Error fetching details:', error);
     res.status(500).json({ success: false, message: 'Error fetching annotations' });
   }
 };
+
+
+exports.deleteVideo = async (req, res) => {
+  try {
+    const videoId = req.params.videoId;
+    await VideoService.deleteVideo(videoId);
+
+    res.status(200).json({ message: 'Video deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting video:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+

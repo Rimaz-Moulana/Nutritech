@@ -24,7 +24,7 @@ function VideoContainer({ type,videoData,viewType }) {
     navigate(`/reviewvideo/${videoId}`);
   };
 
-  const filteredVideos = videoData.filter((video) => {
+  const filteredVideos = videoData?.filter((video) => {
     const productMatch =
       productFilter === 'all' || video.product === productFilter;
     const dateMatch =
@@ -32,6 +32,7 @@ function VideoContainer({ type,videoData,viewType }) {
 
       return productMatch && dateMatch;
   });
+
   return (
     <div className='w-full ml-12'> 
     {viewType=== 'Grid' &&(
@@ -56,11 +57,9 @@ function VideoContainer({ type,videoData,viewType }) {
           <div className=''>
             {console.log(`/videos${video.videoPath.replace(/\\/g, '/')}`)}
           <video className="h-auto max-w-full rounded-lg" controls>
-          <source src={`/videos${video.videopath}`} type="video/mp4" />
-          Your browser does not support the video tag.
-</video>
-
-         
+              <source src={`M:${video.videoPath}`} type="video/mp4" />
+              Your browser does not support the video tag.
+          </video>
 
             <div className='border-2 mt-2 border-gray-300 text-left'>
               <p className='font-semibold'>Status: {video.status}</p>
@@ -95,9 +94,9 @@ function VideoContainer({ type,videoData,viewType }) {
           )}
 
           
-{type === 'pending' && (
+          {type === 'pending' && (
             <div className="h-24 w-8 icon-overlay absolute top-0 right-0 cursor-pointer ">
-              {console.log(video._id)}
+
               <img src={review} alt="Review" onClick={() => handleReview(video._id)} />
             </div>
           )}

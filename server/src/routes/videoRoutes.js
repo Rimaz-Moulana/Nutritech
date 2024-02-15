@@ -24,7 +24,8 @@ router.post('/uploadvideo', videoController.postVideoDetails);
 // router.post('/uploadvideo', videoController.postVideoDetails);
 router.get('/history',videoController.getuploadhistory)
 router.get('/sensormanagernewvideo',videoController.getpendingvideos)
-router.post('/reviewvideo/:videoId', videoController.getSensorManagerReview );
-
+router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );
+router.post('/reviewvideo/:videoId', videoController.saveSensorManagerReview );
+router.delete('/reviewvideo/:videoId', videoController.deleteVideo);
 
 module.exports = router;

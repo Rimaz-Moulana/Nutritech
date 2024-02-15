@@ -4,23 +4,10 @@ import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar'
 import Navbar from '../../components/navbar/Navbar';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function ReviewVideos() {
   const { videoId } = useParams();
-
-  const [isChecked, setIsChecked] = useState(() => {
-    return JSON.parse(localStorage.getItem('isChecked')) || false;
-  });
-
-
-  const handleCheckboxChange = () => {
-    const newCheckedState = !isChecked;
-    setIsChecked(newCheckedState);
-
-    localStorage.setItem('isChecked', JSON.stringify(newCheckedState));
-  }
-
-
 
   return (
     <div className='bg-backgroundGreen flex h-full'>
@@ -34,7 +21,7 @@ function ReviewVideos() {
        Existing Ads related to this product
        </h1>
       <div>
-  
+      <VideoContainer type={"reviewvideo"} />
       </div>
        
       </div>
