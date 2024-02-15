@@ -6,7 +6,7 @@ const multer =require('multer');
 //video uploading
 const storage = multer.diskStorage({
     destination: function(req, file , cb){
-        cb(null, '/Nutritech/frontend/src/assets/videos');
+        cb(null, '/Nutritech/server/uploads');
     },
     filename: function(req, file, cb){
         cb(null, Date.now() + '-' + file.originalname);
@@ -21,9 +21,10 @@ router.get('/all', videoController.getAllVideos);
 router.get('/annotated-videos', videoController.getAnnotatedVideos);
 router.get('/unannotated-videos', videoController.getUnannotatedVideos);
 router.post('/uploadvideo', videoController.postVideoDetails);
-router.post('/uploadvideo', videoController.postVideoDetails);
+// router.post('/uploadvideo', videoController.postVideoDetails);
 router.get('/history',videoController.getuploadhistory)
 router.get('/sensormanagernewvideo',videoController.getpendingvideos)
+router.post('/reviewvideo/:videoId', videoController.getSensorManagerReview );
 
 
 module.exports = router;

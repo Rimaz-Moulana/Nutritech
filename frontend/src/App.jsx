@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-
-
 import Videowithtext from './components/AnnotationTable/Videowithtext';
 import BlankPage from './components/theme/BlankPage';
 import Test from './components/theme/test';
@@ -63,9 +61,10 @@ function App(){
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
               {/* <Route path="/sensormanagernewvideo" element={<NewVideos/>} /> */}
               <Route path="/uploadvideo2" element={<UploadVideo2 />} />
+              {/* <Route path="/reviewvideo" element={<ReviewVideos />} /> */}
               
 
-              <Route path="/reviewvideos" element={<ReviewVideos/>} />
+              <Route path="/reviewvideo/:videoId" element={<ReviewVideos/>} />
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />

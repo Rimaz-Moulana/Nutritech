@@ -23,10 +23,13 @@ exports.getmediahistory = async(req,res)=>{
 
 exports.getsensormanagernewvideos= async(req,res)=>{
   return await VideoModel.find({ status: 'pending' });
+
 }
 
 
-
+exports.getSensorManagerReviewVideos = async(videoId)=>{
+  return await VideoModel.findOne({ _id: videoId })
+}
 
 
 

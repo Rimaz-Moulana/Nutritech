@@ -9,8 +9,6 @@ const userRoutes = require('./src/routes/userRoutes')
 const app = express();
 const PORT = 3000;
 
-// ...
-
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -20,7 +18,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// ...
 
 mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
@@ -31,15 +28,11 @@ mongoose.connect(config.mongoURI, {
 
 
 app.use(express.json());
-// app.use('/api',userRoutes);
-// app.use('/api/video', vidoeRoutes)
-
+const path = require('path');
+app.use('/videos', express.static(path.join(__dirname, 'Nutritech', 'server', 'uploads')));
 app.use('/api/videos', vidoeRoutes);
-// app.use('/api/videos', videoRoutes);
-// Routes
-  // app.use('/videos', videoRoutes);
+
   app.use('/annotations', annotationsRoutes);
-  // Start the server
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });

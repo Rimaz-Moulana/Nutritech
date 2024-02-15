@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import video from '../../assets/videos/astra.mp4'
 import Videodetails from '../SensorManager/Videodetails'
 
-function VideowithReview() {
+function VideowithReview({videoId}) {
+  const[videoData, setVideoData]=useState()
+
+  useEffect(() => {
+    const fetchAnnotations = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+        const data = await response.json();
+        setVideoData(data);
+      } catch (error) {
+        console.error('Error fetching annotations:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnnotations();
+  }, [videoId]);
+  
   return (
     <div className='lg:flex mt-32 justify-right ml-8'>
         <div className='w-1/2'>

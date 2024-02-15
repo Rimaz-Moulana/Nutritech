@@ -8,8 +8,7 @@ import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 
 function UploadVideo() {
   const padZero = (num) => (num < 10 ? `0${num}` : num);
-  
-  const formattedDate = `${padZero(new Date().getFullYear())}:${padZero(new Date().getMonth())}:${padZero(new Date().getDay())}`;
+
   const formattedTime = `${padZero(new Date().getHours())}:${padZero(new Date().getMinutes())}:${padZero(new Date().getSeconds())}`;
   
   const [uploadStatus, setUploadStatus] = useState('');
@@ -17,7 +16,7 @@ function UploadVideo() {
         brand: '',
         product: '',
         variation: '',
-        createdIn: formattedDate,
+        createdIn: new Date().toLocaleDateString(),
         createdAt: formattedTime ,
         videoFile: null // Assuming you need to upload a video file
       });
@@ -36,6 +35,7 @@ function UploadVideo() {
         formD.append('brand', formData.brand);
         formD.append('product', formData.product);
         formD.append('variation', formData.variation);
+        formD.append('createdIn', formData.createdIn);
         formD.append('createdAt', formData.createdAt);
         formD.append('video', formData.videoFile);
         

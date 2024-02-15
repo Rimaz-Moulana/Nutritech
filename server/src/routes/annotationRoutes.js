@@ -1,5 +1,3 @@
-
-// videoRoutes.js
 const express = require('express');
 const router = express.Router();
 const annotationController = require('../controllers/annotationController');

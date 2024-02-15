@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 import history from '../../../src/assets/Images/history.png';
 import pen from '../../../src/assets/Images/pen.png';
 import review from '../../../src/assets/Images/review.png';
-import astra from '../../../src/assets/videos/astra.mp4';
+import astra from '../../../src/assets/videos/1707816204435.mp4';
 
 function VideoContainer({ type,videoData,viewType }) {
-  console.log(videoData)
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   const [productFilter, setProductFilter] = useState('all');
@@ -21,8 +20,8 @@ function VideoContainer({ type,videoData,viewType }) {
     navigate(`/annotationhistory/${videoId}`)
   };
 
-  const handleReview = () => {
-    navigate('/reviewvideos');
+  const handleReview = (videoId) => {
+    navigate(`/reviewvideo/${videoId}`);
   };
 
   const filteredVideos = videoData.filter((video) => {
@@ -55,10 +54,14 @@ function VideoContainer({ type,videoData,viewType }) {
       {filteredVideos.map((video, index) => (
         <div key={index} className='relative'>
           <div className=''>
-            <video className="h-auto max-w-full rounded-lg" controls>
-              <source src={astra} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            {console.log(`/videos${video.videoPath.replace(/\\/g, '/')}`)}
+          <video className="h-auto max-w-full rounded-lg" controls>
+          <source src={`/videos${video.videopath}`} type="video/mp4" />
+          Your browser does not support the video tag.
+</video>
+
+         
+
             <div className='border-2 mt-2 border-gray-300 text-left'>
               <p className='font-semibold'>Status: {video.status}</p>
               <p>Product: {video.product}</p>
@@ -94,7 +97,8 @@ function VideoContainer({ type,videoData,viewType }) {
           
 {type === 'pending' && (
             <div className="h-24 w-8 icon-overlay absolute top-0 right-0 cursor-pointer ">
-              <img src={review} alt="Review" onClick={handleReview} />
+              {console.log(video._id)}
+              <img src={review} alt="Review" onClick={() => handleReview(video._id)} />
             </div>
           )}
 
@@ -110,6 +114,7 @@ function VideoContainer({ type,videoData,viewType }) {
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>
        <tr className='mt-12'>
+        <th>Brand {' '}</th>
          <th className=''> Product{' '}
               <select
               className='text-center w-24 bg-darkGreen'
@@ -154,10 +159,11 @@ function VideoContainer({ type,videoData,viewType }) {
      <tbody className='mt-8 text-black'>
        {filteredVideos.map((video, index) => (
          <tr key={index} className='border-b-1'>
+          <td>{video.brand}</td>
            <td>{video.product}</td>
            <td>{video.status}</td>
-           <td>{video.date}</td>
-           <td>{video.time}</td>
+           <td>{video.createdIn}</td>
+           <td>{video.createdAt}</td>
            <td>{video.uploader}</td>
            {type === 'annotated' && (
              <>

@@ -1,5 +1,5 @@
 
-const videoService = require('../services/videoService');
+// const videoService = require('../services/videoService');
 const Video = require('../models/videoModel')
 
 const VideoService = require('../services/videoService')
@@ -64,10 +64,10 @@ exports.getuploadhistory= async (req,res)=>{
 exports.addvideo = async (req,res) => {
 
     try{
-        const { brand, product , variation , createdAt} = req.body;
+        const { brand, product , variation , createdIn, createdAt} = req.body;
         const videoPath = req.file.path
         console.log(req.body)
-        const newVideo = new Video({brand,product,variation, videoPath, createdAt, status: 'pending', uploader:'Sirasa'});
+        const newVideo = new Video({brand,product,variation, videoPath, createdIn, createdAt, status: 'pending', uploader:'Sirasa'});
         console.log(newVideo)
         await newVideo.save();
        
@@ -90,3 +90,18 @@ exports.getpendingvideos= async (req,res)=>{
     }
 }
 
+exports.getSensorManagerReview = async (req, res) => {
+  try {
+    const videoId = req.params.videoId;
+    const video = await VideoService.getSensorManagerReviewVideos(videoId);
+
+    if (!video) {
+      return res.status(404).json({ success: false, message: 'Video not found' });
+    }
+
+    res.json({ success: true, video });
+  } catch (error) {
+    console.error('Error fetching annotations:', error);
+    res.status(500).json({ success: false, message: 'Error fetching annotations' });
+  }
+};
