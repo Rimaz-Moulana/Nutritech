@@ -6,6 +6,7 @@ import history from '../../../src/assets/Images/history.png';
 import pen from '../../../src/assets/Images/pen.png';
 import review from '../../../src/assets/Images/review.png';
 import astra from '../../../src/assets/videos/1707816204435.mp4';
+import ReactPlayer from 'react-player';
 
 function VideoContainer({ type,videoData,viewType }) {
   const navigate = useNavigate();
@@ -23,6 +24,19 @@ function VideoContainer({ type,videoData,viewType }) {
   const handleReview = (videoId) => {
     navigate(`/reviewvideo/${videoId}`);
   };
+
+const handleVideo = (inputUrl) =>{
+  const url = inputUrl.replace(/\\/g, '/');
+
+// Split the URL based on backslash ("\")
+  const urlParts = url.split('/');
+
+// Take the last part of the array
+  const desiredPart = urlParts[urlParts.length - 1];
+console.log(desiredPart)
+return desiredPart;
+}
+
 
   const filteredVideos = videoData?.filter((video) => {
     const productMatch =
@@ -56,10 +70,19 @@ function VideoContainer({ type,videoData,viewType }) {
         <div key={index} className='relative'>
           <div className=''>
             {console.log(`/videos${video.videoPath.replace(/\\/g, '/')}`)}
-          <video className="h-auto max-w-full rounded-lg" controls>
+
+          {/* <video className="h-auto max-w-full rounded-lg" controls>
               <source src={`M:${video.videoPath}`} type="video/mp4" />
               Your browser does not support the video tag.
-          </video>
+          </video> */}
+
+            <ReactPlayer
+                className='react-player fixed-bottom'
+                url={`/videos/${handleVideo(video.videoPath)}`}
+                width='100%'
+                height='100%'
+                controls={true}
+            />
 
             <div className='border-2 mt-2 border-gray-300 text-left'>
               <p className='font-semibold'>Status: {video.status}</p>
