@@ -49,7 +49,9 @@ const productSchema = new mongoose.Schema({
         SEAROpermittedRemark : String,
         SLfoodCode: String,
         SLpermitted: String,
-        SLfoodcodePermittedRemark: String
+        SLfoodcodePermittedRemark: String,
+        createdTime: String,
+        CreatedData : String
 })
 
 

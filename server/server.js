@@ -15,8 +15,6 @@ const userRoutes = require('./src/routes/userRoutes')
 const app = express();
 const PORT = 3000;
 
-// ...
-
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -26,7 +24,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// ...
 
 mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,

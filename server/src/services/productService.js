@@ -9,3 +9,7 @@ exports.addProduct = async (productDetails) => {
         throw new Error(error.message);
     }
 };
+
+exports.getAllProducts = async() => {
+    return await Product.find();
+}

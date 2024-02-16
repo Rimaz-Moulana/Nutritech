@@ -14,6 +14,23 @@ import Navbar from '../../components/navbar/Navbar'
 import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar'
 
 export default function ProductDetails() {
+        const currentTimeInMillis = Date.now();
+
+        // Create a new Date object using the current timestamp
+        const currentDate = new Date(currentTimeInMillis);
+        
+        // Get the individual components of the date
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1; // Month is zero-based, so add 1
+        const day = currentDate.getDate();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        const seconds = currentDate.getSeconds();
+        
+        const cDate = `${year}-${month}-${day}` ;
+        const cTime = `${hours}:${minutes}:${seconds}`;
+
+        const [uploadStatus, setUploadStatus] = useState('');
         const [formData, setFormData] = useState({
             productName: '',
             brand: '',
@@ -63,7 +80,9 @@ export default function ProductDetails() {
             SEAROpermittedRemark : '',
             SLfoodCode: '',
             SLpermitted: '',
-            SLfoodcodePermittedRemark: ''
+            SLfoodcodePermittedRemark: '',
+            createdTime: cTime ,
+            CreatedData : cDate
         })
 
         const handleChange = (e) => {
@@ -71,65 +90,18 @@ export default function ProductDetails() {
             setFormData({ ...formData, [name]: value });
         }
 
-        // const [productName, setProductName] = useState('');
-        // const [brand, setBrand] = useState('');
-        // const [description, setDescription] = useState('')
-        // const [parentCompany, setParentCompany] = useState('')
-        // const [packagingMaterial, setPackagingMaterial] = useState('')
-        // const [packagingMaterialTouching, setPackagingMaterialTouching] = useState('')
-        // const [variation, setVariation] = useState('')
-        // const [countryProduct, setCountryProduct] = useState('')
-        // const [servingSize, setServingSize] = useState('')
-        // const [sugarType, setSugarType] = useState('')
-        // const [lactose, setLactose] = useState('')
-        // const [vitamin, setVitamin] = useState('')
-        // const [mineral, setMineral] = useState('')
-        // const [omega, setOmega] = useState('')
-        // const [acids, setAcids] = useState('')
-        // const [probiotics, setProbiotics] = useState('')
-        // const [method, setMethod] = useState('')
-        // const [total, setTotal] = useState('')
-        // const [remarks, setRemarks] = useState('')
-        // const [ingredients, setIngredients] = useState('')
-        // const [energy1, setEnergy1] = useState('')
-        // const [energy2, setEnergy2] = useState('')
-        // const [protein1, setProtein1] = useState('')
-        // const [protein2, setProtein2] = useState('')
-        // const [totalFat1, setTotalFat1] = useState('')
-        // const [totalFat2, setTotalFat2] = useState('')
-        // const [SFA1, setSFA1] = useState('')
-        // const [SFA2, setSFA2] = useState('')
-        // const [carbo1, setCarbo1] = useState('')
-        // const [carbo2, setCarbo2] = useState('')
-        // const [sugar1, setSugar1] = useState('')
-        // const [sugar2, setSugar2] = useState('')
-        // const [salt1, setSalt1] = useState('')
-        // const [salt2, setSalt2] = useState('')
-        // const [sodium1, setSodium1] = useState('')
-        // const [sodium2, setSodium2] = useState('')
-        // const [transFat1, setTransFat1] = useState('')
-        // const [transFat2, setTransFat2] = useState('')
-        // const [ash1, setAsh1] = useState('')
-        // const [ash2, setAsh2] = useState('')
-        // const [WPROfoodcode, setWPROFoodcode] = useState('')
-        // const [WPROPermitted, setWPROPermitted] = useState('')
-        // const [WPROPermittedRemark, setWPROPermittedRemark] = useState('')
-        // const [SEAROfoodcode, setSEAROfoodcode] = useState('')
-        // const [SEAROpermitted, setSEAROpermitted] = useState('')
-        // const [SEAROpermittedRemark, setSEAROpermittedRemark] = useState('')
-        // const [SLfoodCode, setSLfoodCode] = useState('')
-        // const [SLpermitted, setSLpermitted] = useState('')
-        // const [SLfoodcodePermittedRemark, setSLfoodcodePermittedRemark] = useState('')
-
         const handleSubmit = async (event) =>{
             event.preventDefault();
 
             try{
+                
                 const response = await axios.post("http://localhost:3000/api/product/add", formData);
                 console.log(response.data);
+                setUploadStatus("New Product Added successfully!");
             }
             catch(error){
                 console.error('Error adding product:', error);
+                setUploadStatus("Error occurred!");
             }
         }
 
@@ -266,6 +238,9 @@ export default function ProductDetails() {
                 </button>
                 </div>
             </div>
+                <div className='mt-10'>
+                    {uploadStatus && <h3>{uploadStatus}</h3>}
+                </div>
         </div>
         </form>
     </div>
