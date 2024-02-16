@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import history from '../../../src/assets/Images/history.png';
 import pen from '../../../src/assets/Images/pen.png';
 import review from '../../../src/assets/Images/review.png';
-import astra from '../../../src/assets/videos/1707816204435.mp4';
 import ReactPlayer from 'react-player';
 
 function VideoContainer({ type,videoData,viewType }) {
@@ -87,8 +86,8 @@ return desiredPart;
             <div className='border-2 mt-2 border-gray-300 text-left'>
               <p className='font-semibold'>Status: {video.status}</p>
               <p>Product: {video.product}</p>
-              <p>Uploaded Date: {video.date}</p>
-              <p>Uploaded Time: {video.time}</p>
+              <p>Uploaded Date: {video.createdIn}</p>
+              <p>Uploaded Time: {video.createdAt}</p>
               <p>Uploader: {video.uploader}</p>
               
            {type==='annotated' &&(
@@ -131,7 +130,7 @@ return desiredPart;
   )}
 
  {viewType==="List" && (
-   <div className='h-full h-min-screen mt-12 text-black'>
+   <div className='h-full h-min-screen mt-12 text-black w-full min-w-screen'>
    <table className='w-full'>
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>

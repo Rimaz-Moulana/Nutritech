@@ -3,6 +3,7 @@ import video from '../../assets/videos/astra.mp4'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Popup from './Popup';
+import ReactPlayer from 'react-player';
 
 function VideowithReview({videoId}) {
   const [videoData, setVideoData] = useState([]);
@@ -79,16 +80,35 @@ function VideowithReview({videoId}) {
     }
   };
 
+  const handleurl = (inputurl) => {
+    if (loading) {
+      console.log('Video data is still loading');
+      return null;
+    } else {
+      const url = inputurl.replace(/\\/g, '/');
+      const desiredPart = url.split('/').pop();
+      const videourl = `/videos/${desiredPart}`;
+      console.log('Video URL:', videourl);
+      return videourl;
+    }
+  };
+  
   return (
-    <div className='lg:flex mt-32 justify-right ml-8'>
-        <div className='w-1/2'>
-        <video className="h-auto max-w-full justify-right rounded-lg ml-10" controls>
-        <source src={video} type="video/mp4" />
-        Your browser does not support the video tag.
-        </video>
+    <div className='lg:flex justify-right ml-8'>
+         <div className='w-1/2 h-1/12 mt-24'>
+         <div>
+        <ReactPlayer
+                className='react-player fixed-bottom'
+                url={handleurl(videoData.videoPath)}
+                width='100%'
+                height='100%'
+                controls={true}
+            />
+
         </div>
+        </div> 
       
-        <form className="w-full max-w-sm lg:ml-36">
+        <form className="w-full mt-32 max-w-sm lg:ml-36">
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">

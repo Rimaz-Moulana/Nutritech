@@ -99,6 +99,35 @@ function AnnotationTable() {
     }
   };
 
+  const submitNone = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
+        annotations: {
+          timestamp: '',
+          rule: '',
+          details: '',
+          recommendation: '',
+        }
+      });
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Annotations saved successfully!',
+        showConfirmButton: false,
+        timer: 2000, 
+        customClass: {
+          popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+        },
+        iconColor: '#294B29',
+      });
+      window.history.back();
+    } catch (error) {
+      console.error('Error saving annotations:', error);
+    }
+  };
+  
+
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex z-10'>
       <div className='w-2/8 fixed h-full hidden sm:flex flex-col'>
@@ -107,7 +136,7 @@ function AnnotationTable() {
       <div className='w-full h-full sm:w-3/4 ml-0 z-10 sm:ml-64'>
         <Navbar type='annotator' />
         <div className='w-full mt-28'>
-          <Videowithtext />
+          <Videowithtext videoId={videoId}/>
         </div>
         <div className='ml-16 h-full sm:ml-20 mb-8 mt-10 text-sm font-semibold text-black'>
           <div className='flex-end'>
@@ -142,7 +171,7 @@ function AnnotationTable() {
                 className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
                   isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
                 }`}
-                onClick={submit}
+                onClick={submitNone}
               >
                 Yes
               </button>

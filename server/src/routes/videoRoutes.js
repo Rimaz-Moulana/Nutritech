@@ -27,5 +27,6 @@ router.get('/sensormanagernewvideo',videoController.getpendingvideos)
 router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );
 router.post('/reviewvideo/:videoId', videoController.saveSensorManagerReview );
 router.delete('/reviewvideo/:videoId', videoController.deleteVideo);
+router.get('/annotation/:videoId', videoController.getAnnotatingVideo);
 
 module.exports = router;

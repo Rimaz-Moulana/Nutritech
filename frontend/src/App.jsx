@@ -28,7 +28,6 @@ import Rules from './pages/SensorManager/Rules';
 import AnnotationHistory from '../src/pages/Annotator/History'
 import AnnotatorHome from '../src/pages/Annotator/Home'
 
-import Video from './components/videoContainer/Video';
 // import './App.css'
 
 
@@ -68,9 +67,6 @@ function App(){
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
-
-
-              <Route path="/video" element={<Video/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

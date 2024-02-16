@@ -34,6 +34,17 @@ exports.getAnnotatedVideos = async (req, res) => {
     }
   };
 
+  exports.getAnnotatingVideo = async (req, res) => {
+    try {
+      const videoId = req.params.videoId;
+      const video = await VideoService.getAnnotationVideo(videoId);
+      res.status(200).json(video);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
 
   exports.postVideoDetails= async (req,res)=>{
     try {

@@ -22,6 +22,10 @@ exports.getAnnotatorAnnotatedVideos = async(req,res)=>{
   return await VideoModel.find({ status: 'annotated' })
 }
 
+exports.getAnnotationVideo = async(videoId)=>{
+  return await VideoModel.find({ _id: videoId })
+}
+
 exports.postmediavideodetails = async(req,res)=>{
     return await VideoModel.create(req.body)
 }
