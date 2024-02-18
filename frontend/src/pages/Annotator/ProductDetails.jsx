@@ -27,7 +27,7 @@ export default function ProductDetails() {
         const minutes = currentDate.getMinutes();
         const seconds = currentDate.getSeconds();
         
-        const cDate = `${year}-${month}-${day}` ;
+        const cDate = `${year}/${month}/${day}`;
         const cTime = `${hours}:${minutes}:${seconds}`;
 
         const [uploadStatus, setUploadStatus] = useState('');

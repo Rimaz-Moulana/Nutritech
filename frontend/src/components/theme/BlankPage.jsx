@@ -4,7 +4,6 @@ import Annotatorsidebar from '../sidebar/AnnotatorSideBar'
 
 export default function BlankPage() {
   return (
-    <>
    
  
     <div className='bg-backgroundGreen flex overflow-x-auto'>
@@ -19,6 +18,6 @@ export default function BlankPage() {
      
         
     </div>
-    </>
+   
   )
 }
