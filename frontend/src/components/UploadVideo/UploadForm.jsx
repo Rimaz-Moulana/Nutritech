@@ -15,4 +15,5 @@ function UploadForm({handleChange}) {
 
 }
 
+export default UploadForm
 
