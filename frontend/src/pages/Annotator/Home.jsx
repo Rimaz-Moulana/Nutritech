@@ -26,7 +26,6 @@ function Home() {
   }, []);
   
   const fetchData = async () => {
-    
     try {
       console.log("hi")
       const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
@@ -36,7 +35,7 @@ function Home() {
     }
   }
   return (
-    <div className='bg-backgroundGreen flex min-h-screen'>
+    <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <AnnotatorSideBar />
       </div>
