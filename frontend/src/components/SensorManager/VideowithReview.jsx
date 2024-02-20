@@ -1,22 +1,44 @@
 import React, { useEffect, useState } from 'react'
-import video from '../../assets/videos/astra.mp4'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Popup from './Popup';
 import ReactPlayer from 'react-player';
 
 function VideowithReview({videoId}) {
   const [videoData, setVideoData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [openModal, setOpenModal] = useState(false);
-
   const handleOpen = () => {
-    setOpenModal(true);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#5a7d59",
+      confirmButtonText: "Yes, decline it!",
+      iconColor: "#294B29",
+      customClass: {
+        popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+        cancelButton: 'bg-gradient-to-t from-buttonGreen to-darkGreen',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDelete();
+        Swal.fire({
+          // title: "Deleted!",
+          showCancelButton: false,
+          text: "Video has been deleted.",
+          timer: 2000,
+          icon: "success",
+          iconColor: '#294B29',
+          customClass: {
+            popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+          },
+        });
+      }
+    });
   };
-  const handleClose = () => {
-    setOpenModal(false);
-  };
+
 
   useEffect(() => {
     const fetchReviewDetails = async () => {
@@ -56,29 +78,18 @@ function VideowithReview({videoId}) {
     }
   };
 
-  const handleDelete= async (e) => {
-    e.preventDefault();
+  const handleDelete = async () => {
     try {
       const response = await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
-
       });
-      Swal.fire({
-        icon: 'success',
-        title: 'Video was Declined successfully!',
-        showConfirmButton: false,
-        timer: 2000, 
-        customClass: {
-          popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
-        },
-        iconColor: '#294B29',
-      });
-
+  
       window.history.back();
-
+  
     } catch (error) {
-      console.error('Error declined video:', error);
+      console.error('Error declining video:', error);
     }
   };
+  
 
   const handleurl = (inputurl) => {
     if (loading) {
@@ -92,7 +103,7 @@ function VideowithReview({videoId}) {
       return videourl;
     }
   };
-  
+ 
   return (
     <div className='lg:flex justify-right ml-8'>
          <div className='w-1/2 h-1/12 mt-24'>
@@ -164,8 +175,6 @@ function VideowithReview({videoId}) {
     </div>
   </div>
 </form>
-<Popup text1={"decline"} text2={"video"} button={"Decline"} openModal={openModal} setOpenModal={setOpenModal} onDelete={handleDelete}/>
-
     </div>
   )
 }

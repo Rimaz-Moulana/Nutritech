@@ -7,7 +7,7 @@ import pen from '../../../src/assets/Images/pen.png';
 import review from '../../../src/assets/Images/review.png';
 import ReactPlayer from 'react-player';
 
-function VideoContainer({ type,videoData,viewType }) {
+function VideoContainer({ type,videoData,viewType,videoDetails }) {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   const [productFilter, setProductFilter] = useState('all');
@@ -32,25 +32,26 @@ const handleVideo = (inputUrl) =>{
 
 // Take the last part of the array
   const desiredPart = urlParts[urlParts.length - 1];
-console.log(desiredPart)
+// console.log(desiredPart)
 return desiredPart;
 }
 
 
   const filteredVideos = videoData?.filter((video) => {
-    const productMatch =
+  
+      const productMatch =
       productFilter === 'all' || video.product === productFilter;
     const dateMatch =
       !startDate || new Date(video.date) >= startDate;
-
       return productMatch && dateMatch;
+     
   });
 
   return (
     <div className='w-full ml-12'> 
     {viewType=== 'Grid' &&(
-      <div className='mt-12 right-0'>
-      <select className='bg-'
+      <div className=' right-0'>
+      {type !== "reviewvideo" && (<select className='bg-'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
@@ -64,6 +65,7 @@ return desiredPart;
                 <option value='Confectionary'>Confectionary</option>
                 <option value='Other'>Other</option>
               </select>
+      )}
     <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 bg-backgroundGreen">
       {filteredVideos.map((video, index) => (
         <div key={index} className='relative'>

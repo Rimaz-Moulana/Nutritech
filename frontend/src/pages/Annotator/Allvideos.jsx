@@ -30,8 +30,6 @@ function Allvideos() {
     fetchData();
   }, []); 
 
- 
-  
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col">

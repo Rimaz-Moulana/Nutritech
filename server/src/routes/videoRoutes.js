@@ -24,9 +24,10 @@ router.post('/uploadvideo', videoController.postVideoDetails);
 // router.post('/uploadvideo', videoController.postVideoDetails);
 router.get('/history',videoController.getuploadhistory)
 router.get('/sensormanagernewvideo',videoController.getpendingvideos)
-router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );
+
 router.post('/reviewvideo/:videoId', videoController.saveSensorManagerReview );
 router.delete('/reviewvideo/:videoId', videoController.deleteVideo);
 router.get('/annotation/:videoId', videoController.getAnnotatingVideo);
-
+// router.get('/reviewvideo/:videoId', videoController.handleReview ); // list the vieos where brand, product and variation are similar to video that is going to review
+router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );//get the video to review
 module.exports = router;

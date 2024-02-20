@@ -59,7 +59,6 @@ exports.getAnnotatedVideos = async (req, res) => {
 exports.getuploadhistory= async (req,res)=>{
   try {
         const ITNVideos = await VideoService.getmediahistory();
-        console.log("itn videos: ",ITNVideos)
         res.json(ITNVideos);
     } catch (error) {
         console.error(error);
@@ -139,4 +138,27 @@ exports.deleteVideo = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+// Merge the logic for both routes into a single handler
+// exports.handleReview = async (req, res) => {
+//   const videoId = req.params.videoId;
+//   console.log(videoId)
+
+//   try {
+//     // Fetch the video data for review and brand-related videos
+//     const { videoReviewData, brandVideoData } = await VideoService.getSensorManagerReviewVideos(videoId);
+    
+//     console.log(videoReviewData)
+//     // Return a combined response or handle as needed
+//     res.json({
+//       videoReviewData,
+//       brandVideoData
+//     });
+//   } catch (error) {
+//     console.error('Error handling review:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// };
+
+
 
