@@ -11,7 +11,8 @@ function UploadVideo() {
   const formattedDate = `${padZero(new Date().getFullYear())}:${padZero(new Date().getMonth())}:${padZero(new Date().getDay())}`;
   const formattedTime = `${padZero(new Date().getHours())}:${padZero(new Date().getMinutes())}:${padZero(new Date().getSeconds())}`;
   
-  const [uploadStatus, setUploadStatus] = useState('');
+    const [uploadStatus, setUploadStatus] = useState('');
+
     const [formData, setFormData] = useState({
         brand: '',
         product: '',
@@ -69,12 +70,10 @@ function UploadVideo() {
       </div>
       <div className=''>
       <UploadNewVideoUIBtnSet handleSubmit={handleSubmit} />
-
       </div>
       
     </div>
   </div>
-  // </div>
 );
 }
 

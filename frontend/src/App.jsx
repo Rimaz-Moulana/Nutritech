@@ -27,10 +27,10 @@ import EditRule from './components/Popup/EditRule';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules';
 
-import AnnotationHistory from '../src/pages/Annotator/History'
-import AnnotatorHome from '../src/pages/Annotator/Home'
+import AnnotationHistory from '../src/pages/Annotator/History';
+import AnnotatorHome from '../src/pages/Annotator/Home';
 
-
+import AddedProductt from './pages/Annotator/AddedProductt';
 // import './App.css'
 
 
@@ -48,6 +48,9 @@ function App(){
               <Route path='/product' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />
               <Route path='/addedproduct' element={<AddedProduct />} />
+
+              <Route path='/addedproduct2' element={<AddedProductt />} />
+
               <Route path="/all" element={<Allvideos/>} />
               <Route path="/annotation/:videoId" element={<AnnotationTable />} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
