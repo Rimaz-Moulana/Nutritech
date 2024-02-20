@@ -67,9 +67,6 @@ exports.getuploadhistory= async (req,res)=>{
 }
 
 
-// exports.getVideosById = async(req,res) ={
-
-
 exports.addvideo = async (req,res) => {
 
     try{

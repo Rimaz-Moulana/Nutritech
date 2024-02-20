@@ -26,7 +26,7 @@ function VideowithReview({videoId}) {
         handleDelete();
         Swal.fire({
           // title: "Deleted!",
-          showCancelButton: false,
+          showConfirmButton: false,
           text: "Video has been deleted.",
           timer: 2000,
           icon: "success",

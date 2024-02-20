@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const vidoeRoutes = require('./src/routes/videoRoutes');
 const annotationsRoutes = require('./src/routes/annotationRoutes')
 const userRoutes = require('./src/routes/userRoutes')
+const ruleRoutes = require('./src/routes/ruleRoutes')
 
 const app = express();
 const PORT = 3000;
@@ -31,6 +32,7 @@ app.use(express.json());
 const path = require('path');
 app.use('/videos', express.static(path.join(__dirname, 'Nutritech', 'server', 'uploads')));
 app.use('/api/videos', vidoeRoutes);
+app.use('/api/rules', ruleRoutes);
 
   app.use('/annotations', annotationsRoutes);
   app.listen(PORT, () => {
