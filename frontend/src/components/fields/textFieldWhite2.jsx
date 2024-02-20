@@ -8,7 +8,7 @@ export default function textFieldWhite2({value,id,name,onChange}) {
                 id = {id}
                 name = {name}
                 onChange={onChange}
-           className="shadow appearance-none border placeholder-black rounded w-full h-8 py-2 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
+           className="shadow appearance-none border placeholder-black rounded w-[90%] h-8 py-2 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
            placeholder="" />
 </div>
   )

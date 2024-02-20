@@ -1,5 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import UploadImage from '../../components/UploadImage/UploadImageIndustryBack'
+import VideoUpload from '../../components/UploadVideo/VideoUploadIndustry'
 import DropDownWhite from '../../components/fields/dropdownWhite'
 import TextFiledsmallWhite from '../../components/fields/textFieldSmallWhite'
 import TextFiledWhite from '../../components/fields/textFieldWhite'
@@ -78,7 +80,9 @@ export default function ProductDetails() {
             SLpermitted: '',
             SLfoodcodePermittedRemark: '',
             createdTime: cTime ,
-            CreatedData : cDate
+            CreatedData : cDate ,
+            videoFile : '',
+            imagePaths: ''
         })
 
         const handleChange = (e) => {
@@ -86,9 +90,13 @@ export default function ProductDetails() {
             setFormData({ ...formData, [name]: value });
         }
 
+        const handleFileChange = (e) => {
+            setFormData({ ...formData, videoFile: e.target.files[0] });
+        };
+
+
         const handleSubmit = async (event) =>{
             event.preventDefault();
-
             try{
                 
                 const response = await axios.post("http://localhost:3000/api/product/add", formData);
@@ -113,7 +121,7 @@ export default function ProductDetails() {
         <h1 className="mb-8 mt-24 text-3xl lg:ml-72  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen">Add New Product Deatils</h1>
         <form onSubmit={handleSubmit}>
         <div className='ml-0 lg:inline-flex sm:flex'>
-            <div className='mt-4 md:w-1/2 lg:ml-32 sm:ml-5'>
+            <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
                 <TextFiled placeholder="Product Name"  name='productName' onChange={handleChange} />
                 <TextFiled placeholder="Brand"  name='brand' onChange={handleChange} />
                 <TextFiled placeholder="Parent Company" name='parentCompany' onChange={handleChange} />
@@ -142,18 +150,19 @@ export default function ProductDetails() {
                             className="shadow appearance-none placeholder-gray-400 border rounded w-[70%] h-10 py-2 px-5 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Ingredient as in the label (separete by comma)" />
                 </div>
+                <div className='py-2 '>
+                    <h1 className='text-2xl lg:ml-36  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Advertisement Video</h1>
+                </div>
+                <div className='p-2 lg:ml-32 '>
+                <VideoUpload handleFileChange={handleFileChange}/>
+                
+                </div>
             </div>
             </div>
             <div className='flex-inline mt-1 md:w-1/2'>
-            {/* <div className='inline-block'>
-                <img className='inline-block px-1 h-20 w-28' src={Astra1} />
-                <img className='inline-block px-1 h-20 w-28' src={Astra2} />
-                <img className='inline-block px-1 h-20 w-28' src={Astra3} />
-                <img className='inline-block px-1 h-20 w-28' src={Astra4} />
-            </div> */}
             <div className='text ml-64'>
             <label className='inline-block pt-5 text-xl '>Per 100g/ml</label>
-            <label className='inline-block px-16 pt-5 text-xl '>Per Serving</label>
+            <label className='inline-block px-36 pt-5 text-xl '>Per Serving</label>
             </div>
                 <div className='grid float-start gap-0 grid-cols-3 p-3'>
                 <label className='inline-block py-1 text-justify text-black ' >Energy(kcal)</label>
@@ -187,49 +196,53 @@ export default function ProductDetails() {
                 <TextFiledsmall name='ash1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='ash2' onChange={handleChange} />
                 </div>
-                <div className='grid float-start gap-0 grid-cols-2 w-full p-2 sm:w-full'>
-                <label className='inline-block text-justify ml-8 py-3  ' >WHO_WPRO_foodcode Product</label>
+                <div className='grid float-start gap-0 grid-cols-2 w-full p-2 sm:w-full mb-20'>
+                <label className='inline-block text-justify ml-0 py-3  ' >WHO_WPRO_foodcode Product</label>
                 <TextFiledWhite2  name='WPROfoodcode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-8 py-3   ' >WHO_WPRO_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >WHO_WPRO_permitted</label>
                 <TextFiledWhite2  name='WPROPermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-8 py-3   ' >WHO_WPRO_permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >WHO_WPRO_permitted Remark</label>
                 <TextFiledWhite2  name='WPROPermittedRemark' onChange={handleChange} />
-                <label className='inline-block text-justify ml-8 py-3   ' >WHO_SEARO_foodcode_Product</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >WHO_SEARO_foodcode_Product</label>
                 <TextFiledWhite2 name='SEAROfoodcode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-8 py-3   ' >WHO_SEARO_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >WHO_SEARO_permitted</label>
                 <TextFiledWhite2 name='SEAROpermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-8 py-3  ' >WHO_SEARO_permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3  ' >WHO_SEARO_permitted Remark</label>
                 <TextFiledWhite2 name='SEAROpermittedRemark' onChange={handleChange} />
-                <label className='inline-block text-justify ml-8 py-3   ' >SL food Code</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >SL food Code</label>
                 <TextFiledWhite2 name='SLfoodCode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-8 py-3   ' >SL_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >SL_permitted</label>
                 <TextFiledWhite2 name='SLpermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-8 py-3  ' >SL_foodcode__permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3  ' >SL_foodcode__permitted Remark</label>
                 <TextFiledWhite2  name='SLfoodcodePermittedRemark' onChange={handleChange} />
+                </div>
+                <h1 className='text-2xl lg:ml-8 mb-2  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Advertisement Video</h1>
+                <div className='py-2'>
+    
+                <div className='inline-block'>
+                    <UploadImage />
+                </div>   
                 </div>
             </div>
         </div>
         <div className='flex-inline py-10 '>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button className="bg-[#3C6339]
-                hover:bg-[#B8C294] text-white text-center w-[70%] py-2 px-4 font-bold rounded">
+                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Cancel
                 </button>
                 </div>
             </div>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button className="bg-[#3C6339]
-                hover:bg-[#B8C294] text-white text-center w-[70%] py-2 px-4 font-bold rounded">
+                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Draft
                 </button>
                 </div>
             </div>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button onClick={handleSubmit} type='submit' className="bg-[#3C6339]
-                hover:bg-[#B8C294] text-white text-center w-[70%] py-2 px-4 font-bold rounded">
+                <button onClick={handleSubmit} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Save
                 </button>
                 </div>
