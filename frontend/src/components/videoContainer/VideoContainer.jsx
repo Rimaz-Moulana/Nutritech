@@ -51,7 +51,7 @@ return desiredPart;
     <div className='w-full ml-12'> 
     {viewType=== 'Grid' &&(
       <div className=' right-0'>
-      {type !== "reviewvideo" && (<select className='bg-'
+      {type !== "reviewvideo" || type !== "mediastation" && (<select className='bg-'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >

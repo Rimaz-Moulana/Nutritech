@@ -31,7 +31,7 @@ exports.postmediavideodetails = async(req,res)=>{
 }
 
 exports.getmediahistory = async(req,res)=>{
-    return await VideoModel.find({ uploader: 'ITN' });
+    return await VideoModel.find({ uploader: 'Sirasa' });
 }
 
 exports.getsensormanagernewvideos= async(req,res)=>{

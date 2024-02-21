@@ -50,7 +50,7 @@ const Annotatorsidebar = () => {
     if (index === nav.findIndex((item) => item.text === 'Video')) {
       setDropdownOpen(!isDropdownOpen);
     } else if (index === nav.findIndex((item) => item.text === 'Products')){
-      navigate('/product');
+      navigate('/addedproduct');
       
     } else{
       navigate('/home');

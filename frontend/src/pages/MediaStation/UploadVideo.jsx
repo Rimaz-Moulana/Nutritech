@@ -4,6 +4,7 @@ import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
+import Swal from 'sweetalert2';
 
 
 function UploadVideo() {
@@ -46,6 +47,18 @@ function UploadVideo() {
           const response  = await axios.post("http://localhost:3000/api/videos/upload", formD);
           console.log(response.data);
           setUploadStatus("Video uploaded successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Video uploaded successfully!',
+            showConfirmButton: false,
+            timer: 2000, 
+            customClass: {
+              popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+            },
+            iconColor: '#294B29',
+          });
+          window.history.back();
+
           }catch(error){
             console.error('Error uploading video:', error);
             setUploadStatus('Error uploading video.');
