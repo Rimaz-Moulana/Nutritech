@@ -8,7 +8,7 @@ import axios from 'axios';
 
 function ReviewVideos() {
   const { videoId } = useParams();
-  const [responseData, setResponseData] = useState({});
+  const [responseData, setResponseData] = useState([]);
   // const { videoReviewData, brandVideoData } = responseData;
   const [loading, setLoading] = useState(true);
 
@@ -27,9 +27,9 @@ function ReviewVideos() {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
-        console.log('Entire response object:', response);
-        setResponseData(response.data.video);
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        // console.log('Entire response object:', response);
+        setResponseData(response.data);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {
@@ -82,7 +82,7 @@ function ReviewVideos() {
       
 
       <div className='left-0'>
-      {/* <VideoContainer type={"reviewvideo"}  viewType={isChecked ? 'Grid' : 'List'}/> */}
+      <VideoContainer type={"reviewvideo"}  videoData={responseData} viewType={isChecked ? 'Grid' : 'List'} />
       </div>
        
       </div>

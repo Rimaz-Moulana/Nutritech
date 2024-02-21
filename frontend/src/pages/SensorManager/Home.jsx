@@ -5,6 +5,8 @@ import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
 import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import ProductTable from '../../components/tables/LogTable';
+import Rules from './Rules';
+import Rule from '../../components/SensorManager/Rule';
 
 function Home() {
 
@@ -19,21 +21,38 @@ function Home() {
   }
 
   const [products, setProducts] = useState([]);
+  const [RuleData, setRuleData] = useState([]);
+
+//   useEffect(() => {
+//     // Fetch data when the component mounts
+//     fetchData();
+//   }, []);
+  
+//   const fetchData = async () => {
+//     try {
+//       console.log("hi")
+//       const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+//       setProducts(response.data);
+//     } catch (error) {
+//       console.error('Error fetching data:', error);
+//     }
+//   }
 
   useEffect(() => {
-    // Fetch data when the component mounts
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/rules/rules');
+        const data = response.data;
+        console.log(data); // This should log the fetched data
+        setRuleData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
     fetchData();
   }, []);
-  
-  const fetchData = async () => {
-    try {
-      console.log("hi")
-      const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
-      setProducts(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
+
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -58,7 +77,12 @@ function Home() {
         <ProductTable data={products} />
         </div>
         <div className='mt-4 left-0'>
-        <ProductTable data={products} />
+        <h1 className='ml-8 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
+           Rules and Regulations
+        </h1>
+        {RuleData.map((rule, index) => (
+        <Rule key={index} rule={rule} type={"home"} />
+      ))}
         </div>
       </div>
     </div>

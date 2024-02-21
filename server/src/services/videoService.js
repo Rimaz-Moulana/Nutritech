@@ -97,38 +97,35 @@ exports.deleteVideo = async (videoId) => {
 //   }
 // };
 
-// exports.getSensorManagerReviewVideos = async (videoId) => {
-//   console.log(videoId)
-//   try {
-//     // Find the video with the provided videoId
-//     const currentVideoData = await VideoModel.findOne({ _id: videoId });
-//     console.log(currentVideoData);
+exports.getSimilarProductAds = async (videoId) => {
+  console.log(videoId)
+  try {
+    // Find the video with the provided videoId
+    const currentVideoData = await VideoModel.findOne({ _id: videoId });
+    console.log(currentVideoData);
 
-//     if (!currentVideoData) {
-//       throw new Error('Video not found');
-//     }
+    if (!currentVideoData) {
+      throw new Error('Video not found');
+    }
 
-//     // Extract brand, product, and variation from the current video
-//     const { brand, product, variation } = currentVideoData;
+    // Extract brand, product, and variation from the current video
+    const { brand, product, variation } = currentVideoData;
 
-//     // Find other videos with the same brand, product, and variation
-//     const brandVideoData = await VideoModel.find({
-//       brand,
-//       product,
-//       variation,
-//       status: { $in: ['annotated', 'unannotated', 'pending'] },
-//       _id: { $ne: videoId } // Exclude the current video from the results
-//     });
+    // Find other videos with the same brand, product, and variation
+    return await VideoModel.find({
+      brand,
+      product,
+      variation,
+      status: { $in: ['annotated', 'unannotated', 'pending'] },
+      _id: { $ne: videoId } // Exclude the current video from the results
+    });
 
-//     console.log(currentVideoData)
-//     // Return an object containing both the video being reviewed and brand-related videos
-//     return {
-//       videoReviewData: currentVideoData,
-//       brandVideoData
-//     };
-//   } catch (error) {
-//     console.error('Error retrieving sensor manager review videos:', error);
-//     throw error;
-//   }
-// };
+    // Return an object containing both the video being reviewed and brand-related videos
+  
+    
+  } catch (error) {
+    console.error('Error retrieving sensor manager review videos:', error);
+    throw error;
+  }
+};
 

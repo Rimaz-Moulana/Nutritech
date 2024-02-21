@@ -8,9 +8,21 @@ import review from '../../../src/assets/Images/review.png';
 import ReactPlayer from 'react-player';
 
 function VideoContainer({ type,videoData,viewType,videoDetails }) {
+  console.log(videoData)
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
-  const [productFilter, setProductFilter] = useState('all');
+  // const [productFilter, setProductFilter] = useState('all');
+
+  const [productFilter, setProductFilter] = useState(() => {
+    // Retrieve from localStorage, default to 'all' if not found
+    return localStorage.getItem('productFilter') || 'all';
+  });
+
+  useEffect(() => {
+    // Update localStorage when productFilter changes
+    localStorage.setItem('productFilter', productFilter);
+  }, [productFilter]);
+
 
   const handleAnnotate = (videoId) => {
     navigate(`/annotation/${videoId}`);
@@ -36,26 +48,34 @@ const handleVideo = (inputUrl) =>{
 return desiredPart;
 }
 
-
-  const filteredVideos = videoData?.filter((video) => {
+const filteredVideos = videoData?.filter((video) => {
+  const productMatch = productFilter === 'all' || video.product === productFilter;
   
-      const productMatch =
-      productFilter === 'all' || video.product === productFilter;
-    const dateMatch =
-      !startDate || new Date(video.date) >= startDate;
-      return productMatch && dateMatch;
-     
-  });
+  const uploadedDateMatch = !startDate || new Date(video.createdIn).toLocaleDateString() == startDate.toLocaleDateString();
+  const annotatedDateMatch =!startDate || (video.annotateddate && new Date(video.annotateddate).toLocaleDateString() == startDate.toLocaleDateString());
+
+  if(type == "annotator"){
+    return productMatch && annotatedDateMatch
+
+  }else{
+    
+  return productMatch &&  uploadedDateMatch;
+  }
+  
+
+});
+
 
   return (
     <div className='w-full ml-12'> 
     {viewType=== 'Grid' &&(
       <div className=' right-0'>
-      {type !== "reviewvideo" || type !== "mediastation" && (<select className='bg-'
+        <div className=' items-end'>
+    <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
-                <option value='all'>All</option>
+                <option value='all'>All Products</option>
                 <option value='Biscuits'>Biscuits</option>
                 <option value='Dairy'>Dairy</option>
                 <option value='Margarine'>Margarine</option>
@@ -64,8 +84,18 @@ return desiredPart;
                 <option value='Bakery items'>Bakery Items</option>
                 <option value='Confectionary'>Confectionary</option>
                 <option value='Other'>Other</option>
-              </select>
-      )}
+    </select>
+
+           <DatePicker
+           className='bg-white mt-2 ml-4 p-1 mb-2 rounded'
+              placeholderText='Select Date'
+             selected={startDate}
+             onChange={(date) => setStartDate(date)}
+             isClearable
+             dateFormat='MM/dd/YYYY'
+           />
+    </div>
+      
     <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 bg-backgroundGreen">
       {filteredVideos.map((video, index) => (
         <div key={index} className='relative'>
@@ -132,42 +162,44 @@ return desiredPart;
   )}
 
  {viewType==="List" && (
-   <div className='h-full h-min-screen mt-12 text-black w-full min-w-screen'>
-   <table className='w-full'>
-     {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
-     <thead>
-       <tr className='mt-12'>
-        <th>Brand {' '}</th>
-         <th className=''> Product{' '}
-              <select
-              className='text-center w-24 bg-darkGreen'
+   <div className='h-full h-min-screen mt-4 text-black w-full min-w-screen'>
+    <div className=' items-end'>
+    <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
-                <option className='bg-darkGreen' value='all'>All</option>
-                <option className='bg-darkGreen' value='Biscuits'>Biscuits</option>
-                <option className='bg-darkGreen' value='Dairy'>Dairy</option>
-                <option className='bg-darkGreen' value='Margarine'>Margarine</option>
-                <option className='bg-darkGreen' value='Noodles'>Noodles</option>
-                <option className='bg-darkGreen' value='Soft Drinks'>Soft Drinks</option>
-                <option className='bg-darkGreen' value='Bakery items'>Bakery Items</option>
-                <option className='bg-darkGreen' value='Confectionary'>Confectionary</option>
-                <option className='bg-darkGreen' value='Other'>Other</option>
-              </select>
-              </th>
-         <th>
-           Status
-         </th>
-         <th className='text-center mt-12'>
-           Uploaded Date{' '}
+                <option value='all'>All Products</option>
+                <option value='Biscuits'>Biscuits</option>
+                <option value='Dairy'>Dairy</option>
+                <option value='Margarine'>Margarine</option>
+                <option value='Noodles'>Noodles</option>
+                <option value='Soft drinks'>Soft Drinks</option>
+                <option value='Bakery items'>Bakery Items</option>
+                <option value='Confectionary'>Confectionary</option>
+                <option value='Other'>Other</option>
+    </select>
+
            <DatePicker
-           className='bg-darkGreen w-28 text-sm'
+           className='bg-white mt-2 ml-4 p-1 mb-2 rounded'
+              placeholderText='Select Date'
              selected={startDate}
              onChange={(date) => setStartDate(date)}
              isClearable
-             dateFormat='dd/mm/yyyy'
+             dateFormat='MM/dd/YYYY'
            />
+    </div>
+     
+   <table className='w-full mt-8'>
+     {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
+     <thead>
+       <tr className='mt-12'>
+        <th></th>
+        <th>Brand {' '}</th>
+         <th className=''> Product{' '}</th>
+         <th>
+           Status
          </th>
+         <th className='text-center mt-12'>Uploaded Date</th>
          <th className='mt-12'>Uploaded Time</th>
          <th className='mt-12'>Uploader</th>
          {type === 'annotated' && (
@@ -176,12 +208,23 @@ return desiredPart;
              <th>Annotated Time</th>
            </>
          )}
+         {type!=="reviewvideo" && (
          <th className='mt-12'>Actions</th>
+         )} 
        </tr>
      </thead>
-     <tbody className='mt-8 text-black'>
+     <tbody className='mt-12 text-black'>
        {filteredVideos.map((video, index) => (
          <tr key={index} className='border-b-1'>
+          <td className='w-40'>
+          <ReactPlayer
+                className='react-player fixed-bottom h-8 w-8 p-2'
+                url={`/videos/${handleVideo(video.videoPath)}`}
+                width='100%'
+                height='100%'
+                controls={true}
+            />
+          </td>
           <td>{video.brand}</td>
            <td>{video.product}</td>
            <td>{video.status}</td>
@@ -196,20 +239,20 @@ return desiredPart;
            )}
 
            <td>
-             {video.status === 'unannotated' && (
+             {video.status === 'unannotated' && type!=="reviewvideo" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-11 py-2.5 text-center me-2 mb-2 "
                  onClick={() => handleAnnotate(video._id)}
                >Annotate</button>
              )}
-             {video.status === 'annotated' && (
+             {video.status === 'annotated' && type!=="reviewvideo" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => ViewAnnotate(video._id)}
              >View History</button>
              )}
 
-             {video.status === 'pending' && (
+             {video.status === 'pending' && type!=="reviewvideo" &&(
              <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-12 py-2.5 "
                  onClick={() => handleReview(video._id)}

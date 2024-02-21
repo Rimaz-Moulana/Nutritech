@@ -136,6 +136,29 @@ exports.deleteVideo = async (req, res) => {
   }
 };
 
+
+
+
+
+exports.getSimilarAds = async (req, res) => {
+  try {
+    const videoId = req.params.videoId;
+    const videos = await VideoService.getSimilarProductAds(videoId);
+    console.log("videos"+videos)
+    res.json(videos);
+  } catch (error) {
+    console.error('Error deleting video:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+
+
+
+
+
+
 // Merge the logic for both routes into a single handler
 // exports.handleReview = async (req, res) => {
 //   const videoId = req.params.videoId;
