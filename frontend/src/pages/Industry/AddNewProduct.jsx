@@ -91,15 +91,21 @@ export default function ProductDetails() {
         }
 
         const handleFileChange = (e) => {
+            
+            
+            // console.log(formVideoPath)
             setFormData({ ...formData, videoFile: e.target.files[0] });
         };
 
 
         const handleSubmit = async (event) =>{
             event.preventDefault();
+            const formD = new FormData();
+            formD.append('videoFile',formData.videoFile);
+            console.log(formData);
             try{
                 
-                const response = await axios.post("http://localhost:3000/api/product/add", formData);
+                const response = await axios.post("http://localhost:3000/api/product/industry/add", formD);
                 console.log(response.data);
                 setUploadStatus("New Product Added successfully!");
             }

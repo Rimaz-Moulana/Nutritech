@@ -21,3 +21,21 @@ exports.getAllProduct = async(req,res ) =>{
     }
     
 }
+
+exports.addNewProduct = async (req,res) => {
+
+    try{
+        const productArray = req.body;
+        console.log(req.body)
+        const videoPath = req.file.path
+        // productArray.videoFile = videoPath;
+        console.log(videoPath)
+        const newProduct = await productService.addNewProduct(videoPath);
+        return res.status(201).json(newProduct);
+
+    } catch(error){
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Server Error'});
+    }
+
+}
