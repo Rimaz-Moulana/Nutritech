@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import UploadImage from '../../components/UploadImage/UploadImageIndustryBack'
 import VideoUpload from '../../components/UploadVideo/VideoUploadIndustry'
+import DropDown from '../../components/fields/dropdown'
 import DropDownWhite from '../../components/fields/dropdownWhite'
 import TextFiledsmallWhite from '../../components/fields/textFieldSmallWhite'
 import TextFiledWhite from '../../components/fields/textFieldWhite'
@@ -34,6 +35,7 @@ export default function ProductDetails() {
             brand: '',
             description: '',
             parentCompany: '',
+            productCategory: '',
             packagingMaterial : '',
             packagingMaterialTouching: '',
             variation : '',
@@ -88,33 +90,83 @@ export default function ProductDetails() {
         const handleChange = (e) => {
             const { name, value } = e.target;
             setFormData({ ...formData, [name]: value });
-        }
-
-        const handleFileChange = (e) => {
-            
-            
-            // console.log(formVideoPath)
+          };
+        
+          const handleFileChange = (e) => {
             setFormData({ ...formData, videoFile: e.target.files[0] });
-        };
-
-
-        const handleSubmit = async (event) =>{
+          };
+        
+          const handleSubmit = async (event) => {
             event.preventDefault();
             const formD = new FormData();
-            formD.append('videoFile',formData.videoFile);
-            console.log(formData);
-            try{
-                
-                const response = await axios.post("http://localhost:3000/api/product/industry/add", formD);
-                console.log(response.data);
-                setUploadStatus("New Product Added successfully!");
-            }
-            catch(error){
-                console.error('Error adding product:', error);
-                setUploadStatus("Error occurred!");
-            }
-        }
-
+            formD.append('productName',formData.productName );
+            formD.append('brand', formData.brand);
+            formD.append('description', formData.description )
+            formD.append('parentCompany',fromData.parentCompany)
+            formD.append('productCategory',fromData.productCategory)
+            formD.append('packagingMaterial', formData.packagingMaterial )
+            formD.append('packagingMaterialTouching', formData.packagingMaterialTouching);
+            formD.append('variation', formData.variation)
+            formD.append('countryProduct',formData.countryProduct)
+            formD.append('servingSize',formData.servingSize)
+            formD.append('sugarType', formData.sugarType);
+            formD.append('lactos', formData.lactose)
+            formD.append('vitamin',formData.vitamin)
+            formD.append('mineral', formData.mineral)
+            formD.append('omega', formData.omega )
+            formD.append('acids', formData.acids)
+            formD.append('probiotics', formData.probiotics )
+            formD.append('method', formData.method)
+            formD.append('total', formData.total)
+            formD.append('remarks', formData.remarks)
+            formD.append('ingredients', formData.ingredients)
+            formD.append('energy1' , formData.energy1 );
+            formD.append('energy2' , formData.energy2)
+            formD.append('protein1', formData.protein1)
+            formD.append('protein2', formData.protein2)
+            formD.append('totalFat1' ,formData.totalFat1 )
+            formD.append('totalFat2', formData.totalFat2)
+            formD.append('SFA1' , formData.SFA1)
+            formD.append('SFA2', formData.SFA2)
+            formD.append('carbo1',formData.carbo1 )
+            formD.append('carbo2', formData.carbo12)
+            formD.append('sugar1' , formData.sugar1 )
+            formD.append('sugar2',  formData.sugar2)
+            formD.append('salt1', formData.salt1)
+            formD.append('salt2',  formData.salt2)
+            formD.append('sodium1', formData.sodium1)
+            formD.append('sodium2', formData.sodium2)
+            formD.append('transFat1', formData.transFat1)
+            formD.append('transFat2', formData.transFat2)
+            formD.append('ash1', formData.ash1 )
+            formD.append('ash2',  formData.ash2)
+            formD.append('WPROfoodcode', formData.WPROfoodcode)
+            formD.append('WPROPermitted', formData.WPROPermitted) 
+            formD.append('WPROPermittedRemark', formData.WPROPermittedRemark)
+            formD.append('SEAROfoodcode', formData.SEAROfoodcode)
+            formD.append('SEAROpermitted',formData.SEAROpermitted)
+            formD.append('SEAROpermittedRemark' ,formData.SEAROpermittedRemark)
+            formD.append('SLfoodCode',formData.SLfoodCode)
+            formD.append('SLpermitted',formData.SLpermitted)
+            formD.append('SLfoodcodePermittedRemark',formData.SLfoodcodePermittedRemark);
+            formD.append('createdTime', cTime);
+            formD.append('CreatedData' , cDate)
+            formD.append('imagePaths',formData.imagePaths);
+            formD.append('variation', formData.variation);
+            formD.append('createdAt', formData.createdAt);
+            formD.append('videoPath', formData.videoFile);
+            
+            try {
+              console.log(formData)
+              console.log(formD)
+              const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
+              console.log(response.data);
+              setUploadStatus("Video uploaded successfully!");
+              }catch(error){
+                console.error('Error uploading video:', error);
+                setUploadStatus('Error uploading video.');
+              }
+          };
 
   return (
     <div className='bg-backgroundGreen overflow-x-hidden'>
@@ -131,11 +183,12 @@ export default function ProductDetails() {
                 <TextFiled placeholder="Product Name"  name='productName' onChange={handleChange} />
                 <TextFiled placeholder="Brand"  name='brand' onChange={handleChange} />
                 <TextFiled placeholder="Parent Company" name='parentCompany' onChange={handleChange} />
+                <DropDown placeholder="Product Category" name='productCategory' onChange={handleChange} />
                 <TextFiled placeholder="Description" name='description' onChange={handleChange} />
                 <TextFiled placeholder="Packaging Material" name='packagingMaterial' onChange={handleChange} />
                 <TextFiled placeholder="Packaging Material(touching)" name='packagingMaterialTouching' onChange={handleChange} />
                 <TextFiled placeholder="Variation"  name='variation' onChange={handleChange} />
-                {/* <DropDown /> */}
+                
             <div className=''>
                 <TextFiledWhite placeholder="Country of the product" name='countryProduct' onChange={handleChange} />
                 <DropDownWhite defOptions="Serving Size"  name='servingSize' onChange={handleChange} />
@@ -222,7 +275,7 @@ export default function ProductDetails() {
                 <label className='inline-block text-justify ml-0 py-3  ' >SL_foodcode__permitted Remark</label>
                 <TextFiledWhite2  name='SLfoodcodePermittedRemark' onChange={handleChange} />
                 </div>
-                <h1 className='text-2xl lg:ml-8 mb-2  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Advertisement Video</h1>
+                <h1 className='text-2xl lg:ml-8 mb-2  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Pack Images</h1>
                 <div className='py-2'>
     
                 <div className='inline-block'>

@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
+
 router.post('/industry/add', upload.single('video') , productController.addNewProduct);
 
 router.post('/add', productController.addProduct);

@@ -25,7 +25,7 @@ exports.getAllProduct = async(req,res ) =>{
 exports.addNewProduct = async (req,res) => {
 
     try{
-        const productArray = req.body;
+        // const productArray = req.body;
         console.log(req.body)
         const videoPath = req.file.path
         // productArray.videoFile = videoPath;

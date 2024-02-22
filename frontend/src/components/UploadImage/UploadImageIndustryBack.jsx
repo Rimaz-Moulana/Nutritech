@@ -23,13 +23,13 @@ const ImageUploader = () => {
   const getImageAltText = index => {
     switch (index) {
       case 0:
-        return 'Front Image';
+        return 'FOP Image';
       case 1:
-        return 'Back Image';
+        return 'BOP Image';
       case 2:
-        return 'Right Image';
+        return 'ROP Image';
       case 3:
-        return 'Left Image';
+        return 'LOP Image';
       default:
         return '';
     }
