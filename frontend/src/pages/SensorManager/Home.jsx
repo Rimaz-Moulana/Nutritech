@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
-import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import ProductTable from '../../components/tables/LogTable';
 import Rules from './Rules';
 import Rule from '../../components/SensorManager/Rule';
+import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar';
 
 function Home() {
 
@@ -56,7 +56,7 @@ function Home() {
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <AnnotatorSideBar />
+        <SensorManagerSidebar />
       </div>
       <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
         <div className='p-1'>

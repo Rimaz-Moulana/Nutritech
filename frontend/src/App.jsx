@@ -30,6 +30,9 @@ import AnnotatorHome from '../src/pages/Annotator/Home'
 import SensorManagerHome from '../src/pages/SensorManager/Home'
 
 import AddedProductt from './pages/Annotator/AddedProductt';
+import SensorManagerProducts from './pages/SensorManager/Products';
+import ReviewProduct from './pages/SensorManager/ReviewProduct';
+
 
 // import './App.css'
 
@@ -74,6 +77,8 @@ function App(){
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
+              <Route path='/sensormanagerproducts' element ={<SensorManagerProducts/>} />
+              <Route path='/reviewproduct/:productId' element ={<ReviewProduct/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
