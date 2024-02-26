@@ -45,8 +45,17 @@ const Annotatorsidebar = () => {
   }, [selected]);
 
   
-  const handleItemClick = (index) => {
+  const handleItemClick = (index,event) => {
+    event.preventDefault();
+
+    localStorage.setItem('selectedSidebarItem', JSON.stringify(index));
+   
     setSelected(index);
+
+    if (selected === index) {
+      // If the clicked item is already selected, navigate to the default 'Home' item
+      navigate('/home');
+    } else {
     if (index === nav.findIndex((item) => item.text === 'Video')) {
       setDropdownOpen(!isDropdownOpen);
     } else if (index === nav.findIndex((item) => item.text === 'Products')){
@@ -55,6 +64,7 @@ const Annotatorsidebar = () => {
     } else{
       navigate('/home');
     }
+  }
   };
 
   const handleEnlargeClick = () => {
@@ -77,7 +87,7 @@ const Annotatorsidebar = () => {
                 className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
                   isEnlarge ? 'pl-2 pr-6 rounded-lg' : 'px-2 rounded-full'
                 } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
-                onClick={() => handleItemClick(index)}
+                onClick={(event) => handleItemClick(index,event)}
               >
                 <img
                   src={isEnlarge ? link.selectedIcon : link.icon}
