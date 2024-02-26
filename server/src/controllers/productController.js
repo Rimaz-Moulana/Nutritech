@@ -1,6 +1,5 @@
 const productService = require('../services/productService')
 
-
 exports.addProduct = async(req,res)=>{
     try{
         const newProduct = await productService.addProduct(req.body);
@@ -21,3 +20,20 @@ exports.getAllProduct = async(req,res ) =>{
     }
     
 }
+
+exports.fetchSensorManagerReview = async (req, res) => {
+    try {
+      const productId = req.params.productId;
+      const product = await productService.getProduct(productId);
+      console.log(product)
+      if (!product) {
+        return res.status(404).json({ success: false, message: 'Product not found' });
+      }
+  
+      res.json({ success: true, product });
+    } catch (error) {
+      console.error('Error fetching details:', error);
+      res.status(500).json({ success: false, message: 'Error fetching product' });
+    }
+  };
+

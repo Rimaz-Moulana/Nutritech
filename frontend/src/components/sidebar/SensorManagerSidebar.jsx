@@ -61,6 +61,7 @@ const SensorManagerSidebar = () => {
       // If the clicked item is already selected, navigate to the default 'Home' item
       navigate('/sensormanagerhome');
     } else {
+      setSelected(index);
       if (index === nav.findIndex((item) => item.text === 'Videos')) {
         navigate('/sensormanagernewvideo');
       } else if (index === nav.findIndex((item) => item.text === 'Products')) {

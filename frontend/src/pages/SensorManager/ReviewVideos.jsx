@@ -49,7 +49,7 @@ function ReviewVideos() {
       <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
         <Navbar type='sensormanager'/>
       
-       <VideowithReview videoId={videoId} videoData={responseData}/>
+       <VideowithReview Id={videoId} videoData={responseData} text={"video"}/>
        <div className='flex justify-between mt-8'>
        <h1 className='text-xl ml-8 font-semibold'>
        Existing Ads related to this product

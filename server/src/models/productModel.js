@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-        productName: String,
         brand : String,
+        productName: String,
         description: String,
         parentCompany: String,
         packagingMaterial : String,
@@ -51,7 +51,8 @@ const productSchema = new mongoose.Schema({
         SLpermitted: String,
         SLfoodcodePermittedRemark: String,
         createdTime: String,
-        CreatedData : String
+        CreatedData : String,
+        uploader : String,
 })
 
 

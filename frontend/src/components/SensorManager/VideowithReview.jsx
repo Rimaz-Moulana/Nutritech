@@ -3,8 +3,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import ReactPlayer from 'react-player';
 
-function VideowithReview({videoId}) {
-  const [videoData, setVideoData] = useState([]);
+function VideowithReview({Id,text}) {
+ const videoId = Id;
+ const productId =Id;
+ 
+ const [Data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const handleOpen = () => {
@@ -39,12 +42,12 @@ function VideowithReview({videoId}) {
     });
   };
 
-
+if (text==="video") {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
-        setVideoData(response.data.video);
+        setData(response.data.video);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {
@@ -54,6 +57,23 @@ function VideowithReview({videoId}) {
 
     fetchReviewDetails();
   }, [videoId]);
+}else{
+  useEffect(() => {
+    const fetchReviewDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/product/reviewproduct/${productId}`);
+        setData(response.data.product);
+      } catch (error) {
+        console.error('Error fetching ReviewDetails:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReviewDetails();
+  }, [productId]);
+}
+ 
 
   const handlesave= async (e) => {
     e.preventDefault();
@@ -108,15 +128,23 @@ function VideowithReview({videoId}) {
     <div className='lg:flex justify-right ml-8'>
          <div className='w-1/2 h-1/12 mt-24'>
          <div>
-        <ReactPlayer
+            {text === "video" && (
+              <ReactPlayer
                 className='react-player fixed-bottom'
-                url={handleurl(videoData.videoPath)}
+                url={handleurl(Data.videoPath)}
                 width='100%'
                 height='100%'
                 controls={true}
-            />
-
+              />
+            )}: (
+              <img
+                // src={handleUrl(Data.frontimage)}  // Replace with your image path handling logic
+                alt="Image"
+                className="w-full h-auto"
+              />
+            )
         </div>
+
         </div> 
       
         <form className="w-full mt-32 max-w-sm lg:ml-36">
@@ -127,7 +155,7 @@ function VideowithReview({videoId}) {
       </label>
     </div>
     <div className="md:w-2/3">
-      <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{videoData.brand}</div>
+      <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.brand}</div>
     </div>
   </div>
   <div className="md:flex md:items-center mb-6">
@@ -137,8 +165,13 @@ function VideowithReview({videoId}) {
       </label>
     </div>
     <div className="md:w-2/3">
-      <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{videoData.product}</div> 
-    </div>
+      {text==="video" && (
+        <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.product}</div> 
+      )}
+      {text==="product" && (
+        <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.productName}</div> 
+      )}
+      </div>
   </div>
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
@@ -147,7 +180,7 @@ function VideowithReview({videoId}) {
       </label>
     </div>
     <div className="md:w-2/3">
-      <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{videoData.variation}</div>
+      <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.variation}</div>
     </div>
   </div>
   <div className="flex items-center">

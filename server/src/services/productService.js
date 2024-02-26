@@ -13,3 +13,7 @@ exports.addProduct = async (productDetails) => {
 exports.getAllProducts = async() => {
     return await Product.find();
 }
+
+exports.getProduct = async(productId)=>{
+    return await Product.findOne({ _id: productId })
+  }
