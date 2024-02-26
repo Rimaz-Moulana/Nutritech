@@ -29,6 +29,8 @@ export default function ProductDetails() {
         const cDate = `${year}/${month}/${day}`;
         const cTime = `${hours}:${minutes}:${seconds}`;
 
+        const status = 'pending';
+
         const [uploadStatus, setUploadStatus] = useState('');
         const [formData, setFormData] = useState({
             productName: '',
@@ -84,6 +86,7 @@ export default function ProductDetails() {
             createdTime: cTime ,
             CreatedData : cDate ,
             videoFile : '',
+            status: status,
             imagePaths: ''
         })
 
@@ -102,8 +105,8 @@ export default function ProductDetails() {
             formD.append('productName',formData.productName );
             formD.append('brand', formData.brand);
             formD.append('description', formData.description )
-            formD.append('parentCompany',fromData.parentCompany)
-            formD.append('productCategory',fromData.productCategory)
+            formD.append('parentCompany',formData.parentCompany)
+            formD.append('productCategory',formData.productCategory)
             formD.append('packagingMaterial', formData.packagingMaterial )
             formD.append('packagingMaterialTouching', formData.packagingMaterialTouching);
             formD.append('variation', formData.variation)
@@ -151,10 +154,10 @@ export default function ProductDetails() {
             formD.append('SLfoodcodePermittedRemark',formData.SLfoodcodePermittedRemark);
             formD.append('createdTime', cTime);
             formD.append('CreatedData' , cDate)
-            formD.append('imagePaths',formData.imagePaths);
-            formD.append('variation', formData.variation);
+            formD.append('status', status)
+            formD.append('image',formData.imagePaths);
             formD.append('createdAt', formData.createdAt);
-            formD.append('videoPath', formData.videoFile);
+            formD.append('video', formData.videoFile);
             
             try {
               console.log(formData)

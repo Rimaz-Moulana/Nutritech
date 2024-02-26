@@ -20,6 +20,6 @@ exports.addNewProduct = async (newProductDetails) => {
         return await newProduct.save();
     }
     catch(error){
-
+        // throw new Error(error.message);
     }
 }

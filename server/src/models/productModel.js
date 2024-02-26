@@ -5,9 +5,10 @@ const productSchema = new mongoose.Schema({
         brand : String,
         description: String,
         parentCompany: String,
+        productCategory: String,
         packagingMaterial : String,
         packagingMaterialTouching: String,
-        variation : String,
+        variation: String,
         countryProduct: String,
         servingSize: String,
         sugarType: String,
@@ -53,6 +54,7 @@ const productSchema = new mongoose.Schema({
         createdTime: String,
         CreatedData : String,
         videoPath: String,
+        status: String,
         imagePath: String
 })
 
