@@ -7,12 +7,9 @@ import GridListView from '../../components/Toggle/GridListView';
 function Allvideos() {
   const [videoData, setVideoData] = useState([]);
   const [isChecked, setIsChecked] = useState(() => {
-    // Retrieve the checkbox state from localStorage, defaulting to false if not found
     return JSON.parse(localStorage.getItem('isChecked')) || false;
   });
 
-   // Add type as a dependency
-  
 
   const handleCheckboxChange = () => {
     const newCheckedState = !isChecked;
@@ -24,7 +21,6 @@ function Allvideos() {
 
 
   useEffect(() => {
-    // Fetch data from your backend API
     const fetchData = async () => {
        const response = await fetch('http://localhost:3000/api/videos/all');
       const data = await response.json();
@@ -35,7 +31,7 @@ function Allvideos() {
   }, []); 
 
   console.log(videoData)
-  
+
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col">
@@ -71,7 +67,6 @@ function Allvideos() {
           Grid View
         </span>
       </label>
-      {/* <GridListView type="all" videoData={videoData}/> */}
 </div>
         
 <VideoContainer 

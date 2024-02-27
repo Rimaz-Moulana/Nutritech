@@ -21,6 +21,37 @@ function AnnotationTable() {
 
   const handleNoClick = () => {
     setIsYesSelected(false);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#5a7d59",
+      confirmButtonText: "Yes",
+      iconColor: "#294B29",
+      customClass: {
+        popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+        cancelButton: 'bg-gradient-to-t from-buttonGreen to-darkGreen',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        submitNone();
+        Swal.fire({
+          // title: "Deleted!",
+          showConfirmButton: false,
+          text: "Done",
+          timer: 2000,
+          icon: "success",
+          iconColor: '#294B29',
+          customClass: {
+            popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+          },
+        });
+      }else{
+        handleYesClick()
+      }
+    });
   };
 
   const viewdetails = () => {
@@ -83,7 +114,6 @@ function AnnotationTable() {
         annotations: rowsData,
       });
 
-      console.log('Response from server:', response.data);
       Swal.fire({
         icon: 'success',
         title: 'Annotations saved successfully!',
@@ -94,10 +124,40 @@ function AnnotationTable() {
         },
         iconColor: '#294B29',
       });
+      window.history.back();
     } catch (error) {
       console.error('Error saving annotations:', error);
     }
   };
+
+  const submitNone = async () => {
+    // e.preventDefault();
+    try {
+      const response = await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
+        annotations: {
+          timestamp: '',
+          rule: '',
+          details: '',
+          recommendation: '',
+        }
+      });
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Annotations saved successfully!',
+        showConfirmButton: false,
+        timer: 2000, 
+        customClass: {
+          popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+        },
+        iconColor: '#294B29',
+      });
+      window.history.back();
+    } catch (error) {
+      console.error('Error saving annotations:', error);
+    }
+  };
+  
 
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex z-10'>
@@ -107,7 +167,7 @@ function AnnotationTable() {
       <div className='w-full h-full sm:w-3/4 ml-0 z-10 sm:ml-64'>
         <Navbar type='annotator' />
         <div className='w-full mt-28'>
-          <Videowithtext />
+          <Videowithtext videoId={videoId}/>
         </div>
         <div className='ml-16 h-full sm:ml-20 mb-8 mt-10 text-sm font-semibold text-black'>
           <div className='flex-end'>
@@ -131,44 +191,6 @@ function AnnotationTable() {
                 No
               </button>
             </div>
-            {!isYesSelected && (
-              <>
-              <div className='mt-12 w-1/2 ml-52 bg-white p-2 place-content-center item-center'>
-              <div className='mt-4 text-lg'>Are you sure?
-              <p>You can't annotate this video again.</p>
-              </div>
-              <div className='flex mt-4 place-content-center'>
-              <button
-                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                  isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
-                }`}
-                onClick={submit}
-              >
-                Yes
-              </button>
-              
-              <button
-                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                  !isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
-                }`}
-                onClick={handleYesClick}
-              >
-                Cancel
-              </button>
-            </div>
-              </div>
-             
-
-            <div>
-            <button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-               onClick={() => window.history.back()}>
-                Cancel
-                </button>
-            </div>
-            </>
-            )
-            }
-
             {isYesSelected && (
               <>
                 {[...Array(rowCount)].map((_, index) => (

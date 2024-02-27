@@ -4,11 +4,12 @@ import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
+import Swal from 'sweetalert2';
 
 
 function UploadVideo() {
+  const padZero = (num) => (num < 10 ? `0${num}` : num);
 
-  const formattedDate = `${padZero(new Date().getFullYear())}:${padZero(new Date().getMonth())}:${padZero(new Date().getDay())}`;
   const formattedTime = `${padZero(new Date().getHours())}:${padZero(new Date().getMinutes())}:${padZero(new Date().getSeconds())}`;
   
     const [uploadStatus, setUploadStatus] = useState('');
@@ -17,7 +18,7 @@ function UploadVideo() {
         brand: '',
         product: '',
         variation: '',
-        createdIn: formattedDate,
+        createdIn: new Date().toLocaleDateString(),
         createdAt: formattedTime ,
         videoFile: null // Assuming you need to upload a video file
       });
@@ -36,6 +37,7 @@ function UploadVideo() {
         formD.append('brand', formData.brand);
         formD.append('product', formData.product);
         formD.append('variation', formData.variation);
+        formD.append('createdIn', formData.createdIn);
         formD.append('createdAt', formData.createdAt);
         formD.append('video', formData.videoFile);
         
@@ -45,6 +47,18 @@ function UploadVideo() {
           const response  = await axios.post("http://localhost:3000/api/videos/upload", formD);
           console.log(response.data);
           setUploadStatus("Video uploaded successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Video uploaded successfully!',
+            showConfirmButton: false,
+            timer: 2000, 
+            customClass: {
+              popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+            },
+            iconColor: '#294B29',
+          });
+          window.history.back();
+
           }catch(error){
             console.error('Error uploading video:', error);
             setUploadStatus('Error uploading video.');

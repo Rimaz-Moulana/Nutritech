@@ -5,6 +5,7 @@ import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import GridListView from '../../components/Toggle/GridListView';
 
 function AnnotatedVideos() {
+  
   const [annotatedVideoData, setannotatedVideoData] = useState([]);
   const [isChecked, setIsChecked] = useState(() => {
     // Retrieve the checkbox state from localStorage, defaulting to false if not found
