@@ -10,7 +10,7 @@ function Products() {
 
     useEffect (()=>{
         const fetchData = async () => {
-            const response = await fetch('http://localhost:3000/api/product/getAll');
+            const response = await fetch('http://localhost:3000/api/product/sensormanagerproducts');
             const data = await response.json();
             setProductData(data);
         };

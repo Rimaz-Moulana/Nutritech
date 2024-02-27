@@ -21,31 +21,19 @@ function Product({productData}) {
 }
     
   
-//   const handleVideo = (inputUrl) =>{
-//     const url = inputUrl.replace(/\\/g, '/');
-  
-//   // Split the URL based on backslash ("\")
-//     const urlParts = url.split('/');
-  
-//   // Take the last part of the array
-//     const desiredPart = urlParts[urlParts.length - 1];
-//   // console.log(desiredPart)
-//   return desiredPart;
-//   }
-  
   const filteredProducts = productData?.filter((product) => {
     const productMatch = productFilter === 'all' || product.product === productFilter;
     
-    // const uploadedDateMatch = !startDate || new Date(product.date).toLocaleDateString() == startDate.toLocaleDateString();   
-    return productMatch; 
+    const uploadedDateMatch = !startDate || new Date(product.date).toLocaleDateString() == startDate.toLocaleDateString();   
+    return productMatch && uploadedDateMatch; 
   });
 
   return (
     <div className='h-full h-min-screen mt-4 text-black w-full min-w-screen'>
     <div className='flex mb-12 ml-12'>
     <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
-                // value={productFilter}
-                // onChange={(e) => setProductFilter(e.target.value)}
+                value={productFilter}
+                onChange={(e) => setProductFilter(e.target.value)}
               >
                 <option value='all'>All Products</option>
                 <option value='Biscuits'>Biscuits</option>
@@ -89,13 +77,6 @@ function Product({productData}) {
        {filteredProducts.map((product, index) => (
          <tr key={index} className='border-b-1'>
           <td className='w-40'>
-          {/* <ReactPlayer
-                className='react-player fixed-bottom h-8 w-8 p-2'
-                url={`/videos/${handleVideo(video.videoPath)}`}
-                width='100%'
-                height='100%'
-                controls={true}
-            /> */}
           </td>
           <td>{product.brand}</td>
            <td>{product.productName}</td>
@@ -103,12 +84,6 @@ function Product({productData}) {
            <td>{product.createdIn}</td>
            <td>{product.createdAt}</td>
            <td>{product.uploader}</td>
-           {/* {type === 'annotated' && ( */}
-             <>
-               {/* <td>{product.annotateddate}</td>
-               <td>{product.annotatedtime}</td> */}
-             </>
-           {/* )} */}
 
            <td>
              <button

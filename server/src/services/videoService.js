@@ -62,7 +62,7 @@ exports.saveSensorManagerReviewStatus = async (videoId) => {
 
 exports.deleteVideo = async (videoId) => {
   try {
-    const deletedVideo = await VideoModel.findByIdAndRemove(videoId);
+    const deletedVideo = await VideoModel.findByIdAndDelete(videoId);
     return deletedVideo;
   } catch (error) {
     console.error(`Error deleting video: ${error.message}`);
@@ -70,48 +70,19 @@ exports.deleteVideo = async (videoId) => {
   }
 };
 
-// exports.getBrandVideos = async (videoId) => {
-//   try {
-//     // Find the video with the provided videoId
-//     const currentVideoData = await VideoModel.findOne({ _id: videoId });
-
-//     if (!currentVideoData) {
-//       throw new Error('Video not found');
-//     }
-//     // console.log('Current Video Data:', currentVideoData);
-//     // Extract brand, product, and variation from the current video
-//     const { brand, product, variation } = currentVideoData;
-
-//     // Find other videos with the same brand, product, and variation
-//    return await VideoModel.find({
-//       brand,
-//       product,
-//       variation,
-//       status: { $in: ['annotated', 'unannotated','pending'] } ,
-//       _id: { $ne: videoId } // Exclude the current video from the results
-//     });
-
-//   } catch (error) {
-//     console.error('Error retrieving brand videos:', error);
-//     throw error;
-//   }
-// };
-
 exports.getSimilarProductAds = async (videoId) => {
   console.log(videoId)
   try {
     // Find the video with the provided videoId
     const currentVideoData = await VideoModel.findOne({ _id: videoId });
-    console.log(currentVideoData);
+    // console.log(currentVideoData);
 
     if (!currentVideoData) {
       throw new Error('Video not found');
     }
 
-    // Extract brand, product, and variation from the current video
     const { brand, product, variation } = currentVideoData;
 
-    // Find other videos with the same brand, product, and variation
     return await VideoModel.find({
       brand,
       product,
@@ -120,7 +91,6 @@ exports.getSimilarProductAds = async (videoId) => {
       _id: { $ne: videoId } // Exclude the current video from the results
     });
 
-    // Return an object containing both the video being reviewed and brand-related videos
   
     
   } catch (error) {

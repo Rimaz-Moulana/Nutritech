@@ -28,7 +28,6 @@ function ReviewVideos() {
     const fetchReviewDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
-        // console.log('Entire response object:', response);
         setResponseData(response.data);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
@@ -49,7 +48,7 @@ function ReviewVideos() {
       <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
         <Navbar type='sensormanager'/>
       
-       <VideowithReview Id={videoId} videoData={responseData} text={"video"}/>
+       <VideowithReview Id={videoId} text={"video"}/>
        <div className='flex justify-between mt-8'>
        <h1 className='text-xl ml-8 font-semibold'>
        Existing Ads related to this product

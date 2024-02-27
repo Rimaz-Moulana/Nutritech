@@ -21,11 +21,21 @@ exports.getAllProduct = async(req,res ) =>{
     
 }
 
+exports.getAllPendingProducts = async(req,res ) =>{
+    try {
+        const allProduct = await productService.getPendingProducts();
+        res.status(201).json(allProduct);
+    }
+    catch(error){
+        res.status(400).json({message:error.message});
+    }
+    
+}
+
 exports.fetchSensorManagerReview = async (req, res) => {
     try {
       const productId = req.params.productId;
       const product = await productService.getProduct(productId);
-      console.log(product)
       if (!product) {
         return res.status(404).json({ success: false, message: 'Product not found' });
       }
@@ -37,3 +47,39 @@ exports.fetchSensorManagerReview = async (req, res) => {
     }
   };
 
+  exports.deleteProduct = async (req, res) => {
+    try {
+      const productId = req.params.productId;
+      console.log(productId)
+      await productService.deleteProducts(productId);
+  
+      res.status(200).json({ message: 'Product deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+  
+  exports.savePendingProduct= async (req,res)=>{
+    try {
+          const productId = req.params.productId;
+          const productStatus = await productService.saveProduct(productId);
+          res.json(productStatus);
+      } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Internal Server Error' });
+      }
+  }
+
+
+  exports.getAllSimilarProducts = async (req, res) => {
+    try {
+      const productId = req.params.productId;
+      const products = await productService.getSimilarProducts(productId);
+      console.log("videos"+products)
+      res.json(products);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };

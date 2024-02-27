@@ -10,7 +10,7 @@ function VideowithReview({Id,text}) {
  const [Data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const handleOpen = () => {
+  const handleOpen = (text) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -26,11 +26,11 @@ function VideowithReview({Id,text}) {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        handleDelete();
+        handleDelete(text);
         Swal.fire({
           // title: "Deleted!",
           showConfirmButton: false,
-          text: "Video has been deleted.",
+          text: `${text} has been deleted.`,
           timer: 2000,
           icon: "success",
           iconColor: '#294B29',
@@ -79,12 +79,18 @@ if (text==="video") {
     e.preventDefault();
     console.log(videoId)
     try {
-      const response = await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
+      if (text === "video") {
+       await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
         status: 'unannotated'
       });
+    }else{
+      await axios.post(`http://localhost:3000/api/product/reviewproduct/${productId}`, {
+        status: 'reviewed'
+      });
+    }
       Swal.fire({
         icon: 'success',
-        title: 'Video saved successfully!',
+        title: `${text} saved successfully!`,
         showConfirmButton: false,
         timer: 2000, 
         customClass: {
@@ -94,19 +100,21 @@ if (text==="video") {
       });
       window.history.back();
     } catch (error) {
-      console.error('Error saving video:', error);
+      console.error(`Error saving ${text}:`, error);
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (text) => {
     try {
-      const response = await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
-      });
+      if (text === "video") {
+        await axios.delete(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+      } else {
+        await axios.delete(`http://localhost:3000/api/product/reviewproduct/${productId}`);
+      }
   
       window.history.back();
-  
     } catch (error) {
-      console.error('Error declining video:', error);
+      console.error(`Error declining ${text}:`, error);
     }
   };
   
@@ -186,10 +194,13 @@ if (text==="video") {
   <div className="flex items-center">
     <div className="md:w-1/3"></div>
     <div className="md:w-2/3">
-      <button className="text-white  bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " type="button"
-      onClick={handleOpen} >
-        Decline
-      </button>
+     
+        <button className="text-white  bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " type="button"
+        onClick={()=>{handleOpen(text)}} >
+          Decline
+        </button>
+      
+      
     </div>
     <div className="md:w-1/3"></div>
     <div className="md:w-2/3">

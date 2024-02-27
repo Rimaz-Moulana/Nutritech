@@ -1,14 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar'
 import Navbar from '../../components/navbar/Navbar'
 import { useParams } from 'react-router-dom';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
+import Product from '../../components/SensorManager/Product';
+import axios from 'axios';
 
 function ReviewProduct() {
   const {productId} = useParams();
-  console.log(productId)
-  return (
-    
+  const [responseData, setResponseData] = useState([]);
+ 
+  useEffect(() => {
+    const fetchReviewDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/product/similarproducts/${productId}`);
+        setResponseData(response.data);
+      } catch (error) {
+        console.error('Error fetching ReviewDetails:', error);
+      } finally {
+        // setLoading(false);
+      }
+    };
+  
+    fetchReviewDetails();
+  }, [productId]);
+console.log(responseData)
+  return ( 
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
           <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
             <SensorManagerSidebar />
@@ -20,6 +37,8 @@ function ReviewProduct() {
            
             
           </div>
+
+          <Product productData={responseData}/>
           </div>
         </div>
   )
