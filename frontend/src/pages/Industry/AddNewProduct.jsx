@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import UploadImage from '../../components/UploadImage/UploadImageIndustryBack'
+import UploadImage from '../../components/UploadImage/UploadImageIndustry'
 import VideoUpload from '../../components/UploadVideo/VideoUploadIndustry'
 import DropDown from '../../components/fields/dropdown'
 import DropDownWhite from '../../components/fields/dropdownWhite'
@@ -98,6 +98,10 @@ export default function ProductDetails() {
           const handleFileChange = (e) => {
             setFormData({ ...formData, videoFile: e.target.files[0] });
           };
+
+        //   const handleImageFile = (imageArray) => {
+        //     setFormData({ ...formData, imagePaths: imageArray });
+        //   }
         
           const handleSubmit = async (event) => {
             event.preventDefault();
@@ -155,13 +159,14 @@ export default function ProductDetails() {
             formD.append('createdTime', cTime);
             formD.append('CreatedData' , cDate)
             formD.append('status', status)
-            formD.append('image',formData.imagePaths);
+            // formD.append('image',formData.imagePaths);
             formD.append('createdAt', formData.createdAt);
             formD.append('video', formData.videoFile);
             
             try {
+              console.log(formData.imagePaths)
               console.log(formData)
-              console.log(formD)
+            //   console.log(formD)
               const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
               console.log(response.data);
               setUploadStatus("Video uploaded successfully!");
@@ -282,6 +287,7 @@ export default function ProductDetails() {
                 <div className='py-2'>
     
                 <div className='inline-block'>
+                    {/* <UploadImage imageFile={handleImageFile} /> */}
                     <UploadImage />
                 </div>   
                 </div>

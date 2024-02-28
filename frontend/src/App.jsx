@@ -30,6 +30,7 @@ import Rules from './pages/SensorManager/Rules';
 import AnnotationHistory from '../src/pages/Annotator/History';
 import AnnotatorHome from '../src/pages/Annotator/Home';
 import AddNewProduct from '../src/pages/Industry/AddNewProduct';
+import AddNewProduct2 from '../src/pages/Industry/AddNewProduct2.jsx';
 // import './App.css'
 
 
@@ -73,6 +74,7 @@ function App(){
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
 
               <Route path='/addnewproduct' element={<AddNewProduct />} />
+              <Route path='/addnewproduct2' element={<AddNewProduct2 />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

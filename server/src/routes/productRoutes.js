@@ -15,6 +15,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
+const storage1 = multer.diskStorage({
+    destination: function(req, file , cb){
+        cb(null, '/Nutritech/frontend/src/assets/Images');
+    },
+    filename: function(req, file, cb){
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload1 = multer({storage: storage1});
+
 
 router.post('/industry/add', upload.single('video') , productController.addNewProduct);
 

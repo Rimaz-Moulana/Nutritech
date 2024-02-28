@@ -6,12 +6,13 @@ const ImageUploader = () => {
   const handleImageChange = (e, index) => {
     const file = e.target.files[0];
     const reader = new FileReader();
-
+    
     reader.onloadend = () => {
       setImages(prevImages => {
         const newImages = [...prevImages];
         newImages[index] = reader.result;
         return newImages;
+        
       });
     };
 
@@ -61,7 +62,10 @@ const ImageUploader = () => {
           </div>
         ))}
       </div>
+
+      
     </div>
+    
   );
 };
 
