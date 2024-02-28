@@ -31,6 +31,6 @@ router.get('/annotation/:videoId', videoController.getAnnotatingVideo);
 router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );//get the video to review
 router.get('/brandproducts/:videoId', videoController.getSimilarAds );
 
-
+router.get('/allUploadedVideos', videoController.getAllUploadedVideos );
 
 module.exports = router;

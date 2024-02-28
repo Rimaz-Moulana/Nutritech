@@ -6,9 +6,12 @@ import history from '../../../src/assets/Images/history.png';
 import pen from '../../../src/assets/Images/pen.png';
 import review from '../../../src/assets/Images/review.png';
 import ReactPlayer from 'react-player';
+import blue from '../../assets/Images/blue.png'
+import white from '../../assets/Images/white.png'
+import yellow from '../../assets/Images/yellow.png'
 
-function VideoContainer({ type,videoData,viewType,videoDetails }) {
-  console.log(videoData)
+function VideoContainer({ type,videoData,viewType,videotype }) {
+  console.log(viewType)
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   // const [productFilter, setProductFilter] = useState('all');
@@ -49,29 +52,32 @@ return desiredPart;
 }
 
 const filteredVideos = videoData?.filter((video) => {
-  const productMatch = productFilter === 'all' || video.product === productFilter;
-  
-  const uploadedDateMatch = !startDate || new Date(video.createdIn).toLocaleDateString() == startDate.toLocaleDateString();
-  const annotatedDateMatch =!startDate || (video.annotateddate && new Date(video.annotateddate).toLocaleDateString() == startDate.toLocaleDateString());
-
-  if(type == "annotator"){
-    return productMatch && annotatedDateMatch
-
-  }else{
-    
-  return productMatch &&  uploadedDateMatch;
+  if (type === "industry") {
+    // If type is "industry", return all videos without filtering
+    return true;
   }
-  
 
+  const productMatch = productFilter === 'all' || video.product === productFilter;
+  const uploadedDateMatch = !startDate || new Date(video.createdIn).toLocaleDateString() === startDate.toLocaleDateString();
+  const annotatedDateMatch = !startDate || (video.annotateddate && new Date(video.annotateddate).toLocaleDateString() === startDate.toLocaleDateString());
+
+  if (type === "annotator") {
+    return productMatch && annotatedDateMatch;
+  } else {
+    return productMatch && uploadedDateMatch;
+  }
 });
+
 
 
   return (
     <div className='w-full ml-12'> 
-    {viewType=== 'Grid' &&(
+    {viewType=== 'Grid'  &&(
       <div className=' right-0'>
         <div className=' items-end'>
-    <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
+      {type !== "industry" && (
+        <>
+            <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
@@ -94,6 +100,8 @@ const filteredVideos = videoData?.filter((video) => {
              isClearable
              dateFormat='MM/dd/YYYY'
            />
+           </>
+      )}
     </div>
       
     <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 bg-backgroundGreen">
@@ -122,16 +130,17 @@ const filteredVideos = videoData?.filter((video) => {
               <p>Uploaded Time: {video.createdAt}</p>
               <p>Uploader: {video.uploader}</p>
               
-           {type==='annotated' &&(
-            <>
-              <p>Annotated Date: {video.annotateddate}</p>
-              <p>Annotated Time: {video.annotatedtime}</p>
-              </>
-            )}
+              {type === 'annotated' && !("industry" === type) && (
+  <>
+    <p>Annotated Date: {video.annotateddate}</p>
+    <p>Annotated Time: {video.annotatedtime}</p>
+  </>
+)}
+
             </div>
           </div>
 
-          {type === 'unannotated' && (
+          {type === 'unannotated' && !("industry" === type) &&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
               <img
                 src={pen}
@@ -141,19 +150,48 @@ const filteredVideos = videoData?.filter((video) => {
             </div>
           )}
 
-          {type === 'annotated' && (
+        {((videotype === 'unannotated' && type==="industry") || (video.status ==="unannotated" && type==="industry")) &&(
+            <div className="h-24 w-4 icon-overlay absolute top-0 mt-2 mr-1 right-0 cursor-pointer ">
+              <img
+              className="h-4 w-4"
+                src={yellow}
+                alt="Unannotated"
+                // onClick={() => handleAnnotate(video._id)} // Pass video ID to handleAnnotate
+              />
+            </div>
+          )}
+
+          {type === 'annotated' && !("industry" === type) &&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
-              <img src={history} alt="Annotate" onClick={() => ViewAnnotate(video._id)}/>
+              <img src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
+            </div>
+          )}
+
+        {((videotype === 'annotated' && type==="industry") || (video.status ==="annotated" && type==="industry") )&&(
+            <div className="flex justify-between gap-8 h-12 w-60 icon-overlay absolute top-0 mt-2 mr-1 right-0  cursor-pointer ">
+              <img className="h-8 w-8" src={history} alt="Annotate" onClick={() => ViewAnnotate(video._id)}/>
+              <img className="h-4 w-4" src={blue} alt="Annotate"/>
+              
             </div>
           )}
 
           
-          {type === 'pending' && (
+          {type === 'pending' && !("industry" === type) &&(
             <div className="h-24 w-8 icon-overlay absolute top-0 right-0 cursor-pointer ">
 
               <img src={review} alt="Review" onClick={() => handleReview(video._id)} />
             </div>
           )}
+
+        {((videotype === 'pending' && type === 'industry') || (video.status === 'pending' && type === 'industry')) && (
+          <div className="h-8 w-4 mr-1 mt-2 icon-overlay absolute top-0 right-0 cursor-pointer ">
+            <img 
+              className="h-4 w-4"
+              src={white} alt="pending" 
+            />
+          </div>
+        )}
+
 
         </div>
       ))}
@@ -164,6 +202,8 @@ const filteredVideos = videoData?.filter((video) => {
  {viewType==="List" && (
    <div className='h-full h-min-screen mt-4 text-black w-full min-w-screen'>
     <div className=' items-end'>
+    {type !== "industry" && (
+      <>
     <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
@@ -187,6 +227,8 @@ const filteredVideos = videoData?.filter((video) => {
              isClearable
              dateFormat='MM/dd/YYYY'
            />
+           </>
+    )}
     </div>
      
    <table className='w-full mt-8'>
@@ -271,3 +313,5 @@ const filteredVideos = videoData?.filter((video) => {
  }
 
 export default VideoContainer;
+
+

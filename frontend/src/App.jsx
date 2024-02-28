@@ -32,6 +32,7 @@ import SensorManagerHome from '../src/pages/SensorManager/Home'
 import AddedProductt from './pages/Annotator/AddedProductt';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
+import IndustryHistory from './pages/Industry/History'
 
 
 // import './App.css'
@@ -79,6 +80,9 @@ function App(){
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
               <Route path='/sensormanagerproducts' element ={<SensorManagerProducts/>} />
               <Route path='/reviewproduct/:productId' element ={<ReviewProduct/>} />
+
+
+              <Route path='/industryhistory' element ={<IndustryHistory/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

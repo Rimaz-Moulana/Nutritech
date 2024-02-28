@@ -51,7 +51,7 @@ const SensorManagerSidebar = () => {
   };
 
   const handleItemClick = (index, event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     localStorage.setItem('selectedSidebarItem', JSON.stringify(index));
     // Update the state with the selected index

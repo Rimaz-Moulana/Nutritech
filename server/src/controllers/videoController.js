@@ -153,6 +153,16 @@ exports.getSimilarAds = async (req, res) => {
 };
 
 
+exports.getAllUploadedVideos= async (req,res)=>{
+  try {
+        const Videos = await VideoService.getAll();
+        res.json(Videos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 
 
 

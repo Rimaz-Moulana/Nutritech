@@ -99,3 +99,12 @@ exports.getSimilarProductAds = async (videoId) => {
   }
 };
 
+exports.getAll = async (req, res) => {
+    return await VideoModel.find({
+      brand: 'Maggi',
+      status: { $in: ['annotated', 'unannotated', 'pending', 'verified', 'red'] }
+    });
+
+  
+};
+
