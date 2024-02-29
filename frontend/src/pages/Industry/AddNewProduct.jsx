@@ -193,7 +193,7 @@ export default function ProductDetails() {
             //   console.log(formD)
               const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
               console.log(response.data);
-              setUploadStatus("Video uploaded successfully!");
+              setUploadStatus("Product uploaded successfully!");
               }catch(error){
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');

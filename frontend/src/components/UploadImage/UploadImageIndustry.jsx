@@ -17,7 +17,6 @@ const ImageUploader = ({onChangeImagesFile}) => {
 
         const newImages = [...prevImages];
         newImages[index] = reader.result;
-        // onChangeImagesFile(newImages)
         return newImages;
       });
     };
