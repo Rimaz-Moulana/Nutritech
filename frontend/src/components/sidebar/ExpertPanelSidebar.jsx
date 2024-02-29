@@ -63,7 +63,7 @@ const ExpertPanelSidebar = () => {
       navigate('/ExpertRules');
       
     } else{
-      navigate('/home');
+      navigate('/expertpanelhome');
     }
   // }
   };
