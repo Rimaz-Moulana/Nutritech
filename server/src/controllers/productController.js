@@ -69,10 +69,15 @@ exports.addNewProduct = async (req,res) => {
             SLfoodcodePermittedRemark ,
             status,
             createdTime  ,
-            CreatedData ,imagePaths  } = req.body;
+            CreatedData  } = req.body;
             console.log(req.body)
-            const videoPath = req.file.path
+            const videoPath = req.files[0].path
             console.log(videoPath)
+            console.log(req.file)
+            const imageFront = req.files[1].path
+            const imageBack = req.files[2].path
+            const imageLeft = req.files[3].path
+            const imageRight = req.files[4].path
             // const newProduct = await productService.addNewProduct();
     
             const newProduct = new Product({productName, brand ,
@@ -128,7 +133,10 @@ exports.addNewProduct = async (req,res) => {
                 CreatedData ,
                 status,
                 videoPath  ,
-                imagePaths })
+                imageFront,
+                imageBack ,
+                imageLeft,
+                imageRight})
         // const newProduct = new Product({ videoPath});
         console.log(newProduct)
         await newProduct.save();

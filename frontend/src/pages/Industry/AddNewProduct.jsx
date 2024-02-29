@@ -30,7 +30,7 @@ export default function ProductDetails() {
         const cTime = `${hours}:${minutes}:${seconds}`;
 
         const status = 'pending';
-
+        const [images,setImages] = useState([null, null])
         const [uploadStatus, setUploadStatus] = useState('');
         const [formData, setFormData] = useState({
             productName: '',
@@ -87,7 +87,10 @@ export default function ProductDetails() {
             CreatedData : cDate ,
             videoFile : '',
             status: status,
-            imagePaths: ''
+            imageFront: '',
+            imageBack: '',
+            imageLeft: '',
+            imageRight: ''
         })
 
         const handleChange = (e) => {
@@ -99,9 +102,26 @@ export default function ProductDetails() {
             setFormData({ ...formData, videoFile: e.target.files[0] });
           };
 
-        //   const handleImageFile = (imageArray) => {
-        //     setFormData({ ...formData, imagePaths: imageArray });
-        //   }
+          const handleImageFile = (file) => {
+            console.log(file.file)
+            switch (file.index) {
+                case 0:
+                  setFormData(prevData => ({ ...prevData, imageFront: file.file }));
+                  break;
+                case 1:
+                  setFormData(prevData => ({ ...prevData, imageBack: file.file }));
+                  break;
+                case 2:
+                  setFormData(prevData => ({ ...prevData, imageLeft: file.file }));
+                  break;
+                case 3:
+                  setFormData(prevData => ({ ...prevData, imageRight: file.file }));
+                  break;
+                default:
+                  // Handle invalid index
+                  break;
+              }
+          }
         
           const handleSubmit = async (event) => {
             event.preventDefault();
@@ -159,9 +179,13 @@ export default function ProductDetails() {
             formD.append('createdTime', cTime);
             formD.append('CreatedData' , cDate)
             formD.append('status', status)
-            // formD.append('image',formData.imagePaths);
-            formD.append('createdAt', formData.createdAt);
             formD.append('video', formData.videoFile);
+            formD.append('image',formData.imageFront);
+            formD.append('image',formData.imageBack);
+            formD.append('image',formData.imageLeft);
+            formD.append('image',formData.imageRight);
+            formD.append('createdAt', formData.createdAt);
+            
             
             try {
               console.log(formData.imagePaths)
@@ -287,8 +311,8 @@ export default function ProductDetails() {
                 <div className='py-2'>
     
                 <div className='inline-block'>
-                    {/* <UploadImage imageFile={handleImageFile} /> */}
-                    <UploadImage />
+                    <UploadImage onChangeImagesFile={handleImageFile} />
+                    {/* <UploadImage /> */}
                 </div>   
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ImageUploader = () => {
+const ImageUploader = ({onChangeImagesFile}) => {
   const [images, setImages] = useState([]);
 
   const handleImageChange = (e, index) => {
@@ -9,17 +9,29 @@ const ImageUploader = () => {
     
     reader.onloadend = () => {
       setImages(prevImages => {
+        const imageData = {
+          index: index,
+          file: file,
+        };
+        onChangeImagesFile(imageData) // Pass image data to parent component
+
         const newImages = [...prevImages];
         newImages[index] = reader.result;
+        // onChangeImagesFile(newImages)
         return newImages;
-        
       });
     };
+
+    
 
     if (file) {
       reader.readAsDataURL(file);
     }
+
+    
   };
+
+ 
 
   const getImageAltText = index => {
     switch (index) {

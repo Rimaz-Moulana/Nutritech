@@ -55,7 +55,10 @@ const productSchema = new mongoose.Schema({
         CreatedData : String,
         videoPath: String,
         status: String,
-        imagePath: String
+        imageFront: String,
+        imageBack: String,
+        imageLeft: String,
+        imageRight: String
 })
 
 
