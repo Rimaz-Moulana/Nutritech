@@ -42,8 +42,8 @@ function Unannotatedvideos() {
       </div>
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
         <Navbar type='annotator'/>
-        <div className='flex'>
-        <h1 className=' mb-8 ml-24 mt-32 mr-4.5 text-3xl font-semibold text-sidebarGreen left-0'>
+        <div className='flex justify-between'>
+        <h1 className=' mb-8 ml-24 mt-32 text-3xl font-semibold text-sidebarGreen left-0'>
            Unannotated Videos
         </h1>
         {/* <GridListView type="annotated" videoData={annotatedVideoData}/> */}

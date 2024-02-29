@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-        productName: String,
         brand : String,
+        productName: String,
+        status: String,
         description: String,
         parentCompany: String,
         productCategory: String,
@@ -59,6 +60,8 @@ const productSchema = new mongoose.Schema({
         imageBack: String,
         imageLeft: String,
         imageRight: String
+        CreatedDate : String,
+        uploader : String,
 })
 
 

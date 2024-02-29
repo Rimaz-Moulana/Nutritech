@@ -11,11 +11,11 @@ const SensorManagerSidebar = () => {
   const [isEnlarge, setEnlarge] = useState(true);
   const navigate = useNavigate(); 
 
-
   const [selected, setSelected] = useState(() => {
     const storedSelected = JSON.parse(localStorage.getItem('selectedSidebarItem'));
-    return storedSelected || 0;
-  });
+    return storedSelected !== null ? storedSelected : nav.findIndex((item) => item.text === 'Home');
+  }); 
+
 
   useEffect(() => {
     localStorage.setItem('selectedSidebarItem', JSON.stringify(selected));
@@ -50,18 +50,32 @@ const SensorManagerSidebar = () => {
     text: 'Group Manager',
   };
 
-  const handleItemClick = (index) => {
+  const handleItemClick = (index, event) => {
+    event.preventDefault();
+
+    localStorage.setItem('selectedSidebarItem', JSON.stringify(index));
+    // Update the state with the selected index
     setSelected(index);
-    if (index === nav.findIndex((item) => item.text === 'Videos')) {
-      navigate('/sensormanagernewvideo')
-    } else if (index === nav.findIndex((item) => item.text === 'Products')){
-      // navigate('/product');
-    }else if (index === nav.findIndex((item) => item.text === 'Rules & Regulations')){
-      navigate('/rules')
-    } else{
-      // navigate('/home');
+
+    if (selected === index) {
+      // If the clicked item is already selected, navigate to the default 'Home' item
+      navigate('/sensormanagerhome');
+    } else {
+      setSelected(index);
+      if (index === nav.findIndex((item) => item.text === 'Videos')) {
+        navigate('/sensormanagernewvideo');
+      } else if (index === nav.findIndex((item) => item.text === 'Products')) {
+        navigate('/sensormanagerproducts');
+      } else if (index === nav.findIndex((item) => item.text === 'Rules & Regulations')) {
+        navigate('/rules');
+      } else {
+        navigate('/sensormanagerhome');
+      }
     }
   };
+  
+ 
+  
 
   const handleEnlargeClick = () => {
     setEnlarge(!isEnlarge);
@@ -83,7 +97,7 @@ const SensorManagerSidebar = () => {
                 className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
                   isEnlarge ? 'pl-1 pr-6 rounded-lg' : 'px-1 rounded-full'
                 } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
-                onClick={() => handleItemClick(index)}
+                onClick={(event) => handleItemClick(index, event)}
               >
                 <img
                   src={isEnlarge ? link.selectedIcon : link.icon}

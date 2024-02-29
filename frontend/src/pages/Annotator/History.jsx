@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 function History() {
   const { videoId } = useParams();
 
+
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex flex-col'> {/* Make the main container a flex column */}
       <div className="w-2/8 fixed hidden sm:flex flex-col">
@@ -16,7 +17,7 @@ function History() {
       <div className="w-full sm:w-3/4 ml-0 sm:ml-64 flex-grow"> {/* Make this div take up remaining vertical space */}
         <Navbar type='annotator' />
         <div className='w-full mt-28'>
-          <Videowithtext />
+          <Videowithtext videoId={videoId}/>
         </div>
         <h1 className='ml-16 mb-8 mt-32 text-3xl lg:mr-[1000px] font-semibold text-sidebarGreen left-0'>
                   Annotations

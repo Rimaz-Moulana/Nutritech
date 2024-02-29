@@ -56,11 +56,24 @@ function Home() {
         </div>
         
         <div className='flex'>
+
+        {/* <ProductTable data={products} /> */}
+        </div>
+        {/* <div className='mt-4 left-0'>
         <ProductTable data={products} />
+        </div> */}
+        <div className='mt-4 left-0'>
+
+        <ProductTable data={products} />
+        </div>
       </div>
+
       </div>
       
     </div>
+
+    // </div>
+
   );
 }
 

@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-
-
 import Videowithtext from './components/AnnotationTable/Videowithtext';
 import BlankPage from './components/theme/BlankPage';
 import Test from './components/theme/test';
@@ -31,6 +29,20 @@ import AnnotationHistory from '../src/pages/Annotator/History';
 import AnnotatorHome from '../src/pages/Annotator/Home';
 import AddNewProduct from '../src/pages/Industry/AddNewProduct';
 import AddNewProduct2 from '../src/pages/Industry/AddNewProduct2.jsx';
+
+// import AnnotationHistory from '../src/pages/Annotator/History';
+// import AnnotatorHome from '../src/pages/Annotator/Home';
+import AnnotationHistory from '../src/pages/Annotator/History'
+import AnnotatorHome from '../src/pages/Annotator/Home'
+import SensorManagerHome from '../src/pages/SensorManager/Home'
+
+import AddedProductt from './pages/Annotator/AddedProductt';
+import SensorManagerProducts from './pages/SensorManager/Products';
+import ReviewProduct from './pages/SensorManager/ReviewProduct';
+
+
+import AddedProductt from './pages/Annotator/AddedProductt';
+
 // import './App.css'
 
 
@@ -61,20 +73,27 @@ function App(){
               <Route path="/uploadvideo" element={<UploadVideo/>} />
               <Route path="/row" element={<Row/>} />
               <Route path="/home" element={<AnnotatorHome/>} />
+              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} />
               {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
               {/* <Route path="/sensormanagernewvideo" element={<NewVideos/>} /> */}
               <Route path="/uploadvideo2" element={<UploadVideo2 />} />
+              {/* <Route path="/reviewvideo" element={<ReviewVideos />} /> */}
               
 
-              <Route path="/reviewvideos" element={<ReviewVideos/>} />
+              <Route path="/reviewvideo/:videoId" element={<ReviewVideos/>} />
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
 
+
               <Route path='/addnewproduct' element={<AddNewProduct />} />
               <Route path='/addnewproduct2' element={<AddNewProduct2 />} />
+
+              <Route path='/sensormanagerproducts' element ={<SensorManagerProducts/>} />
+              <Route path='/reviewproduct/:productId' element ={<ReviewProduct/>} />
+
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
