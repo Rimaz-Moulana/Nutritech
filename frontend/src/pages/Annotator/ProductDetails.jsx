@@ -214,26 +214,23 @@ export default function ProductDetails() {
             </div>
         </div>
         <div className='flex-inline py-10 '>
-            <div className='inline-block w-44'>
+            <div className='inline-block w-44 '>
             <div className='flex text-center'>
-                <button className="bg-[#3C6339]
-                hover:bg-[#B8C294] text-white text-center w-[70%] py-2 px-4 font-bold rounded">
+                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Cancel
                 </button>
                 </div>
             </div>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button className="bg-[#3C6339]
-                hover:bg-[#B8C294] text-white text-center w-[70%] py-2 px-4 font-bold rounded">
+                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Draft
                 </button>
                 </div>
             </div>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button onClick={handleSubmit} type='submit' className="bg-[#3C6339]
-                hover:bg-[#B8C294] text-white text-center w-[70%] py-2 px-4 font-bold rounded">
+                <button onClick={handleSubmit} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Save
                 </button>
                 </div>

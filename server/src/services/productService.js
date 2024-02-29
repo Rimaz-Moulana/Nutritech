@@ -14,6 +14,15 @@ exports.getAllProducts = async() => {
     return await Product.find();
 }
 
+exports.addNewProduct = async (newProductDetails) => {
+    try{
+        const newProduct = new Product(newProductDetails)
+        return await newProduct.save();
+    }
+    catch(error){
+        // throw new Error(error.message);
+    }
+}
 
 exports.getPendingProducts= async() => {
     return await Product.find({ status: 'pending' });

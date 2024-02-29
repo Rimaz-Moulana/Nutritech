@@ -25,6 +25,11 @@ import EditRule from './components/Popup/EditRule';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules';
 
+import AnnotationHistory from '../src/pages/Annotator/History';
+import AnnotatorHome from '../src/pages/Annotator/Home';
+import AddNewProduct from '../src/pages/Industry/AddNewProduct';
+import AddNewProduct2 from '../src/pages/Industry/AddNewProduct2.jsx';
+
 // import AnnotationHistory from '../src/pages/Annotator/History';
 // import AnnotatorHome from '../src/pages/Annotator/Home';
 import AnnotationHistory from '../src/pages/Annotator/History'
@@ -37,6 +42,7 @@ import ReviewProduct from './pages/SensorManager/ReviewProduct';
 
 
 import AddedProductt from './pages/Annotator/AddedProductt';
+
 // import './App.css'
 
 
@@ -55,7 +61,7 @@ function App(){
               <Route path='/test' element={<Test />} />
               <Route path='/addedproduct' element={<AddedProduct />} />
 
-              <Route path='/addedproduct2' element={<AddedProductt />} />
+              
 
               <Route path="/all" element={<Allvideos/>} />
               <Route path="/annotation/:videoId" element={<AnnotationTable />} />
@@ -80,8 +86,14 @@ function App(){
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
+
+
+              <Route path='/addnewproduct' element={<AddNewProduct />} />
+              <Route path='/addnewproduct2' element={<AddNewProduct2 />} />
+
               <Route path='/sensormanagerproducts' element ={<SensorManagerProducts/>} />
               <Route path='/reviewproduct/:productId' element ={<ReviewProduct/>} />
+
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
