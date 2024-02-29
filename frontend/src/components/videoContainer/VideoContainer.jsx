@@ -9,6 +9,8 @@ import ReactPlayer from 'react-player';
 import blue from '../../assets/Images/blue.png'
 import white from '../../assets/Images/white.png'
 import yellow from '../../assets/Images/yellow.png'
+import red from '../../assets/Images/redflag.png'
+import green from '../../assets/Images/greenflag.png'
 
 function VideoContainer({ type,videoData,viewType,videotype }) {
   console.log(viewType)
@@ -38,6 +40,12 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
   const handleReview = (videoId) => {
     navigate(`/reviewvideo/${videoId}`);
   };
+
+
+  const handleApprove = (videoId) => {
+    navigate(`/approvevideo/${videoId}`);
+  };
+
 
 const handleVideo = (inputUrl) =>{
   const url = inputUrl.replace(/\\/g, '/');
@@ -161,11 +169,31 @@ const filteredVideos = videoData?.filter((video) => {
             </div>
           )}
 
-          {type === 'annotated' && !("industry" === type) &&(
+          {type === 'annotated' && !("industry" === type) && !("expert"===type)&&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
               <img src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
             </div>
           )}
+
+          {video.status === 'annotated' && type==="expert" &&(
+            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+              <img src={pen} alt="Annotated" onClick={() => handleApprove(video._id)}/>
+            </div>
+          )}
+
+          {video.status === 'red' && type==="expert" &&(
+            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+              <img src={red} alt="Annotated" onClick={() => handleApprove(video._id)}/>
+            </div>
+          )}
+
+          {video.status === 'green' && type==="expert" &&(
+            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+              <img src={green} alt="Annotated" onClick={() => handleApprove(video._id)}/>
+            </div>
+          )}
+
+
 
         {((videotype === 'annotated' && type==="industry") || (video.status ==="annotated" && type==="industry") )&&(
             <div className="flex justify-between gap-8 h-12 w-60 icon-overlay absolute top-0 mt-2 mr-1 right-0  cursor-pointer ">
@@ -287,12 +315,36 @@ const filteredVideos = videoData?.filter((video) => {
                  onClick={() => handleAnnotate(video._id)}
                >Annotate</button>
              )}
-             {video.status === 'annotated' && type!=="reviewvideo" && (
+             {video.status === 'annotated' && type!=="reviewvideo"  && type!=="expert" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => ViewAnnotate(video._id)}
              >View History</button>
              )}
+
+
+              {video.status === 'annotated' && type==="expert" && (
+               <button
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
+                 onClick={() => handleApprove(video._id)}
+             >Review</button>
+             )}
+
+            {video.status === 'red' && type==="expert" && (
+               <button
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
+                 onClick={() => handleApprove(video._id)}
+             >View Details</button>
+             )}
+
+             {video.status === 'green' && type==="expert" && (
+               <button
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
+                 onClick={() => handleApprove(video._id)}
+             >View Details</button>
+             )}
+             
+
 
              {video.status === 'pending' && type!=="reviewvideo" &&(
              <button
@@ -300,6 +352,8 @@ const filteredVideos = videoData?.filter((video) => {
                  onClick={() => handleReview(video._id)}
              >Review</button>
           )}
+
+
            </td>
          </tr>
        ))}

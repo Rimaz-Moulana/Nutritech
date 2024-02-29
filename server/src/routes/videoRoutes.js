@@ -32,5 +32,9 @@ router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );/
 router.get('/brandproducts/:videoId', videoController.getSimilarAds );
 
 router.get('/allUploadedVideos', videoController.getAllUploadedVideos );
+router.post('/redflag/:videoId', videoController.updateExpertReviewtored );
+router.post('/greenflag/:videoId', videoController.updateExpertReviewtogreen );
+router.get('/redflag', videoController.AllRedFlagVideos );
+router.get('/greenflag', videoController.AllGreenFlagVideos );
 
 module.exports = router;

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import ReactPlayer from 'react-player';
+import red from '../../assets/Images/redflag.png'
+import green from '../../assets/Images/greenflag.png'
 
-function VideowithReview({Id,text}) {
+function VideowithReview({Id,text,type}) {
  const videoId = Id;
  const productId =Id;
  
@@ -11,6 +13,7 @@ function VideowithReview({Id,text}) {
   const [loading, setLoading] = useState(true);
 
   const handleOpen = (text) => {
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -18,7 +21,7 @@ function VideowithReview({Id,text}) {
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#5a7d59",
-      confirmButtonText: "Yes, decline it!",
+      confirmButtonText: "Yes",
       iconColor: "#294B29",
       customClass: {
         popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
@@ -26,11 +29,14 @@ function VideowithReview({Id,text}) {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        handleDelete(text);
+        console.log(text)
+        if(text==="expert"){
+          handleApprove(text);
+        }else{
+          handleDelete(text);
         Swal.fire({
-          // title: "Deleted!",
           showConfirmButton: false,
-          text: `${text} has been deleted.`,
+          text: text === "expert" ? "Done" : `${text} has been deleted.`,
           timer: 2000,
           icon: "success",
           iconColor: '#294B29',
@@ -38,11 +44,14 @@ function VideowithReview({Id,text}) {
             popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
           },
         });
+        }
+        
       }
+      
     });
   };
 
-if (text==="video") {
+if (text==="video"|| text==="expert") {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
@@ -79,7 +88,11 @@ if (text==="video") {
     e.preventDefault();
     console.log(videoId)
     try {
-      if (text === "video") {
+      if(text==="expert"){
+        console.log(text)
+        await axios.post(`http://localhost:3000/api/videos/greenflag/${videoId}`);
+      }   
+      else if (text === "video") {
        await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
         status: 'unannotated'
       });
@@ -104,9 +117,30 @@ if (text==="video") {
     }
   };
 
+  const handleApprove= async(text)=>{
+    await axios.post(`http://localhost:3000/api/videos/greenflag/${videoId}`);
+
+    Swal.fire({
+      icon: 'success',
+      title: `Done`,
+      showConfirmButton: false,
+      timer: 2000, 
+      customClass: {
+        popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+      },
+      iconColor: '#294B29',
+    });
+    window.history.back();
+
+
+  }
+
   const handleDelete = async (text) => {
     try {
-      if (text === "video") {
+
+      if(text==="expert"){
+        await axios.post(`http://localhost:3000/api/videos/redflag/${videoId}`);
+      }else if (text === "video") {
         await axios.delete(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
       } else {
         await axios.delete(`http://localhost:3000/api/product/reviewproduct/${productId}`);
@@ -131,12 +165,12 @@ if (text==="video") {
       return videourl;
     }
   };
- 
+ console.log(Data)
   return (
-    <div className='lg:flex justify-right ml-8'>
+    <div className='lg:flex justify-right ml-24'>
          <div className='w-1/2 h-1/12 mt-24'>
          <div>
-            {text === "video" && (
+            {text === "video" || text==="expert" && (
               <ReactPlayer
                 className='react-player fixed-bottom'
                 url={handleurl(Data.videoPath)}
@@ -144,13 +178,14 @@ if (text==="video") {
                 height='100%'
                 controls={true}
               />
-            )}: (
+            )}
+            {/* : (
               <img
                 // src={handleUrl(Data.frontimage)}  // Replace with your image path handling logic
                 alt="Image"
                 className="w-full h-auto"
               />
-            )
+            ) */}
         </div>
 
         </div> 
@@ -173,7 +208,7 @@ if (text==="video") {
       </label>
     </div>
     <div className="md:w-2/3">
-      {text==="video" && (
+      {text==="video" || text==="expert" && (
         <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.product}</div> 
       )}
       {text==="product" && (
@@ -191,31 +226,58 @@ if (text==="video") {
       <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.variation}</div>
     </div>
   </div>
-  <div className="flex items-center">
+  <div className="flex items-center gap-2">
     <div className="md:w-1/3"></div>
     <div className="md:w-2/3">
      
-        <button className="text-white  bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " type="button"
-        onClick={()=>{handleOpen(text)}} >
-          Decline
-        </button>
+    <button
+  className="text-white flex bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2"
+  type="button"
+  onClick={() => { handleOpen(text) }}
+>
+{text === "expert" && (
+    <div className="flex items-center w-full">
+      Red Flag
+      <img src={red} className="h-4 w-4 ml-4" alt="" />
+    </div>
+  )}
+  {text !== "expert" && (
+    "Decline"
+  )}
+</button>
+
       
       
     </div>
     <div className="md:w-1/3"></div>
-    <div className="md:w-2/3">
-      <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " type="button"
-      onClick={handlesave}
-      disabled={loading}>
-        Save
-      </button>
+    <div className="w-full md:w-2/3">
+    <button
+  className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2"
+  type="button"
+  onClick={() => (text === "expert" ? handleOpen(text) : handlesave())}
+  disabled={loading}
+>
+  {text === "expert" && (
+    <div className="flex items-center w-full">
+      Green Flag
+      <img src={green} className="h-4 w-4 ml-4" alt="" />
+    </div>
+  )}
+  {text !== "expert" && (
+    "Save"
+  )}
+</button>
+
+
     </div>
     <div className="md:w-1/3"></div>
     <div className="md:w-2/3">
+    {text !== "expert" && (
       <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " type="button"
        onClick={() => window.history.back()}>
         Cancel
       </button>
+    )}
     </div>
   </div>
 </form>

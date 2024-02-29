@@ -104,7 +104,51 @@ exports.getAll = async (req, res) => {
       brand: 'Maggi',
       status: { $in: ['annotated', 'unannotated', 'pending', 'verified', 'red'] }
     });
-
   
 };
 
+
+exports.updateReviewRed = async (videoId) => {
+  try {
+    return await VideoModel.findByIdAndUpdate(
+      videoId,
+      {
+        status: 'red',
+        expertreviewedtime: getCurrentDateTime(),
+        expertrevieweddate: new Date().toLocaleDateString(),
+      },
+      { new: true }
+    );
+  } catch (error) {
+    console.error(`Error saving annotations: ${error.message}`);
+    throw error;
+  }
+};
+
+exports.updateReviewGreen = async (videoId) => {
+  try {
+    return await VideoModel.findByIdAndUpdate(
+      videoId,
+      {
+        status: 'green',
+        expertreviewedtime: getCurrentDateTime(),
+        expertrevieweddate: new Date().toLocaleDateString(),
+      },
+      { new: true }
+    );
+  } catch (error) {
+    console.error(`Error saving annotations: ${error.message}`);
+    throw error;
+  }
+};
+
+
+exports.getAllRedFlagVideos= async(req,res)=>{
+  return await VideoModel.find({ status: 'red' });
+
+}
+
+exports.getAllGreenFlagVideos= async(req,res)=>{
+  return await VideoModel.find({ status: 'green' });
+
+}

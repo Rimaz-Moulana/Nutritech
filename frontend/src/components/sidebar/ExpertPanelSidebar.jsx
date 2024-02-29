@@ -5,8 +5,9 @@ import home from '../../assets/Images/home.png';
 import menu from '../../assets/Images/menu.png';
 import foodproducts from '../../assets/Images/products.png';
 import video from '../../assets/Images/video.png';
+import edit from '../../assets/Images/edit.png'
 
-const Annotatorsidebar = () => {
+const ExpertPanelSidebar = () => {
   const [isEnlarge, setEnlarge] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate(); 
@@ -18,9 +19,9 @@ const Annotatorsidebar = () => {
       text: 'Home',
     },
     {
-      icon: foodproducts,
-      selectedIcon: foodproducts,
-      text: 'Products',
+      icon: edit,
+      selectedIcon: edit,
+      text: 'Rules and Regulations',
     },
     {
       icon: video,
@@ -58,8 +59,8 @@ const Annotatorsidebar = () => {
     // } else {
     if (index === nav.findIndex((item) => item.text === 'Video')) {
       setDropdownOpen(!isDropdownOpen);
-    } else if (index === nav.findIndex((item) => item.text === 'Products')){
-      navigate('/addedproduct');
+    } else if (index === nav.findIndex((item) => item.text === 'Rules and Regulations')){
+      navigate('/ExpertRules');
       
     } else{
       navigate('/home');
@@ -104,27 +105,27 @@ const Annotatorsidebar = () => {
                 )}
               </a>
               {link.text === 'Video' && isDropdownOpen && (
-                <div className="absolute top-full left-0 bg-darkGreen shadow rounded mt-2">
+                <div className="absolute top-full left-0 bg-darkGreen shadow rounded mt-2 w-full">
               <Link
-                  to="/all"
+                  to="/expertpanelnew"
                   className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
                   onClick={() => handleItemClick(2)}
                 >
-                  All Videos
+                  New Videos
                 </Link>
                 <Link
-                  to="/annotated-videos"
+                  to="/red"
                   className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
                   onClick={() => handleItemClick(2)}
                 >
-                  Annotated Videos
+                  Red Flaged
                 </Link>
                 <Link
-                  to="/unannotated-videos"
+                  to="/green"
                   className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
                   onClick={() => handleItemClick(2)}
                 >
-                  Unannotated Videos
+                 Green Flaged
                 </Link>
                 </div>
               )}
@@ -136,4 +137,4 @@ const Annotatorsidebar = () => {
   );
 };
 
-export default Annotatorsidebar;
+export default ExpertPanelSidebar;

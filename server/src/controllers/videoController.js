@@ -164,31 +164,52 @@ exports.getAllUploadedVideos= async (req,res)=>{
 }
 
 
+exports.updateExpertReviewtored= async (req,res)=>{
+  try {
+    const videoId = req.params.videoId;
+        const Video = await VideoService.updateReviewRed(videoId);
+        console.log(Video)
+        res.json(Video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.updateExpertReviewtogreen= async (req,res)=>{
+  try {
+    const videoId = req.params.videoId;
+        const Video = await VideoService.updateReviewGreen(videoId);
+        console.log(Video)
+        res.json(Video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.AllRedFlagVideos = async (req, res) => {
+  try {
+    const videos = await VideoService.getAllRedFlagVideos();
+    res.status(200).json(videos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+exports.AllGreenFlagVideos = async (req, res) => {
+  try {
+    const videos = await VideoService.getAllGreenFlagVideos();
+    res.status(200).json(videos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 
 
-
-
-// Merge the logic for both routes into a single handler
-// exports.handleReview = async (req, res) => {
-//   const videoId = req.params.videoId;
-//   console.log(videoId)
-
-//   try {
-//     // Fetch the video data for review and brand-related videos
-//     const { videoReviewData, brandVideoData } = await VideoService.getSensorManagerReviewVideos(videoId);
-    
-//     console.log(videoReviewData)
-//     // Return a combined response or handle as needed
-//     res.json({
-//       videoReviewData,
-//       brandVideoData
-//     });
-//   } catch (error) {
-//     console.error('Error handling review:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// };
 
 
 
