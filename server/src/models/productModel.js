@@ -59,8 +59,7 @@ const productSchema = new mongoose.Schema({
         imageFront: String,
         imageBack: String,
         imageLeft: String,
-        imageRight: String
-        CreatedDate : String,
+        imageRight: String,
         uploader : String,
 })
 
