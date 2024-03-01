@@ -11,7 +11,7 @@ const swaggerSpecs = require("./config/swaggerConfig"); // Import the Swagger co
 
 const userRoutes = require('./src/routes/userRoutes')
 const ruleRoutes = require('./src/routes/ruleRoutes')
-
+const authRoutes = require('./routes/authRoutes');
 
 
 const app = express();
@@ -42,12 +42,15 @@ app.use('/videos', express.static(path.join(__dirname, 'Nutritech', 'server', 'u
 app.use('/api/videos', vidoeRoutes);
 app.use('/api/rules', ruleRoutes);
 app.use('/api/product', productRoutes);
+app.use('/api/auth', authRoutes);
 // app.use('/api',userRoutes);
 // app.use('/api/video', vidoeRoutes)
 
 // Routes
   // app.use('/videos', videoRoutes);
   app.use('/annotations', annotationsRoutes);
+
+  
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });

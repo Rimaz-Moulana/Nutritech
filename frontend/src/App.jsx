@@ -32,16 +32,13 @@ import AddNewProduct2 from '../src/pages/Industry/AddNewProduct2.jsx';
 
 // import AnnotationHistory from '../src/pages/Annotator/History';
 // import AnnotatorHome from '../src/pages/Annotator/Home';
-import AnnotationHistory from '../src/pages/Annotator/History'
-import AnnotatorHome from '../src/pages/Annotator/Home'
-import SensorManagerHome from '../src/pages/SensorManager/Home'
+// import AnnotationHistory from '../src/pages/Annotator/History'
+import SensorManagerHome from '../src/pages/SensorManager/Home';
 
-import AddedProductt from './pages/Annotator/AddedProductt';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
 
 
-import AddedProductt from './pages/Annotator/AddedProductt';
 
 // import './App.css'
 
