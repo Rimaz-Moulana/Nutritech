@@ -39,7 +39,14 @@ import SensorManagerHome from '../src/pages/SensorManager/Home'
 import AddedProductt from './pages/Annotator/AddedProductt';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
-
+import IndustryHistory from './pages/Industry/History'
+import ExpertPanelHome from './pages/ExpertPanel/Home'
+import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos'
+import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
+import RedFlag from './pages/ExpertPanel/RedFlag';
+import GreenFlag from './pages/ExpertPanel/GreenFlag';
+import ExpertRules from './pages/ExpertPanel/Rules'
+import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
 
 import AddedProductt from './pages/Annotator/AddedProductt';
 
@@ -94,6 +101,17 @@ function App(){
               <Route path='/sensormanagerproducts' element ={<SensorManagerProducts/>} />
               <Route path='/reviewproduct/:productId' element ={<ReviewProduct/>} />
 
+
+              <Route path='/industryhistory' element ={<IndustryHistory/>} />
+
+
+              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} />
+              <Route path='/expertpanelnew' element ={<ExpertPanelNewVideos/>} />
+              <Route path='/approvevideo/:videoId' element ={<ApproveVideos/>} />
+              <Route path='/red' element ={<RedFlag/>} />
+              <Route path='/green' element ={<GreenFlag/>} />
+              <Route path='/expertrules' element ={<ExpertRules/>} />
+              <Route path='/expertreviewhistory/:videoId' element ={<ReviewHistory/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

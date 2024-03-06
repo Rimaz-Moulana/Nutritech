@@ -34,7 +34,9 @@
         darkGreen: '#8EA174',
         backgroundGreen: '#E5EBD6',
         sidebarGreen : '#284625',
-        buttonGreen : '#3C6849'
+        buttonGreen : '#3C6849',
+        filterGreen : '#DEE5C2',
+
       },
 
       margin:{
