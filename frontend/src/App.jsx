@@ -25,8 +25,8 @@ import EditRule from './components/Popup/EditRule';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules';
 
-import AnnotationHistory from '../src/pages/Annotator/History';
-import AnnotatorHome from '../src/pages/Annotator/Home';
+// import AnnotationHistory from '../src/pages/Annotator/History';
+// import AnnotatorHome from '../src/pages/Annotator/Home';
 import AddNewProduct from '../src/pages/Industry/AddNewProduct';
 import AddNewProduct2 from '../src/pages/Industry/AddNewProduct2.jsx';
 
@@ -36,7 +36,7 @@ import AnnotationHistory from '../src/pages/Annotator/History'
 import AnnotatorHome from '../src/pages/Annotator/Home'
 import SensorManagerHome from '../src/pages/SensorManager/Home'
 
-import AddedProductt from './pages/Annotator/AddedProductt';
+// import AddedProductt from './pages/Annotator/AddedProductt';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
 import IndustryHistory from './pages/Industry/History'

@@ -53,13 +53,13 @@ const productSchema = new mongoose.Schema({
         SLpermitted: String,
         SLfoodcodePermittedRemark: String,
         createdTime: String,
-        CreatedData : String,
+        // CreatedData : String,
         videoPath: String,
         status: String,
         imageFront: String,
         imageBack: String,
         imageLeft: String,
-        imageRight: String
+        imageRight: String,
         CreatedDate : String,
         uploader : String,
 })
