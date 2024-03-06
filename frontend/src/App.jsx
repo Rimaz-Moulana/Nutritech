@@ -39,6 +39,7 @@ import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
 import RedFlag from './pages/ExpertPanel/RedFlag';
 import GreenFlag from './pages/ExpertPanel/GreenFlag';
 import ExpertRules from './pages/ExpertPanel/Rules'
+import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
 
 // import './App.css'
 
@@ -96,6 +97,7 @@ function App(){
               <Route path='/red' element ={<RedFlag/>} />
               <Route path='/green' element ={<GreenFlag/>} />
               <Route path='/expertrules' element ={<ExpertRules/>} />
+              <Route path='/expertreviewhistory/:videoId' element ={<ReviewHistory/>} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

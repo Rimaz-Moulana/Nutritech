@@ -43,7 +43,13 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
 
 
   const handleApprove = (videoId) => {
-    navigate(`/approvevideo/${videoId}`);
+    if (type==='expertred' || type==='expertgreen') {
+      navigate(`/expertreviewhistory/${videoId}`)
+    }
+    else{
+      navigate(`/approvevideo/${videoId}`);
+    }
+    
   };
 
 
@@ -139,11 +145,11 @@ const filteredVideos = videoData?.filter((video) => {
               <p>Uploader: {video.uploader}</p>
               
               {type === 'annotated' && !("industry" === type) && (
-  <>
-    <p>Annotated Date: {video.annotateddate}</p>
-    <p>Annotated Time: {video.annotatedtime}</p>
-  </>
-)}
+              <>
+                <p>Annotated Date: {video.annotateddate}</p>
+                <p>Annotated Time: {video.annotatedtime}</p>
+              </>
+        )}
 
             </div>
           </div>
@@ -169,7 +175,7 @@ const filteredVideos = videoData?.filter((video) => {
             </div>
           )}
 
-          {type === 'annotated' && !("industry" === type) && !("expert"===type)&&(
+          {type === 'annotated' && !("industry" === type) && ("expert"!==type)&&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
               <img src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
             </div>
@@ -181,15 +187,28 @@ const filteredVideos = videoData?.filter((video) => {
             </div>
           )}
 
-          {video.status === 'red' && type==="expert" &&(
-            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
-              <img src={red} alt="Annotated" onClick={() => handleApprove(video._id)}/>
+          {video.status === 'red' && (type==="expert" || type==="expertred"|| type==="industry") &&(
+            <div className="flex h-8 w-full icon-overlay absolute top-0 mt-2 mr-2 right-0 justify-between ">
+              <img src={red} alt="red" />
+              {type==="industry" && (
+                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
+              )}
+              {(type==="expertred" || type ==="expert") &&(
+                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => handleApprove(video._id)}/>
+              )}  
             </div>
           )}
 
-          {video.status === 'green' && type==="expert" &&(
-            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
-              <img src={green} alt="Annotated" onClick={() => handleApprove(video._id)}/>
+          {video.status === 'green' && (type==="expert"|| type==="expertgreen"||type==="industry") &&(
+            <div className="flex justify-between ml-4 h-8 w-full icon-overlay absolute top-0 mt-2 mr-2 right-0 ">
+              <img src={green} alt="green" />
+              {type==="industry" && (
+                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
+              )}
+              { (type==="expert"|| type==="expertgreen") && (
+                 <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => handleApprove(video._id)}/>
+              )}
+              
             </div>
           )}
 
@@ -330,14 +349,16 @@ const filteredVideos = videoData?.filter((video) => {
              >Review</button>
              )}
 
-            {video.status === 'red' && type==="expert" && (
+            {video.status === 'red' && (type==="expert" || type==='expertred') && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => handleApprove(video._id)}
              >View Details</button>
              )}
 
-             {video.status === 'green' && type==="expert" && (
+
+
+             {video.status === 'green' && (type==="expert" || type==='expertgreen') && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => handleApprove(video._id)}

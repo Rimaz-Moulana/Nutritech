@@ -36,5 +36,6 @@ router.post('/redflag/:videoId', videoController.updateExpertReviewtored );
 router.post('/greenflag/:videoId', videoController.updateExpertReviewtogreen );
 router.get('/redflag', videoController.AllRedFlagVideos );
 router.get('/greenflag', videoController.AllGreenFlagVideos );
+router.post('/comment/:videoId', videoController.postExpertComment );
 
 module.exports = router;

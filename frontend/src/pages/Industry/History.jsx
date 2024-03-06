@@ -41,7 +41,7 @@ function History() {
       } else if (videoFilter === "Annotated") {
         status = "annotated";
       } else if (videoFilter === "Verified") {
-        status = "verified";
+        status = "green";
       } else if (videoFilter === "Red Flaged") {
         status = "red";
       }
@@ -74,6 +74,7 @@ function History() {
       
       });
 
+      console.log(videoData)
     return (
       <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
         <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -127,7 +128,7 @@ function History() {
                 <option value='Checked'>Checked Videos</option>
                 <option value='Annotated'>Annotated Videos</option>
                 <option value='Verified'>Verified Videos</option>
-                <option value='Red flaged'>Red Flaged Videos</option>
+                <option value='Red Flaged'>Red Flaged Videos</option>
             </select>
 
 

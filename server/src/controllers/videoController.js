@@ -72,7 +72,7 @@ exports.addvideo = async (req,res) => {
     try{
         const { brand, product , variation , createdIn, createdAt} = req.body;
         const videoPath = req.file.path
-        console.log(req.body)
+        // console.log(req.body)
         const newVideo = new Video({brand,product,variation, videoPath, createdIn, createdAt, status: 'pending', uploader:'Sirasa'});
         console.log(newVideo)
         await newVideo.save();
@@ -111,7 +111,7 @@ exports.fetchSensorManagerReview = async (req, res) => {
   try {
     const videoId = req.params.videoId;
     const video = await VideoService.getSensorManagerReviewVideos(videoId);
-    console.log(video)
+    // console.log(video)
     if (!video) {
       return res.status(404).json({ success: false, message: 'Video not found' });
     }
@@ -144,7 +144,7 @@ exports.getSimilarAds = async (req, res) => {
   try {
     const videoId = req.params.videoId;
     const videos = await VideoService.getSimilarProductAds(videoId);
-    console.log("videos"+videos)
+    // console.log("videos"+videos)
     res.json(videos);
   } catch (error) {
     console.error('Error deleting video:', error);
@@ -168,7 +168,7 @@ exports.updateExpertReviewtored= async (req,res)=>{
   try {
     const videoId = req.params.videoId;
         const Video = await VideoService.updateReviewRed(videoId);
-        console.log(Video)
+        // console.log(Video)
         res.json(Video);
     } catch (error) {
         console.error(error);
@@ -180,7 +180,7 @@ exports.updateExpertReviewtogreen= async (req,res)=>{
   try {
     const videoId = req.params.videoId;
         const Video = await VideoService.updateReviewGreen(videoId);
-        console.log(Video)
+        // console.log(Video)
         res.json(Video);
     } catch (error) {
         console.error(error);
@@ -209,6 +209,18 @@ exports.AllGreenFlagVideos = async (req, res) => {
 };
 
 
+exports.postExpertComment= async (req,res)=>{
+  try {
+    const videoId = req.params.videoId;
+    const comments = req.body.comment;
+        const comment = await VideoService.postComment(videoId,comments);
+        console.log(comment)
+        res.json(comment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 
 

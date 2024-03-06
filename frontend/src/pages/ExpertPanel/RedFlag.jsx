@@ -23,8 +23,6 @@ function RedFlag() {
     localStorage.setItem('isChecked', JSON.stringify(newCheckedState));
   }
 
-  const navigate= useNavigate();
-
   useEffect(() => {
     const fetchData = async () => {
        const response = await fetch('http://localhost:3000/api/videos/redflag');
@@ -34,7 +32,7 @@ function RedFlag() {
   
     fetchData();
   }, []); 
-console.log(videoData)
+console.log("Red:"+videoData)
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -75,7 +73,7 @@ console.log(videoData)
       </div>
       <div>
       <VideoContainer
-        type={'expert'}
+        type={'expertred'}
         videoData={videoData}
         viewType={isChecked ? 'Grid' : 'List'}         
       /> 

@@ -11,6 +11,9 @@ function VideowithReview({Id,text,type}) {
  
  const [Data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [greenFlagDisabled, setGreenFlagDisabled] = useState(false);
+  const [redFlagDisabled, setRedFlagDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const handleOpen = (text) => {
 
@@ -30,8 +33,13 @@ function VideowithReview({Id,text,type}) {
     }).then((result) => {
       if (result.isConfirmed) {
         console.log(text)
+        setButtonDisabled(true);
         if(text==="expert"){
-          handleApprove(text);
+          if (Data.status==="red") {
+            handleApprove(text);
+          }else{
+            handleDelete(text);
+          }         
         }else{
           handleDelete(text);
         Swal.fire({
@@ -43,7 +51,14 @@ function VideowithReview({Id,text,type}) {
           customClass: {
             popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
           },
-        });
+        })
+        // .then(() => {
+          // Check if buttons are disabled, and if yes, navigate to the previous page
+          if (buttonDisabled) {
+            localStorage.removeItem('savedButtonDisabled')
+            // window.history.back();
+          }
+        // });
         }
         
       }
@@ -51,7 +66,7 @@ function VideowithReview({Id,text,type}) {
     });
   };
 
-if (text==="video"|| text==="expert") {
+if (text==="video"|| text==="expert" || text==='experthistory')  {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
@@ -85,10 +100,10 @@ if (text==="video"|| text==="expert") {
  
 
   const handlesave= async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log(videoId)
     try {
-      if(text==="expert"){
+      if(text==="expert" ){
         console.log(text)
         await axios.post(`http://localhost:3000/api/videos/greenflag/${videoId}`);
       }   
@@ -111,7 +126,10 @@ if (text==="video"|| text==="expert") {
         },
         iconColor: '#294B29',
       });
-      window.history.back();
+      if (text !== "expert") {
+        window.history.back();
+      }
+      
     } catch (error) {
       console.error(`Error saving ${text}:`, error);
     }
@@ -130,7 +148,9 @@ if (text==="video"|| text==="expert") {
       },
       iconColor: '#294B29',
     });
-    window.history.back();
+    if (text !== "expert") {
+      window.history.back();
+    }
 
 
   }
@@ -146,7 +166,9 @@ if (text==="video"|| text==="expert") {
         await axios.delete(`http://localhost:3000/api/product/reviewproduct/${productId}`);
       }
   
-      window.history.back();
+      if (text !== "expert") {
+        window.history.back();
+      }
     } catch (error) {
       console.error(`Error declining ${text}:`, error);
     }
@@ -167,10 +189,11 @@ if (text==="video"|| text==="expert") {
   };
  console.log(Data)
   return (
+    <div>
     <div className='lg:flex justify-right ml-24'>
-         <div className='w-1/2 h-1/12 mt-24'>
+         <div className='w-full h-full mt-12'>
          <div>
-            {text === "video" || text==="expert" && (
+            {(text === "video" || text==="expert" || text==="experthistory") && (
               <ReactPlayer
                 className='react-player fixed-bottom'
                 url={handleurl(Data.videoPath)}
@@ -190,7 +213,7 @@ if (text==="video"|| text==="expert") {
 
         </div> 
       
-        <form className="w-full mt-32 max-w-sm lg:ml-36">
+        <form className="w-full mt-24 max-w-sm lg:ml-36">
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
@@ -208,7 +231,7 @@ if (text==="video"|| text==="expert") {
       </label>
     </div>
     <div className="md:w-2/3">
-      {text==="video" || text==="expert" && (
+      {(text==="video" || text==="expert" || text==='experthistory') && (
         <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.product}</div> 
       )}
       {text==="product" && (
@@ -226,14 +249,18 @@ if (text==="video"|| text==="expert") {
       <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.variation}</div>
     </div>
   </div>
+
+  {text!=='experthistory' && (
   <div className="flex items-center gap-2">
     <div className="md:w-1/3"></div>
     <div className="md:w-2/3">
      
     <button
-  className="text-white flex bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2"
+  className={`text-white flex ${
+    buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
+  } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2`}
   type="button"
-  onClick={() => { handleOpen(text) }}
+  onClick={() => { buttonDisabled ? null : handleOpen(text) }}
 >
 {text === "expert" && (
     <div className="flex items-center w-full">
@@ -252,9 +279,11 @@ if (text==="video"|| text==="expert") {
     <div className="md:w-1/3"></div>
     <div className="w-full md:w-2/3">
     <button
-  className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2"
+  className={`text-white flex ${
+    buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
+  } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2`}
   type="button"
-  onClick={() => (text === "expert" ? handleOpen(text) : handlesave())}
+  onClick={() => (text === "expert" ? (buttonDisabled ? null : handleOpen(text)) : handlesave())}
   disabled={loading}
 >
   {text === "expert" && (
@@ -270,6 +299,7 @@ if (text==="video"|| text==="expert") {
 
 
     </div>
+    
     <div className="md:w-1/3"></div>
     <div className="md:w-2/3">
     {text !== "expert" && (
@@ -280,8 +310,15 @@ if (text==="video"|| text==="expert") {
     )}
     </div>
   </div>
+  )}
 </form>
+
+
     </div>
+    <div>
+      
+    </div>
+  </div>
   )
 }
 

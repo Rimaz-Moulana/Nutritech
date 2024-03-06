@@ -75,7 +75,7 @@ console.log(videoData)
       </div>
       <div>
       <VideoContainer
-        type={'expert'}
+        type={'expertgreen'}
         videoData={videoData}
         viewType={isChecked ? 'Grid' : 'List'}         
       /> 

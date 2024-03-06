@@ -19,7 +19,7 @@ exports.getAnnotatorUnannotatedVideos = async(req,res)=>{
 }
 
 exports.getAnnotatorAnnotatedVideos = async(req,res)=>{
-  return await VideoModel.find({ status: 'annotated' })
+  return await VideoModel.find({ status:{ $in: ['annotated','red','green']} })
 }
 
 exports.getAnnotationVideo = async(videoId)=>{
@@ -102,7 +102,7 @@ exports.getSimilarProductAds = async (videoId) => {
 exports.getAll = async (req, res) => {
     return await VideoModel.find({
       brand: 'Maggi',
-      status: { $in: ['annotated', 'unannotated', 'pending', 'verified', 'red'] }
+      status: { $in: ['annotated', 'unannotated', 'pending', 'green', 'red'] }
     });
   
 };
@@ -152,3 +152,20 @@ exports.getAllGreenFlagVideos= async(req,res)=>{
   return await VideoModel.find({ status: 'green' });
 
 }
+
+exports.postComment = async (videoId,comments,req) => {
+  try {
+    return await VideoModel.findByIdAndUpdate(
+      videoId,
+      {
+        $set: {comment:comments},
+        commentedtime: getCurrentDateTime(),
+        commenteddate: new Date().toLocaleDateString(),
+      },
+      { new: true }
+    );
+  } catch (error) {
+    console.error(`Error saving comment: ${error.message}`);
+    throw error;
+  }
+};
