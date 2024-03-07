@@ -27,6 +27,3 @@ router.get('/similarproducts/:productId', productController.getAllSimilarProduct
 
 module.exports = router;
 
-
-module.exports = router;
-

@@ -11,7 +11,7 @@ import AnnotationTable from './pages/Annotator/AnnotationTable';
 import ProductDetails from './pages/Annotator/ProductDetails';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
 import Log from './pages/Log';
-import Login from './pages/Login';
+import Login from './pages/test/Login.jsx';
 // import Row from './components/AnnotationTable/Row';
 // import Buttons from './components/AnnotationTable/Buttons';
 import Product from './pages/Annotator/Product';
@@ -37,65 +37,69 @@ import SensorManagerHome from '../src/pages/SensorManager/Home';
 
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
+import LoginPage from './pages/test/LoginForm.jsx';
+import RegisterPage from './pages/test/RegisterForm.jsx';
 
+  // import './App.css'
+  function App() {
 
-
-// import './App.css'
-
-
-function App(){
-
-  return (
-    <BrowserRouter>
+    return (
+      <BrowserRouter>
         <Routes>
-            {/* <Route path='/'  > */}
-              {/* <Route path='/' element={<Nabra/>} /> */}
-              <Route path='/' element={<Login />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/log' element={<Log />} />
-              <Route path='/blankPages' element={<BlankPage />} />
-              <Route path='/product' element={<ProductDetails />} />
-              <Route path='/test' element={<Test />} />
-              <Route path='/addedproduct' element={<AddedProduct />} />
-
-              
-
-              <Route path="/all" element={<Allvideos/>} />
-              <Route path="/annotation/:videoId" element={<AnnotationTable />} />
-              <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
-              <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
-              <Route path="/text" element={<Videowithtext/>} />
-              <Route path="/test" element={<Product/>} />
-              <Route path="/history" element={<History/>} />
-              <Route path="/uploadvideo" element={<UploadVideo/>} />
-              <Route path="/row" element={<Row/>} />
-              <Route path="/home" element={<AnnotatorHome/>} />
-              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} />
-              {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
-
-              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
-              {/* <Route path="/sensormanagernewvideo" element={<NewVideos/>} /> */}
-              <Route path="/uploadvideo2" element={<UploadVideo2 />} />
-              {/* <Route path="/reviewvideo" element={<ReviewVideos />} /> */}
-              
-
-              <Route path="/reviewvideo/:videoId" element={<ReviewVideos/>} />
-              <Route path="/rules" element={<Rules/>} />
-              <Route path="/editrules" element={<EditRule/>} />
-              <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
+          {/* <Route path='/'  > */}
+          {/* <Route path='/' element={<Nabra/>} /> */}
+          <Route path='/' element={<Login />} />
+          {/* <Route path='/login' element={<Login />} /> */}
+          <Route path='/log' element={<Log />} />
+          <Route path='/blankPages' element={<BlankPage />} />
 
 
-              <Route path='/addnewproduct' element={<AddNewProduct />} />
-              <Route path='/addnewproduct2' element={<AddNewProduct2 />} />
+          <Route path='annotator/product' element={<ProductDetails />} />
+          <Route path='/test' element={<Test />} />
+          <Route path='annotator/addedproduct' element={<AddedProduct />} />
 
-              <Route path='/sensormanagerproducts' element ={<SensorManagerProducts/>} />
-              <Route path='/reviewproduct/:productId' element ={<ReviewProduct/>} />
+          <Route exact path="/login" element={<LoginPage />} />
+          <Route exact path="/register" element={<RegisterPage />} />
 
-            {/* </Route> */}
+
+          <Route path="annotator/all" element={<Allvideos />} />
+          <Route path="annotator/annotation/:videoId" element={<AnnotationTable />} />
+          <Route path="annotator/annotated-videos" element={<AnnotatedVideos />} />
+          <Route path="/unannotated-videos" element={<UnannotatedVideos />} />
+          <Route path="annotator/text" element={<Videowithtext />} />
+          <Route path="annotator/test" element={<Product />} />
+          <Route path="annotator/history" element={<History />} />
+
+          <Route path="/uploadvideo" element={<UploadVideo />} />
+          <Route path="/row" element={<Row />} />
+          <Route path="annotator/home" element={<AnnotatorHome />} />
+
+          <Route path="/sensormanagerhome" element={<SensorManagerHome />} />
+          {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
+
+          <Route path="sensor manager/sensormanagernewvideo" element={<NewVideos />} />
+          {/* <Route path="/sensormanagernewvideo" element={<NewVideos/>} /> */}
+          <Route path="/uploadvideo2" element={<UploadVideo2 />} />
+          {/* <Route path="/reviewvideo" element={<ReviewVideos />} /> */}
+
+
+          <Route path="/reviewvideo/:videoId" element={<ReviewVideos />} />
+          <Route path="/rules" element={<Rules />} />
+          <Route path="/editrules" element={<EditRule />} />
+          <Route path="/annotationhistory/:videoId" element={<AnnotationHistory />} />
+
+
+          <Route path='/addnewproduct' element={<AddNewProduct />} />
+          <Route path='/addnewproduct2' element={<AddNewProduct2 />} />
+
+          <Route path='/sensormanagerproducts' element={<SensorManagerProducts />} />
+          <Route path='/reviewproduct/:productId' element={<ReviewProduct />} />
+
+          {/* </Route> */}
         </Routes>
-    </BrowserRouter>
-  )
-}
+      </BrowserRouter>
+    );
+  };
 
 export default App;
 
