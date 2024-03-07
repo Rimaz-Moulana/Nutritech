@@ -75,7 +75,7 @@ function AnnotationTable() {
   const addRow = () => {
     setRowCount((prevCount) => {
       const newCount = prevCount + 1;
-      setAddedRows((prevRows) => [...prevRows, newCount]);
+      setAddedRows((prevRows) => [...prevRows, newCount - 1]); // Store the actual index
       setRowsData((prevData) => [
         ...prevData,
         { id: newCount, timestamp: '', rule: '', details: '', recommendation: '' },
@@ -85,7 +85,7 @@ function AnnotationTable() {
   };
 
   useEffect(() => {
-    console.log('Updated rowsData:', rowsData);
+    // console.log('Updated rowsData:', rowsData);
     localStorage.setItem('rowsData', JSON.stringify(rowsData));
   }, [rowsData]);
 
@@ -124,6 +124,9 @@ function AnnotationTable() {
         },
         iconColor: '#294B29',
       });
+      
+      localStorage.removeItem('addedrows');
+      localStorage.removeItem('rowsData');
       window.history.back();
     } catch (error) {
       console.error('Error saving annotations:', error);

@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar';
 import Navbar from '../../components/navbar/Navbar';
 import Videowithtext from '../../components/AnnotationTable/Videowithtext';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
 import { useParams } from 'react-router-dom';
+import Comments from '../../components/CommentSection/Comments';
+import ViewComment from '../../components/CommentSection/ViewComment';
 
 function History() {
   const { videoId } = useParams();
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    const fetchAnnotations = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`);
+        setData(response.data.annotations);
+      } catch (error) {
+        console.error('Error fetching annotations:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnnotations();
+  }, [videoId]);
+
+  console.log(data)
 
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex flex-col'> {/* Make the main container a flex column */}
@@ -28,6 +47,9 @@ function History() {
           <RowHistory videoId={videoId} />
         </div>
       </div>
+      <div className='mt-8 w-full'>
+          <ViewComment videoId={videoId}/>
+        </div>
       <div className="bottom-0 left-0 w-full px-4 py-4"> {/* Position cancel button at the bottom */}
         <button className="mb-12 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 " onClick={() => window.history.back()}>Cancel</button>
       </div>
