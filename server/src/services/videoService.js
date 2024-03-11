@@ -22,6 +22,12 @@ exports.getAnnotatorAnnotatedVideos = async(req,res)=>{
   return await VideoModel.find({ status:{ $in: ['annotated','red','green']} })
 }
 
+exports.getAnnotatedVideosForExpert = async(req,res)=>{
+  return await VideoModel.find({ status:'annotated'})
+}
+
+
+
 exports.getAnnotationVideo = async(videoId)=>{
   return await VideoModel.find({ _id: videoId })
 }
@@ -153,14 +159,40 @@ exports.getAllGreenFlagVideos= async(req,res)=>{
 
 }
 
-exports.postComment = async (videoId,comments,req) => {
+exports.postComment = async (videoId, comments, req) => {
   try {
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
-        $set: {comment:comments},
-        commentedtime: getCurrentDateTime(),
-        commenteddate: new Date().toLocaleDateString(),
+        $push: {
+          comment: {
+            text: comments,
+            repliedtime: getCurrentDateTime(),
+            replieddate: new Date().toLocaleDateString(),
+          },
+        },
+      },
+      { new: true }
+    );
+  } catch (error) {
+    console.error(`Error saving comment: ${error.message}`);
+    throw error;
+  }
+};
+
+
+exports.postReply = async (videoId, replycomment, req) => {
+  try {
+    return await VideoModel.findByIdAndUpdate(
+      videoId,
+      {
+        $push: {
+          reply: {
+            text: replycomment,
+            commentedtime: getCurrentDateTime(),
+            commenteddate: new Date().toLocaleDateString(),
+          },
+        },
       },
       { new: true }
     );

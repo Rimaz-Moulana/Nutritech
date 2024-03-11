@@ -27,7 +27,7 @@ function NewVideos() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/annotated-videos');
+       const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
       const data = await response.json();
       setVideoData(data);
     };
@@ -75,7 +75,7 @@ function NewVideos() {
       </div>
       <div>
       <VideoContainer
-        type={'expert'}
+        type={'expertnew'}
         videoData={videoData}
         viewType={isChecked ? 'Grid' : 'List'}         
       /> 

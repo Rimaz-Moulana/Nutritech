@@ -59,12 +59,7 @@ function RowHistory({ videoId, usertype }) {
           <th className="border border-gray-300">Regulation</th>
           <th className="border border-gray-300">Details</th>
           <th className="border border-gray-300">Recommendation</th>
-          {usertype === "expert" && (
-            <>
-              <th className="border border-gray-300">Correct</th>
-              <th className="border border-gray-300">Wrong</th>
-            </>
-          )}
+          
         </tr>
       </thead>
       <tbody>

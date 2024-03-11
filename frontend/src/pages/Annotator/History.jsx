@@ -6,6 +6,7 @@ import RowHistory from '../../components/AnnotationTable/RowHistory';
 import { useParams } from 'react-router-dom';
 import Comments from '../../components/CommentSection/Comments';
 import ViewComment from '../../components/CommentSection/ViewComment';
+import axios from 'axios';
 
 function History() {
   const { videoId } = useParams();
@@ -19,7 +20,7 @@ function History() {
       } catch (error) {
         console.error('Error fetching annotations:', error);
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     };
 
@@ -48,8 +49,12 @@ function History() {
         </div>
       </div>
       <div className='mt-8 w-full'>
-          <ViewComment videoId={videoId}/>
+          <ViewComment videoId={videoId} type={"reply"}/>
         </div>
+
+        {/* <div className='mt-8 w-full'>
+          <Comments videoId={videoId} type={"reply"}/>
+        </div> */}
       <div className="bottom-0 left-0 w-full px-4 py-4"> {/* Position cancel button at the bottom */}
         <button className="mb-12 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 " onClick={() => window.history.back()}>Cancel</button>
       </div>

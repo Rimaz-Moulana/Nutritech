@@ -18,6 +18,8 @@ const upload = multer({storage: storage});
 router.post('/upload', upload.single('video'), videoController.addvideo); // video upload
 router.get('/all', videoController.getAllVideos);
 router.get('/annotated-videos', videoController.getAnnotatedVideos);
+router.get('/annotatedvideosExpert', videoController.getAnnotatedVideosForExperts);
+
 router.get('/unannotated-videos', videoController.getUnannotatedVideos);
 router.post('/uploadvideo', videoController.postVideoDetails);
 // router.post('/uploadvideo', videoController.postVideoDetails);
@@ -37,5 +39,6 @@ router.post('/greenflag/:videoId', videoController.updateExpertReviewtogreen );
 router.get('/redflag', videoController.AllRedFlagVideos );
 router.get('/greenflag', videoController.AllGreenFlagVideos );
 router.post('/comment/:videoId', videoController.postExpertComment );
+router.post('/reply/:videoId', videoController.postIndustryReply );
 
 module.exports = router;
