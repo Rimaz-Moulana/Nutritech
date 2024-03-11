@@ -79,8 +79,8 @@ function App(){
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
               <Route path="/row" element={<Row/>} />
-              <Route path="/home" element={<AnnotatorHome/>} />
-              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} />
+              <Route path="/home" element={<AnnotatorHome/>} /> {/*annotatorhomepage*/}
+              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} /> {/*sensormanager home page*/}
               {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
@@ -105,7 +105,7 @@ function App(){
               <Route path='/industryhistory' element ={<IndustryHistory/>} />
 
 
-              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} />
+              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} /> {/*expert panel home page */}
               <Route path='/expertpanelnew' element ={<ExpertPanelNewVideos/>} />
               <Route path='/approvevideo/:videoId' element ={<ApproveVideos/>} />
               <Route path='/red' element ={<RedFlag/>} />
