@@ -23,6 +23,17 @@ exports.getAnnotatedVideos = async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
+  exports.getAnnotatedVideosForExperts= async (req, res) => {
+    try {
+      const videos = await VideoService.getAnnotatedVideosForExpert();
+      res.status(200).json(videos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
+ 
   
   exports.getUnannotatedVideos = async (req, res) => {
     try {
@@ -224,4 +235,16 @@ exports.postExpertComment= async (req,res)=>{
 
 
 
-
+exports.postIndustryReply= async (req,res)=>{
+  try {
+    const videoId = req.params.videoId;
+    // console.log(videoId)
+    const reply = req.body.comment;
+        const replycomment = await VideoService.postReply(videoId,reply);
+        // console.log(comment)
+        res.json(replycomment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
