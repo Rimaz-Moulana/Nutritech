@@ -29,7 +29,7 @@ async function login(req, res) {
                 dashboardRoute = '/admin/dashboard';
                 break;
             case 'annotator':
-                dashboardRoute = '/annotator/dashboard';
+                dashboardRoute = '/annotator/home';
                 break;
             case 'sensor manager':
                 dashboardRoute = '/sensor manager/dashboard';

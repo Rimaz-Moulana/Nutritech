@@ -5,7 +5,7 @@ import Image from '../../assets/Images/NutriTech Logo-04 1.png';
 
 function Register() {
   // const navigate = useNavigate();
-  const navigate = useNavigate()
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -23,7 +23,7 @@ function Register() {
         try {
             await axios.post('http://localhost:3000/api/register', formData);
             // Redirect to login page or any other page after successful registration
-            navigate('../test/Login.jsx')
+            navigate('/')
         } catch (error) {
             console.error('Registration failed:', error);
         }
