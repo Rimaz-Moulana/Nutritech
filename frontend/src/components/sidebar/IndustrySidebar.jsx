@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 
 import home from '../../assets/Images/home.png';
 import menu from '../../assets/Images/menu.png';
@@ -7,8 +8,10 @@ import foodproducts from '../../assets/Images/products.png';
 import video from '../../assets/Images/video.png';
 import edit from '../../assets/Images/edit.png';
 
-const SensorManagerSidebar = () => {
-  const [isEnlarge, setEnlarge] = useState(true);
+
+function IndustrySidebar() {
+
+    const [isEnlarge, setEnlarge] = useState(true);
   const navigate = useNavigate(); 
 
   const [selected, setSelected] = useState(() => {
@@ -59,17 +62,17 @@ const SensorManagerSidebar = () => {
 
     if (selected === index) {
       // If the clicked item is already selected, navigate to the default 'Home' item
-      navigate('/sensormanagerhome');
+    //   navigate('/sensormanagerhome');
     } else {
       setSelected(index);
       if (index === nav.findIndex((item) => item.text === 'Videos')) {
-        navigate('/sensormanagernewvideo');
+        // navigate('/sensormanagernewvideo');
       } else if (index === nav.findIndex((item) => item.text === 'Products')) {
-        navigate('/sensormanagerproducts');
+        // navigate('/sensormanagerproducts');
       } else if (index === nav.findIndex((item) => item.text === 'Rules & Regulations')) {
-        navigate('/rules');
+        // navigate('/rules');
       } else {
-        navigate('/sensormanagerhome');
+        // navigate('/sensormanagerhome');
       }
     }
   };
@@ -119,6 +122,6 @@ const SensorManagerSidebar = () => {
       </header>
     </div>
   );
-};
+}
 
-export default SensorManagerSidebar;
+export default IndustrySidebar
