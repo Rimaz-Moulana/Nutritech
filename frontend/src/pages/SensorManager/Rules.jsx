@@ -99,7 +99,7 @@ function Rules() {
       try {
         const response = await axios.get('http://localhost:3000/api/rules/rules');
         const data = response.data;
-        console.log(data); // This should log the fetched data
+        // console.log(data); // This should log the fetched data
         setRuleData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -131,7 +131,7 @@ function Rules() {
         <div className='mb-12'>
             
         {RuleData.map((rule, index) => (
-        <Rule key={index} rule={rule} />
+        <Rule key={index} rule={rule} type={"sensormanager"}/>
       ))}
         </div>
         
