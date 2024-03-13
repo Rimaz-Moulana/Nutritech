@@ -1,61 +1,71 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import AnnotationHistory from '../src/pages/Annotator/History';
-import AnnotatorHome from '../src/pages/Annotator/Home';
-import SensorManagerHome from '../src/pages/SensorManager/Home';
-import Row from './components/AnnotationTable/Row';
 import Videowithtext from './components/AnnotationTable/Videowithtext';
-import EditRule from './components/Popup/EditRule';
 import BlankPage from './components/theme/BlankPage';
 import Test from './components/theme/test';
-import { AuthProvider } from './context/AuthProvider.jsx';
 import AddedProduct from './pages/Annotator/AddedProduct';
 import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
 import AnnotationTable from './pages/Annotator/AnnotationTable';
-import Product from './pages/Annotator/Product';
 import ProductDetails from './pages/Annotator/ProductDetails';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
 import Log from './pages/Log';
+import Login from './pages/Login';
+// import Row from './components/AnnotationTable/Row';
+// import Buttons from './components/AnnotationTable/Buttons';
+import Product from './pages/Annotator/Product';
 import History from './pages/MediaStation/History';
 import UploadVideo from './pages/MediaStation/UploadVideo';
 import UploadVideo2 from './pages/MediaStation/UploadVideo2';
 import NewVideos from './pages/SensorManager/NewVideos';
 
+import Row from './components/AnnotationTable/Row';
+import EditRule from './components/Popup/EditRule';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules';
 
+// import AnnotationHistory from '../src/pages/Annotator/History';
+// import AnnotatorHome from '../src/pages/Annotator/Home';
 import AddNewProduct from '../src/pages/Industry/AddNewProduct';
 import AddNewProduct2 from '../src/pages/Industry/AddNewProduct2.jsx';
 
 // import AnnotationHistory from '../src/pages/Annotator/History';
 // import AnnotatorHome from '../src/pages/Annotator/Home';
-// import AnnotationHistory from '../src/pages/Annotator/History'
+import AnnotationHistory from '../src/pages/Annotator/History';
+import AnnotatorHome from '../src/pages/Annotator/Home';
+import SensorManagerHome from '../src/pages/SensorManager/Home';
 
+// import AddedProductt from './pages/Annotator/AddedProductt';
+import GreenFlag from './pages/ExpertPanel/GreenFlag';
+import ExpertPanelHome from './pages/ExpertPanel/Home';
+import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos';
+import RedFlag from './pages/ExpertPanel/RedFlag';
+import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
+import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
+import ExpertRules from './pages/ExpertPanel/Rules';
+import IndustryHistory from './pages/Industry/History';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
-import Login from './pages/test/Login.jsx';
 
-  // import './App.css'
-  function App() {
 
-    return (
-      <AuthProvider>
-      <BrowserRouter>
+// import './App.css'
+
+
+function App(){
+
+  return (
+    <BrowserRouter>
         <Routes>
-          {/* <Route path='/'  > */}
-          {/* <Route path='/' element={<Nabra/>} /> */}
-          <Route path='/' element={<Login />} />
-          {/* <Route path='/login' element={<Login />} /> */}
-          <Route path='/log' element={<Log />} />
-          <Route path='/blankPages' element={<BlankPage />} />
-
-
-          <Route path='annotator/product' element={<ProductDetails />} />
-          <Route path='/test' element={<Test />} />
-          <Route path='annotator/addedproduct' element={<AddedProduct />} />
+            {/* <Route path='/'  > */}
+              {/* <Route path='/' element={<Nabra/>} /> */}
+              <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/log' element={<Log />} />
+              <Route path='/blankPages' element={<BlankPage />} />
+              <Route path='/product' element={<ProductDetails />} />
+              <Route path='/test' element={<Test />} />
+              <Route path='/addedproduct' element={<AddedProduct />} />
 
               
 
@@ -68,24 +78,24 @@ import Login from './pages/test/Login.jsx';
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
               <Route path="/row" element={<Row/>} />
-              <Route path="/home" element={<AnnotatorHome/>} />
-              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} />
+              <Route path="/home" element={<AnnotatorHome/>} /> {/*annotatorhomepage*/}
+              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} /> {/*sensormanager home page*/}
               {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
 
-          <Route path="sensor manager/sensormanagernewvideo" element={<NewVideos />} />
-          {/* <Route path="/sensormanagernewvideo" element={<NewVideos/>} /> */}
-          <Route path="/uploadvideo2" element={<UploadVideo2 />} />
-          {/* <Route path="/reviewvideo" element={<ReviewVideos />} /> */}
+              <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
+              {/* <Route path="/sensormanagernewvideo" element={<NewVideos/>} /> */}
+              <Route path="/uploadvideo2" element={<UploadVideo2 />} />
+              {/* <Route path="/reviewvideo" element={<ReviewVideos />} /> */}
+              
+
+              <Route path="/reviewvideo/:videoId" element={<ReviewVideos/>} />
+              <Route path="/rules" element={<Rules/>} />
+              <Route path="/editrules" element={<EditRule/>} />
+              <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
 
 
-          <Route path="/reviewvideo/:videoId" element={<ReviewVideos />} />
-          <Route path="/rules" element={<Rules />} />
-          <Route path="/editrules" element={<EditRule />} />
-          <Route path="/annotationhistory/:videoId" element={<AnnotationHistory />} />
-
-
-          <Route path='/addnewproduct' element={<AddNewProduct />} />
-          <Route path='/addnewproduct2' element={<AddNewProduct2 />} />
+              <Route path='/addnewproduct' element={<AddNewProduct />} />
+              <Route path='/addnewproduct2' element={<AddNewProduct2 />} />
 
               <Route path='/sensormanagerproducts' element ={<SensorManagerProducts/>} />
               <Route path='/reviewproduct/:productId' element ={<ReviewProduct/>} />
@@ -94,7 +104,7 @@ import Login from './pages/test/Login.jsx';
               <Route path='/industryhistory' element ={<IndustryHistory/>} />
 
 
-              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} />
+              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} /> {/*expert panel home page */}
               <Route path='/expertpanelnew' element ={<ExpertPanelNewVideos/>} />
               <Route path='/approvevideo/:videoId' element ={<ApproveVideos/>} />
               <Route path='/red' element ={<RedFlag/>} />
@@ -103,9 +113,8 @@ import Login from './pages/test/Login.jsx';
               <Route path='/expertreviewhistory/:videoId' element ={<ReviewHistory/>} />
             {/* </Route> */}
         </Routes>
-      </BrowserRouter>
-    </AuthProvider>
-  );
+    </BrowserRouter>
+  )
 }
 
 export default App;
