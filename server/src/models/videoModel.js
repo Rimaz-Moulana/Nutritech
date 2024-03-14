@@ -8,6 +8,7 @@ const VideoSchema = new mongoose.Schema({
   variation: String,
   flag: Boolean,
   videoPath: String,
+  duration: Number,
   createdIn: String,
   createdAt : String,
   status: String,
@@ -21,9 +22,24 @@ const VideoSchema = new mongoose.Schema({
   recommendation: String,
   annotatedtime:String,
   annotateddate:String,
-  comment:String,
-  commentedtime:String,
-  commenteddate: String,
+  comment:[
+    {
+      text: String,
+      commentedtime:String,
+      commenteddate: String,
+
+    }
+  ],
+
+  reply:[
+    {
+      text: String,
+      repliedtime:String,
+      replieddate: String,
+
+    }
+  ],
+  
   annotations: [
     {
       timestamp: String,

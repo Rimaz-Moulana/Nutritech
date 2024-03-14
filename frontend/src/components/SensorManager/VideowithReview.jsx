@@ -15,8 +15,8 @@ function VideowithReview({Id,text,type}) {
   const [redFlagDisabled, setRedFlagDisabled] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
-  const handleOpen = (text) => {
-
+  const handleOpen = (text,status) => {
+// console.log(text)
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -32,16 +32,19 @@ function VideowithReview({Id,text,type}) {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(text)
+        // console.log(text)
         setButtonDisabled(true);
+        // console.log(text)
         if(text==="expert"){
-          if (Data.status==="red") {
-            handleApprove(text);
-          }else{
+          // console.log("hey there")
+          if (status==="red") {
             handleDelete(text);
+          }else{
+            handleApprove(text);
           }         
         }else{
           handleDelete(text);
+        }
         Swal.fire({
           showConfirmButton: false,
           text: text === "expert" ? "Done" : `${text} has been deleted.`,
@@ -59,7 +62,7 @@ function VideowithReview({Id,text,type}) {
             // window.history.back();
           }
         // });
-        }
+        
         
       }
       
@@ -260,7 +263,8 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
   } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2`}
   type="button"
-  onClick={() => { buttonDisabled ? null : handleOpen(text) }}
+  // onClick={() => { buttonDisabled ? null : handleOpen(text,"red") }}
+  onClick={() => { Data.status!=="annotated" ? null : handleOpen(text,"red") }}
 >
 {text === "expert" && (
     <div className="flex items-center w-full">
@@ -283,7 +287,8 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
   } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2`}
   type="button"
-  onClick={() => (text === "expert" ? (buttonDisabled ? null : handleOpen(text)) : handlesave())}
+  // onClick={() => (text === "expert" ? (buttonDisabled ? null : handleOpen(text,"green")) : handlesave())}
+  onClick={() => (text === "expert" ? (Data.status!=="annotated" ? null : handleOpen(text,"green")) : handlesave())}
   disabled={loading}
 >
   {text === "expert" && (
