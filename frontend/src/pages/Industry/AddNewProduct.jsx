@@ -215,7 +215,7 @@ export default function ProductDetails() {
                 <TextFiled placeholder="Product Name"  name='productName' onChange={handleChange} />
                 <TextFiled placeholder="Brand"  name='brand' onChange={handleChange} />
                 <TextFiled placeholder="Parent Company" name='parentCompany' onChange={handleChange} />
-                <DropDown placeholder="Product Category" name='productCategory' onChange={handleChange} />
+                <DropDown  placeholder="Product Category" name='productCategory' onChange={handleChange} />
                 <TextFiled placeholder="Description" name='description' onChange={handleChange} />
                 <TextFiled placeholder="Packaging Material" name='packagingMaterial' onChange={handleChange} />
                 <TextFiled placeholder="Packaging Material(touching)" name='packagingMaterialTouching' onChange={handleChange} />
