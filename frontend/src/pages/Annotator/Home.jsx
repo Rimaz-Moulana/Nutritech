@@ -12,10 +12,10 @@ function Home() {
 
   const handleVideos = () =>{
     console.log('button clicked')
-    navigate('/all')
+    navigate('/annotator/all')
   }
   const handleProducts = () =>{
-    navigate('/product');
+    navigate('/annotator/product');
   }
 
   const [products, setProducts] = useState([]);
@@ -24,12 +24,42 @@ function Home() {
     // Fetch data when the component mounts
     fetchData();
   }, []);
+
+  
   
   const fetchData = async () => {
     try {
-      console.log("hi")
-      const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+      console.log("fetching session details..");
+      const authData = localStorage.getItem('token');
+      console.log(authData)
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+    }, 30000); // 60 seconds
+
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+
+      
+      console.log(config)
+      const response = await axios.get('http://localhost:3000/api/product/getAll', config ); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
       setProducts(response.data);
+       // Schedule token expiration check
+       
+      }
+      else{
+        navigate('/');  //login path when token is expired
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }

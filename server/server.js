@@ -6,12 +6,9 @@ const vidoeRoutes = require('./src/routes/videoRoutes');
 const productRoutes = require('./src/routes/productRoutes')
 const annotationsRoutes = require('./src/routes/annotationRoutes')
 
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpecs = require("./config/swaggerConfig"); // Import the Swagger configuration file
 
-const userRoutes = require('./src/routes/userRoutes')
 const ruleRoutes = require('./src/routes/ruleRoutes')
-
+const authRoutes = require('./src/routes/authRoutes');
 
 
 const app = express();
@@ -36,18 +33,20 @@ mongoose.connect(config.mongoURI, {
 
 
 app.use(express.json());
-// app.use('/api/videos', vidoeRoutes);
+
 const path = require('path');
 app.use('/videos', express.static(path.join(__dirname, 'Nutritech', 'server', 'uploads')));
 app.use('/api/videos', vidoeRoutes);
 app.use('/api/rules', ruleRoutes);
 app.use('/api/product', productRoutes);
-// app.use('/api',userRoutes);
-// app.use('/api/video', vidoeRoutes)
+app.use('/api', authRoutes);
+
 
 // Routes
   // app.use('/videos', videoRoutes);
   app.use('/annotations', annotationsRoutes);
+
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });

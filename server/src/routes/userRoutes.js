@@ -1,17 +1,10 @@
-// const express = require('express');
-// const userController = require('../controllers/userController');
+const express = require('express');
+const router = express.Router();
+const authMiddleware = require('../middlewares/authMiddleware');
 
+router.get('/profile', authMiddleware.authenticateUser, (req, res) => {
+    // Here you can access the authenticated user's data through req.user
+    res.json({ user: req.user });
+});
 
-// const router = express.Router();
-
-// // router.get('/users', (req,res) => {
-// //     res.json({msg:"get all users"})
-// // });
-
-// router.get('/users/:id', userController.getUser);
-
-// router.post('/upload',)
-
-
-
-// module.exports = router;
+module.exports = router;
