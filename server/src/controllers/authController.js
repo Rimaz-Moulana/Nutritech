@@ -29,10 +29,10 @@ async function login(req, res) {
                 dashboardRoute = '/admin/dashboard';
                 break;
             case 'annotator':
-                dashboardRoute = '/annotator/home';
+                dashboardRoute = '/home';
                 break;
             case 'sensor manager':
-                dashboardRoute = '/sensor manager/dashboard';
+                dashboardRoute = '/sensormanagerhome';
                 break;
             case 'researcher':
                 dashboardRoute = '/researcher/dashboard';
@@ -40,6 +40,8 @@ async function login(req, res) {
             case 'industry':
                 dashboardRoute = '/industry/dashboard';
                 break;
+            case 'expert panel':
+                dashboardRoute = '/expertpanelhome'
             default:
                 dashboardRoute = '/'; // Default route
         }

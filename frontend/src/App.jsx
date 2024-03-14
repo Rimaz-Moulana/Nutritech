@@ -9,9 +9,9 @@ import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
 import AnnotationTable from './pages/Annotator/AnnotationTable';
 import ProductDetails from './pages/Annotator/ProductDetails';
-import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
-import Log from './pages/Log';
-import Login from './pages/Login';
+import UnannotatedVideos from './pages/Annotator/UnannotatedVideos.jsx';
+
+import { default as Log, default as Login } from './pages/test/Login.jsx';
 // import Row from './components/AnnotationTable/Row';
 // import Buttons from './components/AnnotationTable/Buttons';
 import Product from './pages/Annotator/Product';
