@@ -15,9 +15,9 @@ import { default as Log, default as Login } from './pages/test/Login.jsx';
 // import Row from './components/AnnotationTable/Row';
 // import Buttons from './components/AnnotationTable/Buttons';
 import Product from './pages/Annotator/Product';
-import History from './pages/MediaStation/History';
-import UploadVideo from './pages/MediaStation/UploadVideo';
-import UploadVideo2 from './pages/MediaStation/UploadVideo2';
+import History from './pages/Researcher/History';
+import UploadVideo from './pages/Researcher/UploadVideo';
+import UploadVideo2 from './pages/Researcher/UploadVideo2';
 import NewVideos from './pages/SensorManager/NewVideos';
 
 import Row from './components/AnnotationTable/Row';
@@ -47,6 +47,11 @@ import ExpertRules from './pages/ExpertPanel/Rules';
 import IndustryHistory from './pages/Industry/History';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
+
+import IndustryHome from './pages/Industry/Home';
+import ResearcherHome from './pages/Researcher/Home';
+
+
 
 
 // import './App.css'
@@ -111,6 +116,9 @@ function App(){
               <Route path='/green' element ={<GreenFlag/>} />
               <Route path='/expertrules' element ={<ExpertRules/>} />
               <Route path='/expertreviewhistory/:videoId' element ={<ReviewHistory/>} />
+
+              <Route path='/researcherhome' element ={<ResearcherHome/>} /> {/*reseracherhome*/}
+              <Route path='/industryhome' element ={<IndustryHome/>} /> {/*industryhome*/}
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

@@ -16,7 +16,7 @@ const {videoId} = useParams();
   let text;
 
  
-  console.log(Data)
+  // console.log(Data)
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -33,7 +33,7 @@ const {videoId} = useParams();
             <Annotations videoId={videoId} usertype={"expert"}/>
         </div>
 
-        <ViewComment videoId={videoId}/>
+        <ViewComment videoId={videoId} type={"comment"}/>
         <div className="bottom-0 left-0 w-full px-4 py-4"> {/* Position cancel button at the bottom */}
         <button className="mb-12 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 " onClick={() => window.history.back()}>Cancel</button>
       </div>

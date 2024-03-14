@@ -23,6 +23,17 @@ exports.getAnnotatedVideos = async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
+  exports.getAnnotatedVideosForExperts= async (req, res) => {
+    try {
+      const videos = await VideoService.getAnnotatedVideosForExpert();
+      res.status(200).json(videos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
+ 
   
   exports.getUnannotatedVideos = async (req, res) => {
     try {
@@ -70,10 +81,10 @@ exports.getuploadhistory= async (req,res)=>{
 exports.addvideo = async (req,res) => {
 
     try{
-        const { brand, product , variation , createdIn, createdAt} = req.body;
+        const { brand, product , variation , createdIn, createdAt,duration} = req.body;
         const videoPath = req.file.path
         // console.log(req.body)
-        const newVideo = new Video({brand,product,variation, videoPath, createdIn, createdAt, status: 'pending', uploader:'Sirasa'});
+        const newVideo = new Video({brand,product,variation, videoPath, createdIn, createdAt, duration, status: 'pending', uploader:'Sirasa'});
         console.log(newVideo)
         await newVideo.save();
        
@@ -83,7 +94,6 @@ exports.addvideo = async (req,res) => {
         console.error(error);
         return res.status(500).json({ success: false, message: 'Server Error'});
     }
-
 }
 
 exports.getpendingvideos= async (req,res)=>{
@@ -224,4 +234,16 @@ exports.postExpertComment= async (req,res)=>{
 
 
 
-
+exports.postIndustryReply= async (req,res)=>{
+  try {
+    const videoId = req.params.videoId;
+    // console.log(videoId)
+    const reply = req.body.comment;
+        const replycomment = await VideoService.postReply(videoId,reply);
+        // console.log(comment)
+        res.json(replycomment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}

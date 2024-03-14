@@ -21,6 +21,8 @@ router.post('/industry/add', upload.single('video') , productController.addNewPr
 
 router.get('/all', videoController.getAllVideos);
 router.get('/annotated-videos', videoController.getAnnotatedVideos);
+router.get('/annotatedvideosExpert', videoController.getAnnotatedVideosForExperts);
+
 router.get('/unannotated-videos', videoController.getUnannotatedVideos);
 router.post('/uploadvideo', videoController.postVideoDetails);
 // router.post('/uploadvideo', videoController.postVideoDetails);
@@ -40,5 +42,6 @@ router.post('/greenflag/:videoId', videoController.updateExpertReviewtogreen );
 router.get('/redflag', videoController.AllRedFlagVideos );
 router.get('/greenflag', videoController.AllGreenFlagVideos );
 router.post('/comment/:videoId', videoController.postExpertComment );
+router.post('/reply/:videoId', videoController.postIndustryReply );
 
 module.exports = router;

@@ -13,7 +13,7 @@ import red from '../../assets/Images/redflag.png'
 import green from '../../assets/Images/greenflag.png'
 
 function VideoContainer({ type,videoData,viewType,videotype }) {
-  console.log(viewType)
+  // console.log(viewType)
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   // const [productFilter, setProductFilter] = useState('all');
@@ -181,7 +181,7 @@ const filteredVideos = videoData?.filter((video) => {
             </div>
           )}
 
-          {video.status === 'annotated' && type==="expert" &&(
+          {(video.status === 'annotated' && type==="expertnew") &&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
               <img src={pen} alt="Annotated" onClick={() => handleApprove(video._id)}/>
             </div>
@@ -334,7 +334,7 @@ const filteredVideos = videoData?.filter((video) => {
                  onClick={() => handleAnnotate(video._id)}
                >Annotate</button>
              )}
-             {video.status === 'annotated' && type!=="reviewvideo"  && type!=="expert" && (
+             {video.status === 'annotated' && type!=="reviewvideo"  && type!=="expert" && type!=="expertnew" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => ViewAnnotate(video._id)}
@@ -342,7 +342,7 @@ const filteredVideos = videoData?.filter((video) => {
              )}
 
 
-              {video.status === 'annotated' && type==="expert" && (
+              {video.status === 'annotated' && type==="expertnew" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => handleApprove(video._id)}
