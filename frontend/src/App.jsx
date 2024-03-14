@@ -44,7 +44,7 @@ import IndustryHome from './pages/Industry/Home'
 import ResearcherHome from './pages/Researcher/Home'
 
 
-// import './App.css'
+import './App.css'
 
 
 function App(){
