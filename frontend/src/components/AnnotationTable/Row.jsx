@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import RulePopup from '../Popup/RulePopup';
 
 function Row({
+  duration,
   onRuleChange,
   onDetailsChange,
   onTimestampChange,
@@ -15,6 +16,19 @@ function Row({
   const [rules, setRules] = useState([]);
   const [selectedRule, setSelectedRule] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // console.log(duration)
+
+  const generateTimestampOptions = () => {
+    const options = [];
+    for (let i = 0; i < duration; i += 5) {
+      const start = i;
+      const end = Math.min(i + 5, duration);
+      const option = `${start}-${end}s`;
+      options.push(option);
+    }
+    return options;
+  };
+
 
   useEffect(()=>{
     const fetchData = async() =>{
@@ -66,19 +80,9 @@ function Row({
     <div className="relative justify-center border-gray-200 border-1 rounded-sm">
       <label id='timestamp' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Stamp</label>
       <select className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleTimestampChange}>
-        <option >Select</option>
-        <option >00-05s</option>
-        <option >05-10s</option>
-        <option >10-15s</option>
-        <option >15-20s</option>
-        <option >20-25s</option>
-        <option >25-30s</option>
-        <option >30-35s</option>
-        <option >35-40s</option>
-        <option >40-45s</option>
-        <option >45-50s</option>
-        <option >50-55s</option>
-        <option >55-60s</option>
+         {generateTimestampOptions().map((option, index) => (
+                <option key={index}>{option}</option>
+              ))}
       </select>
     </div>
     <div className="relative mt-4 min-w-[200px] border-gray-200 border-1 rounded-sm">
