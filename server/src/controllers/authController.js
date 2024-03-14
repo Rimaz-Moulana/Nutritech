@@ -35,10 +35,10 @@ async function login(req, res) {
                 dashboardRoute = '/sensormanagerhome';
                 break;
             case 'researcher':
-                dashboardRoute = '/researcher/dashboard';
+                dashboardRoute = '/researcherhome';
                 break;
             case 'industry':
-                dashboardRoute = '/industry/dashboard';
+                dashboardRoute = '/industryhome';
                 break;
             case 'expert panel':
                 dashboardRoute = '/expertpanelhome'

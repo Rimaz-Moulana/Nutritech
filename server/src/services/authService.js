@@ -30,7 +30,7 @@ async function loginUser(email, password) {
         throw new Error('Invalid password');
     }
 
-    const token = jwt.sign({ userId: user._id, role: user.role }, 'secret_key', { expiresIn: '15s' });
+    const token = jwt.sign({ userId: user._id, role: user.role }, 'secret_key', { expiresIn: '60s' });
 
     return token;
 }

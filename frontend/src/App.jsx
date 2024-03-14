@@ -11,7 +11,8 @@ import AnnotationTable from './pages/Annotator/AnnotationTable';
 import ProductDetails from './pages/Annotator/ProductDetails';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos.jsx';
 
-import { default as Log, default as Login } from './pages/test/Login.jsx';
+import { default as Login } from './pages/test/Login.jsx';
+import Register from './pages/test/RegisterForm.jsx';
 // import Row from './components/AnnotationTable/Row';
 // import Buttons from './components/AnnotationTable/Buttons';
 import Product from './pages/Annotator/Product';
@@ -65,8 +66,9 @@ function App(){
             {/* <Route path='/'  > */}
               {/* <Route path='/' element={<Nabra/>} /> */}
               <Route path='/' element={<Login />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/log' element={<Log />} />
+              {/* <Route path='/login' element={<Login />} />
+              <Route path='/log' element={<Log />} /> */}
+              <Route path='/register' element={<Register />} />
               <Route path='/blankPages' element={<BlankPage />} />
               <Route path='/product' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />

@@ -32,10 +32,13 @@ function Home() {
       console.log("fetching session details..");
       const authData = localStorage.getItem('token');
       console.log(authData)
+
       setTimeout(() => {
         // Remove token from local storage after 5 seconds
         localStorage.removeItem('token');
-    }, 5000); // 5 seconds
+    }, 30000); // 60 seconds
+
+
       if(authData){
         const {accessToken} = authData;
         console.log(accessToken);
