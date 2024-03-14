@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Image from '../../assets/Images/NutriTech Logo-04 1.png';
+import Reg from '../../assets/Images/reg.jpg';
 
 function Register() {
   // const navigate = useNavigate();
@@ -34,12 +35,12 @@ function Register() {
       <div
         //class="flex md:w-1/2 justify-center items-center"
         className="flex-inline md:w-1/2 justify-center items-center">
-            {/* <img  className='h-screen w-full' src={Image1} />  */}
+            <img  className='h-screen w-full' src={Reg} /> 
       </div>
         {/* //class="block md:w-1/2 h-screen justify-center items-center bg-gradient-to-br from-[#B8C294] to-white " */}
       <div className="space-y-4 md:w-1/2 h-screen justify-center items-center bg-gradient-to-br from-[#B8C294] to-white ">
-            <img className="block pt-8 w-[40%] justify-center items-center ml-56 " src={Image} />
-            <div className='block justify-center items-center ml-44'>
+            <img className="block pt-8 w-[40%] justify-center items-center ml-[29%] " src={Image} />
+            <div className='block justify-center items-center ml-[22%]'>
             <form className="bg-none align-content-center p-8" onSubmit={handleSubmit} >
             <div className='flex items-center justify-between mb-4'>
             <input className="shadow appearance-none border  bg-white rounded w-[70%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} /> 

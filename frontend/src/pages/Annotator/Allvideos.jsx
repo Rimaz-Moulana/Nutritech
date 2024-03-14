@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
-import GridListView from '../../components/Toggle/GridListView';
 
 function Allvideos() {
+  const navigate = useNavigate();
   const [videoData, setVideoData] = useState([]);
   const [isChecked, setIsChecked] = useState(() => {
     return JSON.parse(localStorage.getItem('isChecked')) || false;
@@ -22,13 +23,46 @@ function Allvideos() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/all');
+      
+      try{
+        console.log("fetching session details..");
+      const authData = localStorage.getItem('token');
+      console.log(authData)
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+    }, 30000); // 60 seconds
+
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+
+      
+      console.log(config)
+       const response = await fetch('http://localhost:3000/api/videos/all', config);
       const data = await response.json();
       setVideoData(data);
-    };
-  
-    fetchData();
-  }, []); 
+      
+    
+  }
+  else{
+    navigate('/');  //login path when token is expired
+  }
+  }catch(error){
+    console.error('Error fetching data:', error);
+  }
+  }
+  fetchData();
+}, []); 
 
   console.log(videoData)
 
