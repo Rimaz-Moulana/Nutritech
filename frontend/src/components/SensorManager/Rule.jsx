@@ -50,15 +50,16 @@ function Rule({ rule , type}) {
 
 
   return (
-    <div className='flex bg-white rounded w-6/8 ml-8 mt-12 mr-16 border-2 border-black h-16'>
-      <div className='w-3/4'>
-        <p className='text-left ml-4 '>{rule.rule} </p>
+    <div className='flex bg-white rounded w-6/8 ml-8 mt-12 mr-16 border-2 border-black h-fit'>
+      <div className='w-full'>
+      <p className='text-left ml-4 text-gray-500 '>{rule.ruleNumber} </p>
+        <p className='text-left ml-4 font-semibold mb-4 '>{rule.rule} </p>
       </div>
 
       <div className='flex h-12 justify-end w-1/4 mt-6'>
         {/* <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">Edit</button> */}
         
-      {type !== "home" || type!=="expert" && (
+      {type === "sensormanager" && (
         <button
         className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
         onClick={() => handleOpen(rule._id)}

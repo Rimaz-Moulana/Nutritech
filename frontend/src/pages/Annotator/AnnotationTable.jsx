@@ -14,6 +14,7 @@ function AnnotationTable() {
   const { videoId } = useParams();
 
   const [isYesSelected, setIsYesSelected] = useState(true);
+  const [videoDuration, setDuration] = useState([]);
 
   const handleYesClick = () => {
     setIsYesSelected(true);
@@ -161,7 +162,23 @@ function AnnotationTable() {
     }
   };
   
+ 
 
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+        const data = response.data[0].duration;  // Access the data property directly
+        setDuration(data);
+      } catch (error) {
+        console.error('Error fetching Video:', error);
+      } 
+    };
+  
+    fetchVideo();
+  }, [videoId]);
+  
+console.log(videoDuration)
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex z-10'>
       <div className='w-2/8 fixed h-full hidden sm:flex flex-col'>
@@ -198,7 +215,7 @@ function AnnotationTable() {
               <>
                 {[...Array(rowCount)].map((_, index) => (
                   <div key={index}>
-                    <Row
+                    <Row duration={videoDuration}
                       rowData={rowsData[index] || {
                         timestamp: '',
                         rule: '',

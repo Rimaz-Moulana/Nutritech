@@ -15,9 +15,9 @@ import Login from './pages/Login';
 // import Row from './components/AnnotationTable/Row';
 // import Buttons from './components/AnnotationTable/Buttons';
 import Product from './pages/Annotator/Product';
-import History from './pages/MediaStation/History';
-import UploadVideo from './pages/MediaStation/UploadVideo';
-import UploadVideo2 from './pages/MediaStation/UploadVideo2';
+import History from './pages/Researcher/History';
+import UploadVideo from './pages/Researcher/UploadVideo';
+import UploadVideo2 from './pages/Researcher/UploadVideo2';
 import NewVideos from './pages/SensorManager/NewVideos';
 
 import Row from './components/AnnotationTable/Row';
@@ -47,6 +47,9 @@ import RedFlag from './pages/ExpertPanel/RedFlag';
 import GreenFlag from './pages/ExpertPanel/GreenFlag';
 import ExpertRules from './pages/ExpertPanel/Rules'
 import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
+import IndustryHome from './pages/Industry/Home'
+import ResearcherHome from './pages/Researcher/Home'
+
 
 import AddedProductt from './pages/Annotator/AddedProductt';
 
@@ -79,8 +82,8 @@ function App(){
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
               <Route path="/row" element={<Row/>} />
-              <Route path="/home" element={<AnnotatorHome/>} />
-              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} />
+              <Route path="/home" element={<AnnotatorHome/>} /> {/*annotatorhomepage*/}
+              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} /> {/*sensormanager home page*/}
               {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
@@ -105,13 +108,16 @@ function App(){
               <Route path='/industryhistory' element ={<IndustryHistory/>} />
 
 
-              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} />
+              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} /> {/*expert panel home page */}
               <Route path='/expertpanelnew' element ={<ExpertPanelNewVideos/>} />
               <Route path='/approvevideo/:videoId' element ={<ApproveVideos/>} />
               <Route path='/red' element ={<RedFlag/>} />
               <Route path='/green' element ={<GreenFlag/>} />
               <Route path='/expertrules' element ={<ExpertRules/>} />
               <Route path='/expertreviewhistory/:videoId' element ={<ReviewHistory/>} />
+
+              <Route path='/researcherhome' element ={<ResearcherHome/>} /> {/*reseracherhome*/}
+              <Route path='/industryhome' element ={<IndustryHome/>} /> {/*industryhome*/}
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

@@ -8,6 +8,7 @@ const VideoSchema = new mongoose.Schema({
   variation: String,
   flag: Boolean,
   videoPath: String,
+  duration: Number,
   createdIn: String,
   createdAt : String,
   status: String,
