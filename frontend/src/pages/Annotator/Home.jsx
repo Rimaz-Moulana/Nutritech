@@ -12,10 +12,10 @@ function Home() {
 
   const handleVideos = () =>{
     console.log('button clicked')
-    navigate('/all')
+    navigate('/annotator/all')
   }
   const handleProducts = () =>{
-    navigate('/product');
+    navigate('/annotator/product');
   }
 
   const [products, setProducts] = useState([]);
@@ -24,12 +24,42 @@ function Home() {
     // Fetch data when the component mounts
     fetchData();
   }, []);
+
+  
   
   const fetchData = async () => {
     try {
-      console.log("hi")
-      const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+      console.log("fetching session details..");
+      const authData = localStorage.getItem('token');
+      console.log(authData)
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+    }, 30000); // 60 seconds
+
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+
+      
+      console.log(config)
+      const response = await axios.get('http://localhost:3000/api/product/getAll', config ); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
       setProducts(response.data);
+       // Schedule token expiration check
+       
+      }
+      else{
+        navigate('/');  //login path when token is expired
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -54,14 +84,26 @@ function Home() {
         <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
         <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
         </div>
-        <div className='mt-4 left-0'>
-        <ProductTable data={products} />
+        
+        <div className='flex'>
+
+        {/* <ProductTable data={products} /> */}
         </div>
+        {/* <div className='mt-4 left-0'>
+        <ProductTable data={products} />
+        </div> */}
         <div className='mt-4 left-0'>
+
         <ProductTable data={products} />
         </div>
       </div>
-    </div>
+
+      </div>
+      
+    // </div>
+
+    // </div>
+
   );
 }
 

@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
         brand : String,
         productName: String,
-        status: String,
         description: String,
         parentCompany: String,
+        productCategory: String,
         packagingMaterial : String,
         packagingMaterialTouching: String,
-        variation : String,
+        variation: String,
         countryProduct: String,
         servingSize: String,
         sugarType: String,
@@ -53,6 +53,12 @@ const productSchema = new mongoose.Schema({
         SLfoodcodePermittedRemark: String,
         createdTime: String,
         CreatedData : String,
+        videoPath: String,
+        status: String,
+        imageFront: String,
+        imageBack: String,
+        imageLeft: String,
+        imageRight: String,
         uploader : String,
 })
 

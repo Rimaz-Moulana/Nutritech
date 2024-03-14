@@ -9,9 +9,10 @@ import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
 import AnnotationTable from './pages/Annotator/AnnotationTable';
 import ProductDetails from './pages/Annotator/ProductDetails';
-import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
-import Log from './pages/Log';
-import Login from './pages/Login';
+import UnannotatedVideos from './pages/Annotator/UnannotatedVideos.jsx';
+
+import { default as Login } from './pages/test/Login.jsx';
+import Register from './pages/test/RegisterForm.jsx';
 // import Row from './components/AnnotationTable/Row';
 // import Buttons from './components/AnnotationTable/Buttons';
 import Product from './pages/Annotator/Product';
@@ -25,23 +26,33 @@ import EditRule from './components/Popup/EditRule';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/SensorManager/Rules';
 
-import AnnotationHistory from '../src/pages/Annotator/History'
-import AnnotatorHome from '../src/pages/Annotator/Home'
-import SensorManagerHome from '../src/pages/SensorManager/Home'
+// import AnnotationHistory from '../src/pages/Annotator/History';
+// import AnnotatorHome from '../src/pages/Annotator/Home';
+import AddNewProduct from '../src/pages/Industry/AddNewProduct';
+import AddNewProduct2 from '../src/pages/Industry/AddNewProduct2.jsx';
 
-import AddedProductt from './pages/Annotator/AddedProductt';
+// import AnnotationHistory from '../src/pages/Annotator/History';
+// import AnnotatorHome from '../src/pages/Annotator/Home';
+import AnnotationHistory from '../src/pages/Annotator/History';
+import AnnotatorHome from '../src/pages/Annotator/Home';
+import SensorManagerHome from '../src/pages/SensorManager/Home';
+
+// import AddedProductt from './pages/Annotator/AddedProductt';
+import GreenFlag from './pages/ExpertPanel/GreenFlag';
+import ExpertPanelHome from './pages/ExpertPanel/Home';
+import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos';
+import RedFlag from './pages/ExpertPanel/RedFlag';
+import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
+import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
+import ExpertRules from './pages/ExpertPanel/Rules';
+import IndustryHistory from './pages/Industry/History';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
-import IndustryHistory from './pages/Industry/History'
-import ExpertPanelHome from './pages/ExpertPanel/Home'
-import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos'
-import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
-import RedFlag from './pages/ExpertPanel/RedFlag';
-import GreenFlag from './pages/ExpertPanel/GreenFlag';
-import ExpertRules from './pages/ExpertPanel/Rules'
-import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
-import IndustryHome from './pages/Industry/Home'
-import ResearcherHome from './pages/Researcher/Home'
+
+import IndustryHome from './pages/Industry/Home';
+import ResearcherHome from './pages/Researcher/Home';
+
+
 
 
 import './App.css'
@@ -55,14 +66,15 @@ function App(){
             {/* <Route path='/'  > */}
               {/* <Route path='/' element={<Nabra/>} /> */}
               <Route path='/' element={<Login />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/log' element={<Log />} />
+              {/* <Route path='/login' element={<Login />} />
+              <Route path='/log' element={<Log />} /> */}
+              <Route path='/register' element={<Register />} />
               <Route path='/blankPages' element={<BlankPage />} />
               <Route path='/product' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />
               <Route path='/addedproduct' element={<AddedProduct />} />
 
-              <Route path='/addedproduct2' element={<AddedProductt />} />
+              
 
               <Route path="/all" element={<Allvideos/>} />
               <Route path="/annotation/:videoId" element={<AnnotationTable />} />
@@ -73,8 +85,8 @@ function App(){
               <Route path="/history" element={<History/>} />
               <Route path="/uploadvideo" element={<UploadVideo/>} />
               <Route path="/row" element={<Row/>} />
-              <Route path="/home" element={<AnnotatorHome/>} />
-              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} />
+              <Route path="/home" element={<AnnotatorHome/>} /> {/*annotatorhomepage*/}
+              <Route path="/sensormanagerhome" element={<SensorManagerHome/>} /> {/*sensormanager home page*/}
               {/* <Route path="/homeswiper" element={<HomeSwiper/>} /> */}
 
               <Route path="/sensormanagernewvideo" element={<NewVideos/>} />
@@ -87,6 +99,11 @@ function App(){
               <Route path="/rules" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
+
+
+              <Route path='/addnewproduct' element={<AddNewProduct />} />
+              <Route path='/addnewproduct2' element={<AddNewProduct2 />} />
+
               <Route path='/sensormanagerproducts' element ={<SensorManagerProducts/>} />
               <Route path='/reviewproduct/:productId' element ={<ReviewProduct/>} />
 
@@ -94,7 +111,7 @@ function App(){
               <Route path='/industryhistory' element ={<IndustryHistory/>} />
 
 
-              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} />
+              <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} /> {/*expert panel home page */}
               <Route path='/expertpanelnew' element ={<ExpertPanelNewVideos/>} />
               <Route path='/approvevideo/:videoId' element ={<ApproveVideos/>} />
               <Route path='/red' element ={<RedFlag/>} />
@@ -111,5 +128,3 @@ function App(){
 }
 
 export default App;
-
-
