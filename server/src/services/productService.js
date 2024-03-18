@@ -43,12 +43,13 @@ exports.getProduct = async(productId)=>{
   };
 
 
-  exports.saveProduct = async (productId) => {
+  exports.saveProduct = async (productId,fact) => {
     try {
       return await Product.findByIdAndUpdate(
         productId,
         {
           status: 'reviewed',
+          healthfact: fact,
         //   reviewedtime: getCurrentDateTime(),
         //   revieweddate: new Date().toLocaleDateString(),
         },
