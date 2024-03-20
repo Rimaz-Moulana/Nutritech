@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import VideoContainer from './../components/videoContainer/VideoContainer';
 import SensorManagerSidebar from './../components/sidebar/SensorManagerSidebar';
 import Navbar from './../components/navbar/Navbar';
-import Rule from './../components/SensorManager/Rule';
+import Rule from './../components/Rule';
 import backwardarrow from './../assets/Images/backarrowgreen.png'
 import Swal from 'sweetalert2';
 import axios from 'axios';

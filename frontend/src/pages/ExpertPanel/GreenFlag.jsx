@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
 import ProductTable from '../../components/tables/LogTable';
-import Rule from '../../components/SensorManager/Rule';
+import Rule from '../../components/Rule';
 import Sidebar from '../../components/sidebar/ExpertPanelSidebar'
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 

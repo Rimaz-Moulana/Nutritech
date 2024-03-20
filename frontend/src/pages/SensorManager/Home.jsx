@@ -5,7 +5,7 @@ import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
 import ProductTable from '../../components/tables/LogTable';
 import Rules from '../Rules';
-import Rule from '../../components/SensorManager/Rule';
+import Rule from '../../components/Rule';
 import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar';
 
 function Home() {
