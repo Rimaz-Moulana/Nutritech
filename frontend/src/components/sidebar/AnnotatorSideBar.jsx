@@ -52,10 +52,10 @@ const Annotatorsidebar = () => {
    
     setSelected(index);
 
-    // if (selected === index) {
-    //   // If the clicked item is already selected, navigate to the default 'Home' item
-    //   navigate('/home');
-    // } else {
+    if (selected === index) {
+      // If the clicked item is already selected, navigate to the default 'Home' item
+      navigate('/home');
+    } else {
     if (index === nav.findIndex((item) => item.text === 'Video')) {
       setDropdownOpen(!isDropdownOpen);
     } else if (index === nav.findIndex((item) => item.text === 'Products')){
@@ -64,7 +64,7 @@ const Annotatorsidebar = () => {
     } else{
       navigate('/home');
     }
-  // }
+  }
   };
 
   const handleEnlargeClick = () => {

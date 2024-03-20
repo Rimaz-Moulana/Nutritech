@@ -1,34 +1,25 @@
-import React , {useRef} from 'react';
+import React , {useEffect, useRef, useState} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Video from '../../assets/videos/astra.mp4'
 import arrow from '../../assets/Images/arrowgreen.png'
+import ReactPlayer from 'react-player';
 
 const HomeSwiper = () => {
-  const videos = [
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-    Video,
-  ];
+  const [videoData, setVideoData] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+       const response = await fetch('http://localhost:3000/api/videos/all');
+      const data = await response.json();
+      setVideoData(data);
+    };
+  
+    fetchData();
+  }, []); 
+
+  console.log(videoData)
   const sliderRef = useRef(null);
 
   const settings = {
@@ -47,14 +38,33 @@ const HomeSwiper = () => {
     sliderRef.current.slickPrev();
   };
 
+  const handleVideo = (inputUrl) =>{
+    const url = inputUrl.replace(/\\/g, '/');
+  
+  // Split the URL based on backslash ("\")
+    const urlParts = url.split('/');
+  
+  // Take the last part of the array
+    const desiredPart = urlParts[urlParts.length - 1];
+  // console.log(desiredPart)
+  return desiredPart;
+  }
+
   return (
     <div className=' ml-12 mr-12'>
         <div className='gap-6 w-6/8'>
         <Slider ref={sliderRef} {...settings}>
-        {videos.map((video, index) => (
+        {videoData.map((video, index) => (
           <div key={index} className='ml-4 gap-6 p-4'>
             <video controls width="100%" height="auto">
-              <source src={video} type="video/mp4" />
+              {/* <source src={video} type="video/mp4" /> */}
+              <ReactPlayer
+                className='react-player fixed-bottom h-8 w-8 p-2'
+                url={`/videos/${handleVideo(video.videoPath)}`}
+                width='100%'
+                height='100%'
+                controls={true}
+            />
               Your browser does not support the video tag.
             </video>
           </div>

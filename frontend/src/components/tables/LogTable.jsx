@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-export default function LogTable(props) {
+export default function LogTable() {
+  const [products, setProducts] = useState([]);
   const [selectedProductIndex, setSelectedProductIndex] = useState(null);
 
   const openDetailsModal = (index) => {
@@ -11,11 +13,28 @@ export default function LogTable(props) {
     setSelectedProductIndex(null);
   };
 
+  useEffect(() => {
+    // Fetch data when the component mounts
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    
+    try {
+      console.log("hi")
+      const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  console.log(products)
   const filterKeys = ['_id', 'createdTime', 'CreatedData','__v']; // Add the keys you want to filter out
 
   return (
-    <div className='w-[100%] h-[100%] lg:ml-72 sm:ml-20 md:ml-40'>
-      <table className="min-w-[80%] mb-[30%] table-auto divide-y divide-gray-200">
+    <div className='w-[100%] sm:text-sm sm:p-2'>
+      <table className="min-w-[100%] ml-4 table-auto divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
             <th scope="col" className="px-6 py-3 float-start justify-items-end text-lg font-medium text-black uppercase tracking-wider">
@@ -36,28 +55,31 @@ export default function LogTable(props) {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {props.data.map((product, index) => (
+          {/* {index<=5 && ( */}
+          {products.map((product, index) => (
+            index<3 && (
+              
             <tr key={index}>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-1 whitespace-nowrap">
                 <div className="float-start text-gray-900">{product.productName}</div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="whitespace-nowrap">
                 <div className="text-gray-900">{product.brand}</div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="whitespace-nowrap">
                 <div className="text-gray-900">{product.createdTime}</div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="whitespace-nowrap">
                 <div className="text-gray-900">{product.CreatedData}</div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className=" whitespace-nowrap">
                 <div className="text-gray-900 float-right relative ">
                   <button
                     className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2'
                     onClick={() => openDetailsModal(index)}>View Details</button>
                   {selectedProductIndex === index && (
-                    <div className="modal absolute z-10 top-full bg-gray-50 rounded-sm shadow-lg p-2"     style={{ top: 'calc(100% + 5px)', right: 0 }}>
-                      <button className=" text-white bg-gradient-to-t from-red-600 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-700 dark:focus:ring-red-700 shadow-lg shadow-red-700 dark:shadow-lg dark:shadow-red-700 font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " onClick={closeDetailsModal}>Close</button>
+                    <div className="modal absolute z-10 top-full bg-gray-50 rounded-sm shadow-lg p-1"     style={{ top: 'calc(100% + 5px)', right: 0 }}>
+                      <button className=" text-white bg-gradient-to-t from-red-600 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-700 dark:focus:ring-red-700 shadow-lg shadow-red-700 dark:shadow-lg dark:shadow-red-700 font-medium rounded-lg text-sm px-10 py-1 text-center me-1 mb-1 " onClick={closeDetailsModal}>Close</button>
                       <h1 className='font-bold text-lg'>Product Details</h1>
                       <ul >
                         {Object.entries(product).filter(([key, value]) => !filterKeys.includes(key)).map(([key, value]) => (
@@ -69,7 +91,9 @@ export default function LogTable(props) {
                 </div>
               </td>
             </tr>
+            )
           ))}
+          {/* )} */}
         </tbody>
       </table>
     </div>

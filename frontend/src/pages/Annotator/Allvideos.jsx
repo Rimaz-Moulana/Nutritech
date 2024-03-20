@@ -30,7 +30,7 @@ function Allvideos() {
     fetchData();
   }, []); 
 
-  console.log(videoData)
+  // console.log(videoData)
 
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>

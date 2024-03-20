@@ -49,7 +49,7 @@ const SensorManagerSidebar = () => {
     enlarge: menu,
     text: 'Group Manager',
   };
-
+  const type="sensormanager"
   const handleItemClick = (index, event) => {
     // event.preventDefault();
 
@@ -67,7 +67,7 @@ const SensorManagerSidebar = () => {
       } else if (index === nav.findIndex((item) => item.text === 'Products')) {
         navigate('/sensormanagerproducts');
       } else if (index === nav.findIndex((item) => item.text === 'Rules & Regulations')) {
-        navigate('/rules');
+        navigate(`/rules/${type}`);
       } else {
         navigate('/sensormanagerhome');
       }

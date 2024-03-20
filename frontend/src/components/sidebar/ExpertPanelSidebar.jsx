@@ -45,7 +45,7 @@ const ExpertPanelSidebar = () => {
     localStorage.setItem('selectedSidebarItem', JSON.stringify(selected));
   }, [selected]);
 
-  
+  const type = "expert"
   const handleItemClick = (index,event) => {
     event.preventDefault();
 
@@ -53,19 +53,19 @@ const ExpertPanelSidebar = () => {
    
     setSelected(index);
 
-    // if (selected === index) {
-    //   // If the clicked item is already selected, navigate to the default 'Home' item
-    //   navigate('/home');
-    // } else {
+    if (selected === index) {
+      // If the clicked item is already selected, navigate to the default 'Home' item
+      navigate('/expertpanelhome');
+    } else {
     if (index === nav.findIndex((item) => item.text === 'Video')) {
       setDropdownOpen(!isDropdownOpen);
     } else if (index === nav.findIndex((item) => item.text === 'Rules and Regulations')){
-      navigate('/ExpertRules');
+      navigate(`/rules/${type}`);
       
     } else{
       navigate('/expertpanelhome');
     }
-  // }
+  }
   };
 
   const handleEnlargeClick = () => {

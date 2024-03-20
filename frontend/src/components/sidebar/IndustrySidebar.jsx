@@ -11,7 +11,7 @@ import edit from '../../assets/Images/edit.png';
 
 function IndustrySidebar() {
 
-    const [isEnlarge, setEnlarge] = useState(true);
+  const [isEnlarge, setEnlarge] = useState(true);
   const navigate = useNavigate(); 
 
   const [selected, setSelected] = useState(() => {
@@ -53,6 +53,7 @@ function IndustrySidebar() {
     text: 'Group Manager',
   };
 
+  const type ="industry";
   const handleItemClick = (index, event) => {
     // event.preventDefault();
 
@@ -62,17 +63,17 @@ function IndustrySidebar() {
 
     if (selected === index) {
       // If the clicked item is already selected, navigate to the default 'Home' item
-    //   navigate('/sensormanagerhome');
+      navigate('/industryhome');
     } else {
-      setSelected(index);
+      // setSelected(index);
       if (index === nav.findIndex((item) => item.text === 'Videos')) {
-        // navigate('/sensormanagernewvideo');
+        navigate('/industryhistory');
       } else if (index === nav.findIndex((item) => item.text === 'Products')) {
-        // navigate('/sensormanagerproducts');
+        navigate('/sensormanagerproducts');
       } else if (index === nav.findIndex((item) => item.text === 'Rules & Regulations')) {
-        // navigate('/rules');
+        navigate(`/rules/${type}`);
       } else {
-        // navigate('/sensormanagerhome');
+        navigate('/industryhome');
       }
     }
   };
