@@ -63,7 +63,7 @@ function IndustrySidebar() {
 
     if (selected === index) {
       // If the clicked item is already selected, navigate to the default 'Home' item
-      navigate('/industryhome');
+      return;
     } else {
       // setSelected(index);
       if (index === nav.findIndex((item) => item.text === 'Videos')) {

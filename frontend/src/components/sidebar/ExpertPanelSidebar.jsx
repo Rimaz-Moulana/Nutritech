@@ -53,18 +53,22 @@ const ExpertPanelSidebar = () => {
    
     setSelected(index);
 
-    if (selected === index) {
-      // If the clicked item is already selected, navigate to the default 'Home' item
-      navigate('/expertpanelhome');
-    } else {
+    
     if (index === nav.findIndex((item) => item.text === 'Video')) {
       setDropdownOpen(!isDropdownOpen);
-    } else if (index === nav.findIndex((item) => item.text === 'Rules and Regulations')){
+    }else{
+      if (selected === index) {
+        // If the clicked item is already selected, navigate to the default 'Home' item
+        return;
+      } else {
+         if (index === nav.findIndex((item) => item.text === 'Rules and Regulations')){
       navigate(`/rules/${type}`);
       
-    } else{
+        } else{
       navigate('/expertpanelhome');
-    }
+      }
+      }
+      
   }
   };
 
@@ -74,7 +78,7 @@ const ExpertPanelSidebar = () => {
 
   return (
     <div id="app" className="min-h-screen fixed bg-sidebarGreen">
-      <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
+      <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-1">
         <nav className=" inline-flex flex-col space-y-2">
           <button
             className="h-8 w-8 p-1 mb-8 hidden sm:block bg-sidebarGreen text-sidebarGreen rounded-lg mx-auto hover:border-gray-300"

@@ -35,7 +35,10 @@ export default function AddedProduct() {
     <AddNewProduct />
     </div>
     <ProductBar />
+    <div className='ml-24'>
     <LogTable data={products} />
+    </div>
+    
     </div>
   )
 }

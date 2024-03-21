@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-function Rule({ rule , type}) {
-
+function Rule({ rule , type, rules}) {
+console.log(rules)
   const handleDelete = async (ruleId) => {
     try {
       const response = await axios.delete(`http://localhost:3000/api/rules/rules/${ruleId}`,
@@ -50,6 +50,17 @@ function Rule({ rule , type}) {
 
 
   return (
+    <div>
+{type === "home" && rules.slice(0, 3).map((item, index) => (
+        <div key={index} className='flex bg-white rounded w-6/8 ml-8 mt-12 mr-16 border-2 border-black h-fit'>
+          <div className='w-full'>
+            <p className='text-left ml-4 text-gray-500'>{item.ruleNumber}</p>
+            <p className='text-left ml-4 font-semibold mb-4'>{item.rule}</p>
+          </div>
+        </div>
+      ))}
+
+{type !== "home" && (
     <div className='flex bg-white rounded w-6/8 ml-8 mt-12 mr-16 border-2 border-black h-fit'>
       <div className='w-full'>
       <p className='text-left ml-4 text-gray-500 '>{rule.ruleNumber} </p>
@@ -71,6 +82,8 @@ function Rule({ rule , type}) {
 
       {/* <Popup text1={"delete"} text2={"rule"} button={"Delete"} openModal={openModal} setOpenModal={setOpenModal}/> */}
 
+    </div>
+    )}
     </div>
   );
 }

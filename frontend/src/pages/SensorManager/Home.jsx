@@ -22,6 +22,21 @@ function Home() {
 
   const [products, setProducts] = useState([]);
   const [RuleData, setRuleData] = useState([]);
+  const [pendingVideoData, setPendingVideoData] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from your backend API
+    const fetchData = async () => {
+      // try {
+        // Allvideos.jsx
+        const response = await fetch('http://localhost:3000/api/videos/sensormanagernewvideo');
+        const data = await response.json();
+        setPendingVideoData(data);
+
+    };
+
+    fetchData();
+  }, []);
 
 //   useEffect(() => {
 //     // Fetch data when the component mounts
@@ -68,7 +83,7 @@ function Home() {
         </h1>
         <button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleVideos}>All Videos</button>
         </div>
-        <HomeSwiper/>
+        <HomeSwiper videoData={pendingVideoData}/>
         <div className='flex mt-24 justify-between'>
         <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
         <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
@@ -81,7 +96,7 @@ function Home() {
            Rules and Regulations
         </h1>
         {RuleData.map((rule, index) => (
-        <Rule key={index} rule={rule} type={"home"} />
+        <Rule key={index} rule={rule} type={"home"} rules={RuleData} />
       ))}
         </div>
       </div>

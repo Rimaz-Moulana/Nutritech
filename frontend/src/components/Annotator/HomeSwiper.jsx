@@ -6,19 +6,8 @@ import Video from '../../assets/videos/astra.mp4'
 import arrow from '../../assets/Images/arrowgreen.png'
 import ReactPlayer from 'react-player';
 
-const HomeSwiper = () => {
-  const [videoData, setVideoData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/all');
-      const data = await response.json();
-      setVideoData(data);
-    };
+const HomeSwiper = ({videoData}) => {
   
-    fetchData();
-  }, []); 
-
   console.log(videoData)
   const sliderRef = useRef(null);
 
@@ -55,18 +44,18 @@ const HomeSwiper = () => {
         <div className='gap-6 w-6/8'>
         <Slider ref={sliderRef} {...settings}>
         {videoData.map((video, index) => (
-          <div key={index} className='ml-4 gap-6 p-4'>
-            <video controls width="100%" height="auto">
+          <div key={index} className='ml-4 gap-4 p-4 h-32'>
+            {/* <video controls width="100%" height="auto"> */}
               {/* <source src={video} type="video/mp4" /> */}
               <ReactPlayer
-                className='react-player fixed-bottom h-8 w-8 p-2'
+                className='react-player fixed-bottom h-8 w-8 p-1'
                 url={`/videos/${handleVideo(video.videoPath)}`}
                 width='100%'
                 height='100%'
                 controls={true}
             />
-              Your browser does not support the video tag.
-            </video>
+              {/* Your browser does not support the video tag. */}
+            {/* </video> */}
           </div>
         ))}
         
