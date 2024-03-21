@@ -26,7 +26,7 @@ async function login(req, res) {
         let dashboardRoute;
         switch (user.role) {
             case 'admin':
-                dashboardRoute = '/admin/dashboard';
+                dashboardRoute = '/users';
                 break;
             case 'annotator':
                 dashboardRoute = '/home';
