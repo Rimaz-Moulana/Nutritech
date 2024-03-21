@@ -48,42 +48,34 @@ console.log(rules)
     
   };
 
-
   return (
     <div>
-{type === "home" && rules.slice(0, 3).map((item, index) => (
-        <div key={index} className='flex bg-white rounded w-6/8 ml-8 mt-12 mr-16 border-2 border-black h-fit'>
-          <div className='w-full'>
-            <p className='text-left ml-4 text-gray-500'>{item.ruleNumber}</p>
-            <p className='text-left ml-4 font-semibold mb-4'>{item.rule}</p>
-          </div>
-        </div>
-      ))}
-
-{type !== "home" && (
-    <div className='flex bg-white rounded w-6/8 ml-8 mt-12 mr-16 border-2 border-black h-fit'>
+    <div className='flex bg-white rounded ml-8 mt-8 mr-16 border-2 border-black h-fit'>
       <div className='w-full'>
       <p className='text-left ml-4 text-gray-500 '>{rule.ruleNumber} </p>
-        <p className='text-left ml-4 font-semibold mb-4 '>{rule.rule} </p>
+        <p className='text-left ml-4 font-semibold mb-4 p-2'>{rule.rule} </p>
       </div>
 
-      <div className='flex h-12 justify-end w-1/4 mt-6'>
+     
         {/* <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">Edit</button> */}
         
       {(type === "sensormanager" || type==="expert") && (
-        <button
-        className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-        onClick={() => handleOpen(rule._id)}
-      >
-        Delete
-      </button>
+         <div className='flex justify-end items-end h-12 w-1/8 mt-6 bottom-0'>
+         <button
+           className=" text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 "
+           onClick={() => handleOpen(rule._id)}
+         >
+           Delete
+         </button>
+       </div>
+       
       )}  
-      </div>
+      
 
       {/* <Popup text1={"delete"} text2={"rule"} button={"Delete"} openModal={openModal} setOpenModal={setOpenModal}/> */}
 
     </div>
-    )}
+  
     </div>
   );
 }

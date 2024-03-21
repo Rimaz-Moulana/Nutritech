@@ -130,16 +130,16 @@ function Rules() {
       </div>
       <div className="w-full ml-0 h-full sm:ml-64">
         <Navbar type='sensormanager'/>
-        <div className='flex justify-between'>
-        <h1 className=' mb-8 mt-24 ml-8 text-3xl font-semibold text-sidebarGreen left-0'>
-           Rules and Regulations
+        <div className=''>
+        <h1 className=' mt-24 text-2xl font-semibold text-sidebarGreen left-0'>
+        GAZETTE EXTRAORDINARY OF THE DEMOCRATIC SOCIALIST REPUBLIC OF SRI LANKA - 14.02.2023
         </h1>
         {(type === "sensormanager" || type === "expert") && (
         <button
-          className="text-white mt-24 mr-20 bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="flex-end text-white mt-4 mr-20 bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           onClick={handleOpen}  // Add parentheses to call the function
         >
-          Add New
+          Add New Regulation
         </button>
         )}
         </div>
@@ -156,7 +156,7 @@ function Rules() {
                   Cancel
                 </button>
           </div>
-          
+
       </div>
           
       

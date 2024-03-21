@@ -20,18 +20,26 @@ function Home() {
     navigate('/product');
   }
 
+  const type="sensormanager";
+  const viewrules= () => {
+    navigate(`/rules/${type}`);
+  };
+
+
   const [products, setProducts] = useState([]);
   const [RuleData, setRuleData] = useState([]);
-  const [pendingVideoData, setPendingVideoData] = useState([]);
+  const [VideoData, setVideoData] = useState([]);
+
+
 
   useEffect(() => {
     // Fetch data from your backend API
     const fetchData = async () => {
       // try {
         // Allvideos.jsx
-        const response = await fetch('http://localhost:3000/api/videos/sensormanagernewvideo');
+        const response = await fetch('http://localhost:3000/api/videos/sensormanagerallvideos');
         const data = await response.json();
-        setPendingVideoData(data);
+        setVideoData(data);
 
     };
 
@@ -77,13 +85,13 @@ function Home() {
         <div className='p-1'>
         <Navbar type='annotator' />
         </div>
-        <div className='flex justify-between z-9999 mt-24'>
-        <h1 className='ml-8 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
+        <div className='flex justify-between z-9999 mt-12'>
+        <h1 className='ml-8 mb-8 mt-12 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
            Videos
         </h1>
-        <button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleVideos}>All Videos</button>
+        <button className="text-white mt-12 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleVideos}>All Videos</button>
         </div>
-        <HomeSwiper videoData={pendingVideoData}/>
+        <HomeSwiper videoData={VideoData}/>
         <div className='flex mt-24 justify-between'>
         <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
         <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
@@ -91,12 +99,17 @@ function Home() {
         <div className='mt-4 left-0'>
         <ProductTable data={products} />
         </div>
-        <div className='mt-4 left-0'>
-        <h1 className='ml-8 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
-           Rules and Regulations
-        </h1>
+        <div className=''>
+        <div className='flex mt-8 justify-between'>
+        <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Rules and Regulations</h1>
+        <button className="mt-4 text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={viewrules}>
+          View All rules
+      </button>
+        </div>
         {RuleData.map((rule, index) => (
-        <Rule key={index} rule={rule} type={"home"} rules={RuleData} />
+          index<4 &&
+        <Rule key={index} rule={rule} type={"sensormanagerhome"}/>
+          
       ))}
         </div>
       </div>

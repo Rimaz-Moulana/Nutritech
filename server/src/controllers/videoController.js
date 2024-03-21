@@ -106,6 +106,17 @@ exports.getpendingvideos= async (req,res)=>{
     }
 }
 
+exports.getsensormanagernallvideos= async (req,res)=>{
+  try {
+        const pendingVideos = await VideoService.getsensormanagerallvideo();
+        res.json(pendingVideos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
 exports.saveSensorManagerReview= async (req,res)=>{
   try {
         const videoId = req.params.videoId;
