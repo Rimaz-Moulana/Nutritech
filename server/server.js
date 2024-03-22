@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const vidoeRoutes = require('./src/routes/videoRoutes');
 const productRoutes = require('./src/routes/productRoutes')
 const annotationsRoutes = require('./src/routes/annotationRoutes')
+const userRoutes = require('./src/routes/routesUser')
 
 
 const ruleRoutes = require('./src/routes/ruleRoutes')
@@ -46,6 +47,7 @@ app.use('/api', authRoutes);
   // app.use('/videos', videoRoutes);
   app.use('/annotations', annotationsRoutes);
 
+app.use('/api/users', userRoutes)
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
