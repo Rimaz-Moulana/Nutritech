@@ -39,6 +39,7 @@ exports.addUser = async (req, res) => {
 
 // Update user
 exports.updateUser = async (req, res) => {
+  console.log(req.body)
   try {
     const user = await User.findById(req.params.id);
     if (user == null) {
