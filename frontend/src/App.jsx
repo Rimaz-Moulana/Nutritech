@@ -73,7 +73,7 @@ function App(){
               <Route path='/log' element={<Log />} /> */}
               <Route path='/register' element={<Register />} />
               <Route path='/blankPages' element={<BlankPage />} />
-              <Route path='/product' element={<ProductDetails />} />
+              <Route path='/product/:productId' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />
               <Route path='/addedproduct' element={<AddedProduct />} />
 
