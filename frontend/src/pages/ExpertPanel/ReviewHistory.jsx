@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import Sidebar from '../../components/sidebar/ExpertPanelSidebar'
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Annotations from '../../components/AnnotationTable/RowHistory'
 import Comments from '../../components/CommentSection/Comments';
 import ViewComment from '../../components/CommentSection/ViewComment';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewHistory() {
 const navigate= useNavigate();
@@ -20,7 +20,7 @@ const {videoId} = useParams();
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar />
+      <Sidebar type="expert"/>
       </div>
       <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64 ">
         <div className='px-12'>

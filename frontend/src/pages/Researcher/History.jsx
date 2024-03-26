@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import Sidebar from '../../components/sidebar/SideBar';
+import Navbar from '../../components/navbar/Navbar';
+
 
 function History() {
   const [ITNVideoData, setITNVideoData] = useState([]);
@@ -46,9 +49,12 @@ function History() {
     navigate('/uploadvideo');
   };
   return (
-    <div className='bg-backgroundGreen flex'>
+    <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
+      <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
+        <Sidebar type="researcher"/>
+        </div>
     <div className="w-full ml-20 mr-24 h-full ">
-      <NavbarMediaStation />
+      <Navbar />
       <div className='flex justify-between'>
       <h1 className=' mb-8 mt-24 text-3xl ml-4 font-semibold text-sidebarGreen justify-start '>
          Upload History

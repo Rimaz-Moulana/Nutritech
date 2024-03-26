@@ -3,6 +3,7 @@ import Navbar from '../../components/navbar/Navbar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import GridListView from '../../components/Toggle/GridListView';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function AnnotatedVideos() {
   
@@ -40,7 +41,7 @@ function AnnotatedVideos() {
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col">
-        <AnnotatorSideBar />
+        <Sidebar type="annotator" />
       </div>
       <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
         <Navbar type='annotator'/>

@@ -6,6 +6,7 @@ import Navbar from '../../components/navbar/Navbar';
 import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import ProductTable from '../../components/tables/LogTable';
 import ExpertPanelSidebar from '../../components/sidebar/ExpertPanelSidebar';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function Home() {
 
@@ -79,7 +80,7 @@ function Home() {
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <ExpertPanelSidebar/>
+        <Sidebar type="expert"/>
       </div>
       <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
         <div className='p-1'>

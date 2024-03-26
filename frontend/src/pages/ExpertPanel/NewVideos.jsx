@@ -5,8 +5,8 @@ import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
 import ProductTable from '../../components/tables/LogTable';
 import Rule from '../../components/Rule';
-import Sidebar from '../../components/sidebar/ExpertPanelSidebar'
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function NewVideos() {
 
@@ -38,7 +38,7 @@ function NewVideos() {
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar />
+      <Sidebar type="expert"/>
       </div>
       <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64 ">
         <div className='px-12'>

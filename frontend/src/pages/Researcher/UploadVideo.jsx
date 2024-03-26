@@ -5,6 +5,7 @@ import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 import Swal from 'sweetalert2';
+import Navbar from '../../components/navbar/Navbar';
 
 
 function UploadVideo() {
@@ -80,7 +81,7 @@ function UploadVideo() {
   return (
     <div className='bg-backgroundGreen flex h-screen'>
     <div className="w-full ml-12 mr-4 ">
-      <NavbarMediaStation />
+      <Navbar />
       <div className='flex justify-between'>
       <h1 className=' mb-8 mt-32 lg:mr-[820px] text-3xl ml-4 font-semibold text-sidebarGreen justify-start'>
          Upload Advertisement Video

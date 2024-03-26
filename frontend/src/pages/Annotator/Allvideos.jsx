@@ -3,6 +3,7 @@ import Navbar from '../../components/navbar/Navbar';
 import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 import GridListView from '../../components/Toggle/GridListView';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function Allvideos() {
   const [videoData, setVideoData] = useState([]);
@@ -35,7 +36,7 @@ function Allvideos() {
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col">
-        <AnnotatorSideBar />
+        <Sidebar type="annotator" />
       </div>
       <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
         <Navbar type='annotator' />

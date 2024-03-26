@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import IndustrySidebar from '../components/sidebar/IndustrySidebar';
 import ExpertPanelSidebar from '../components/sidebar/ExpertPanelSidebar';
+import Sidebar from '../components/sidebar/SideBar';
 
 function Rules() {
   const [RuleData, setRuleData] = useState([]);
@@ -117,16 +118,7 @@ function Rules() {
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> 
-      {type === "sensormanager" && (
-        <SensorManagerSidebar />
-      )}
-       {type === "industry" && (
-        <IndustrySidebar />
-      )}
-      {type === "expert" && (
-        <ExpertPanelSidebar />
-      )}
-
+      <Sidebar type={type}/>
       </div>
       <div className="w-full ml-0 h-full sm:ml-64">
         <Navbar type='sensormanager'/>

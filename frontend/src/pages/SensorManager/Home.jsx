@@ -7,6 +7,7 @@ import ProductTable from '../../components/tables/LogTable';
 import Rules from '../Rules';
 import Rule from '../../components/Rule';
 import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function Home() {
 
@@ -79,7 +80,7 @@ function Home() {
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <SensorManagerSidebar />
+        <Sidebar type="sensormanager" />
       </div>
       <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
         <div className='p-1'>
