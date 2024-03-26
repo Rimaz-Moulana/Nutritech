@@ -19,6 +19,7 @@ router.post('/industry/add', upload.any('video/images') , productController.addN
 
 router.post('/add', productController.addProduct);
 router.get('/getAll', productController.getAllProduct);
+router.get('/industry/getProduct/:productId', productController.getProduct)
 router.get('/reviewproduct/:productId', productController.fetchSensorManagerReview)
 router.delete('/reviewproduct/:productId', productController.deleteProduct);
 router.post('/reviewproduct/:productId', productController.savePendingProduct );
