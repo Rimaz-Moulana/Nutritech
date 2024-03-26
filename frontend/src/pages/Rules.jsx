@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 // import { useNavigate } from 'react-router-dom';
 import VideoContainer from './../components/videoContainer/VideoContainer';
-import SensorManagerSidebar from './../components/sidebar/SensorManagerSidebar';
 import Navbar from './../components/navbar/Navbar';
 import Rule from './../components/Rule';
 import backwardarrow from './../assets/Images/backarrowgreen.png'
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import IndustrySidebar from '../components/sidebar/IndustrySidebar';
-import ExpertPanelSidebar from '../components/sidebar/ExpertPanelSidebar';
 import Sidebar from '../components/sidebar/SideBar';
 
 function Rules() {

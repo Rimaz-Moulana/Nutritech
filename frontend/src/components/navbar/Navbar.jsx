@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../../src/assets/Images/NutriTechLogo08.png';
 import menuIcon from '../../../src/assets/Images/blackmenu.png';
-import SensorManagerSidebar from '../sidebar/SensorManagerSidebar';
-import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar';
 import Sidebar from '../sidebar/SideBar';
 
 export default function Navbar({type}) {
