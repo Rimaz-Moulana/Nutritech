@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function LogTable() {
+export default function LogTable(props) {
+  const navigate = useNavigate()
   const [products, setProducts] = useState([]);
   const [selectedProductIndex, setSelectedProductIndex] = useState(null);
 
@@ -31,6 +33,13 @@ export default function LogTable() {
 
   console.log(products)
   const filterKeys = ['_id', 'createdTime', 'CreatedData','__v']; // Add the keys you want to filter out
+
+  const handleEdit = (productId) => {
+    
+    navigate(`/product/${productId}`);
+    console.log(productId)
+  };
+
 
   return (
     <div className='w-[100%] sm:text-sm sm:p-2'>
@@ -77,6 +86,7 @@ export default function LogTable() {
                   <button
                     className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2'
                     onClick={() => openDetailsModal(index)}>View Details</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mr-2" onClick={() => handleEdit(product._id)}>Edit</button>
                   {selectedProductIndex === index && (
                     <div className="modal absolute z-10 top-full bg-gray-50 rounded-sm shadow-lg p-1"     style={{ top: 'calc(100% + 5px)', right: 0 }}>
                       <button className=" text-white bg-gradient-to-t from-red-600 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-700 dark:focus:ring-red-700 shadow-lg shadow-red-700 dark:shadow-lg dark:shadow-red-700 font-medium rounded-lg text-sm px-10 py-1 text-center me-1 mb-1 " onClick={closeDetailsModal}>Close</button>

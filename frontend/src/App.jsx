@@ -53,6 +53,9 @@ import IndustryHome from './pages/Industry/Home';
 import ResearcherHome from './pages/Researcher/Home';
 
 
+import AddUser from './pages/Admin/AddUser.jsx';
+import AllUsers from './pages/Admin/AdminDashboard.jsx';
+
 
 
 import './App.css'
@@ -70,7 +73,7 @@ function App(){
               <Route path='/log' element={<Log />} /> */}
               <Route path='/register' element={<Register />} />
               <Route path='/blankPages' element={<BlankPage />} />
-              <Route path='/product' element={<ProductDetails />} />
+              <Route path='/product/:productId' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />
               <Route path='/addedproduct' element={<AddedProduct />} />
 
@@ -121,6 +124,9 @@ function App(){
 
               <Route path='/researcherhome' element ={<ResearcherHome/>} /> {/*reseracherhome*/}
               <Route path='/industryhome' element ={<IndustryHome/>} /> {/*industryhome*/}
+
+              <Route path='/addUser' element={<AddUser />} />
+              <Route path='/users' element={<AllUsers />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

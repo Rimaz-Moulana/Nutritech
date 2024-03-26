@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function dropdown({ value,id,name, onChange}) {
   const optionsArray = [
-    { value: 'Confectionery:', label: 'Confectionery:' },
+    { value: 'Confectionery', label: 'Confectionery' },
     { value: 'Fine Bakery Wares', label: 'Fine Bakery Wares' },
     { value: 'Bread and Ordinary Bakery Wares', label: 'Bread and Ordinary Bakery Wares' },
     { value: 'Cereals', label: 'Cereals' },
@@ -31,7 +31,7 @@ export default function dropdown({ value,id,name, onChange}) {
         value={value} // Set the selected value
         onChange={onChange} // Handle changes
       >
-            <option selected>Product Category</option>
+            <option className='' selected>Product Category</option>
             
             {optionsArray.map((option) => (
             <option key={option.value} value={option.value}>

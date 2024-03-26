@@ -23,6 +23,18 @@ exports.getAllProduct = async(req,res ) =>{
     
 }
 
+exports.getProduct = async(req,res ) =>{
+  try {
+      const productId = req.params.productId;
+      const Product = await productService.getProduct(productId);
+      res.status(201).json(Product);
+  }
+  catch(error){
+      res.status(400).json({message:error.message});
+  }
+  
+}
+
 exports.addNewProduct = async (req,res) => {
 
     try{
