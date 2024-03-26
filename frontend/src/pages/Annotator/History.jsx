@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar';
 import Navbar from '../../components/navbar/Navbar';
 import Videowithtext from '../../components/AnnotationTable/Videowithtext';
 import RowHistory from '../../components/AnnotationTable/RowHistory';

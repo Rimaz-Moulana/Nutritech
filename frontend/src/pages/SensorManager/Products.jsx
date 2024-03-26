@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar';
 import Navbar from '../../components/navbar/Navbar';
 import Product from '../../components/SensorManager/Product'; 
 import Sidebar from '../../components/sidebar/SideBar';

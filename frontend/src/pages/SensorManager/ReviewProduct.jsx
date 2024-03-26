@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar'
 import Navbar from '../../components/navbar/Navbar'
 import { useParams } from 'react-router-dom';
 import VideowithReview from '../../components/SensorManager/VideowithReview';

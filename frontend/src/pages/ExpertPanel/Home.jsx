@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
-import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import ProductTable from '../../components/tables/LogTable';
-import ExpertPanelSidebar from '../../components/sidebar/ExpertPanelSidebar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function Home() {

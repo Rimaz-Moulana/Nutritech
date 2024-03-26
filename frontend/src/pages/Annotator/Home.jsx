@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
-import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import ProductTable from '../../components/tables/LogTable';
 import Sidebar from '../../components/sidebar/SideBar';
 
@@ -44,7 +43,7 @@ function Home() {
       setTimeout(() => {
         // Remove token from local storage after 5 seconds
         localStorage.removeItem('token');
-    }, 30000); // 60 seconds
+    }, 150000); // 60 seconds
 
 
       if(authData){

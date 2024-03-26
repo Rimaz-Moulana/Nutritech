@@ -6,7 +6,6 @@ import Navbar from '../../components/navbar/Navbar';
 import ProductTable from '../../components/tables/LogTable';
 import Rules from '../Rules';
 import Rule from '../../components/Rule';
-import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function Home() {

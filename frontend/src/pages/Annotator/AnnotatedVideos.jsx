@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
-import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import GridListView from '../../components/Toggle/GridListView';
 import Sidebar from '../../components/sidebar/SideBar';
 

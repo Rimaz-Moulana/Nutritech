@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 // import { useNavigate } from 'react-router-dom';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
-import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar';
 import Navbar from '../../components/navbar/Navbar';
 import GridListView from '../../components/Toggle/GridListView';
 import Sidebar from '../../components/sidebar/SideBar';

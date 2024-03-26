@@ -4,7 +4,6 @@ import React from 'react';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 import Sidebar from '../../components/sidebar/SideBar';
 import Navbar from '../../components/navbar/Navbar';
