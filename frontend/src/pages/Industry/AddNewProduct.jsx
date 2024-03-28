@@ -184,7 +184,6 @@ export default function ProductDetails() {
             formD.append('image',formData.imageBack);
             formD.append('image',formData.imageLeft);
             formD.append('image',formData.imageRight);
-            formD.append('createdAt', formData.createdAt);
             
             
             try {
