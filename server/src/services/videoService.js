@@ -214,7 +214,7 @@ const convertVideoToText = async (videoPath) => {
             config: {
                 encoding: 'LINEAR16',
                 sampleRateHertz: 16000,
-                languageCode: 'en-US',
+                languageCode: 'si-LK', // Specify the language code for Sinhala
             },
             audio: {
                 content: fs.readFileSync(videoPath).toString('base64'),
