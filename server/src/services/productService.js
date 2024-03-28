@@ -10,6 +10,15 @@ exports.addProduct = async (productDetails) => {
     }
 };
 
+exports.updateProduct = async (productId, productData) => {
+  try{
+    console.log(productData,productId)
+    return await Product.findByIdAndUpdate(productId, productData, {new: true});
+  }catch (error) {
+    throw error;
+  }
+}
+
 exports.getAllProducts = async() => {
     return await Product.find();
 }

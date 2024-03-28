@@ -12,6 +12,18 @@ exports.addProduct = async(req,res)=>{
     }
 }
 
+exports.updateProduct = async(req,res)=>{
+    const productId = req.params.productId;
+    const updatedData = req.body;
+
+    try {
+        const updatedProduct = await productService.updateProduct(productId, updatedData);
+        res.json(updatedProduct);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 exports.getAllProduct = async(req,res ) =>{
     try {
         const allProduct = await productService.getAllProducts();
