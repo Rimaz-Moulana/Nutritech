@@ -1,4 +1,6 @@
 const VideoModel = require('../models/videoModel');
+const fs = require('fs')
+const { SpeechClient } = require('@google-cloud/speech')
 
 const getCurrentDateTime = () => {
   const currentDate = new Date();
@@ -200,4 +202,37 @@ exports.postReply = async (videoId, replycomment, req) => {
     console.error(`Error saving comment: ${error.message}`);
     throw error;
   }
+};
+
+
+const speechClient = new SpeechClient();
+
+const convertVideoToText = async (videoPath) => {
+    try {
+        // Reads a local audio file and converts it to text
+        const [response] = await speechClient.recognize({
+            config: {
+                encoding: 'LINEAR16',
+                sampleRateHertz: 16000,
+                languageCode: 'en-US',
+            },
+            audio: {
+                content: fs.readFileSync(videoPath).toString('base64'),
+            },
+        });
+
+        // Get transcription result
+        const transcription = response.results
+            .map(result => result.alternatives[0].transcript)
+            .join('\n');
+
+        return transcription;
+    } catch (error) {
+        console.error('Error converting audio to text:', error);
+        throw error;
+    }
+};
+
+module.exports = {
+    convertVideoToText,
 };

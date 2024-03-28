@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import video from '../../assets/videos/astra.mp4'
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 
 function Videowithtext({videoId}) {
   console.log(videoId)
   const [videoData, setVideoData] = useState([]);
+  const [conversionResult, setConversionResult] = useState(null);
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -13,6 +13,7 @@ function Videowithtext({videoId}) {
         const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
         const data = response.data;  // Access the data property directly
         setVideoData(data);
+        setConversionResult(response.data.text);
       } catch (error) {
         console.error('Error fetching Video:', error);
       } 
@@ -52,6 +53,7 @@ console.log(videoData)
       )}
       <div className='bg-white lg:w-1/2 lg:ml-12 sm:w-full p-3 text-justify border rounded-lg'>
         <p>
+        {conversionResult && <div>{conversionResult}</div>}
         Cake? Bake!
         Cake Bake Cake Bake Cake Bake Cake Bake cake bake cake bake with Astra 
         Cake Bake Cake Bake Cake Bake Cake Bake cake bake cake bake with Astra 

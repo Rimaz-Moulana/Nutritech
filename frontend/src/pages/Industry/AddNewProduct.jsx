@@ -30,6 +30,8 @@ export default function ProductDetails() {
         const cTime = `${hours}:${minutes}:${seconds}`;
 
         const status = 'pending';
+        const [conversionResult,  setConversionResult] = useState(null);
+        const [selectedFile, setSelectedFile] = useState(null);
         const [images,setImages] = useState([null, null])
         const [uploadStatus, setUploadStatus] = useState('');
         const [formData, setFormData] = useState({
@@ -100,6 +102,7 @@ export default function ProductDetails() {
         
           const handleFileChange = (e) => {
             setFormData({ ...formData, videoFile: e.target.files[0] });
+            setSelectedFile(e.target.files[0]);
           };
 
           const handleImageFile = (file) => {
@@ -192,6 +195,7 @@ export default function ProductDetails() {
             //   console.log(formD)
               const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
               console.log(response.data);
+              setConversionResult(response.data.text);
               setUploadStatus("Product uploaded successfully!");
               }catch(error){
                 console.error('Error uploading video:', error);
@@ -341,6 +345,7 @@ export default function ProductDetails() {
                 <div className='mt-10'>
                     {uploadStatus && <h3>{uploadStatus}</h3>}
                 </div>
+                {conversionResult && <div>{conversionResult}</div>}
         </div>
         </form>
     </div>
