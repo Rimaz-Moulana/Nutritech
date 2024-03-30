@@ -2,29 +2,46 @@ import React , {useEffect, useRef, useState} from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Video from '../../assets/videos/astra.mp4'
-import arrow from '../../assets/Images/arrowgreen.png'
 import ReactPlayer from 'react-player';
+// import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const HomeSwiper = ({videoData}) => {
   
   console.log(videoData)
   const sliderRef = useRef(null);
 
+  const SampleNextArrow=(props)=>{
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "gray", color:"black" }}
+        onClick={onClick}
+      />
+    );
+  }
+  
+  const SamplePrevArrow=(props)=> {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "gray", color:"black"}}
+        onClick={onClick}
+      />
+    );
+  }
+
   const settings = {
-    dots: false,
+    dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 5, // Number of videos visible in the row
-    slidesToScroll: 1,
-  };
-
-  const nextSlide = () => {
-    sliderRef.current.slickNext();
-  };
-
-  const prevSlide = () => {
-    sliderRef.current.slickPrev();
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    // nextArrow: <FaChevronRight />, // Use imported arrow icons
+    // prevArrow: <FaChevronLeft />,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow /> 
   };
 
   const handleVideo = (inputUrl) =>{
@@ -40,15 +57,13 @@ const HomeSwiper = ({videoData}) => {
   }
 
   return (
-    <div className=' ml-12 mr-12'>
-        <div className='gap-6 w-6/8'>
-        <Slider ref={sliderRef} {...settings}>
+    <div className='p-4'>
+        <div className=''>
+        <Slider {...settings} ref={sliderRef}>
         {videoData.map((video, index) => (
-          <div key={index} className='ml-4 gap-4 p-4 h-32'>
-            {/* <video controls width="100%" height="auto"> */}
-              {/* <source src={video} type="video/mp4" /> */}
+          <div key={index} className=' gap-2 p-4 h-44'>
               <ReactPlayer
-                className='react-player fixed-bottom h-8 w-8 p-1'
+                className='react-player p-1'
                 url={`/videos/${handleVideo(video.videoPath)}`}
                 width='100%'
                 height='100%'
@@ -57,12 +72,9 @@ const HomeSwiper = ({videoData}) => {
               {/* Your browser does not support the video tag. */}
             {/* </video> */}
           </div>
-        ))}
-        
+        ))}  
       </Slider>
-        </div>
-      
-      
+        </div>  
     </div>
   );
 };

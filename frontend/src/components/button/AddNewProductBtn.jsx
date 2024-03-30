@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function AddNewProductBtn() {
   const navigate = useNavigate(); 
   const addproducts= () => {
-    navigate('/product');
+    navigate('/addnewproduct');
   };
   return (
     <div className='inline-flex ml-[80%] w-[80%] h-[3%] mt-24'>

@@ -67,7 +67,6 @@ function App(){
     <BrowserRouter>
         <Routes>
             {/* <Route path='/'  > */}
-              {/* <Route path='/' element={<Nabra/>} /> */}
               <Route path='/' element={<Login />} />
               {/* <Route path='/login' element={<Login />} />
               <Route path='/log' element={<Log />} /> */}

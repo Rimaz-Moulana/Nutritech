@@ -12,7 +12,7 @@ export default function Navbar({type}) {
 
   return (
     <div>
-      <nav className="mt-0 mb-6 fixed w-full z-10">
+      <nav className="mt-0 mb-6 fixed w-screen z-10">
         <div className="flex p-2 bg-backgroundGreen">
           {/* Menu Icon for Small Screens */}
           <img

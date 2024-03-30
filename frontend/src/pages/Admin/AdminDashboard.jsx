@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar';
+import Sidebar from '../../components/sidebar/SideBar';
 
 const UserList = () => {
   const navigate = useNavigate()
@@ -59,7 +59,7 @@ const UserList = () => {
   return (
     <div className='bg-backgroundGreen overflow-x-hidden'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col">
-        <Annotatorsidebar />
+        <Sidebar type="admin" />
       </div>
       <div className="w-full sm:w-3/4 ml-0 sm:ml-64">
         <Navbar />

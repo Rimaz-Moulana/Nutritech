@@ -19,7 +19,7 @@ function Home() {
     navigate('/all')
   }
   const handleProducts = () =>{
-    navigate('/product');
+    navigate('/addedproduct');
   }
 
   const [products, setProducts] = useState([]);
@@ -69,7 +69,7 @@ function Home() {
   }
 
   const addproducts= () => {
-    navigate('/product');
+    navigate('/addnewproduct');
   };
 
   const type="industry";

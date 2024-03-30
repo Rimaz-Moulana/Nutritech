@@ -85,9 +85,9 @@ const filteredVideos = videoData?.filter((video) => {
 
 
   return (
-    <div className='w-full ml-12'> 
+    <div className='w-full ml-auto pr-2 pl-2'> 
     {viewType=== 'Grid'  &&(
-      <div className=' right-0'>
+      <div className='sm:w-auto right-0'>
         <div className=' items-end'>
       {type !== "industry" && (
         <>
@@ -247,8 +247,8 @@ const filteredVideos = videoData?.filter((video) => {
   )}
 
  {viewType==="List" && (
-   <div className='h-full h-min-screen mt-4 text-black w-full min-w-screen'>
-    <div className=' items-end'>
+   <div className='h-full mt-4 text-black w-full min-w-screen'>
+    <div className='items-end'>
     {type !== "industry" && (
       <>
     <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
@@ -277,57 +277,62 @@ const filteredVideos = videoData?.filter((video) => {
            </>
     )}
     </div>
-     
-   <table className='w-full mt-8'>
+    <div className='h-full mt-4 overflow-x-auto xl:overflow-hidden text-black place-items-center pr-4'> 
+   <table className='h-full mt-8 w-full'>
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>
        <tr className='mt-12'>
         <th></th>
-        <th>Brand {' '}</th>
-         <th className=''> Product{' '}</th>
+        {/* <th className='px-3'> {' '}</th> */}
+        <th className='px-2'>Brand {' '}</th>
+         <th className='px-2'> Product{' '}</th>
          <th>
            Status
          </th>
-         <th className='text-center mt-12'>Uploaded Date</th>
-         <th className='mt-12'>Uploaded Time</th>
-         <th className='mt-12'>Uploader</th>
+         <th className='px-2 text-center mt-12'>Uploaded Date</th>
+         <th className='px-2 mt-12'>Uploaded Time</th>
+         <th className='px-2 mt-12'>Uploader</th>
          {type === 'annotated' && (
            <>
-             <th>Annotated Date</th>
-             <th>Annotated Time</th>
+             <th className='px-2'>Annotated Date</th>
+             <th className='px-2'>Annotated Time</th>
            </>
          )}
          {type!=="reviewvideo" && (
-         <th className='mt-12'>Actions</th>
+         <th className='px-2 mt-12'>Actions</th>
          )} 
        </tr>
      </thead>
      <tbody className='mt-12 text-black'>
        {filteredVideos.map((video, index) => (
          <tr key={index} className='border-b-1'>
-          <td className='w-40'>
-          <ReactPlayer
-                className='react-player fixed-bottom h-8 w-8 p-2'
+          <td className='w-40 pr-2'>
+            <div></div>
+            <div>
+            <ReactPlayer
+                className='react-player h-8 w-8 pl-2'
                 url={`/videos/${handleVideo(video.videoPath)}`}
                 width='100%'
-                height='100%'
+                height='auto'
                 controls={true}
             />
+            </div>
+         
           </td>
-          <td>{video.brand}</td>
-           <td>{video.product}</td>
-           <td>{video.status}</td>
-           <td>{video.createdIn}</td>
-           <td>{video.createdAt}</td>
-           <td>{video.uploader}</td>
+          <td className='pr-2'>{video.brand}</td>
+           <td className='px-2'>{video.product}</td>
+           <td className='px-2'>{video.status}</td>
+           <td className='px-2'>{video.createdIn}</td>
+           <td className='px-2'>{video.createdAt}</td>
+           <td className='px-2'>{video.uploader}</td>
            {type === 'annotated' && (
              <>
-               <td>{video.annotateddate}</td>
-               <td>{video.annotatedtime}</td>
+               <td className='px-2'>{video.annotateddate}</td>
+               <td className='px-2'>{video.annotatedtime}</td>
              </>
            )}
 
-           <td>
+           <td className='px-2'>
              {video.status === 'unannotated' && type!=="reviewvideo" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-11 py-2.5 text-center me-2 mb-2 "
@@ -360,7 +365,7 @@ const filteredVideos = videoData?.filter((video) => {
 
              {video.status === 'green' && (type==="expert" || type==='expertgreen') && (
                <button
-               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 lg:px-8 py-2.5 sm:px-2 "
                  onClick={() => handleApprove(video._id)}
              >View Details</button>
              )}
@@ -380,6 +385,7 @@ const filteredVideos = videoData?.filter((video) => {
        ))}
      </tbody>
    </table>
+   </div>
  </div>
 
 )}

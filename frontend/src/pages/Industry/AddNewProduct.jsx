@@ -10,6 +10,7 @@ import TextFiledWhite2 from '../../components/fields/textFieldWhite2'
 import TextFiledsmall from '../../components/fields/textFieldsmall'
 import TextFiled from '../../components/fields/textfield'
 import Navbar from '../../components/navbar/Navbar'
+import Sidebar from '../../components/sidebar/SideBar'
 
 export default function ProductDetails() {
         const currentTimeInMillis = Date.now();

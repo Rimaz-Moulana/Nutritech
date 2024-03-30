@@ -159,7 +159,7 @@ const Sidebar = ({type}) => {
         if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Videos')) {
           navigate('/industryhistory');
         } else if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Products')) {
-          // navigate('/products');
+          navigate('/addedproduct');
         } else if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Rules & Regulations')) {
           navigate(`/rules/${type}`);
         } else {
@@ -211,7 +211,7 @@ const Sidebar = ({type}) => {
   };
 
   return (
-    <div id="app" className="min-h-screen fixed bg-sidebarGreen">
+    <div id="app" className="min-h-screen fixed bg-sidebarGreen lg:max-w-[15%]">
   <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
     <nav className=" inline-flex flex-col space-y-2">
       <button

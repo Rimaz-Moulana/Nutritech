@@ -17,7 +17,7 @@ function Home() {
     navigate('/all')
   }
   const handleProducts = () =>{
-    navigate('/product');
+    navigate('/addedproduct');
   }
 
   const type="sensormanager";

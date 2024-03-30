@@ -32,7 +32,7 @@ function Allvideos() {
       setTimeout(() => {
         // Remove token from local storage after 5 seconds
         localStorage.removeItem('token');
-    }, 30000); // 60 seconds
+    }, 150000); // 60 seconds
 
 
       if(authData){
@@ -67,18 +67,18 @@ function Allvideos() {
   // console.log(videoData)
 
   return (
-    <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
-      <div className="w-2/8 fixed h-full hidden sm:flex flex-col">
+    <div className='bg-backgroundGreen lg:overflow-x-hidden flex h-full min-h-screen w-full justify-between pr-3'>
+      <div className="fixed h-full hidden sm:flex flex-col">
         <Sidebar type="annotator" />
       </div>
-      <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
+      <div className="w-full h-full center-l  lg:ml-[15%] px-3">
         <Navbar type='annotator' />
         <div className='flex justify-between'>
-          <h1 className=' mb-8 ml-24 mt-32 text-3xl font-semibold text-sidebarGreen left-0'>
+          <h1 className=' mb-8 mt-32 lg:text-3xl sm:text-xl font-semibold text-sidebarGreen pl-3'>
                   All Videos
                 </h1>
-
-          <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white '>
+<div className='pr-3'>
+<label className='themeSwitcherTwo shadow-card relative mt-32 lg:h-10 sm:h-6  inline-flex  cursor-pointer select-none rounded-md bg-white '>
         <input
           type='checkbox'
           className='sr-only'
@@ -86,7 +86,7 @@ function Allvideos() {
           onChange={handleCheckboxChange}
         />
         <span
-          className={`flex space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+          className={`flex space-x-4 rounded pt-2 pb-2 px-2 text-sm font-medium ${
             !isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
           }`}
         >
@@ -101,6 +101,8 @@ function Allvideos() {
           Grid View
         </span>
       </label>
+</div>
+     
 </div>
         
 <VideoContainer 

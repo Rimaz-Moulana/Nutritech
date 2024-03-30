@@ -19,6 +19,7 @@ function Home() {
   }
 
   const [products, setProducts] = useState([]);
+  const [videoData, setVideoData] = useState([]);
 
   useEffect(() => {
     // Fetch data when the component mounts
@@ -34,6 +35,24 @@ function Home() {
       console.error('Error fetching data:', error);
     }
   }
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/videos/history');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
+        }
+        const data = await response.json();
+        setVideoData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchVideos();
+  }, []);
+  
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -49,7 +68,7 @@ function Home() {
         </h1>
         <button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleVideos}>All Videos</button>
         </div>
-        <HomeSwiper/>
+        <HomeSwiper videoData={videoData}/>
         <div className='flex mt-24 justify-between'>
         <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
         <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
