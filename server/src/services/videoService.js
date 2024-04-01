@@ -213,7 +213,7 @@ exports.postReply = async (videoId, replycomment, req) => {
 //video to text
 const speechClient = new SpeechClient();
 
-const convertVideoToText = async (videoPath) => {
+exports.convertVideoToText = async (videoPath) => {
     try {
         // Reads a local audio file and converts it to text
         const [response] = await speechClient.recognize({
@@ -239,6 +239,6 @@ const convertVideoToText = async (videoPath) => {
     }
 };
 
-module.exports = {
-    convertVideoToText,
-};
+// module.exports = {
+//     convertVideoToText,
+// };
