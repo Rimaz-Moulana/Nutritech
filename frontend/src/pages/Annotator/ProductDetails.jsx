@@ -12,122 +12,198 @@ import Sidebar from '../../components/sidebar/SideBar'
 
 
 export default function ProductDetails() {
-        const {productId} = useParams()
-        console.log(productId)
-        const currentTimeInMillis = Date.now();
+    const {productId} = useParams()
+    console.log(productId)
+    const currentTimeInMillis = Date.now();
 
-        // Create a new Date object using the current timestamp
-        const currentDate = new Date(currentTimeInMillis);
-        
-        // Get the individual components of the date
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1; // Month is zero-based, so add 1
-        const day = currentDate.getDate();
-        const hours = currentDate.getHours();
-        const minutes = currentDate.getMinutes();
-        const seconds = currentDate.getSeconds();
-        
-        const cDate = `${year}/${month}/${day}`;
-        const cTime = `${hours}:${minutes}:${seconds}`;
+    // Create a new Date object using the current timestamp
+    const currentDate = new Date(currentTimeInMillis);
+    
+    // Get the individual components of the date
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1; // Month is zero-based, so add 1
+    const day = currentDate.getDate();
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+    const seconds = currentDate.getSeconds();
+    
+    const cDate = `${year}/${month}/${day}`;
+    const cTime = `${hours}:${minutes}:${seconds}`;
 
-        const [uploadStatus, setUploadStatus] = useState('');
-        const [formData, setFormData] = useState({
+    const [uploadStatus, setUploadStatus] = useState('');
+    const [formData, setFormData] = useState({
+        productName: '',
+        brand: '',
+        description: '',
+        parentCompany: '',
+        packagingMaterial : '',
+        packagingMaterialTouching: '',
+        variation : '',
+        countryProduct: '',
+        servingSize: '',
+        sugarType: '',
+        lactose : '',
+        vitamin: '',
+        mineral: '',
+        omega: '',
+        acids: '',
+        probiotics: '',
+        method : '',
+        total: '',
+        remarks : '',
+        ingredients : '',
+        energy1: '',
+        energy2 : '',
+        protein1 : '',
+        protein2 : '',
+        totalFat1: '',
+        totalFat2 : '',
+        SFA1: '',
+        SFA2 : '',
+        carbo1 : '',
+        carbo2: '',
+        sugar1: '',
+        sugar2: '',
+        salt1 : '',
+        salt2 : '',
+        sodium1 : '',
+        sodium2 : '',
+        transFat1 : '',
+        transFat2 : '',
+        ash1 : '',
+        ash2 : '',
+        WPROfoodcode : '',
+        WPROPermitted : '',
+        WPROPermittedRemark : '',
+        SEAROfoodcode : '',
+        SEAROpermitted: '',
+        SEAROpermittedRemark : '',
+        SLfoodCode: '',
+        SLpermitted: '',
+        SLfoodcodePermittedRemark: '',
+        createdTime: cTime ,
+        CreatedData : cDate,
+        videoFile : '',
+        imageFront: '',
+        imageBack: '',
+        imageLeft: '',
+        imageRight: ''
+    })
+
+    useEffect(() => {
+        // Fetch data when the component mounts
+        fetchData();
+        
+        // Retrieve data from local storage
+        const draftData = localStorage.getItem('productDraft');
+        if (draftData) {
+            setFormData(JSON.parse(draftData));
+        }
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    }
+
+    const handleSubmit = async (event) =>{
+        event.preventDefault();
+        console.log(formData)
+        try {
+            const response = await axios.put(`http://localhost:3000/api/product/industry/update/${productId}`, formData);
+            console.log(response.data);
+            setUploadStatus("New Product updated successfully!");
+
+            // Clear draft data from local storage upon successful submission
+            localStorage.removeItem('productDraft');
+        } catch(error) {
+            console.error('Error adding product:', error);
+            setUploadStatus("Error occurred!");
+        }
+    }
+
+    const handleDraftSave = () => {
+        // Save form data to local storage
+        localStorage.setItem('productDraft', JSON.stringify(formData));
+        setUploadStatus("Draft saved successfully!");
+    }
+
+    const cancelSave = (e)=>{
+        e.preventDefault()
+        localStorage.removeItem('productDraft');
+        setFormData({
             productName: '',
             brand: '',
             description: '',
             parentCompany: '',
-            packagingMaterial : '',
+            packagingMaterial: '',
             packagingMaterialTouching: '',
-            variation : '',
+            variation: '',
             countryProduct: '',
             servingSize: '',
             sugarType: '',
-            lactose : '',
+            lactose: '',
             vitamin: '',
             mineral: '',
             omega: '',
             acids: '',
             probiotics: '',
-            method : '',
+            method: '',
             total: '',
-            remarks : '',
-            ingredients : '',
+            remarks: '',
+            ingredients: '',
             energy1: '',
-            energy2 : '',
-            protein1 : '',
-            protein2 : '',
+            energy2: '',
+            protein1: '',
+            protein2: '',
             totalFat1: '',
-            totalFat2 : '',
+            totalFat2: '',
             SFA1: '',
-            SFA2 : '',
-            carbo1 : '',
+            SFA2: '',
+            carbo1: '',
             carbo2: '',
             sugar1: '',
             sugar2: '',
-            salt1 : '',
-            salt2 : '',
-            sodium1 : '',
-            sodium2 : '',
-            transFat1 : '',
-            transFat2 : '',
-            ash1 : '',
-            ash2 : '',
-            WPROfoodcode : '',
-            WPROPermitted : '',
-            WPROPermittedRemark : '',
-            SEAROfoodcode : '',
+            salt1: '',
+            salt2: '',
+            sodium1: '',
+            sodium2: '',
+            transFat1: '',
+            transFat2: '',
+            ash1: '',
+            ash2: '',
+            WPROfoodcode: '',
+            WPROPermitted: '',
+            WPROPermittedRemark: '',
+            SEAROfoodcode: '',
             SEAROpermitted: '',
-            SEAROpermittedRemark : '',
+            SEAROpermittedRemark: '',
             SLfoodCode: '',
             SLpermitted: '',
             SLfoodcodePermittedRemark: '',
-            createdTime: cTime ,
-            CreatedData : cDate,
-            videoFile : '',
+            createdTime: cTime,
+            CreatedData: cDate,
+            videoFile: '',
             imageFront: '',
             imageBack: '',
             imageLeft: '',
             imageRight: ''
-        })
+        });
+    
+    }
 
-        const handleChange = (e) => {
-            const { name, value } = e.target;
-            setFormData({ ...formData, [name]: value });
+    const fetchData = async () => {
+        console.log("hi")
+        try {
+            const response = await axios.get(`http://localhost:3000/api/product/industry/getProduct/${productId}`);
+            const productData = response.data;
+            setFormData(productData);
+            console.log(response.data);
+        } catch(error) {
+            console.error('Error adding product:', error);
+            setUploadStatus("Error occurred!");
         }
-
-        const handleSubmit = async (event) =>{
-            event.preventDefault();
-            console.log(formData)
-            try{
-                
-                const response = await axios.put(`http://localhost:3000/api/product/industry/update/${productId}`, formData);
-                console.log(response.data);
-                setUploadStatus("New Product updated successfully!");
-            }
-            catch(error){
-                console.error('Error adding product:', error);
-                setUploadStatus("Error occurred!");
-            }
-        }
-
-        useEffect(() => {
-            // Fetch data when the component mounts
-            fetchData();
-          }, []);
-          
-        const fetchData = async () => {
-            console.log("hi")
-            try{
-                const response = await axios.get(`http://localhost:3000/api/product/industry/getProduct/${productId}`);
-                const productData = response.data;
-                setFormData(productData);
-                console.log(response.data);
-            }
-            catch(error){
-                console.error('Error adding product:', error);
-                setUploadStatus("Error occurred!");
-            }
-        }
+    }
 
   return (
     <div className='bg-backgroundGreen overflow-x-hidden'>
@@ -138,7 +214,7 @@ export default function ProductDetails() {
         <Navbar />
         </div>
         <h1 className="lg:ml-20 sm:ml-40 mb-8 mt-24 lg:mr-[750px] md:mr-50 sm:mr  text-3xl font-semibold text-sidebarGreen">Product Deatils</h1>
-        <form onSubmit={handleSubmit}>
+        <form >
         <div className='ml-4 lg:inline-flex sm:flex'>
             <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
                 <TextFiled placeholder="Product Name" value={formData.productName} name='productName' onChange={handleChange} />
@@ -241,14 +317,14 @@ export default function ProductDetails() {
         <div className='flex-inline py-10 '>
             <div className='inline-block w-44 '>
             <div className='flex text-center'>
-                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
+                <button onClick={cancelSave} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Cancel
                 </button>
                 </div>
             </div>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
+                <button onClick={handleDraftSave} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Draft
                 </button>
                 </div>
