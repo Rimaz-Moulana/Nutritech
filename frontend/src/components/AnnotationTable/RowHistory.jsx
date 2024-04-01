@@ -1,48 +1,93 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import Row from './Row'
+import Modal from 'react-modal';
 
-function RowHistory() {
+function RowHistory({ videoId, usertype }) {
+  // console.log(usertype)
+  const [annotations, setAnnotations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const pRefs = useRef([]);
+  const [rowCorrectness, setRowCorrectness] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [isChecked, setIsChecked] = useState(() => {
+    // return JSON.parse(localStorage.getItem('isChecked')) || false;
+  });
+
+
+  useEffect(() => {
+    const fetchAnnotations = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`);
+        setAnnotations(response.data.annotations);
+      } catch (error) {
+        console.error('Error fetching annotations:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnnotations();
+  }, [videoId]);
+
+  useEffect(() => {
+    // Set the height of each p tag based on its content
+    pRefs.current.forEach((ref) => {
+      if (ref) {
+        ref.style.height = `${ref.scrollHeight}px`;
+      }
+    });
+  }, [annotations]);
+
+  const handleCheckboxChange = () => {
+    const newCheckedState = !isChecked;
+    setIsChecked(newCheckedState);
+    setShowModal(true);
+
+    // localStorage.setItem('isChecked', JSON.stringify(newCheckedState));
+  }
+  
+  const closeModal = () => {
+    setShowModal(false);
+  };
   return (
-    <div className='flex ml-0 mt-12 text-gray-500'>  
-    <div className=''>
-    <div className="relative justify-center border-gray-200 border-1 rounded-sm">
-      <label id='timestamp' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Stamp</label>
-      <p className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen">00-05s</p>
-    </div>
-    <div className="relative mt-4 min-w-[200px] border-gray-200 border-1 rounded-sm">
-      <label id='rules' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rule</label>
-      {/* <select className="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen">
-        <option >Rule 01</option>
-        <option >Rule 02</option>
-        <option >Rule 03</option>
-        <option >Rule 04</option>
-        <option >Rule 05</option>
-        <option >Rule 06</option>
-      </select> */}
-      <p>Rule 01</p>
-    </div>
-    <div className='mt-4 border-2 text-left border-gray-300 rounded-sm h-24 text'>
-      <p className=''> Advertisements must not make false or misleading claims about the health benefits of foods</p>
-    </div>
-    </div>
-<div className='flex'>
-<div >
-    <div className="relative h-full mb-6 ml-12 border-gray-200 border-1 rounded-sm">
-    <label id='details' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Details</label>
-      <p type="text" id="small-input" className="block w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> The dvertisement make false or misleading claims about the health benefits of food</p>
-    </div>
-      </div>
+    <div className='ml-0 text-gray-500'>
+    <table className="w-full bg-white border rounded">
+      <thead>
+        <tr>
+          <th className="border border-gray-300">Time Stamp</th>
+          <th className="border border-gray-300">Regulation</th>
+          <th className="border border-gray-300">Details</th>
+          <th className="border border-gray-300">Recommendation</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        {annotations.map((annotation, index) => (
+          <React.Fragment key={index}>
 
-      <div className="relative h-full mb-6 ml-12 border-gray-200 border-1 rounded-sm">
-          <label id='reccomendation' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Recommendation</label>
-            <p type="text" id="small-input" className="block w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">hjfgb hgqagbf hfgqhi uyrgfqurg yegugr ygryrgb wejhqi ufh    iow</p>
-          </div>
-</div>
-    
-      </div>
+            {annotation.rule !== "" && (
+            <tr>
+              <td className="border border-gray-300 p-2">{annotation.timestamp}</td>
+              <td className="border border-gray-300 text-start p-2">{annotation.rule}</td>
+              <td className="border border-gray-300 text-left p-2">{annotation.details}</td>
+              <td className="border border-gray-300 text-left p-2">{annotation.recommendation}</td>
+              {/* {usertype === "expert" && annotation.rule !== "" && (
+                <>
+                  <td className="border border-gray-300 text-center p-2 "><input checked id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 center bg-gray-100 border-gray-300 focus:ring-darkGreen dark:focus:ring-darkGreen dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  /></td>
+                  <td className="border border-gray-300 text-center p-2"><input id="default-radio-2" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-darkGreen dark:focus:ring-darkGreen dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={handleCheckboxChange}/></td>
+                </>
+              )} */}
+            </tr>
+            )}
 
-      
+          </React.Fragment>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  
   );
 }
 
 export default RowHistory;
-

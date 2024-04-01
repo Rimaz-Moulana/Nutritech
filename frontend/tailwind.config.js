@@ -34,14 +34,23 @@
         darkGreen: '#8EA174',
         backgroundGreen: '#E5EBD6',
         sidebarGreen : '#284625',
-        buttonGreen : '#3C6849'
+        buttonGreen : '#3C6849',
+        filterGreen : '#DEE5C2',
+
       },
 
       margin:{
-        '7.5':'75px'
-      }
+        '6.5':'50%',
+        // '5.5':'50%',
+        '4.5' : '47%',
+        '0.5' : '5%'
+      },
+
+  
     },
   },
 
   plugins: [],
+
+  
 }
