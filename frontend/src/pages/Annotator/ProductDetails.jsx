@@ -1,10 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Astra1 from '../../assets/Images/astra1.png'
-import Astra2 from '../../assets/Images/astra2.png'
-import Astra3 from '../../assets/Images/astra3.png'
-import Astra4 from '../../assets/Images/astra4.png'
 import DropDownWhite from '../../components/fields/dropdownWhite'
 import TextFiledsmallWhite from '../../components/fields/textFieldSmallWhite'
 import TextFiledWhite from '../../components/fields/textFieldWhite'
@@ -86,7 +82,12 @@ export default function ProductDetails() {
             SLpermitted: '',
             SLfoodcodePermittedRemark: '',
             createdTime: cTime ,
-            CreatedData : cDate
+            CreatedData : cDate,
+            videoFile : '',
+            imageFront: '',
+            imageBack: '',
+            imageLeft: '',
+            imageRight: ''
         })
 
         const handleChange = (e) => {
@@ -96,12 +97,12 @@ export default function ProductDetails() {
 
         const handleSubmit = async (event) =>{
             event.preventDefault();
-
+            console.log(formData)
             try{
                 
-                const response = await axios.put("http://localhost:3000/api/product/add", formData);
+                const response = await axios.put(`http://localhost:3000/api/product/industry/update/${productId}`, formData);
                 console.log(response.data);
-                setUploadStatus("New Product Added successfully!");
+                setUploadStatus("New Product updated successfully!");
             }
             catch(error){
                 console.error('Error adding product:', error);
@@ -115,8 +116,11 @@ export default function ProductDetails() {
           }, []);
           
         const fetchData = async () => {
+            console.log("hi")
             try{
-                const response = await axios.get(`http://localhost:3000/api/product/getProduct/${productId}`);
+                const response = await axios.get(`http://localhost:3000/api/product/industry/getProduct/${productId}`);
+                const productData = response.data;
+                setFormData(productData);
                 console.log(response.data);
             }
             catch(error){
@@ -137,30 +141,31 @@ export default function ProductDetails() {
         <form onSubmit={handleSubmit}>
         <div className='ml-4 lg:inline-flex sm:flex'>
             <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
-                <TextFiled placeholder="Product Name"  name='productName' onChange={handleChange} />
-                <TextFiled placeholder="Brand"  name='brand' onChange={handleChange} />
-                <TextFiled placeholder="Parent Company" name='parentCompany' onChange={handleChange} />
-                <TextFiled placeholder="Description" name='description' onChange={handleChange} />
-                <TextFiled placeholder="Packaging Material" name='packagingMaterial' onChange={handleChange} />
-                <TextFiled placeholder="Packaging Material(touching)" name='packagingMaterialTouching' onChange={handleChange} />
-                <TextFiled placeholder="Variation"  name='variation' onChange={handleChange} />
+                <TextFiled placeholder="Product Name" value={formData.productName} name='productName' onChange={handleChange} />
+                <TextFiled placeholder="Brand"  name='brand' value={formData.brand} onChange={handleChange} />
+                <TextFiled placeholder="Parent Company" name='parentCompany' value={formData.parentCompany} onChange={handleChange} />
+                <TextFiled placeholder="Description" name='description' value={formData.description} onChange={handleChange} />
+                <TextFiled placeholder="Packaging Material" name='packagingMaterial' value={formData.packagingMaterial} onChange={handleChange} />
+                <TextFiled placeholder="Packaging Material(touching)" name='packagingMaterialTouching' value={formData.packagingMaterialTouching} onChange={handleChange} />
+                <TextFiled placeholder="Variation"  name='variation' value={formData.variation} onChange={handleChange} />
                 {/* <DropDown /> */}
             <div className=''>
-                <TextFiledWhite placeholder="Country of the product" name='countryProduct' onChange={handleChange} />
-                <DropDownWhite defOptions="Serving Size"  name='servingSize' onChange={handleChange} />
-                <DropDownWhite defOptions="Sugar Type" name='sugarType' onChange={handleChange} />
-                <DropDownWhite defOptions="Lactose/Maltodextrin" name='lactose' onChange={handleChange} />
-                <TextFiledWhite placeholder="Vitamin" name='vitamin' onChange={handleChange} />
-                <TextFiledWhite placeholder="Mineral" name='mineral' onChange={handleChange} />
-                <DropDownWhite  defOptions="DHA/Omega 3 Fatty Acid/DHA"  name='omega' onChange={handleChange} />
-                <DropDownWhite  defOptions="Polyunsaturated fatty acids"  name='acids' onChange={handleChange} />
-                <TextFiledWhite placeholder="Probiotics" name='probiotics' onChange={handleChange} />
-                <TextFiledWhite placeholder="Reconstituted method (Y/N/C)"   name='method' onChange={handleChange} />
-                <TextFiledWhite placeholder="Reconstituted total volume(ml)" name='total' onChange={handleChange} />
-                <TextFiledWhite placeholder="Preparation instruction or other remarks(only if reconstituted method is 'Y' or 'C')" name='remarks' onChange={handleChange}  />
+                <TextFiledWhite placeholder="Country of the product" name='countryProduct' value={formData.countryProduct} onChange={handleChange} />
+                <DropDownWhite defOptions="Serving Size"  name='servingSize' value={formData.servingSize} onChange={handleChange} />
+                <DropDownWhite defOptions="Sugar Type" name='sugarType' value={formData.sugarType} onChange={handleChange} />
+                <DropDownWhite defOptions="Lactose/Maltodextrin" name='lactose' value={formData.lactose} onChange={handleChange} />
+                <TextFiledWhite placeholder="Vitamin" name='vitamin' value={formData.vitamin} onChange={handleChange} />
+                <TextFiledWhite placeholder="Mineral" name='mineral' value={formData.mineral} onChange={handleChange} />
+                <DropDownWhite  defOptions="DHA/Omega 3 Fatty Acid/DHA"  name='omega' value={formData.omega} onChange={handleChange} />
+                <DropDownWhite  defOptions="Polyunsaturated fatty acids"  name='acids' value={formData.acids} onChange={handleChange} />
+                <TextFiledWhite placeholder="Probiotics" name='probiotics' value={formData.probiotics} onChange={handleChange} />
+                <TextFiledWhite placeholder="Reconstituted method (Y/N/C)"   name='method' value={formData.method} onChange={handleChange} />
+                <TextFiledWhite placeholder="Reconstituted total volume(ml)" name='total' value={formData.total} onChange={handleChange} />
+                <TextFiledWhite placeholder="Preparation instruction or other remarks(only if reconstituted method is 'Y' or 'C')" name='remarks' value={formData.remarks} onChange={handleChange}  />
                 <div className='p-2'>
                     <input
                             type="text"
+                            value={formData.ingredients}
                             name='ingredients' onChange={handleChange} 
                             className="shadow appearance-none placeholder-gray-400 border rounded w-[70%] h-10 py-2 px-5 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Ingredient as in the label (separete by comma)" />
@@ -169,10 +174,11 @@ export default function ProductDetails() {
             </div>
             <div className='flex-inline mt-4 md:w-1/2'>
             <div className='inline-block'>
-                <img className='inline-block px-1 h-20 w-28' src={Astra1} />
-                <img className='inline-block px-1 h-20 w-28' src={Astra2} />
-                <img className='inline-block px-1 h-20 w-28' src={Astra3} />
-                <img className='inline-block px-1 h-20 w-28' src={Astra4} />
+            {console.log(formData.imageBack)}
+                <img className='inline-block px-1 h-20 w-28' src={formData.imageFront} />
+                <img className='inline-block px-1 h-20 w-28' src={formData.imageBack} />
+                <img className='inline-block px-1 h-20 w-28' src={formData.imageLeft} />
+                <img className='inline-block px-1 h-20 w-28' src={formData.imageRight} />
             </div>
             <div className='text ml-64'>
             <label className='inline-block pt-5 text-xl '>Per 100g/ml</label>
@@ -180,55 +186,55 @@ export default function ProductDetails() {
             </div>
                 <div className='grid float-start gap-0 grid-cols-3 p-3'>
                 <label className='inline-block py-1 text-justify text-black ' >Energy(kcal)</label>
-                <TextFiledsmall name='energy1' onChange={handleChange} />
-                <TextFiledsmallWhite name='energy2' onChange={handleChange} />
+                <TextFiledsmall name='energy1' value={formData.energy1} onChange={handleChange} />
+                <TextFiledsmallWhite name='energy2' value={formData.energy2}  onChange={handleChange} />
                 <label className='inline-block py-1  text-justify' >Protein(g)</label>
-                <TextFiledsmall name='protein1' onChange={handleChange} />
-                <TextFiledsmallWhite  name='protein2' onChange={handleChange} />
+                <TextFiledsmall name='protein1' value={formData.protein1} onChange={handleChange} />
+                <TextFiledsmallWhite  name='protein2' value={formData.protein2} onChange={handleChange} />
                 <label className='inline-block py-1 text-justify ' >Total Fat(g)</label>
-                <TextFiledsmall name='totalFat1' onChange={handleChange} />
-                <TextFiledsmallWhite  name='totalFat2' onChange={handleChange} />
+                <TextFiledsmall name='totalFat1' value={formData.transFat1} onChange={handleChange} />
+                <TextFiledsmallWhite  name='totalFat2' value={formData.transFat2} onChange={handleChange} />
                 <label className='inline-block py-1 text-justify  ' >SFA(g)</label>
-                <TextFiledsmall name='SFA1' onChange={handleChange} />
-                <TextFiledsmallWhite  name='SFA2' onChange={handleChange} />
+                <TextFiledsmall name='SFA1' value={formData.SFA1} onChange={handleChange} />
+                <TextFiledsmallWhite  name='SFA2'  value={formData.SFA2} onChange={handleChange} />
                 <label className='inline-block py-1 text-justify ' >Carbo(ga)</label>
-                <TextFiledsmall  name='carbo1' onChange={handleChange} />
-                <TextFiledsmallWhite  name='carbo2' onChange={handleChange} />
+                <TextFiledsmall  name='carbo1' value={formData.carbo1} onChange={handleChange} />
+                <TextFiledsmallWhite  name='carbo2' value={formData.carbo2} onChange={handleChange} />
                 <label className='inline-block py-1 text-justify ' >Sugars(g)</label>
-                <TextFiledsmall  name='sugar1' onChange={handleChange} />
-                <TextFiledsmallWhite name='sugar2' onChange={handleChange} />
+                <TextFiledsmall  name='sugar1' value={formData.sugar1} onChange={handleChange} />
+                <TextFiledsmallWhite name='sugar2' value={formData.sugar2} onChange={handleChange} />
                 <label className='inline-block py-1  text-justify' >Salt(g)</label>
-                <TextFiledsmall name='salt1' onChange={handleChange} />
-                <TextFiledsmallWhite name='salt2' onChange={handleChange} />
+                <TextFiledsmall name='salt1' value={formData.salt1} onChange={handleChange} />
+                <TextFiledsmallWhite name='salt2'  value={formData.salt2} onChange={handleChange} />
                 <label className='inline-block py-1  text-justify ' >Sodium(g)</label>
-                <TextFiledsmall name='sodium1' onChange={handleChange} />
-                <TextFiledsmallWhite name='sodium2' onChange={handleChange} />
+                <TextFiledsmall name='sodium1' value={formData.sodium1} onChange={handleChange} />
+                <TextFiledsmallWhite name='sodium2' value={formData.sodium2} onChange={handleChange} />
                 <label className='inline-block py-1 text-justify ' >Trans Fat(g)</label>
-                <TextFiledsmall  name='transFat1' onChange={handleChange} />
-                <TextFiledsmallWhite  name='transFat2' onChange={handleChange} />
+                <TextFiledsmall  name='transFat1' value={formData.transFat1} onChange={handleChange} />
+                <TextFiledsmallWhite  name='transFat2' value={formData.transFat2} onChange={handleChange} />
                 <label className='inline-block py-1  text-justify ' >Ash</label>
-                <TextFiledsmall name='ash1' onChange={handleChange} />
-                <TextFiledsmallWhite  name='ash2' onChange={handleChange} />
+                <TextFiledsmall name='ash1' value={formData.ash1} onChange={handleChange} />
+                <TextFiledsmallWhite  name='ash2' value={formData.ash2}  onChange={handleChange} />
                 </div>
                 <div className='grid float-start gap-0 grid-cols-2 w-full p-2 sm:w-full'>
                 <label className='inline-block text-justify ml-8 py-3  ' >WHO_WPRO_foodcode Product</label>
-                <TextFiledWhite2  name='WPROfoodcode' onChange={handleChange} />
+                <TextFiledWhite2  name='WPROfoodcode' value={formData.WPROfoodcode} onChange={handleChange} />
                 <label className='inline-block text-justify ml-8 py-3   ' >WHO_WPRO_permitted</label>
-                <TextFiledWhite2  name='WPROPermitted' onChange={handleChange} />
+                <TextFiledWhite2  name='WPROPermitted' value={formData.WPROPermitted} onChange={handleChange} />
                 <label className='inline-block text-justify ml-8 py-3   ' >WHO_WPRO_permitted Remark</label>
-                <TextFiledWhite2  name='WPROPermittedRemark' onChange={handleChange} />
+                <TextFiledWhite2  name='WPROPermittedRemark' value={formData.WPROPermittedRemark} onChange={handleChange} />
                 <label className='inline-block text-justify ml-8 py-3   ' >WHO_SEARO_foodcode_Product</label>
-                <TextFiledWhite2 name='SEAROfoodcode' onChange={handleChange} />
+                <TextFiledWhite2 name='SEAROfoodcode' value={formData.SEAROfoodcode} onChange={handleChange} />
                 <label className='inline-block text-justify ml-8 py-3   ' >WHO_SEARO_permitted</label>
-                <TextFiledWhite2 name='SEAROpermitted' onChange={handleChange} />
+                <TextFiledWhite2 name='SEAROpermitted' value={formData.SEAROpermitted} onChange={handleChange} />
                 <label className='inline-block text-justify ml-8 py-3  ' >WHO_SEARO_permitted Remark</label>
-                <TextFiledWhite2 name='SEAROpermittedRemark' onChange={handleChange} />
+                <TextFiledWhite2 name='SEAROpermittedRemark' value={formData.SEAROpermittedRemark} onChange={handleChange} />
                 <label className='inline-block text-justify ml-8 py-3   ' >SL food Code</label>
-                <TextFiledWhite2 name='SLfoodCode' onChange={handleChange} />
+                <TextFiledWhite2 name='SLfoodCode' value={formData.SLfoodCode} onChange={handleChange} />
                 <label className='inline-block text-justify ml-8 py-3   ' >SL_permitted</label>
-                <TextFiledWhite2 name='SLpermitted' onChange={handleChange} />
+                <TextFiledWhite2 name='SLpermitted' value={formData.SLpermitted} onChange={handleChange} />
                 <label className='inline-block text-justify ml-8 py-3  ' >SL_foodcode__permitted Remark</label>
-                <TextFiledWhite2  name='SLfoodcodePermittedRemark' onChange={handleChange} />
+                <TextFiledWhite2  name='SLfoodcodePermittedRemark' value={formData.SLfoodcodePermittedRemark} onChange={handleChange} />
                 </div>
             </div>
         </div>

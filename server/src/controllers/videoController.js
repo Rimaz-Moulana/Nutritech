@@ -1,6 +1,7 @@
 
 // const videoService = require('../services/videoService');
 const Video = require('../models/videoModel')
+const { convertVideoToText } = require('../services/videoService');
 
 const VideoService = require('../services/videoService')
 
@@ -85,6 +86,12 @@ exports.addvideo = async (req,res) => {
         const videoPath = req.file.path
         // console.log(req.body)
         const newVideo = new Video({brand,product,variation,category, videoPath, createdIn, createdAt, duration, status: 'pending', uploader:'Sirasa'});
+        
+        // Convert uploaded video to text
+        const text = await convertVideoToText(req.file.path);
+
+        // Send converted text as response
+        res.json({ text });
         console.log(newVideo)
         await newVideo.save();
        
@@ -258,3 +265,5 @@ exports.postIndustryReply= async (req,res)=>{
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
+

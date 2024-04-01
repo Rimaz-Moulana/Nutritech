@@ -18,6 +18,7 @@ const upload = multer({storage: storage});
 router.post('/industry/add', upload.any('video/images') , productController.addNewProduct);
 
 router.post('/add', productController.addProduct);
+router.put('/industry/update/:productId', productController.updateProduct);
 router.get('/getAll', productController.getAllProduct);
 router.get('/industry/getProduct/:productId', productController.getProduct)
 router.get('/reviewproduct/:productId', productController.fetchSensorManagerReview)
