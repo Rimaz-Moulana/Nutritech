@@ -174,10 +174,6 @@ exports.deleteVideo = async (req, res) => {
   }
 };
 
-
-
-
-
 exports.getSimilarAds = async (req, res) => {
   try {
     const videoId = req.params.videoId;
@@ -275,5 +271,3 @@ exports.postIndustryReply= async (req,res)=>{
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
-
