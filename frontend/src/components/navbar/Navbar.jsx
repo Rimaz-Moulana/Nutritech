@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import logo from '../../../src/assets/Images/NutriTechLogo08.png';
 import menuIcon from '../../../src/assets/Images/blackmenu.png';
-import SensorManagerSidebar from '../sidebar/SensorManagerSidebar';
-import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar';
+import Sidebar from '../sidebar/SideBar';
 
 export default function Navbar({type}) {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
@@ -13,7 +12,7 @@ export default function Navbar({type}) {
 
   return (
     <div>
-      <nav className="mt-0 mb-6 fixed w-full z-10">
+      <nav className="mt-0 mb-6 fixed w-screen z-10">
         <div className="flex p-2 bg-backgroundGreen">
           {/* Menu Icon for Small Screens */}
           <img
@@ -30,18 +29,12 @@ export default function Navbar({type}) {
           {/* Sidebar */}
       {isSidebarVisible && (
         <div className="sm:hidden fixed h-1/2 w-1/2 inset-0 bg-opacity-0 z-50 mt-24 ">
-          {type==='sensormanager' && (
+        
           <div className="flex">
-            <SensorManagerSidebar />
+            <Sidebar type={type} />
             <div className="flex-1" onClick={handleMenuClick}></div>
           </div>
-)}
-{type==='annotator' && (
-          <div className="flex">
-            <Annotatorsidebar />
-            <div className="flex-1" onClick={handleMenuClick}></div>
-          </div>
-)}
+
         </div>
       )} 
 

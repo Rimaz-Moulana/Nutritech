@@ -3,13 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 function Product({productData}) {
-    console.log(productData)
+    // console.log(productData)
     const navigate = useNavigate();
     const [startDate, setStartDate] = useState(null);
+    let fact;
   
     const [productFilter, setProductFilter] = useState(() => {
       return localStorage.getItem('productFilter') || 'all';
     });
+
+
   
     useEffect(() => {
       // Update localStorage when productFilter changes

@@ -11,6 +11,7 @@ import white from '../../assets/Images/white.png'
 import yellow from '../../assets/Images/yellow.png'
 import red from '../../assets/Images/redflag.png'
 import green from '../../assets/Images/greenflag.png'
+import Dropdown from '../fields/dropdown';
 
 function VideoContainer({ type,videoData,viewType,videotype }) {
   // console.log(viewType)
@@ -22,6 +23,10 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
     // Retrieve from localStorage, default to 'all' if not found
     return localStorage.getItem('productFilter') || 'all';
   });
+
+  const [Data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     // Update localStorage when productFilter changes
@@ -71,7 +76,7 @@ const filteredVideos = videoData?.filter((video) => {
     return true;
   }
 
-  const productMatch = productFilter === 'all' || video.product === productFilter;
+  const productMatch = productFilter === 'all' || video.category === productFilter;
   const uploadedDateMatch = !startDate || new Date(video.createdIn).toLocaleDateString() === startDate.toLocaleDateString();
   const annotatedDateMatch = !startDate || (video.annotateddate && new Date(video.annotateddate).toLocaleDateString() === startDate.toLocaleDateString());
 
@@ -85,25 +90,43 @@ const filteredVideos = videoData?.filter((video) => {
 
 
   return (
-    <div className='w-full ml-12'> 
+    <div className='w-full ml-auto pr-2 pl-2'> 
     {viewType=== 'Grid'  &&(
-      <div className=' right-0'>
+      <div className='sm:w-auto right-0'>
         <div className=' items-end'>
       {type !== "industry" && (
         <>
-            <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
+            <select className='bg-white text-xs p-1 items-end mt-2 mb-2 rounded w-[25%]'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
                 <option value='all'>All Products</option>
-                <option value='Biscuits'>Biscuits</option>
-                <option value='Dairy'>Dairy</option>
-                <option value='Margarine'>Margarine</option>
-                <option value='Noodles'>Noodles</option>
-                <option value='Soft drinks'>Soft Drinks</option>
-                <option value='Bakery items'>Bakery Items</option>
-                <option value='Confectionary'>Confectionary</option>
-                <option value='Other'>Other</option>
+                <option value='Confectionery'>Confectionery</option>
+                <option value='Fine Bakery Wares'>Fine Bakery Wares</option>
+                <option value='Bread and Ordinary Bakery Wares'>Bread and Ordinary Bakery Wares</option>
+                <option value='Cereals'>Cereals</option>
+                <option value='Potato,cereal or starch-based and animal based'>Potato,cereal or starch-based and animal based</option>
+                <option value='Processed nuts'>Processed nuts</option>
+                <option value='Fish-based'>Fish-based</option>
+                <option value='Juices'>Juices</option>
+                <option value='Milk and dairy based drinks'>Milk and dairy based drinks</option>
+                <option value='Water based flavoured drink'>Water based flavoured drink</option>
+                <option value='Coffee,coffee substitutes,tea, herbal infusions'>Coffee,coffee substitutes,tea, herbal infusions</option>
+                <option value='Cereal,grain, tree nut-based beverages'>Cereal,grain, tree nut-based beverages</option>
+                <option value='Frozen dairy based desserts and edible ices'>Frozen dairy based desserts and edible ices</option>
+                <option value='Curded dairy based desserts'>Curded dairy based desserts</option>
+                <option value='Cheese and analogues'>Cheese and analogues</option>
+                <option value='Composite foods'>Composite foods</option>
+                <option value='Fats and oils, and fat emulsions'>Fats and oils, and fat emulsions</option>
+                <option value='Pasta and noodles and like products'>Pasta and noodles and like products</option>
+                <option value='Fresh and frozen meat, poultry, game, fish and seafood products'>Fresh and frozen meat, poultry, game, fish and seafood products</option>
+                <option value='Processed meat, poultry and game Products'>Processed meat, poultry and game Products</option>
+                <option value='Processed fish and seafood products'>Processed fish and seafood products</option>
+                <option value='Fresh and frozen fruits and vegetables,and legumes'>Fresh and frozen fruits and vegetables,and legumes</option>
+                <option value='Processed fruits and vegetables'>Processed fruits and vegetables</option>
+                <option value='Solid-form soybean Products'>Solid-form soybean Products</option>
+                <option value='Sauces, dips, and dressings'>Sauces, dips, and dressings</option>
+                <option value='Fats and oils, and fat emulsions'>Fats and oils, and fat emulsions</option>
     </select>
 
            <DatePicker
@@ -118,7 +141,7 @@ const filteredVideos = videoData?.filter((video) => {
       )}
     </div>
       
-    <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 bg-backgroundGreen">
+    <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 p-4 mt-8 mr-5 mb-8 bg-backgroundGreen">
       {filteredVideos.map((video, index) => (
         <div key={index} className='relative'>
           <div className=''>
@@ -247,8 +270,8 @@ const filteredVideos = videoData?.filter((video) => {
   )}
 
  {viewType==="List" && (
-   <div className='h-full h-min-screen mt-4 text-black w-full min-w-screen'>
-    <div className=' items-end'>
+   <div className='h-full mt-4 text-black w-full min-w-screen'>
+    <div className='items-end'>
     {type !== "industry" && (
       <>
     <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
@@ -277,57 +300,62 @@ const filteredVideos = videoData?.filter((video) => {
            </>
     )}
     </div>
-     
-   <table className='w-full mt-8'>
+    <div className='h-full mt-4 overflow-x-auto xl:overflow-hidden text-black place-items-center pr-4'> 
+   <table className='h-full mt-8 w-full'>
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>
        <tr className='mt-12'>
         <th></th>
-        <th>Brand {' '}</th>
-         <th className=''> Product{' '}</th>
+        {/* <th className='px-3'> {' '}</th> */}
+        <th className='px-2'>Brand {' '}</th>
+         <th className='px-2'> Product{' '}</th>
          <th>
            Status
          </th>
-         <th className='text-center mt-12'>Uploaded Date</th>
-         <th className='mt-12'>Uploaded Time</th>
-         <th className='mt-12'>Uploader</th>
+         <th className='px-2 text-center mt-12'>Uploaded Date</th>
+         <th className='px-2 mt-12'>Uploaded Time</th>
+         <th className='px-2 mt-12'>Uploader</th>
          {type === 'annotated' && (
            <>
-             <th>Annotated Date</th>
-             <th>Annotated Time</th>
+             <th className='px-2'>Annotated Date</th>
+             <th className='px-2'>Annotated Time</th>
            </>
          )}
          {type!=="reviewvideo" && (
-         <th className='mt-12'>Actions</th>
+         <th className='px-2 mt-12'>Actions</th>
          )} 
        </tr>
      </thead>
      <tbody className='mt-12 text-black'>
        {filteredVideos.map((video, index) => (
          <tr key={index} className='border-b-1'>
-          <td className='w-40'>
-          <ReactPlayer
-                className='react-player fixed-bottom h-8 w-8 p-2'
+          <td className='w-40 pr-2'>
+            <div></div>
+            <div>
+            <ReactPlayer
+                className='react-player h-8 w-8 pl-2'
                 url={`/videos/${handleVideo(video.videoPath)}`}
                 width='100%'
-                height='100%'
+                height='auto'
                 controls={true}
             />
+            </div>
+         
           </td>
-          <td>{video.brand}</td>
-           <td>{video.product}</td>
-           <td>{video.status}</td>
-           <td>{video.createdIn}</td>
-           <td>{video.createdAt}</td>
-           <td>{video.uploader}</td>
+          <td className='pr-2'>{video.brand}</td>
+           <td className='px-2'>{video.product}</td>
+           <td className='px-2'>{video.status}</td>
+           <td className='px-2'>{video.createdIn}</td>
+           <td className='px-2'>{video.createdAt}</td>
+           <td className='px-2'>{video.uploader}</td>
            {type === 'annotated' && (
              <>
-               <td>{video.annotateddate}</td>
-               <td>{video.annotatedtime}</td>
+               <td className='px-2'>{video.annotateddate}</td>
+               <td className='px-2'>{video.annotatedtime}</td>
              </>
            )}
 
-           <td>
+           <td className='px-2'>
              {video.status === 'unannotated' && type!=="reviewvideo" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-11 py-2.5 text-center me-2 mb-2 "
@@ -360,7 +388,7 @@ const filteredVideos = videoData?.filter((video) => {
 
              {video.status === 'green' && (type==="expert" || type==='expertgreen') && (
                <button
-               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 lg:px-8 py-2.5 sm:px-2 "
                  onClick={() => handleApprove(video._id)}
              >View Details</button>
              )}
@@ -380,6 +408,7 @@ const filteredVideos = videoData?.filter((video) => {
        ))}
      </tbody>
    </table>
+   </div>
  </div>
 
 )}

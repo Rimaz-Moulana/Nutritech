@@ -12,7 +12,7 @@ import TextFiledWhite2 from '../../components/fields/textFieldWhite2'
 import TextFiledsmall from '../../components/fields/textFieldsmall'
 import TextFiled from '../../components/fields/textfield'
 import Navbar from '../navbar/Navbar'
-import Annotatorsidebar from '../sidebar/AnnotatorSideBar'
+import Sidebar from '../sidebar/SideBar'
 
 export default function test() {
   return (
@@ -20,7 +20,7 @@ export default function test() {
  
     <div className='bg-backgroundGreen overflow-x-hidden'>
         <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Annotatorsidebar />
+        <Sidebar />
         </div>
         <div className="w-full sm:w-3/4 ml-0 sm:ml-64">
         <Navbar />

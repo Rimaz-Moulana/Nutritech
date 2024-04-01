@@ -10,7 +10,7 @@ import TextFiledWhite2 from '../../components/fields/textFieldWhite2'
 import TextFiledsmall from '../../components/fields/textFieldsmall'
 import TextFiled from '../../components/fields/textfield'
 import Navbar from '../../components/navbar/Navbar'
-import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar'
+import Sidebar from '../../components/sidebar/SideBar'
 
 export default function ProductDetails() {
         const currentTimeInMillis = Date.now();
@@ -203,7 +203,7 @@ export default function ProductDetails() {
   return (
     <div className='bg-backgroundGreen overflow-x-hidden'>
         <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Annotatorsidebar />
+        <Sidebar type="industry" />
         </div>
         <div className="w-full sm:w-3/4 ml-0 sm:ml-64">
         <Navbar />
@@ -215,7 +215,7 @@ export default function ProductDetails() {
                 <TextFiled placeholder="Product Name"  name='productName' onChange={handleChange} />
                 <TextFiled placeholder="Brand"  name='brand' onChange={handleChange} />
                 <TextFiled placeholder="Parent Company" name='parentCompany' onChange={handleChange} />
-                <DropDown placeholder="Product Category" name='productCategory' onChange={handleChange} />
+                <DropDown  placeholder="Product Category" name='productCategory' onChange={handleChange} />
                 <TextFiled placeholder="Description" name='description' onChange={handleChange} />
                 <TextFiled placeholder="Packaging Material" name='packagingMaterial' onChange={handleChange} />
                 <TextFiled placeholder="Packaging Material(touching)" name='packagingMaterialTouching' onChange={handleChange} />

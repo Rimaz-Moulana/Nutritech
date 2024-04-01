@@ -1,6 +1,7 @@
 
 import React from 'react';
 import TextFiledWhiteForm from '../fields/TextFieldWhiteForm';
+import Dropdown from '../fields/dropdown';
 
 function UploadForm({handleChange}) {
   return (
@@ -8,6 +9,11 @@ function UploadForm({handleChange}) {
                 <TextFiledWhiteForm type={1} name='brand' onChange={handleChange} />
                 <TextFiledWhiteForm type={2} name='product' onChange={handleChange} />
                 <TextFiledWhiteForm type={3} name='variation' onChange={handleChange} />
+                <div>
+                <Dropdown  placeholder="Product Category" name='category' onChange={handleChange} />
+                </div>
+                
+
 </div>
 
 

@@ -1,5 +1,6 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import Astra1 from '../../assets/Images/astra1.png'
 import Astra2 from '../../assets/Images/astra2.png'
 import Astra3 from '../../assets/Images/astra3.png'
@@ -11,9 +12,12 @@ import TextFiledWhite2 from '../../components/fields/textFieldWhite2'
 import TextFiledsmall from '../../components/fields/textFieldsmall'
 import TextFiled from '../../components/fields/textfield'
 import Navbar from '../../components/navbar/Navbar'
-import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar'
+import Sidebar from '../../components/sidebar/SideBar'
+
 
 export default function ProductDetails() {
+        const {productId} = useParams()
+        console.log(productId)
         const currentTimeInMillis = Date.now();
 
         // Create a new Date object using the current timestamp
@@ -95,7 +99,7 @@ export default function ProductDetails() {
 
             try{
                 
-                const response = await axios.post("http://localhost:3000/api/product/add", formData);
+                const response = await axios.put("http://localhost:3000/api/product/add", formData);
                 console.log(response.data);
                 setUploadStatus("New Product Added successfully!");
             }
@@ -105,11 +109,26 @@ export default function ProductDetails() {
             }
         }
 
+        useEffect(() => {
+            // Fetch data when the component mounts
+            fetchData();
+          }, []);
+          
+        const fetchData = async () => {
+            try{
+                const response = await axios.get(`http://localhost:3000/api/product/getProduct/${productId}`);
+                console.log(response.data);
+            }
+            catch(error){
+                console.error('Error adding product:', error);
+                setUploadStatus("Error occurred!");
+            }
+        }
 
   return (
     <div className='bg-backgroundGreen overflow-x-hidden'>
         <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Annotatorsidebar />
+        <Sidebar type="annotator" />
         </div>
         <div className="w-full sm:w-3/4 ml-0 sm:ml-64">
         <Navbar />

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import AnnotatorSideBar from '../../components/sidebar/AnnotatorSideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
-import GridListView from '../../components/Toggle/GridListView';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function Allvideos() {
+  const navigate = useNavigate();
   const [videoData, setVideoData] = useState([]);
   const [isChecked, setIsChecked] = useState(() => {
     return JSON.parse(localStorage.getItem('isChecked')) || false;
@@ -22,29 +23,62 @@ function Allvideos() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/all');
+      
+      try{
+        console.log("fetching session details..");
+      const authData = localStorage.getItem('token');
+      console.log(authData)
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+    }, 150000); // 60 seconds
+
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+
+      
+      console.log(config)
+       const response = await fetch('http://localhost:3000/api/videos/all', config);
       const data = await response.json();
       setVideoData(data);
-    };
-  
-    fetchData();
-  }, []); 
+      
+    
+  }
+  else{
+    navigate('/');  //login path when token is expired
+  }
+  }catch(error){
+    console.error('Error fetching data:', error);
+  }
+  }
+  fetchData();
+}, []); 
 
-  console.log(videoData)
+  // console.log(videoData)
 
   return (
-    <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
-      <div className="w-2/8 fixed h-full hidden sm:flex flex-col">
-        <AnnotatorSideBar />
+    <div className='bg-backgroundGreen lg:overflow-x-hidden flex h-full min-h-screen w-full justify-between pr-3'>
+      <div className="fixed h-full hidden sm:flex flex-col">
+        <Sidebar type="annotator" />
       </div>
-      <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
+      <div className="w-full h-full center-l  lg:ml-[15%] md:ml-[25%] px-3">
         <Navbar type='annotator' />
         <div className='flex justify-between'>
-          <h1 className=' mb-8 ml-24 mt-32 text-3xl font-semibold text-sidebarGreen left-0'>
+          <h1 className=' mb-8 mt-32 lg:text-3xl sm:text-xl font-semibold text-sidebarGreen pl-3'>
                   All Videos
                 </h1>
-
-          <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white '>
+<div className='pr-3'>
+<label className='themeSwitcherTwo shadow-card relative mt-32 lg:h-10 md:h-8 sm:h-6  inline-flex  cursor-pointer select-none rounded-md bg-white text-center '>
         <input
           type='checkbox'
           className='sr-only'
@@ -52,7 +86,7 @@ function Allvideos() {
           onChange={handleCheckboxChange}
         />
         <span
-          className={`flex space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+          className={`flex space-x-4 rounded pt-2 pb-2 px-2 text-sm font-medium ${
             !isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
           }`}
         >
@@ -60,13 +94,15 @@ function Allvideos() {
           List View
         </span>
         <span
-          className={`flex space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+          className={`flex space-x-4 rounded py-2 px-2 text-sm font-medium ${
             isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
           }`}
         >
           Grid View
         </span>
       </label>
+</div>
+     
 </div>
         
 <VideoContainer 

@@ -9,11 +9,82 @@ function VideowithReview({Id,text,type}) {
  const videoId = Id;
  const productId =Id;
  
+ 
  const [Data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [greenFlagDisabled, setGreenFlagDisabled] = useState(false);
   const [redFlagDisabled, setRedFlagDisabled] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const health = ()=>{
+    let fact;
+    const isConfectionery = Data.productCategory === "Confectionery";
+    const isFineBakeryWares = Data.productCategory === "Fine Bakery Wares";
+    const isOrdinaryBakeryWares = Data.productCategory === "Bread and Ordinary Bakery Wares";
+    const isCereals =Data.productCategory === "Cereals";
+    const isReadytoeatSavouries = Data.productCategory === "Ready-to-eat Savouries";
+    const isProcessednuts = Data.productCategory === "Processed nuts";
+    const isFishbased = Data.productCategory === "Fish-based";
+    const isBeverages =Data.productCategory === "Beverages";
+    const isFrozendairybaseddessertsandedibleices = Data.productCategory === "Frozen dairy based desserts and edible ices";
+    const isCurdeddairybaseddesserts = Data.productCategory === "Curded dairy based desserts";
+    const isCheeseandanalogues = Data.productCategory === "Cheese and analogues";
+    const isCompositefoods =Data.productCategory === "Composite foods (Prepared foods)";
+    const isFatsandoilsandfatemulsions = Data.productCategory === "Fats and oils, and fat emulsions";
+    const isPastaandnoodlesandlikeproducts = Data.productCategory === "Pasta and noodles and like products";
+    const isFreshandfrozenmeatpoultrygamefishandseafoodproducts = Data.productCategory === "Fresh and frozen meat, poultry, game, fish and seafood products";
+    const isProcessedmeatpoultrygamefishandfishproducts =Data.productCategory === "Processed meat, poultry, game, fish and fish products";
+    const isFreshandfrozenfruitsandvegetablesandlegumes = Data.productCategory === "Fresh and frozen fruits and vegetables,and legumes";
+    const isProcessedfruitsandvegetables = Data.productCategory === "Processed fruits and vegetables";
+    const isSolidformsoybeanProducts = Data.productCategory === "Solid-form soybean Products";
+    const isSaucesdipsanddressings =Data.productCategory === "Sauces, dips, and dressings";
+    
+    
+    if ((isConfectionery || isFineBakeryWares || isOrdinaryBakeryWares) &&
+        Data.totalFat2 <= 8.0 &&
+        Data.sugar2 <= 6.0) {
+        if ((isFineBakeryWares || isOrdinaryBakeryWares) && Data.sodium2 <= 0.25) {
+            if (isFineBakeryWares && Data.energy2 <= 230) {
+                fact = "healthy";
+            } else {
+                fact = "unhealthy";
+            }
+        } else if (Data.energy2 <= 230) {
+            fact = "healthy";
+        } else {
+            fact = "unhealthy";
+        }
+    } else if(isCereals && Data.totalFat2<=12.0 && Data.sugar2<=9.0 && Data.sodium2<=0.35 ) {
+        fact = "healthy";
+    }else if(isFrozendairybaseddessertsandedibleices && Data.totalFat2<=8.0 && Data.sugar2<=12.0 && Data.sodium2<=0.10 && Data.energy2 <= 230){
+      fact = "healthy";
+    }else if(isCurdeddairybaseddesserts && Data.totalFat2<=7.0 && Data.sugar2<=6.0 && Data.sodium2<=0.10 && Data.energy2 <= 230){
+      fact = "healthy";
+    }else if(isCheeseandanalogues && Data.totalFat2<=20.0 /*&& Data.addedsugar2==0.0*/ && Data.sodium2<=0.60 ){
+      fact = "healthy";
+    }else if(isCompositefoods && Data.totalFat2<=8.0 && Data.SFA2==3.5 && Data.sugar2<=9.0  && Data.sodium2<=0.35 ){
+      fact = "healthy";
+    }else if(isFatsandoilsandfatemulsions  && Data.SFA2==35.0 && Data.sodium2<=0.10 ){
+      fact = "healthy";
+    }else if(isPastaandnoodlesandlikeproducts  && Data.totalFat2<=3.0 &&  Data.sodium2<=0.25 ){
+      fact = "healthy";
+    }else if(isFreshandfrozenmeatpoultrygamefishandseafoodproducts && Data.totalFat2<=15.0 ){
+      fact = "healthy";
+    }else if(isFreshandfrozenfruitsandvegetablesandlegumes){
+      fact = "healthy";
+    }else if(isProcessedfruitsandvegetables && Data.sodium2<=0.40 ){
+      fact = "healthy";
+    }else if(isSolidformsoybeanProducts && Data.totalFat2<=12.0 && Data.sugar2<=5.0 && Data.sodium2<=0.10 ){
+      fact = "healthy";
+    }else if(isSaucesdipsanddressings && Data.totalFat2<=12.0 && Data.sugar2<=10.0 && Data.sodium2<=0.30){
+      fact = "healthy";
+    }else{
+      fact ="unhealthy"
+    }
+    return fact;
+    
+  }
+
 
   const handleOpen = (text,status) => {
 // console.log(text)
@@ -104,7 +175,8 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
 
   const handlesave= async (e) => {
     // e.preventDefault();
-    console.log(videoId)
+    // console.log(videoId)
+    const healthFact= health();
     try {
       if(text==="expert" ){
         console.log(text)
@@ -116,7 +188,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       });
     }else{
       await axios.post(`http://localhost:3000/api/product/reviewproduct/${productId}`, {
-        status: 'reviewed'
+        healthfact : healthFact,
       });
     }
       Swal.fire({

@@ -44,6 +44,11 @@ exports.getsensormanagernewvideos= async(req,res)=>{
   return await VideoModel.find({ status: 'pending' });
 
 }
+exports.getsensormanagerallvideo= async(req,res)=>{
+  return await VideoModel.find({ status:{ $in: ['pending','unannotated']} });
+
+}
+
 
 exports.getSensorManagerReviewVideos = async(videoId)=>{
   return await VideoModel.findOne({ _id: videoId })

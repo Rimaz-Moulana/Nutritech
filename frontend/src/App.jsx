@@ -9,9 +9,10 @@ import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
 import AnnotationTable from './pages/Annotator/AnnotationTable';
 import ProductDetails from './pages/Annotator/ProductDetails';
-import UnannotatedVideos from './pages/Annotator/UnannotatedVideos';
-import Log from './pages/Log';
-import Login from './pages/Login';
+import UnannotatedVideos from './pages/Annotator/UnannotatedVideos.jsx';
+
+import { default as Login } from './pages/test/Login.jsx';
+import Register from './pages/test/RegisterForm.jsx';
 // import Row from './components/AnnotationTable/Row';
 // import Buttons from './components/AnnotationTable/Buttons';
 import Product from './pages/Annotator/Product';
@@ -23,7 +24,7 @@ import NewVideos from './pages/SensorManager/NewVideos';
 import Row from './components/AnnotationTable/Row';
 import EditRule from './components/Popup/EditRule';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
-import Rules from './pages/SensorManager/Rules';
+import Rules from './pages/Rules';
 
 // import AnnotationHistory from '../src/pages/Annotator/History';
 // import AnnotatorHome from '../src/pages/Annotator/Home';
@@ -32,28 +33,32 @@ import AddNewProduct2 from '../src/pages/Industry/AddNewProduct2.jsx';
 
 // import AnnotationHistory from '../src/pages/Annotator/History';
 // import AnnotatorHome from '../src/pages/Annotator/Home';
-import AnnotationHistory from '../src/pages/Annotator/History'
-import AnnotatorHome from '../src/pages/Annotator/Home'
-import SensorManagerHome from '../src/pages/SensorManager/Home'
+import AnnotationHistory from '../src/pages/Annotator/History';
+import AnnotatorHome from '../src/pages/Annotator/Home';
+import SensorManagerHome from '../src/pages/SensorManager/Home';
 
 // import AddedProductt from './pages/Annotator/AddedProductt';
+import GreenFlag from './pages/ExpertPanel/GreenFlag';
+import ExpertPanelHome from './pages/ExpertPanel/Home';
+import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos';
+import RedFlag from './pages/ExpertPanel/RedFlag';
+import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
+import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
+// import ExpertRules from './pages/ExpertPanel/Rules';
+import IndustryHistory from './pages/Industry/History';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
-import IndustryHistory from './pages/Industry/History'
-import ExpertPanelHome from './pages/ExpertPanel/Home'
-import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos'
-import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
-import RedFlag from './pages/ExpertPanel/RedFlag';
-import GreenFlag from './pages/ExpertPanel/GreenFlag';
-import ExpertRules from './pages/ExpertPanel/Rules'
-import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
-import IndustryHome from './pages/Industry/Home'
-import ResearcherHome from './pages/Researcher/Home'
+
+import IndustryHome from './pages/Industry/Home';
+import ResearcherHome from './pages/Researcher/Home';
 
 
-import AddedProductt from './pages/Annotator/AddedProductt';
+import AddUser from './pages/Admin/AddUser.jsx';
+import AllUsers from './pages/Admin/AdminDashboard.jsx';
 
-// import './App.css'
+
+
+import './App.css'
 
 
 function App(){
@@ -62,12 +67,12 @@ function App(){
     <BrowserRouter>
         <Routes>
             {/* <Route path='/'  > */}
-              {/* <Route path='/' element={<Nabra/>} /> */}
               <Route path='/' element={<Login />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/log' element={<Log />} />
+              {/* <Route path='/login' element={<Login />} />
+              <Route path='/log' element={<Log />} /> */}
+              <Route path='/register' element={<Register />} />
               <Route path='/blankPages' element={<BlankPage />} />
-              <Route path='/product' element={<ProductDetails />} />
+              <Route path='/product/:productId' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />
               <Route path='/addedproduct' element={<AddedProduct />} />
 
@@ -93,7 +98,7 @@ function App(){
               
 
               <Route path="/reviewvideo/:videoId" element={<ReviewVideos/>} />
-              <Route path="/rules" element={<Rules/>} />
+              <Route path="/rules/:type" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
 
@@ -113,11 +118,14 @@ function App(){
               <Route path='/approvevideo/:videoId' element ={<ApproveVideos/>} />
               <Route path='/red' element ={<RedFlag/>} />
               <Route path='/green' element ={<GreenFlag/>} />
-              <Route path='/expertrules' element ={<ExpertRules/>} />
+              {/* <Route path='/expertrules' element ={<ExpertRules/>} /> */}
               <Route path='/expertreviewhistory/:videoId' element ={<ReviewHistory/>} />
 
               <Route path='/researcherhome' element ={<ResearcherHome/>} /> {/*reseracherhome*/}
               <Route path='/industryhome' element ={<IndustryHome/>} /> {/*industryhome*/}
+
+              <Route path='/addUser' element={<AddUser />} />
+              <Route path='/users' element={<AllUsers />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
@@ -125,5 +133,3 @@ function App(){
 }
 
 export default App;
-
-
