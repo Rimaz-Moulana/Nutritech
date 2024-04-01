@@ -79,29 +79,39 @@ exports.getuploadhistory= async (req,res)=>{
 }
 
 
-exports.addvideo = async (req,res) => {
+exports.addvideo = async (req, res) => {
+  try {
+      const { brand, product, variation, category, createdIn, createdAt, duration } = req.body;
+      const videoPath = req.file.path;
 
-    try{
-        const { brand, product , variation , category, createdIn, createdAt,duration} = req.body;
-        const videoPath = req.file.path
-        // console.log(req.body)
-        const newVideo = new Video({brand,product,variation,category, videoPath, createdIn, createdAt, duration, status: 'pending', uploader:'Sirasa'});
-        
-        // Convert uploaded video to text
-        const text = await convertVideoToText(req.file.path);
+      // Convert uploaded video to text
+      const text = await convertVideoToText(videoPath);
+      // console.log('hi'+text)
 
-        // Send converted text as response
-        res.json({ text });
-        console.log(newVideo)
-        await newVideo.save();
-       
-        return res.status(201).json({success: true, newVideo});
+      // Create a new video object
+      const newVideo = new Video({
+          brand,
+          product,
+          variation,
+          category,
+          videoPath,
+          createdIn,
+          createdAt,
+          duration,
+          status: 'pending',
+          uploader: 'Sirasa'
+      });
 
-    } catch(error){
-        console.error(error);
-        return res.status(500).json({ success: false, message: 'Server Error'});
-    }
-}
+      // Save the new video
+      await newVideo.save();
+
+      // Send response with converted text
+      res.status(201).json({ success: true,text, newVideo });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
 
 exports.getpendingvideos= async (req,res)=>{
   try {
