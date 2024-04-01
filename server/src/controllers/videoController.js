@@ -81,10 +81,10 @@ exports.getuploadhistory= async (req,res)=>{
 exports.addvideo = async (req,res) => {
 
     try{
-        const { brand, product , variation , createdIn, createdAt,duration} = req.body;
+        const { brand, product , variation , category, createdIn, createdAt,duration} = req.body;
         const videoPath = req.file.path
         // console.log(req.body)
-        const newVideo = new Video({brand,product,variation, videoPath, createdIn, createdAt, duration, status: 'pending', uploader:'Sirasa'});
+        const newVideo = new Video({brand,product,variation,category, videoPath, createdIn, createdAt, duration, status: 'pending', uploader:'Sirasa'});
         console.log(newVideo)
         await newVideo.save();
        

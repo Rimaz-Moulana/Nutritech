@@ -11,6 +11,7 @@ import white from '../../assets/Images/white.png'
 import yellow from '../../assets/Images/yellow.png'
 import red from '../../assets/Images/redflag.png'
 import green from '../../assets/Images/greenflag.png'
+import Dropdown from '../fields/dropdown';
 
 function VideoContainer({ type,videoData,viewType,videotype }) {
   // console.log(viewType)
@@ -22,6 +23,10 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
     // Retrieve from localStorage, default to 'all' if not found
     return localStorage.getItem('productFilter') || 'all';
   });
+
+  const [Data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     // Update localStorage when productFilter changes
@@ -71,7 +76,7 @@ const filteredVideos = videoData?.filter((video) => {
     return true;
   }
 
-  const productMatch = productFilter === 'all' || video.product === productFilter;
+  const productMatch = productFilter === 'all' || video.category === productFilter;
   const uploadedDateMatch = !startDate || new Date(video.createdIn).toLocaleDateString() === startDate.toLocaleDateString();
   const annotatedDateMatch = !startDate || (video.annotateddate && new Date(video.annotateddate).toLocaleDateString() === startDate.toLocaleDateString());
 
@@ -91,19 +96,37 @@ const filteredVideos = videoData?.filter((video) => {
         <div className=' items-end'>
       {type !== "industry" && (
         <>
-            <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
+            <select className='bg-white text-xs p-1 items-end mt-2 mb-2 rounded w-[25%]'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
                 <option value='all'>All Products</option>
-                <option value='Biscuits'>Biscuits</option>
-                <option value='Dairy'>Dairy</option>
-                <option value='Margarine'>Margarine</option>
-                <option value='Noodles'>Noodles</option>
-                <option value='Soft drinks'>Soft Drinks</option>
-                <option value='Bakery items'>Bakery Items</option>
-                <option value='Confectionary'>Confectionary</option>
-                <option value='Other'>Other</option>
+                <option value='Confectionery'>Confectionery</option>
+                <option value='Fine Bakery Wares'>Fine Bakery Wares</option>
+                <option value='Bread and Ordinary Bakery Wares'>Bread and Ordinary Bakery Wares</option>
+                <option value='Cereals'>Cereals</option>
+                <option value='Potato,cereal or starch-based and animal based'>Potato,cereal or starch-based and animal based</option>
+                <option value='Processed nuts'>Processed nuts</option>
+                <option value='Fish-based'>Fish-based</option>
+                <option value='Juices'>Juices</option>
+                <option value='Milk and dairy based drinks'>Milk and dairy based drinks</option>
+                <option value='Water based flavoured drink'>Water based flavoured drink</option>
+                <option value='Coffee,coffee substitutes,tea, herbal infusions'>Coffee,coffee substitutes,tea, herbal infusions</option>
+                <option value='Cereal,grain, tree nut-based beverages'>Cereal,grain, tree nut-based beverages</option>
+                <option value='Frozen dairy based desserts and edible ices'>Frozen dairy based desserts and edible ices</option>
+                <option value='Curded dairy based desserts'>Curded dairy based desserts</option>
+                <option value='Cheese and analogues'>Cheese and analogues</option>
+                <option value='Composite foods'>Composite foods</option>
+                <option value='Fats and oils, and fat emulsions'>Fats and oils, and fat emulsions</option>
+                <option value='Pasta and noodles and like products'>Pasta and noodles and like products</option>
+                <option value='Fresh and frozen meat, poultry, game, fish and seafood products'>Fresh and frozen meat, poultry, game, fish and seafood products</option>
+                <option value='Processed meat, poultry and game Products'>Processed meat, poultry and game Products</option>
+                <option value='Processed fish and seafood products'>Processed fish and seafood products</option>
+                <option value='Fresh and frozen fruits and vegetables,and legumes'>Fresh and frozen fruits and vegetables,and legumes</option>
+                <option value='Processed fruits and vegetables'>Processed fruits and vegetables</option>
+                <option value='Solid-form soybean Products'>Solid-form soybean Products</option>
+                <option value='Sauces, dips, and dressings'>Sauces, dips, and dressings</option>
+                <option value='Fats and oils, and fat emulsions'>Fats and oils, and fat emulsions</option>
     </select>
 
            <DatePicker
@@ -118,7 +141,7 @@ const filteredVideos = videoData?.filter((video) => {
       )}
     </div>
       
-    <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 ml-12 mt-8 mr-5 mb-8 bg-backgroundGreen">
+    <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 p-4 mt-8 mr-5 mb-8 bg-backgroundGreen">
       {filteredVideos.map((video, index) => (
         <div key={index} className='relative'>
           <div className=''>

@@ -19,6 +19,7 @@ function UploadVideo() {
         brand: '',
         product: '',
         variation: '',
+        category: '',
         createdIn: new Date().toLocaleDateString(),
         createdAt: formattedTime ,
         videoFile: null // Assuming you need to upload a video file
@@ -49,6 +50,7 @@ function UploadVideo() {
         formD.append('brand', formData.brand);
         formD.append('product', formData.product);
         formD.append('variation', formData.variation);
+        formD.append('category', formData.category);
         formD.append('createdIn', formData.createdIn);
         formD.append('createdAt', formData.createdAt);
         formD.append('video', formData.videoFile);

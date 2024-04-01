@@ -38,17 +38,19 @@ function AnnotatedVideos() {
     fetchData();
   }, []);
   return (
-    <div className='bg-backgroundGreen flex h-full min-h-screen'>
-      <div className="w-2/8 fixed h-full hidden sm:flex flex-col">
+    <div className='bg-backgroundGreen lg:overflow-x-hidden flex h-full min-h-screen w-full justify-between pr-3'>
+      <div className="fixed h-full hidden sm:flex flex-col">
         <Sidebar type="annotator" />
       </div>
-      <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
+      <div className="w-full h-full center-l  lg:ml-[15%] md:ml-[25%] px-3">
         <Navbar type='annotator'/>
         <div className='flex justify-between'>
-        <h1 className=' mb-8 ml-20 mt-32 text-3xl font-semibold text-sidebarGreen left-0'>
+        <h1 className=' mb-8 mt-32 lg:text-3xl sm:text-xl font-semibold text-sidebarGreen pl-3'>
            Annotated Videos
         </h1>
-        <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white '>
+        
+        <div className='pr-3'>
+<label className='themeSwitcherTwo shadow-card relative mt-32 lg:h-10 md:h-8 sm:h-6  inline-flex  cursor-pointer select-none rounded-md bg-white '>
         <input
           type='checkbox'
           className='sr-only'
@@ -56,7 +58,7 @@ function AnnotatedVideos() {
           onChange={handleCheckboxChange}
         />
         <span
-          className={`flex space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+          className={`flex space-x-4 rounded pt-2 pb-2 px-2 text-sm font-medium ${
             !isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
           }`}
         >
@@ -64,13 +66,15 @@ function AnnotatedVideos() {
           List View
         </span>
         <span
-          className={`flex space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+          className={`flex space-x-2 rounded py-2 px-2 text-sm font-medium ${
             isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
           }`}
         >
           Grid View
         </span>
       </label>
+</div>
+     
       </div>
       <VideoContainer 
         type={'annotated'}

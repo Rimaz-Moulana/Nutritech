@@ -71,14 +71,14 @@ function Allvideos() {
       <div className="fixed h-full hidden sm:flex flex-col">
         <Sidebar type="annotator" />
       </div>
-      <div className="w-full h-full center-l  lg:ml-[15%] px-3">
+      <div className="w-full h-full center-l  lg:ml-[15%] md:ml-[25%] px-3">
         <Navbar type='annotator' />
         <div className='flex justify-between'>
           <h1 className=' mb-8 mt-32 lg:text-3xl sm:text-xl font-semibold text-sidebarGreen pl-3'>
                   All Videos
                 </h1>
 <div className='pr-3'>
-<label className='themeSwitcherTwo shadow-card relative mt-32 lg:h-10 sm:h-6  inline-flex  cursor-pointer select-none rounded-md bg-white '>
+<label className='themeSwitcherTwo shadow-card relative mt-32 lg:h-10 md:h-8 sm:h-6  inline-flex  cursor-pointer select-none rounded-md bg-white text-center '>
         <input
           type='checkbox'
           className='sr-only'
@@ -94,7 +94,7 @@ function Allvideos() {
           List View
         </span>
         <span
-          className={`flex space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+          className={`flex space-x-4 rounded py-2 px-2 text-sm font-medium ${
             isChecked ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
           }`}
         >
