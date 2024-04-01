@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import VideoContainer from '../../components/videoContainer/VideoContainer';
-import SensorManagerSidebar from '../../components/sidebar/SensorManagerSidebar';
 import Navbar from '../../components/navbar/Navbar';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewVideos() {
   const { videoId } = useParams();
@@ -43,7 +43,7 @@ function ReviewVideos() {
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <SensorManagerSidebar />
+      <Sidebar type="sensormanager" />
       </div>
       <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
         <Navbar type='sensormanager'/>

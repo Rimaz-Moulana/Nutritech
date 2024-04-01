@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar';
 import Navbar from '../../components/navbar/Navbar';
 import Row from '../../components/AnnotationTable/Row';
 import Videowithtext from '../../components/AnnotationTable/Videowithtext';
@@ -8,6 +7,7 @@ import minus from '../../assets/Images/minus.png';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function AnnotationTable() {
   const navigate = useNavigate();
@@ -182,7 +182,7 @@ console.log(videoDuration)
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex z-10'>
       <div className='w-2/8 fixed h-full hidden sm:flex flex-col'>
-        <Annotatorsidebar />
+        <Sidebar type="annotator" />
       </div>
       <div className='w-full h-full sm:w-3/4 ml-0 z-10 sm:ml-64'>
         <Navbar type='annotator' />

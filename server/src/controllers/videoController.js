@@ -82,10 +82,10 @@ exports.getuploadhistory= async (req,res)=>{
 exports.addvideo = async (req,res) => {
 
     try{
-        const { brand, product , variation , createdIn, createdAt,duration} = req.body;
+        const { brand, product , variation , category, createdIn, createdAt,duration} = req.body;
         const videoPath = req.file.path
         // console.log(req.body)
-        const newVideo = new Video({brand,product,variation, videoPath, createdIn, createdAt, duration, status: 'pending', uploader:'Sirasa'});
+        const newVideo = new Video({brand,product,variation,category, videoPath, createdIn, createdAt, duration, status: 'pending', uploader:'Sirasa'});
         
         // Convert uploaded video to text
         const text = await convertVideoToText(req.file.path);
@@ -112,6 +112,17 @@ exports.getpendingvideos= async (req,res)=>{
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
+exports.getsensormanagernallvideos= async (req,res)=>{
+  try {
+        const pendingVideos = await VideoService.getsensormanagerallvideo();
+        res.json(pendingVideos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 
 exports.saveSensorManagerReview= async (req,res)=>{
   try {

@@ -5,6 +5,7 @@ import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 import Swal from 'sweetalert2';
+import Navbar from '../../components/navbar/Navbar';
 
 
 function UploadVideo() {
@@ -18,6 +19,7 @@ function UploadVideo() {
         brand: '',
         product: '',
         variation: '',
+        category: '',
         createdIn: new Date().toLocaleDateString(),
         createdAt: formattedTime ,
         videoFile: null // Assuming you need to upload a video file
@@ -48,6 +50,7 @@ function UploadVideo() {
         formD.append('brand', formData.brand);
         formD.append('product', formData.product);
         formD.append('variation', formData.variation);
+        formD.append('category', formData.category);
         formD.append('createdIn', formData.createdIn);
         formD.append('createdAt', formData.createdAt);
         formD.append('video', formData.videoFile);
@@ -80,7 +83,7 @@ function UploadVideo() {
   return (
     <div className='bg-backgroundGreen flex h-screen'>
     <div className="w-full ml-12 mr-4 ">
-      <NavbarMediaStation />
+      <Navbar />
       <div className='flex justify-between'>
       <h1 className=' mb-8 mt-32 lg:mr-[820px] text-3xl ml-4 font-semibold text-sidebarGreen justify-start'>
          Upload Advertisement Video

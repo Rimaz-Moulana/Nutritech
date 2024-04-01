@@ -216,7 +216,8 @@ exports.fetchSensorManagerReview = async (req, res) => {
   exports.savePendingProduct= async (req,res)=>{
     try {
           const productId = req.params.productId;
-          const productStatus = await productService.saveProduct(productId);
+          const fact = req.body.healthfact;
+          const productStatus = await productService.saveProduct(productId,fact);
           res.json(productStatus);
       } catch (error) {
           console.error(error);

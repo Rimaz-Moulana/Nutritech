@@ -24,7 +24,7 @@ import NewVideos from './pages/SensorManager/NewVideos';
 import Row from './components/AnnotationTable/Row';
 import EditRule from './components/Popup/EditRule';
 import ReviewVideos from './pages/SensorManager/ReviewVideos';
-import Rules from './pages/SensorManager/Rules';
+import Rules from './pages/Rules';
 
 // import AnnotationHistory from '../src/pages/Annotator/History';
 // import AnnotatorHome from '../src/pages/Annotator/Home';
@@ -44,7 +44,7 @@ import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos';
 import RedFlag from './pages/ExpertPanel/RedFlag';
 import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
 import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
-import ExpertRules from './pages/ExpertPanel/Rules';
+// import ExpertRules from './pages/ExpertPanel/Rules';
 import IndustryHistory from './pages/Industry/History';
 import SensorManagerProducts from './pages/SensorManager/Products';
 import ReviewProduct from './pages/SensorManager/ReviewProduct';
@@ -58,7 +58,7 @@ import AllUsers from './pages/Admin/AdminDashboard.jsx';
 
 
 
-// import './App.css'
+import './App.css'
 
 
 function App(){
@@ -67,7 +67,6 @@ function App(){
     <BrowserRouter>
         <Routes>
             {/* <Route path='/'  > */}
-              {/* <Route path='/' element={<Nabra/>} /> */}
               <Route path='/' element={<Login />} />
               {/* <Route path='/login' element={<Login />} />
               <Route path='/log' element={<Log />} /> */}
@@ -99,7 +98,7 @@ function App(){
               
 
               <Route path="/reviewvideo/:videoId" element={<ReviewVideos/>} />
-              <Route path="/rules" element={<Rules/>} />
+              <Route path="/rules/:type" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
               <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
 
@@ -119,7 +118,7 @@ function App(){
               <Route path='/approvevideo/:videoId' element ={<ApproveVideos/>} />
               <Route path='/red' element ={<RedFlag/>} />
               <Route path='/green' element ={<GreenFlag/>} />
-              <Route path='/expertrules' element ={<ExpertRules/>} />
+              {/* <Route path='/expertrules' element ={<ExpertRules/>} /> */}
               <Route path='/expertreviewhistory/:videoId' element ={<ReviewHistory/>} />
 
               <Route path='/researcherhome' element ={<ResearcherHome/>} /> {/*reseracherhome*/}

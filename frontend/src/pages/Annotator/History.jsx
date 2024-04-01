@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Annotatorsidebar from '../../components/sidebar/AnnotatorSideBar';
 import Navbar from '../../components/navbar/Navbar';
 import Videowithtext from '../../components/AnnotationTable/Videowithtext';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
@@ -7,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import Comments from '../../components/CommentSection/Comments';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import axios from 'axios';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function History() {
   const { videoId } = useParams();
@@ -32,7 +32,7 @@ function History() {
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex flex-col'> {/* Make the main container a flex column */}
       <div className="w-2/8 fixed hidden sm:flex flex-col">
-        <Annotatorsidebar />
+        <Sidebar type="annotator" />
       </div>
       <div className="w-full sm:w-3/4 ml-0 sm:ml-64 flex-grow"> {/* Make this div take up remaining vertical space */}
         <Navbar type='annotator' />

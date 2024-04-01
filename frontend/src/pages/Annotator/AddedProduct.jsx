@@ -28,14 +28,18 @@ export default function AddedProduct() {
 
   };
   return (
-    <div className='w-full min-h-screen overflow-x-auto xl:overflow-hidden bg-backgroundGreen'>
-    <BlankPage />
+    <div className='w-full min-h-screen overflow-x-auto xl:overflow-hidden bg-backgroundGreen place-items-center'>
+    <BlankPage type="annotator" />
     <div className='inline-flex ml-[11%] w-[80%]'>
     <h1 className="mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Product</h1>
     <AddNewProduct />
     </div>
     <ProductBar />
+    <div className='w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64'>
+    <div className=''>
     <LogTable data={products} />
+    </div>
+    </div>    
     </div>
   )
 }
