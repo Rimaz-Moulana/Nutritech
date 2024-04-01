@@ -210,6 +210,7 @@ exports.postReply = async (videoId, replycomment, req) => {
 };
 
 
+//video to text
 const speechClient = new SpeechClient();
 
 const convertVideoToText = async (videoPath) => {
