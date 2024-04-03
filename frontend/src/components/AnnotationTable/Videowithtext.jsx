@@ -36,9 +36,9 @@ function Videowithtext({videoId}) {
  
 console.log(videoData)
   return (
-    <div className='lg:flex sm:relative justify-center'>
+    <div className='lg:flex sm:relative justify-center '>
       {videoData[0] && (
-        <div>
+        <div className='p-3'>
         <ReactPlayer
                 className='react-player fixed-bottom'
                 url={`/videos/${handleVideo(videoData[0].videoPath)}`}
@@ -50,7 +50,7 @@ console.log(videoData)
         </div>
 
       )}
-      <div className='bg-white lg:w-1/2 lg:ml-12 sm:w-full p-3 text-justify border rounded-lg'>
+      <div className='bg-white lg:w-[55%] sm:w-full text-justify border rounded-lg lg:ml-12 p-3 '>
         <p>
         Cake? Bake!
         Cake Bake Cake Bake Cake Bake Cake Bake cake bake cake bake with Astra 

@@ -88,7 +88,7 @@ function History() {
           Grid View
         </span>
       </label>
-      <VideoContainer type={"mediastation"} videoData={videoData} viewType={isChecked ? 'Grid' : 'List'} />
+      <VideoContainer type={"history"} videoData={videoData} viewType={isChecked ? 'Grid' : 'List'} />
     </div>
   </div>
 );

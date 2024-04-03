@@ -111,7 +111,7 @@ function AnnotationTable() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
+      await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
         annotations: rowsData,
       });
 
@@ -180,17 +180,17 @@ function AnnotationTable() {
   
 console.log(videoDuration)
   return (
-    <div className='bg-backgroundGreen h-full min-h-screen flex z-10'>
-      <div className='w-2/8 fixed h-full hidden sm:flex flex-col'>
+    <div className='bg-backgroundGreen h-full min-h-screen flex z-10 '>
+      <div className='fixed h-full hidden sm:flex flex-col'>
         <Sidebar type="annotator" />
       </div>
-      <div className='w-full h-full sm:w-3/4 ml-0 z-10 sm:ml-64'>
+      <div className='w-full lg:ml-[15%] lg:w-[75%] h-full ml-0 flex-grow z-10 '>
         <Navbar type='annotator' />
         <div className='w-full mt-28'>
           <Videowithtext videoId={videoId}/>
         </div>
-        <div className='ml-16 h-full sm:ml-20 mb-8 mt-10 text-sm font-semibold text-black'>
-          <div className='flex-end'>
+        <div className='px-3 h-full mb-8 mt-10 text-sm font-semibold text-black'>
+          <div className='lg:flex-end'>
             <p className='text-lg'>Does this video violated advertising rules and regulations?</p>
             
             <div className='flex place-content-center'>
@@ -214,7 +214,7 @@ console.log(videoDuration)
             {isYesSelected && (
               <>
                 {[...Array(rowCount)].map((_, index) => (
-                  <div key={index}>
+                  <div key={index} className='center-l flex'>
                     <Row duration={videoDuration}
                       rowData={rowsData[index] || {
                         timestamp: '',
@@ -231,7 +231,7 @@ console.log(videoDuration)
                     />
                     {addedrows.includes(index) && (
                       <button
-                        className='rounded-full mt-4 justify-end h-24 w-24'
+                        className='rounded-full justify-end h-12 w-12 ml-[5%] mt-[13%] '
                         onClick={() => removeRow(index)}
                       >
                         <img className='mr-0 mt-0 h-12 w-12' src={minus} alt='Remove' />

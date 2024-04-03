@@ -66,17 +66,20 @@ function ViewComment({ videoId, type }) {
   };
   console.log(Data)
   return (
-    <div className='mt-8 w-1/2 font-semibold mx-auto text-center'>
-      <h1 className='text-sidebarGreen text-2xl text-left'>Comment section</h1>
+    <div className=' lg:w-3/4 p-3 font-semibold mx-auto text-center'>
+      <h1 className='text-sidebarGreen text-3xl'>Comment section</h1>
 
       {loading ? (
         <div>Loading...</div>
       ) : renderCommentsAndReplies().length > 0 ? (
         <>
           {renderCommentsAndReplies()}
+
+          {type !=="annotator" && (
           <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
             <Comments type={type} videoId={videoId} />
           </div>
+          )}
         </>
       ) : (
         <div className='bg-darkGreen text-white mt-4 p-3 text-xl text-left'>
