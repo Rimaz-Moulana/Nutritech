@@ -85,7 +85,7 @@ exports.addvideo = async (req, res) => {
       const videoPath = req.file.path;
 
       // Convert uploaded video to text
-      const text = await convertVideoToText(videoPath);
+      // const text = await convertVideoToText(videoPath);
       // console.log('hi'+text)
 
       // Create a new video object
@@ -106,7 +106,7 @@ exports.addvideo = async (req, res) => {
       await newVideo.save();
 
       // Send response with converted text
-      res.status(201).json({ success: true,text, newVideo });
+      res.status(201).json({ success: true, newVideo });
   } catch (error) {
       console.error(error);
       res.status(500).json({ success: false, message: 'Server Error' });
