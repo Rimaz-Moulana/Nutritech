@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Image from '../../assets/Images/NutriTech Logo-04 1.png';
 import Image1 from '../../assets/Images/login_imag.jpeg';
-// import Image1 from '../../assets/images/login_imag.jpeg';
 
 export default function login() {
     const [formData, setFormData] = useState({

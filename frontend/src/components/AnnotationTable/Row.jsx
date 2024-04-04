@@ -75,7 +75,7 @@ function Row({
 
   return (
     <div>
-    <div className='flex mt-12 item-center'>  
+    <div className='lg:flex sm:relative item-center p-3 center-l lg:ml-[5%]'>  
     <div className=''>
     <div className="relative justify-center border-gray-200 border-1 rounded-sm">
       <label id='timestamp' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Stamp</label>
@@ -99,16 +99,16 @@ function Row({
     <button onClick={openPopup} className='mt-4 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2'>View Rules</button>
    </div>
     </div>
-<div className='flex'>
-<div >
-    <div className="relative h-full mb-6 ml-12 border-gray-200 border-1 rounded-sm">
-    <label id='details' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Details</label>
-      <textarea type="text" id="small-input" className="block size-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDetailsChange}></textarea>
+<div className='lg:flex sm:relative'>
+<div className='px-3' >
+    <div className="relative h-full mb-6 border-gray-200 border-1 rounded-sm px-3">
+    <label id='details' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white px-3">Details</label>
+      <textarea type="text" id="small-input" className="block w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDetailsChange}></textarea>
     </div>
       </div>
 
-      <div className="relative h-full mb-6 ml-12 border-gray-200 border-1 rounded-sm">
-          <label id='reccomendation' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Recommendation</label>
+      <div className="relative h-full mb-6 border-gray-200 border-1 rounded-sm px-3">
+          <label id='reccomendation' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white px-3">Recommendation</label>
             <textarea type="text" id="small-input" className="block w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleRecommendationChange}></textarea>
           </div>
 </div>
