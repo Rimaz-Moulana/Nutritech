@@ -13,152 +13,192 @@ import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/SideBar'
 
 export default function ProductDetails() {
-    const currentTimeInMillis = Date.now();
+        const currentTimeInMillis = Date.now();
 
-    // Create a new Date object using the current timestamp
-    const currentDate = new Date(currentTimeInMillis);
+        // Create a new Date object using the current timestamp
+        const currentDate = new Date(currentTimeInMillis);
+        
+        // Get the individual components of the date
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1; // Month is zero-based, so add 1
+        const day = currentDate.getDate();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        const seconds = currentDate.getSeconds();
+        
+        const cDate = `${year}/${month}/${day}`;
+        const cTime = `${hours}:${minutes}:${seconds}`;
 
-    // Get the individual components of the date
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // Month is zero-based, so add 1
-    const day = currentDate.getDate();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
+        const status = 'pending';
+        const [images,setImages] = useState([null, null])
+        const [uploadStatus, setUploadStatus] = useState('');
+        const [formData, setFormData] = useState({
+            productName: '',
+            brand: '',
+            description: '',
+            parentCompany: '',
+            productCategory: '',
+            packagingMaterial : '',
+            packagingMaterialTouching: '',
+            variation : '',
+            countryProduct: '',
+            servingSize: '',
+            sugarType: '',
+            lactose : '',
+            vitamin: '',
+            mineral: '',
+            omega: '',
+            acids: '',
+            probiotics: '',
+            method : '',
+            total: '',
+            remarks : '',
+            ingredients : '',
+            energy1: '',
+            energy2 : '',
+            protein1 : '',
+            protein2 : '',
+            totalFat1: '',
+            totalFat2 : '',
+            SFA1: '',
+            SFA2 : '',
+            carbo1 : '',
+            carbo2: '',
+            sugar1: '',
+            sugar2: '',
+            salt1 : '',
+            salt2 : '',
+            sodium1 : '',
+            sodium2 : '',
+            transFat1 : '',
+            transFat2 : '',
+            ash1 : '',
+            ash2 : '',
+            WPROfoodcode : '',
+            WPROPermitted : '',
+            WPROPermittedRemark : '',
+            SEAROfoodcode : '',
+            SEAROpermitted: '',
+            SEAROpermittedRemark : '',
+            SLfoodCode: '',
+            SLpermitted: '',
+            SLfoodcodePermittedRemark: '',
+            createdTime: cTime ,
+            CreatedData : cDate ,
+            videoFile : '',
+            status: status,
+            imageFront: '',
+            imageBack: '',
+            imageLeft: '',
+            imageRight: ''
+        })
 
-    const cDate = `${year}/${month}/${day}`;
-    const cTime = `${hours}:${minutes}:${seconds}`;
+        const handleChange = (e) => {
+            const { name, value } = e.target;
+            setFormData({ ...formData, [name]: value });
+          };
+        
+          const handleFileChange = (e) => {
+            setFormData({ ...formData, videoFile: e.target.files[0] });
+          };
 
-    const status = 'pending';
-    const [conversionResult, setConversionResult] = useState(null);
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [images, setImages] = useState([null, null])
-    const [uploadStatus, setUploadStatus] = useState('');
-    const [showForm, setShowForm] = useState(true); // State to control showing/hiding the form
-
-    const formDataInitialState = {
-        productName: '',
-        brand: '',
-        description: '',
-        parentCompany: '',
-        productCategory: '',
-        packagingMaterial: '',
-        packagingMaterialTouching: '',
-        variation: '',
-        countryProduct: '',
-        servingSize: '',
-        sugarType: '',
-        lactose: '',
-        vitamin: '',
-        mineral: '',
-        omega: '',
-        acids: '',
-        probiotics: '',
-        method: '',
-        total: '',
-        remarks: '',
-        ingredients: '',
-        energy1: '',
-        energy2: '',
-        protein1: '',
-        protein2: '',
-        totalFat1: '',
-        totalFat2: '',
-        SFA1: '',
-        SFA2: '',
-        carbo1: '',
-        carbo2: '',
-        sugar1: '',
-        sugar2: '',
-        salt1: '',
-        salt2: '',
-        sodium1: '',
-        sodium2: '',
-        transFat1: '',
-        transFat2: '',
-        ash1: '',
-        ash2: '',
-        WPROfoodcode: '',
-        WPROPermitted: '',
-        WPROPermittedRemark: '',
-        SEAROfoodcode: '',
-        SEAROpermitted: '',
-        SEAROpermittedRemark: '',
-        SLfoodCode: '',
-        SLpermitted: '',
-        SLfoodcodePermittedRemark: '',
-        createdTime: cTime,
-        CreatedData: cDate,
-        videoFile: '',
-        status: status,
-        imageFront: '',
-        imageBack: '',
-        imageLeft: '',
-        imageRight: ''
-    };
-
-    const [formData, setFormData] = useState(formDataInitialState);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleFileChange = (e) => {
-        setFormData({ ...formData, videoFile: e.target.files[0] });
-        setSelectedFile(e.target.files[0]);
-    };
-
-    const handleImageFile = (file) => {
-        console.log(file.file)
-        switch (file.index) {
-            case 0:
-                setFormData(prevData => ({ ...prevData, imageFront: file.file }));
-                break;
-            case 1:
-                setFormData(prevData => ({ ...prevData, imageBack: file.file }));
-                break;
-            case 2:
-                setFormData(prevData => ({ ...prevData, imageLeft: file.file }));
-                break;
-            case 3:
-                setFormData(prevData => ({ ...prevData, imageRight: file.file }));
-                break;
-            default:
-                // Handle invalid index
-                break;
-        }
-    }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const formD = new FormData();
-        // Append form data to the FormData object
-
-        try {
-            // Send form data to the server using axios
-            const response = await axios.post("http://localhost:3000/api/product/industry/add", formD);
-            console.log(response.data);
-            setConversionResult(response.data.text);
-            setUploadStatus("Product uploaded successfully!");
-        } catch (error) {
-            console.error('Error uploading video:', error);
-            setUploadStatus('Error uploading video.');
-        }
-    };
-
-    // const handleDraft = () => {
-    //     // Implement logic for saving draft
-    //     localStorage.setItem('productDraft', JSON.stringify(formData));
-    //     setUploadStatus("Draft saved successfully!");
-    // };
-
-    const handleCancel = () => {
-        // Reset form data and hide the form
-        setFormData(formDataInitialState);
-        setShowForm(false);
-        console.log("Form canceled.");
-    };
+          const handleImageFile = (file) => {
+            console.log(file.file)
+            switch (file.index) {
+                case 0:
+                  setFormData(prevData => ({ ...prevData, imageFront: file.file }));
+                  break;
+                case 1:
+                  setFormData(prevData => ({ ...prevData, imageBack: file.file }));
+                  break;
+                case 2:
+                  setFormData(prevData => ({ ...prevData, imageLeft: file.file }));
+                  break;
+                case 3:
+                  setFormData(prevData => ({ ...prevData, imageRight: file.file }));
+                  break;
+                default:
+                  // Handle invalid index
+                  break;
+              }
+          }
+        
+          const handleSubmit = async (event) => {
+            event.preventDefault();
+            const formD = new FormData();
+            formD.append('productName',formData.productName );
+            formD.append('brand', formData.brand);
+            formD.append('description', formData.description )
+            formD.append('parentCompany',formData.parentCompany)
+            formD.append('productCategory',formData.productCategory)
+            formD.append('packagingMaterial', formData.packagingMaterial )
+            formD.append('packagingMaterialTouching', formData.packagingMaterialTouching);
+            formD.append('variation', formData.variation)
+            formD.append('countryProduct',formData.countryProduct)
+            formD.append('servingSize',formData.servingSize)
+            formD.append('sugarType', formData.sugarType);
+            formD.append('lactos', formData.lactose)
+            formD.append('vitamin',formData.vitamin)
+            formD.append('mineral', formData.mineral)
+            formD.append('omega', formData.omega )
+            formD.append('acids', formData.acids)
+            formD.append('probiotics', formData.probiotics )
+            formD.append('method', formData.method)
+            formD.append('total', formData.total)
+            formD.append('remarks', formData.remarks)
+            formD.append('ingredients', formData.ingredients)
+            formD.append('energy1' , formData.energy1 );
+            formD.append('energy2' , formData.energy2)
+            formD.append('protein1', formData.protein1)
+            formD.append('protein2', formData.protein2)
+            formD.append('totalFat1' ,formData.totalFat1 )
+            formD.append('totalFat2', formData.totalFat2)
+            formD.append('SFA1' , formData.SFA1)
+            formD.append('SFA2', formData.SFA2)
+            formD.append('carbo1',formData.carbo1 )
+            formD.append('carbo2', formData.carbo12)
+            formD.append('sugar1' , formData.sugar1 )
+            formD.append('sugar2',  formData.sugar2)
+            formD.append('salt1', formData.salt1)
+            formD.append('salt2',  formData.salt2)
+            formD.append('sodium1', formData.sodium1)
+            formD.append('sodium2', formData.sodium2)
+            formD.append('transFat1', formData.transFat1)
+            formD.append('transFat2', formData.transFat2)
+            formD.append('ash1', formData.ash1 )
+            formD.append('ash2',  formData.ash2)
+            formD.append('WPROfoodcode', formData.WPROfoodcode)
+            formD.append('WPROPermitted', formData.WPROPermitted) 
+            formD.append('WPROPermittedRemark', formData.WPROPermittedRemark)
+            formD.append('SEAROfoodcode', formData.SEAROfoodcode)
+            formD.append('SEAROpermitted',formData.SEAROpermitted)
+            formD.append('SEAROpermittedRemark' ,formData.SEAROpermittedRemark)
+            formD.append('SLfoodCode',formData.SLfoodCode)
+            formD.append('SLpermitted',formData.SLpermitted)
+            formD.append('SLfoodcodePermittedRemark',formData.SLfoodcodePermittedRemark);
+            formD.append('createdTime', cTime);
+            formD.append('CreatedData' , cDate)
+            formD.append('status', status)
+            formD.append('video', formData.videoFile);
+            formD.append('image',formData.imageFront);
+            formD.append('image',formData.imageBack);
+            formD.append('image',formData.imageLeft);
+            formD.append('image',formData.imageRight);
+            formD.append('createdAt', formData.createdAt);
+            
+            
+            try {
+              console.log(formData.imagePaths)
+              console.log(formData)
+            //   console.log(formD)
+              const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
+              console.log(response.data);
+              setUploadStatus("Product uploaded successfully!");
+              }catch(error){
+                console.error('Error uploading video:', error);
+                setUploadStatus('Error uploading video.');
+              }
+          };
 
   return (
     <div className='bg-backgroundGreen overflow-x-hidden'>
@@ -169,7 +209,7 @@ export default function ProductDetails() {
         <Navbar />
         </div>
         <h1 className="mb-8 mt-24 text-3xl lg:ml-72  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen">Add New Product Deatils</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
         <div className='ml-0 lg:inline-flex sm:flex'>
             <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
                 <TextFiled placeholder="Product Name"  name='productName' onChange={handleChange} />
@@ -280,18 +320,18 @@ export default function ProductDetails() {
         <div className='flex-inline py-10 '>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button onClick={handleCancel} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
+                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Cancel
                 </button>
                 </div>
             </div>
-            {/* <div className='inline-block w-44'>
+            <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button onClick={handleDraft} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
+                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Draft
                 </button>
                 </div>
-            </div> */}
+            </div>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
                 <button onClick={handleSubmit} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
@@ -302,7 +342,6 @@ export default function ProductDetails() {
                 <div className='mt-10'>
                     {uploadStatus && <h3>{uploadStatus}</h3>}
                 </div>
-                {conversionResult && <div>{conversionResult}</div>}
         </div>
         </form>
     </div>
