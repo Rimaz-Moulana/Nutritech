@@ -97,7 +97,7 @@ exports.addNewProduct = async (req,res) => {
             console.log(req.body)
             const videoPath = req.files[0].path
             console.log(videoPath)
-            console.log(req.file)
+            console.log(req.files)
             const imageFront = req.files[1].path
             const imageBack = req.files[2].path
             const imageLeft = req.files[3].path
@@ -136,7 +136,7 @@ exports.addNewProduct = async (req,res) => {
                 carbo2 ,
                 sugar1 ,
                 sugar2 ,
-                salt1  ,
+                salt1 ,
                 salt2  ,
                 sodium1  ,
                 sodium2  ,

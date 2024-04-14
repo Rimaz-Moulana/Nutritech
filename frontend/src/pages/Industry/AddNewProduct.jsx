@@ -137,7 +137,7 @@ export default function ProductDetails() {
             formD.append('countryProduct',formData.countryProduct)
             formD.append('servingSize',formData.servingSize)
             formD.append('sugarType', formData.sugarType);
-            formD.append('lactos', formData.lactose)
+            formD.append('lactose', formData.lactose)
             formD.append('vitamin',formData.vitamin)
             formD.append('mineral', formData.mineral)
             formD.append('omega', formData.omega )
@@ -184,7 +184,7 @@ export default function ProductDetails() {
             formD.append('image',formData.imageBack);
             formD.append('image',formData.imageLeft);
             formD.append('image',formData.imageRight);
-            formD.append('createdAt', formData.createdAt);
+            // formD.append('createdAt', formData.createdAt);
             
             
             try {
