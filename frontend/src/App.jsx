@@ -23,8 +23,8 @@ import NewVideos from './pages/SensorManager/NewVideos';
 
 import Row from './components/AnnotationTable/Row';
 import EditRule from './components/Popup/EditRule';
-import ReviewVideos from './pages/SensorManager/ReviewVideos';
 import Rules from './pages/Rules';
+import ReviewVideos from './pages/SensorManager/ReviewVideos';
 
 // import AnnotationHistory from '../src/pages/Annotator/History';
 // import AnnotatorHome from '../src/pages/Annotator/Home';
@@ -58,7 +58,7 @@ import AllUsers from './pages/Admin/AdminDashboard.jsx';
 
 
 
-import './App.css'
+import './App.css';
 
 
 function App(){
@@ -66,6 +66,7 @@ function App(){
   return (
     <BrowserRouter>
         <Routes>
+              {/* <Route path='/text' element={<VideoToText />} /> */}
             {/* <Route path='/'  > */}
               <Route path='/' element={<Login />} />
               {/* <Route path='/login' element={<Login />} />

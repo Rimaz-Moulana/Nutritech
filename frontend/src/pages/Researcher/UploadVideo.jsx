@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
-import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
-import Swal from 'sweetalert2';
 import Navbar from '../../components/navbar/Navbar';
 
 
@@ -30,15 +29,16 @@ function UploadVideo() {
         setFormData({ ...formData, [name]: value });
       };
     
-      const handleFileChange = (e) => {
-        const file = e.target.files[0];
+      const handleFileChange = (file) => {
+        // const file = e.target.files[0];
+        console.log(file)
         const videoElement = document.createElement('video');
         const fileURL = URL.createObjectURL(file);
       
         videoElement.addEventListener('loadedmetadata', () => {
           const durationInSeconds = Math.round(videoElement.duration);
           console.log('Duration in seconds:', durationInSeconds);
-          setFormData({ ...formData, videoFile: file, duration: durationInSeconds });
+          setFormData({ ...formData, videoFile: file , duration: durationInSeconds });
         });
       
         videoElement.src = fileURL;
