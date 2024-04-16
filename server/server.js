@@ -27,7 +27,8 @@ app.use((req, res, next) => {
 
 mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 10000,
   })
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.error(err));
