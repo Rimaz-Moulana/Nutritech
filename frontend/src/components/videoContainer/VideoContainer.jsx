@@ -42,6 +42,15 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
     navigate(`/annotationhistory/${videoId}`)
   };
 
+  const ViewHistory = (videoId) => {
+    navigate(`/videohistory/${videoId}`)
+  };
+
+  const ViewReviewHistory = (videoId) => {
+    navigate(`/expertreviewhistory/${videoId}`)
+  };
+
+
   const handleReview = (videoId) => {
     navigate(`/reviewvideo/${videoId}`);
   };
@@ -327,6 +336,7 @@ const filteredVideos = videoData?.filter((video) => {
         {/* <th className='px-3'> {' '}</th> */}
         <th className='px-2'>Brand {' '}</th>
          <th className='px-2'> Product{' '}</th>
+         <th className='px-2'> Size{' '}</th>
          <th>
            Status
          </th>
@@ -362,6 +372,7 @@ const filteredVideos = videoData?.filter((video) => {
           </td>
           <td className='pr-2'>{video.brand}</td>
            <td className='px-2'>{video.product}</td>
+           <td className='px-2'>{video.variation}</td>
            <td className='px-2'>{video.status}</td>
            <td className='px-2'>{video.createdIn}</td>
            <td className='px-2'>{video.createdAt}</td>
@@ -380,13 +391,26 @@ const filteredVideos = videoData?.filter((video) => {
                  onClick={() => handleAnnotate(video._id)}
                >Annotate</button>
              )}
-             {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type!=="reviewvideo"  && type!=="expert" && type!=="expertnew" && type!=="history" && (
+             {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type!=="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertred" && type!=="expertnew" && type!=="history" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => ViewAnnotate(video._id)}
              >View History</button>
              )}
 
+            {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type==="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertnew" && type!=="history" && (
+               <button
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
+                 onClick={() => ViewHistory(video._id)}
+             >View History</button>
+             )}
+
+            {(video.status==="red" || video.status==="green" )&& (type==="expertred" || type==="expertgreen") && (
+               <button
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
+                 onClick={() => ViewReviewHistory(video._id)}
+             >View History</button>
+             )}
 
               {video.status === 'annotated' && type==="expertnew" && type!=="history" && (
                <button
@@ -413,7 +437,7 @@ const filteredVideos = videoData?.filter((video) => {
              
 
 
-             {video.status === 'pending' && type!=="reviewvideo" && type!=="history" &&(
+             {video.status === 'pending' && type!=="reviewvideo" && type!=="history" && type!=="industry" &&(
              <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-12 py-2.5 "
                  onClick={() => handleReview(video._id)}

@@ -156,7 +156,7 @@ export default function ProductDetails() {
             formD.append('SFA1' , formData.SFA1)
             formD.append('SFA2', formData.SFA2)
             formD.append('carbo1',formData.carbo1 )
-            formD.append('carbo2', formData.carbo12)
+            formD.append('carbo2', formData.carbo2)
             formD.append('sugar1' , formData.sugar1 )
             formD.append('sugar2',  formData.sugar2)
             formD.append('salt1', formData.salt1)
@@ -198,6 +198,8 @@ export default function ProductDetails() {
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');
               }
+
+              
           };
 
   return (

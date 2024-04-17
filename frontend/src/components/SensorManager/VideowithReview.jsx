@@ -317,7 +317,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
-        Variation
+        Size
       </label>
     </div>
     <div className="md:w-2/3">
@@ -335,8 +335,8 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
   } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2`}
   type="button"
-  // onClick={() => { buttonDisabled ? null : handleOpen(text,"red") }}
-  onClick={() => { Data.status!=="annotated" ? null : handleOpen(text,"red") }}
+  onClick={() => { buttonDisabled ? null : handleOpen(text,"red") }}
+  // onClick={() => { /*Data.status!=="annotated" ? null :*/ handleOpen(text,"red") }}
 >
 {text === "expert" && (
     <div className="flex items-center w-full">

@@ -7,9 +7,31 @@ import ProductTable from '../../components/tables/LogTable';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function Home() {
-
   const navigate= useNavigate();
   const [videoData, setVideoData] = useState([]);
+  const [userData, setUserData] = useState([]);
+  const email  = localStorage.getItem('email');
+  // const encodedEmail = encodeURIComponent(email);
+  // console.log(encodedEmail)
+  console.log(userData)
+
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          // const email  = localStorage.getItem('email');
+          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          console.log(response.data); // Logging the response data directly
+          setUserData(response.data); // Setting the response data to the state
+       } catch (error) {
+          console.error('Error fetching user:', error);
+          // Handle error (e.g., set error state, show error message)
+       }
+    };
+  
+    fetchUser();
+}, []);
+
+
   const handleVideos = () =>{
     console.log('button clicked')
     navigate('/annotator/all')
@@ -46,7 +68,7 @@ function Home() {
       setTimeout(() => {
         // Remove token from local storage after 5 seconds
         localStorage.removeItem('token');
-    }, 30000); // 60 seconds
+    }, 1800000); // 60 seconds
 
 
       if(authData){
@@ -74,7 +96,7 @@ function Home() {
       console.error('Error fetching data:', error);
     }
   }
-  console.log(videoData)
+ 
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}

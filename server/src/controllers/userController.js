@@ -20,6 +20,18 @@ exports.getUserById = async (req, res) => {
   }
 };
 
+exports.getUserByEmail = async (req, res) => {
+  try {
+    const email = req.params.email;
+    console.log(email) 
+    const user = await userService.getUserEmail(email);
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 // Add user
 exports.addUser = async (req, res) => {
   const user = new User({

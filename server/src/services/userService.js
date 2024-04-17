@@ -10,6 +10,14 @@ exports.getUserById = async (userId) => {
   return await User.findById(userId);
 };
 
+exports.getUserEmail = async (email) => {
+  try {
+    return await User.findOne({ email: email });
+  
+  } catch (error) {
+    throw error;
+  }
+};
 // Add user
 exports.addUser = async (userData) => {
   const user = new User(userData);
