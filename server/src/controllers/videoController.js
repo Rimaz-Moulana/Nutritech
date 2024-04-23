@@ -184,23 +184,13 @@ exports.getAllUploadedVideos= async (req,res)=>{
     }
 }
 
-
-exports.updateExpertReviewtored= async (req,res)=>{
+exports.updateExpertFlagReview = async (req,res)=>{
   try {
     const videoId = req.params.videoId;
-        const Video = await VideoService.updateReviewRed(videoId);
-        // console.log(Video)
-        res.json(Video);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-}
-
-exports.updateExpertReviewtogreen= async (req,res)=>{
-  try {
-    const videoId = req.params.videoId;
-        const Video = await VideoService.updateReviewGreen(videoId);
+    const panelstatus = req.body.panelstatus;
+    console.log(panelstatus);
+    
+        const Video = await VideoService.updateReview(videoId,panelstatus);
         // console.log(Video)
         res.json(Video);
     } catch (error) {
@@ -210,6 +200,7 @@ exports.updateExpertReviewtogreen= async (req,res)=>{
 }
 
 exports.AllRedFlagVideos = async (req, res) => {
+  
   try {
     const videos = await VideoService.getAllRedFlagVideos();
     res.status(200).json(videos);
@@ -234,9 +225,40 @@ exports.postExpertComment= async (req,res)=>{
   try {
     const videoId = req.params.videoId;
     const comments = req.body.comment;
-        const comment = await VideoService.postComment(videoId,comments);
+    const email = req.body.email;
+        const comment = await VideoService.postComment(videoId,comments,email);
         console.log(comment)
         res.json(comment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.postFinalComment= async (req,res)=>{
+  try {
+    const videoId = req.params.videoId;
+    const comments = req.body.comment;
+    const email = req.body.email;
+        const comment = await VideoService.postFinal(videoId,comments,email);
+        console.log(comment)
+        res.json(comment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
+exports.updateExpertHeadFlagReview = async (req,res)=>{
+  try {
+    const videoId = req.params.videoId;
+    const finalflag = req.body.finalflag;
+    console.log(finalflag);
+    
+        const Video = await VideoService.updateFinalReview(videoId,finalflag);
+        // console.log(Video)
+        res.json(Video);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -250,7 +272,8 @@ exports.postIndustryReply= async (req,res)=>{
     const videoId = req.params.videoId;
     // console.log(videoId)
     const reply = req.body.comment;
-        const replycomment = await VideoService.postReply(videoId,reply);
+    const email = req.body.email;
+        const replycomment = await VideoService.postReply(videoId,reply,email);
         // console.log(comment)
         res.json(replycomment);
     } catch (error) {

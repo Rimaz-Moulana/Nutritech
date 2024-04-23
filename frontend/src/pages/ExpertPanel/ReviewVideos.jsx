@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
@@ -7,6 +6,7 @@ import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Annotations from '../../components/AnnotationTable/RowHistory'
 import Comments from '../../components/CommentSection/Comments';
 import Sidebar from '../../components/sidebar/SideBar';
+import ViewComment from '../../components/CommentSection/ViewComment';
 
 function ReviewVideos() {
 
@@ -31,7 +31,7 @@ const {videoId} = useParams();
         <div className='mt-12 ml-24'>
             <Annotations videoId={videoId} usertype={"expert"}/>
         </div>
-
+        <ViewComment videoId={videoId} type={"comment"}/>
         <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"comment"}/>
         </div>

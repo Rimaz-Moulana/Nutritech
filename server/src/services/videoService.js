@@ -118,40 +118,72 @@ exports.getAll = async (req, res) => {
   
 };
 
-
-exports.updateReviewRed = async (videoId) => {
+exports.updateReview = async (videoId, panelstatus) => {
   try {
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
-        status: 'red',
-        expertreviewedtime: getCurrentDateTime(),
-        expertrevieweddate: new Date().toLocaleDateString(),
+        $set: {
+          panelstatus:panelstatus,
+          
+        }
+        
       },
-      { new: true }
+      {
+        new: true
+      }
     );
   } catch (error) {
-    console.error(`Error saving annotations: ${error.message}`);
+    console.error(`Error saving reviews: ${error.message}`);
     throw error;
   }
 };
 
-exports.updateReviewGreen = async (videoId) => {
+
+
+exports.updateFinalReview = async (videoId,finalflag ) => {
+  const finalstatus=finalflag.status;
   try {
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
-        status: 'green',
-        expertreviewedtime: getCurrentDateTime(),
-        expertrevieweddate: new Date().toLocaleDateString(),
+        $set: {
+          finalflag:finalflag,
+          status:finalstatus
+        }
       },
-      { new: true }
+      {
+        new: true
+      }
     );
   } catch (error) {
-    console.error(`Error saving annotations: ${error.message}`);
+    console.error(`Error saving reviews: ${error.message}`);
     throw error;
   }
 };
+// exports.updateReviewGreen = async (videoId, email, status = "green") => {
+//   try {
+//     return await VideoModel.findByIdAndUpdate(
+//       videoId,
+//       {
+//         $set: {
+//           "panelstatus.$.status": status,
+//           "panelstatus.$.email": email,
+//           "panelstatus.$.expertreviewedtime": getCurrentDateTime(),
+//           "panelstatus.$.expertrevieweddate": new Date().toLocaleDateString()
+//         }
+//       },
+//       {
+        
+//         new: true
+//       }
+//     );
+//   } catch (error) {
+//     console.error(`Error saving reviews: ${error.message}`);
+//     throw error;
+//   }
+// };
+
 
 
 exports.getAllRedFlagVideos= async(req,res)=>{
@@ -164,7 +196,7 @@ exports.getAllGreenFlagVideos= async(req,res)=>{
 
 }
 
-exports.postComment = async (videoId, comments, req) => {
+exports.postComment = async (videoId, comments, email, req) => {
   try {
     return await VideoModel.findByIdAndUpdate(
       videoId,
@@ -172,8 +204,31 @@ exports.postComment = async (videoId, comments, req) => {
         $push: {
           comment: {
             text: comments,
-            repliedtime: getCurrentDateTime(),
-            replieddate: new Date().toLocaleDateString(),
+            commenter:email,
+            commentedtime: getCurrentDateTime(),
+            commenteddate: new Date().toLocaleDateString(),
+          },
+        },
+      },
+      { new: true }
+    );
+  } catch (error) {
+    console.error(`Error saving comment: ${error.message}`);
+    throw error;
+  }
+};
+
+exports.postFinal = async (videoId, comments, email, req) => {
+  try {
+    return await VideoModel.findByIdAndUpdate(
+      videoId,
+      {
+        $push: {
+          finalcomment: {
+            text: comments,
+            commenter:email,
+            commentedtime: getCurrentDateTime(),
+            commenteddate: new Date().toLocaleDateString(),
           },
         },
       },
@@ -186,7 +241,8 @@ exports.postComment = async (videoId, comments, req) => {
 };
 
 
-exports.postReply = async (videoId, replycomment, req) => {
+
+exports.postReply = async (videoId, replycomment, email, req) => {
   try {
     return await VideoModel.findByIdAndUpdate(
       videoId,
@@ -194,8 +250,9 @@ exports.postReply = async (videoId, replycomment, req) => {
         $push: {
           reply: {
             text: replycomment,
-            commentedtime: getCurrentDateTime(),
-            commenteddate: new Date().toLocaleDateString(),
+            replyer:email,
+            repliedtime: getCurrentDateTime(),
+            replieddate: new Date().toLocaleDateString(),
           },
         },
       },

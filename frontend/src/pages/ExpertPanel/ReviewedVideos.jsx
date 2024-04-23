@@ -1,16 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
-import ProductTable from '../../components/tables/LogTable';
-import Rule from '../../components/Rule';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 import Sidebar from '../../components/sidebar/SideBar';
 
-function NewVideos() {
-
-  const [videoData, setVideoData] = useState([]);
+function ReviewedVideos() {
   const [Data, setData] = useState([]);
   const [isChecked, setIsChecked] = useState(() => {
     return JSON.parse(localStorage.getItem('isChecked')) || false;
@@ -24,8 +18,6 @@ function NewVideos() {
     localStorage.setItem('isChecked', JSON.stringify(newCheckedState));
   }
 
-  const navigate= useNavigate();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,11 +26,11 @@ function NewVideos() {
   
         // Filter out videos where the commenter's email doesn't match the user's email
         const filteredData = data.filter(video => {
-          return !video.comment.some(comment => comment.commenter === email);
+          return video.comment.some(comment => comment.commenter === email) && video.status ==="annotated";
         });
   
         // Update the state with the filtered data
-        setVideoData(data);
+        // setVideoData(data);
         setData(filteredData);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -60,7 +52,7 @@ console.log("Data",Data);
         </div>
         <div className='flex justify-between z-9999 mt-12'>
         <h1 className='ml-24 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
-           New Videos
+           Reviewed Videos By You
         </h1>
 
         <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white '>
@@ -89,7 +81,7 @@ console.log("Data",Data);
       </div>
       <div>
       <VideoContainer
-        type={'expertnew'}
+        type={'expertreviewed'}
         videoData={Data}
         viewType={isChecked ? 'Grid' : 'List'}         
       /> 
@@ -100,4 +92,4 @@ console.log("Data",Data);
   );
 }
 
-export default NewVideos
+export default ReviewedVideos

@@ -9,18 +9,15 @@ import Sidebar from '../../components/sidebar/SideBar';
 function Home() {
   const navigate= useNavigate();
   const [videoData, setVideoData] = useState([]);
-  const [userData, setUserData] = useState([]);
+  // const [userData, setUserData] = useState([]);
   const email  = localStorage.getItem('email');
-  // const encodedEmail = encodeURIComponent(email);
-  // console.log(encodedEmail)
-  console.log(userData)
-
+  const [userData, setUserData] = useState([]);
   useEffect(() => {
     const fetchUser = async () => {
        try {
           // const email  = localStorage.getItem('email');
           const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
-          console.log(response.data); // Logging the response data directly
+          // console.log("response",response); // Logging the response data directly
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
           console.error('Error fetching user:', error);
@@ -30,7 +27,6 @@ function Home() {
   
     fetchUser();
 }, []);
-
 
   const handleVideos = () =>{
     console.log('button clicked')

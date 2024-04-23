@@ -55,7 +55,8 @@ import ResearcherHome from './pages/Researcher/Home';
 
 import AddUser from './pages/Admin/AddUser.jsx';
 import AllUsers from './pages/Admin/AdminDashboard.jsx';
-import VideoHistory from './pages/Industry/VideoHistory.jsx'
+import VideoHistory from './pages/Industry/VideoHistory.jsx';
+import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
 
 
 
@@ -128,6 +129,7 @@ function App(){
 
               <Route path='/addUser' element={<AddUser />} />
               <Route path='/users' element={<AllUsers />} />
+              <Route path='/reviewedvideos' element={<ReviewedVideos />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

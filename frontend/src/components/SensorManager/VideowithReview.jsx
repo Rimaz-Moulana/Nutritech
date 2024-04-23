@@ -8,6 +8,7 @@ import green from '../../assets/Images/greenflag.png'
 function VideowithReview({Id,text,type}) {
  const videoId = Id;
  const productId =Id;
+ const email  = localStorage.getItem('email');
  
  
  const [Data, setData] = useState([]);
@@ -15,6 +16,21 @@ function VideowithReview({Id,text,type}) {
   const [greenFlagDisabled, setGreenFlagDisabled] = useState(false);
   const [redFlagDisabled, setRedFlagDisabled] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          setUserData(response.data); // Setting the response data to the state
+       } catch (error) {
+          console.error('Error fetching user:', error);
+       }
+    };
+  
+    fetchUser();
+}, []);
+
 
   const health = ()=>{
     let fact;
@@ -180,7 +196,10 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     try {
       if(text==="expert" ){
         console.log(text)
-        await axios.post(`http://localhost:3000/api/videos/greenflag/${videoId}`);
+        await axios.post(
+         
+          `http://localhost:3000/api/videos/greenflag/${videoId}`,{email});
+  
       }   
       else if (text === "video") {
        await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
@@ -210,40 +229,161 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     }
   };
 
-  const handleApprove= async(text)=>{
-    await axios.post(`http://localhost:3000/api/videos/greenflag/${videoId}`);
+  const getCurrentDateTime = () => {
+    const currentDate = new Date();
+    const formattedDateTime = `${padZero(currentDate.getHours())}:${padZero(currentDate.getMinutes())}:${padZero(currentDate.getSeconds())}`;
+    return formattedDateTime;
+  };
+  
+  const padZero = (num) => (num < 10 ? `0${num}` : num);
 
-    Swal.fire({
-      icon: 'success',
-      title: `Done`,
-      showConfirmButton: false,
-      timer: 2000, 
-      customClass: {
-        popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
-      },
-      iconColor: '#294B29',
-    });
-    if (text !== "expert") {
-      window.history.back();
+  // const handleApprove= async(text)=>{
+    
+  //   await axios.post(
+  //     if(userData.role==="expert head") {
+  //   `http://localhost:3000/api/videos/flag/${videoId}`,{
+  //     finalflag:{
+  //       status:"green",
+  //       email:email,
+  //       expertreviewedtime: getCurrentDateTime(),
+  //       expertrevieweddate: new Date().toLocaleDateString()
+
+  //     }
+  //   }
+  // }else{
+  //   `http://localhost:3000/api/videos/flag/${videoId}`,{
+  //     panelstatus:{
+  //       status:"green",
+  //       email:email,
+  //       expertreviewedtime: getCurrentDateTime(),
+  //       expertrevieweddate: new Date().toLocaleDateString()
+
+  //     }
+  //   }});
+  
+   
+
+  //   Swal.fire({
+  //     icon: 'success',
+  //     title: `Done`,
+  //     showConfirmButton: false,
+  //     timer: 2000, 
+  //     customClass: {
+  //       popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+  //     },
+  //     iconColor: '#294B29',
+  //   });
+  //   if (text !== "expert") {
+  //     window.history.back();
+  //   }
+
+
+  // }
+
+  const handleApprove = async (text) => {
+    let endpoint;
+    let data;
+  
+    if (userData.role === "expert head") {
+      endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
+      data = {
+        finalflag: {
+          status: "green",
+          email: email,
+          expertreviewedtime: getCurrentDateTime(),
+          expertrevieweddate: new Date().toLocaleDateString()
+        }
+      };
+    } else {
+      endpoint = `http://localhost:3000/api/videos/flag/${videoId}`;
+      data = {
+        panelstatus: {
+          status: "green",
+          email: email,
+          expertreviewedtime: getCurrentDateTime(),
+          expertrevieweddate: new Date().toLocaleDateString()
+        }
+      };
     }
-
-
-  }
-
-  const handleDelete = async (text) => {
+  
     try {
-
-      if(text==="expert"){
-        await axios.post(`http://localhost:3000/api/videos/redflag/${videoId}`);
-      }else if (text === "video") {
-        await axios.delete(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
-      } else {
-        await axios.delete(`http://localhost:3000/api/product/reviewproduct/${productId}`);
-      }
+      await axios.post(endpoint, data);
+  
+      Swal.fire({
+        icon: 'success',
+        title: `Done`,
+        showConfirmButton: false,
+        timer: 2000,
+        customClass: {
+          popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+        },
+        iconColor: '#294B29',
+      });
   
       if (text !== "expert") {
         window.history.back();
       }
+    } catch (error) {
+      console.error("Error occurred while making the request:", error);
+    }
+  };
+  
+  
+
+  const handleDelete = async (text) => {
+    try {
+
+      if (text === "expert") {
+        let endpoint;
+        let data;
+      
+        if (userData.role === "expert head") {
+          endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
+          data = {
+            finalflag: {
+              status: "red",
+              email: email,
+              expertreviewedtime: getCurrentDateTime(),
+              expertrevieweddate: new Date().toLocaleDateString()
+            }
+          };
+        } else {
+          endpoint = `http://localhost:3000/api/videos/flag/${videoId}`;
+          data = {
+            panelstatus: {
+              status: "red",
+              email: email,
+              expertreviewedtime: getCurrentDateTime(),
+              expertrevieweddate: new Date().toLocaleDateString()
+            }
+          };
+        }
+      
+        try {
+          await axios.post(endpoint, data);
+      
+          Swal.fire({
+            icon: 'success',
+            title: `Done`,
+            showConfirmButton: false,
+            timer: 2000,
+            customClass: {
+              popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+            },
+            iconColor: '#294B29',
+          });
+        } catch (error) {
+          console.error(`Error declining ${text}:`, error);
+        }
+      } else if (text === "video") {
+        await axios.delete(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+      } else {
+        await axios.delete(`http://localhost:3000/api/product/reviewproduct/${productId}`);
+      }
+      
+      if (text !== "expert") {
+        window.history.back();
+      }  
     } catch (error) {
       console.error(`Error declining ${text}:`, error);
     }
@@ -324,6 +464,22 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.variation}</div>
     </div>
   </div>
+
+  {Data.finalflag && (
+    <div className="md:flex md:items-center mb-6">
+    <div className="md:w-1/3">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+        Flag
+      </label>
+    </div>
+    <div className="md:w-2/3 items-center">
+      {Data.finalflag[0].status==="red" && (
+        <div className="flex items-center w-full shadow bg-white appearance-none border-2 border-darkGreen rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.finalflag[0].status} <img src={red} className="h-8 w-8 ml-4" alt="" /></div>
+      )}
+      
+    </div>
+  </div>
+  )}
 
   {text!=='experthistory' && (
   <div className="flex items-center gap-2">
