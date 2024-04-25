@@ -22,9 +22,22 @@ const ImageUploader = () => {
     }
   };
 
-  const handleVideoChange = e => {
+  const handleVideoChange = (e,index) => {
     const file = e.target.files[0];
-    setVideo(file);
+
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      setVideo(prevImages => {
+        const newImages = [...prevImages];
+        newImages[index] = reader.result;
+        return newImages;
+      });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   const uploadData = async () => {

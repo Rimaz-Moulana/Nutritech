@@ -13,7 +13,7 @@ const authRoutes = require('./src/routes/authRoutes');
 
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
@@ -27,7 +27,8 @@ app.use((req, res, next) => {
 
 mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 10000,
   })
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.error(err));

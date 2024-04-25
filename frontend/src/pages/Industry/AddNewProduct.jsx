@@ -13,22 +13,98 @@ import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/SideBar'
 
 export default function ProductDetails() {
-    const currentTimeInMillis = Date.now();
+        const currentTimeInMillis = Date.now();
 
-    // Create a new Date object using the current timestamp
-    const currentDate = new Date(currentTimeInMillis);
+        // Create a new Date object using the current timestamp
+        const currentDate = new Date(currentTimeInMillis);
+        
+        // Get the individual components of the date
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1; // Month is zero-based, so add 1
+        const day = currentDate.getDate();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        const seconds = currentDate.getSeconds();
+        
+        const cDate = `${year}/${month}/${day}`;
+        const cTime = `${hours}:${minutes}:${seconds}`;
 
-    // Get the individual components of the date
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // Month is zero-based, so add 1
-    const day = currentDate.getDate();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
+        const status = 'pending';
+        const [images,setImages] = useState([null, null])
+        const [uploadStatus, setUploadStatus] = useState('');
+        const [formData, setFormData] = useState({
+            productName: '',
+            brand: '',
+            description: '',
+            parentCompany: '',
+            productCategory: '',
+            packagingMaterial : '',
+            packagingMaterialTouching: '',
+            variation : '',
+            countryProduct: '',
+            servingSize: '',
+            sugarType: '',
+            lactose : '',
+            vitamin: '',
+            mineral: '',
+            omega: '',
+            acids: '',
+            probiotics: '',
+            method : '',
+            total: '',
+            remarks : '',
+            ingredients : '',
+            energy1: '',
+            energy2 : '',
+            protein1 : '',
+            protein2 : '',
+            totalFat1: '',
+            totalFat2 : '',
+            SFA1: '',
+            SFA2 : '',
+            carbo1 : '',
+            carbo2 : '',
+            sugar1: '',
+            sugar2: '',
+            salt1 : '',
+            salt2 : '',
+            sodium1 : '',
+            sodium2 : '',
+            transFat1 : '',
+            transFat2 : '',
+            ash1 : '',
+            ash2 : '',
+            WPROfoodcode : '',
+            WPROPermitted : '',
+            WPROPermittedRemark : '',
+            SEAROfoodcode : '',
+            SEAROpermitted: '',
+            SEAROpermittedRemark : '',
+            SLfoodCode: '',
+            SLpermitted: '',
+            SLfoodcodePermittedRemark: '',
+            createdTime: cTime ,
+            CreatedData : cDate ,
+            videoFile : '',
+            status: status,
+            imageFront: '',
+            imageBack: '',
+            imageLeft: '',
+            imageRight: ''
+        })
 
-    const cDate = `${year}/${month}/${day}`;
-    const cTime = `${hours}:${minutes}:${seconds}`;
+        const handleChange = (e) => {
+            const { name, value } = e.target;
+            setFormData({ ...formData, [name]: value });
+          };
+        
+          const handleFileChange = (file) => {
+            console.log(file);
+            setFormData({ ...formData, videoFile:file });
+            
+          };
 
+          console.log(formData.videoFile)
           const handleImageFile = (file) => {
             console.log(file.file)
             switch (file.index) {
@@ -64,7 +140,7 @@ export default function ProductDetails() {
             formD.append('countryProduct',formData.countryProduct)
             formD.append('servingSize',formData.servingSize)
             formD.append('sugarType', formData.sugarType);
-            formD.append('lactos', formData.lactose)
+            formD.append('lactose', formData.lactose)
             formD.append('vitamin',formData.vitamin)
             formD.append('mineral', formData.mineral)
             formD.append('omega', formData.omega )
@@ -111,7 +187,7 @@ export default function ProductDetails() {
             formD.append('image',formData.imageBack);
             formD.append('image',formData.imageLeft);
             formD.append('image',formData.imageRight);
-            formD.append('createdAt', formData.createdAt);
+            // formD.append('createdAt', formData.createdAt);
             
             
             try {
@@ -125,8 +201,6 @@ export default function ProductDetails() {
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');
               }
-
-              
           };
 
   return (
@@ -138,7 +212,7 @@ export default function ProductDetails() {
         <Navbar />
         </div>
         <h1 className="mb-8 mt-24 text-3xl lg:ml-72  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen">Add New Product Deatils</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
         <div className='ml-0 lg:inline-flex sm:flex'>
             <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
                 <TextFiled placeholder="Product Name"  name='productName' onChange={handleChange} />
@@ -249,18 +323,18 @@ export default function ProductDetails() {
         <div className='flex-inline py-10 '>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button onClick={handleCancel} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
+                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Cancel
                 </button>
                 </div>
             </div>
-            {/* <div className='inline-block w-44'>
+            <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button onClick={handleDraft} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
+                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Draft
                 </button>
                 </div>
-            </div> */}
+            </div>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
                 <button onClick={handleSubmit} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
@@ -271,7 +345,6 @@ export default function ProductDetails() {
                 <div className='mt-10'>
                     {uploadStatus && <h3>{uploadStatus}</h3>}
                 </div>
-                {conversionResult && <div>{conversionResult}</div>}
         </div>
         </form>
     </div>

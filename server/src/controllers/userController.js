@@ -63,7 +63,7 @@ exports.updateUser = async (req, res) => {
     }
 
     user.username = req.body.username || user.username;
-    user.password = req.body.password || user.password;
+    user.password = await bcrypt.hash( req.body.password, 10) || user.password;
     user.email = req.body.email || user.email;
     user.userRole = req.body.userRole || user.userRole;
 

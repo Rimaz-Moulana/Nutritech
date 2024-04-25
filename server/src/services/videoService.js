@@ -1,6 +1,5 @@
 const VideoModel = require('../models/videoModel');
-const fs = require('fs')
-const { SpeechClient } = require('@google-cloud/speech')
+
 
 const getCurrentDateTime = () => {
   const currentDate = new Date();
@@ -219,6 +218,55 @@ exports.postComment = async (videoId, comments, email, req) => {
     throw error;
   }
 };
+
+
+// //video to text
+// async function convertVideoToText(videoPath) {
+//   const audioPath = 'temp_audio.wav'; // Temporary audio file
+
+//   return new Promise((resolve, reject) => {
+//       ffmpeg(videoPath)
+//           .audioCodec('pcm_s16le')
+//           .audioFrequency(44100)
+//           .audioChannels(2)
+//           .save(audioPath)
+//           .on('end', async () => {
+//               try {
+//                   const file = fs.readFileSync(audioPath);
+//                   const audioBytes = file.toString('base64');
+
+//                   const audio = {
+//                       content: audioBytes,
+//                   };
+//                   const config = {
+//                       encoding: 'LINEAR16',
+//                       sampleRateHertz: 44100,
+//                       languageCode: 'si-LK', // Sinhala language code
+//                   };
+
+//                   const request = {
+//                       audio: audio,
+//                       config: config,
+//                   };
+
+//                   const [response] = await client.recognize(request);
+//                   const transcription = response.results
+//                       .map((result) => result.alternatives[0].transcript)
+//                       .join('\n');
+
+//                   resolve(transcription);
+//               } catch (error) {
+//                   reject(error);
+//               }
+//           })
+//           .on('error', (err) => {
+//               reject(err);
+//           });
+//   });
+// }
+
+// module.exports = { convertVideoToText };
+
 
 
 //video to text
