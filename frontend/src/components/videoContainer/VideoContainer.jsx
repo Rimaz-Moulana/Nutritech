@@ -41,7 +41,9 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
   const ViewAnnotate = (videoId) => {
     navigate(`/annotationhistory/${videoId}`)
   };
-
+const Viewvideohistory=(videoId) => {
+  navigate(`/videohistory/${videoId}`)
+};
   const ViewHistory = (videoId) => {
     navigate(`/videohistory/${videoId}`)
   };
@@ -235,7 +237,7 @@ const filteredVideos = videoData?.filter((video) => {
             <div className="flex h-8 w-full icon-overlay absolute top-0 mt-2 mr-2 right-0 justify-between ">
               <img src={red} alt="red" />
               {type==="industry" && (
-                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
+                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => Viewvideohistory(video._id)}/>
               )}
               {(type==="expertred" || type ==="expert") && type!=="history" &&(
                 <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => handleApprove(video._id)}/>
