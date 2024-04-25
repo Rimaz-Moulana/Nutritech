@@ -31,33 +31,44 @@ function History() {
 
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex flex-col'> {/* Make the main container a flex column */}
-      <div className="w-2/8 fixed hidden sm:flex flex-col">
+      <div className="fixed hidden sm:flex flex-col">
         <Sidebar type="annotator" />
       </div>
-      <div className="w-full sm:w-3/4 ml-0 sm:ml-64 flex-grow"> {/* Make this div take up remaining vertical space */}
+      <div className="w-full lg:w-[75%] ml-0 sm:ml-64 flex-grow"> {/* Make this div take up remaining vertical space */}
         <Navbar type='annotator' />
         <div className='w-full mt-28'>
           <Videowithtext videoId={videoId}/>
         </div>
-        <h1 className='ml-16 mb-8 mt-32 text-3xl lg:mr-[1000px] font-semibold text-sidebarGreen left-0'>
+        <h1 className='px-3 mb-8 mt-12 text-3xl font-semibold text-sidebarGreen text-left'>
                   Annotations
                 </h1>
-        <div className='ml-16 sm:ml-20 mb-8 mt-10 text-sm font-semibold text-black'>
+        <div className='px-3 mb-8 mt-10 text-sm font-semibold text-black center-l lg:w-[100%]'>
         
           {/* Pass videoId and video to RowHistory */}
           <RowHistory videoId={videoId} />
         </div>
-      </div>
-      <div className='mt-8 w-full'>
-          <ViewComment videoId={videoId} type={"reply"}/>
+
+        <div className='px-3 center-l w-full'>
+          <ViewComment videoId={videoId} type={"annotator"}/>
         </div>
 
         {/* <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"reply"}/>
         </div> */}
-      <div className="bottom-0 left-0 w-full px-4 py-4"> {/* Position cancel button at the bottom */}
-        <button className="mb-12 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 " onClick={() => window.history.back()}>Cancel</button>
+      <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
+        <button
+                  className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+                  >
+                  View Product Details
+                </button>
+
+                <button className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                 onClick={() => window.history.back()}>
+                  Cancel
+                </button>
       </div>
+      </div>
+     
     </div>
   );
 }

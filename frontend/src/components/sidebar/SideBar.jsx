@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import home from '../../assets/Images/home.png';
 import menu from '../../assets/Images/menu.png';
 import foodproducts from '../../assets/Images/products.png';
 import video from '../../assets/Images/video.png';
 import edit from '../../assets/Images/edit.png'
+import axios from 'axios';
 
 
 
@@ -13,6 +13,24 @@ const Sidebar = ({type}) => {
   const [isEnlarge, setEnlarge] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate(); 
+
+  const email  = localStorage.getItem('email');
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          // const email  = localStorage.getItem('email');
+          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          // console.log("response",response); // Logging the response data directly
+          setUserData(response.data); // Setting the response data to the state
+       } catch (error) {
+          console.error('Error fetching user:', error);
+          // Handle error (e.g., set error state, show error message)
+       }
+    };
+  
+    fetchUser();
+}, []);
 
   const navAnnotator = [
     {
@@ -129,12 +147,13 @@ const Sidebar = ({type}) => {
         return;
       } else {
         if (index === navAnnotator.findIndex((item) => item.text === 'Products')){
-        navigate('/addedproduct');    
+        navigate(`/addedproduct/${type}`);    
       } else{
         navigate('/home');
       }
     }
     }else if (type==="expert") {
+
       if (index === navExpert.findIndex((item) => item.text === 'Video')) {
         setDropdownOpen(!isDropdownOpen);
       }else{
@@ -159,7 +178,7 @@ const Sidebar = ({type}) => {
         if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Videos')) {
           navigate('/industryhistory');
         } else if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Products')) {
-          navigate('/addedproduct');
+          navigate(`/addedproduct/${type}`);
         } else if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Rules & Regulations')) {
           navigate(`/rules/${type}`);
         } else {
@@ -211,7 +230,7 @@ const Sidebar = ({type}) => {
   };
 
   return (
-    <div id="app" className="min-h-screen fixed bg-sidebarGreen lg:max-w-[15%]">
+    <div id="app" className="min-h-screen fixed bg-sidebarGreen lg:max-w-[15%] text-left">
   <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
     <nav className=" inline-flex flex-col space-y-2">
       <button
@@ -301,6 +320,16 @@ const Sidebar = ({type}) => {
                 >
                   New Videos
                 </Link>
+
+                {(userData.role !=="expert head" )&& (
+                  <Link
+                  to="/reviewedvideos"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                  onClick={() => handleItemClick(2)}
+                >
+                  Reviewed Videos
+                </Link>
+                )}
                 <Link
                   to="/red"
                   className="block px-4 py-2 text-sm text-gray-700 hover:text-white"

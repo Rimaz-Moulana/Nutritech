@@ -38,11 +38,12 @@ router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );/
 router.get('/brandproducts/:videoId', videoController.getSimilarAds );
 
 router.get('/allUploadedVideos', videoController.getAllUploadedVideos );
-router.post('/redflag/:videoId', videoController.updateExpertReviewtored );
-router.post('/greenflag/:videoId', videoController.updateExpertReviewtogreen );
+// router.post('/redflag/:videoId', videoController.updateExpertReviewtored );
+router.post('/flag/:videoId', videoController.updateExpertFlagReview );
 router.get('/redflag', videoController.AllRedFlagVideos );
 router.get('/greenflag', videoController.AllGreenFlagVideos );
 router.post('/comment/:videoId', videoController.postExpertComment );
 router.post('/reply/:videoId', videoController.postIndustryReply );
-
+router.post('/finalcomment/:videoId', videoController.postFinalComment);
+router.post('/finalflag/:videoId', videoController.updateExpertHeadFlagReview );
 module.exports = router;

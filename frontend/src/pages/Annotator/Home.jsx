@@ -10,6 +10,10 @@ function Home() {
 
   const navigate= useNavigate();
   const [videoData, setVideoData] = useState([]);
+
+  const user = localStorage.getItem('email');
+  console.log(user)
+
   const handleVideos = () =>{
     console.log('button clicked')
     navigate('/all')
@@ -39,11 +43,12 @@ function Home() {
     try {
       console.log("fetching session details..");
       const authData = localStorage.getItem('token');
-      console.log(authData)
+      // console.log(authData)
 
       setTimeout(() => {
         // Remove token from local storage after 5 seconds
         localStorage.removeItem('token');
+        localStorage.removeItem('email');
     }, 150000); // 60 seconds
 
 

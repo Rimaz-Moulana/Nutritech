@@ -28,7 +28,7 @@ function Home() {
   //   // Fetch data when the component mounts
   //   fetchData();
   // }, []);
-  
+  useEffect(()=> {
   const fetchData = async () => {
     try {
       console.log("hi")
@@ -38,6 +38,8 @@ function Home() {
       console.error('Error fetching data:', error);
     }
   }
+  fetchData();
+},[]);
 
   useEffect(() => {
     const fetchData = async () => {

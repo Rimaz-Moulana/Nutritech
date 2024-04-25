@@ -16,6 +16,7 @@ function Login() {
         try {
             const res = await axios.post('http://localhost:3000/api/login', formData);
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('email', formData.email);
             // Redirect to dashboard or any other page after successful login
         } catch (error) {
             console.error('Login failed:', error);

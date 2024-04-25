@@ -51,8 +51,8 @@ function RowHistory({ videoId, usertype }) {
     setShowModal(false);
   };
   return (
-    <div className='ml-0 text-gray-500'>
-    <table className="w-full bg-white border rounded">
+    <div className='ml-0 text-gray-500 item-center'>
+    <table className="w-full bg-white border rounded lg:w-[100%]">
       <thead>
         <tr>
           <th className="border border-gray-300">Time Stamp</th>

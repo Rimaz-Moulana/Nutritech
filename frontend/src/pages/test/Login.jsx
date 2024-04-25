@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import Image from '../../assets/Images/NutriTech Logo-04 1.png';
-import Image1 from '../../assets/images/login_imag.jpeg';
+import Image1 from '../../assets/Images/login_imag.jpeg';
 
 export default function login() {
     const [formData, setFormData] = useState({
@@ -21,6 +21,7 @@ export default function login() {
 
             // Save token to local storage
             localStorage.setItem('token', token);
+            localStorage.setItem('email', formData.email);
 
             // Redirect to dashboard or any other page after successful login
             window.location.href = redirect;

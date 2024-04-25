@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const userService = require('../services/userService');
 
 // Get all users
 exports.getAllUsers = async (req, res) => {
@@ -18,6 +19,20 @@ exports.getUserById = async (req, res) => {
     res.json(user);
   } catch (error) {
     res.status(404).json({ message: 'User not found' });
+  }
+};
+
+exports.getUserByEmail = async (req, res) => {
+  try {
+    const email = req.params.email;
+    console.log(email);
+    const user = await userService.getUserEmail(email);
+    console.log(user);
+    res.json(user);
+    // res.status(200).json(user);
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 

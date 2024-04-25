@@ -55,6 +55,8 @@ import ResearcherHome from './pages/Researcher/Home';
 
 import AddUser from './pages/Admin/AddUser.jsx';
 import AllUsers from './pages/Admin/AdminDashboard.jsx';
+import VideoHistory from './pages/Industry/VideoHistory.jsx';
+import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
 
 
 
@@ -74,7 +76,7 @@ function App(){
               <Route path='/blankPages' element={<BlankPage />} />
               <Route path='/product/:productId' element={<ProductDetails />} />
               <Route path='/test' element={<Test />} />
-              <Route path='/addedproduct' element={<AddedProduct />} />
+              <Route path='/addedproduct/:type' element={<AddedProduct />} />
 
               
 
@@ -111,6 +113,7 @@ function App(){
 
 
               <Route path='/industryhistory' element ={<IndustryHistory/>} />
+              <Route path='/videohistory/:videoId' element ={<VideoHistory/>} />
 
 
               <Route path='/expertpanelhome' element ={<ExpertPanelHome/>} /> {/*expert panel home page */}
@@ -126,6 +129,7 @@ function App(){
 
               <Route path='/addUser' element={<AddUser />} />
               <Route path='/users' element={<AllUsers />} />
+              <Route path='/reviewedvideos' element={<ReviewedVideos />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>
