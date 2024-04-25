@@ -47,7 +47,7 @@ function ReviewVideos() {
       </div>
       <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
         <Navbar type='sensormanager'/>
-      
+       
        <VideowithReview Id={videoId} text={"video"}/>
        <div className='flex justify-between mt-8'>
        <h1 className='text-xl ml-8 font-semibold'>
@@ -77,6 +77,14 @@ function ReviewVideos() {
           Grid View
         </span>
       </label>
+
+      <div className=" flex items-end justify-center z-10 h-full"> {/* Position cancel button at the bottom */}
+        <button
+                  className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+                  >
+                  View Product Details
+                </button>
+      </div>
        </div>
       
 

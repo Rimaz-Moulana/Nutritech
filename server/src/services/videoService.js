@@ -98,7 +98,7 @@ exports.getSimilarProductAds = async (videoId) => {
       brand,
       product,
       variation,
-      status: { $in: ['annotated', 'unannotated', 'pending'] },
+      status: { $in: ['annotated', 'unannotated', 'pending','green','red'] },
       _id: { $ne: videoId } // Exclude the current video from the results
     });
 

@@ -465,21 +465,28 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     </div>
   </div>
 
-  {Data.finalflag && (
-    <div className="md:flex md:items-center mb-6">
+  {Data.finalflag && Data.finalflag.length !== 0 && (
+  <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
         Flag
       </label>
     </div>
     <div className="md:w-2/3 items-center">
-      {Data.finalflag[0].status==="red" && (
-        <div className="flex items-center w-full shadow bg-white appearance-none border-2 border-darkGreen rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.finalflag[0].status} <img src={red} className="h-8 w-8 ml-4" alt="" /></div>
+      {Data.finalflag[0].status === "red" && (
+        <div className="flex items-center w-full shadow bg-white appearance-none border-2 border-darkGreen rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >
+          {Data.finalflag[0].status} <img src={red} className="h-8 w-8 ml-4" alt="" />
+        </div>
       )}
-      
+       {Data.finalflag[0].status === "green" && (
+        <div className="flex items-center w-full shadow bg-white appearance-none border-2 border-darkGreen rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >
+          {Data.finalflag[0].status} <img src={green} className="h-8 w-8 ml-4" alt="" />
+        </div>
+      )}
     </div>
   </div>
-  )}
+)}
+
 
   {text!=='experthistory' && (
   <div className="flex items-center gap-2">
