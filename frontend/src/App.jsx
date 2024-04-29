@@ -44,6 +44,7 @@ import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos';
 import RedFlag from './pages/ExpertPanel/RedFlag';
 import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
 import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
+import ViewProductDetails from './pages/SensorManager/ViewProductDetails.jsx';
 // import ExpertRules from './pages/ExpertPanel/Rules';
 import IndustryHistory from './pages/Industry/History';
 import SensorManagerProducts from './pages/SensorManager/Products';
@@ -55,8 +56,8 @@ import ResearcherHome from './pages/Researcher/Home';
 
 import AddUser from './pages/Admin/AddUser.jsx';
 import AllUsers from './pages/Admin/AdminDashboard.jsx';
-import VideoHistory from './pages/Industry/VideoHistory.jsx';
 import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
+import VideoHistory from './pages/Industry/VideoHistory.jsx';
 
 
 
@@ -124,6 +125,7 @@ function App(){
               <Route path='/green' element ={<GreenFlag/>} />
               {/* <Route path='/expertrules' element ={<ExpertRules/>} /> */}
               <Route path='/expertreviewhistory/:videoId' element ={<ReviewHistory/>} />
+              <Route path='/productDetails' element={<ViewProductDetails />} />
 
               <Route path='/researcherhome' element ={<ResearcherHome/>} /> {/*reseracherhome*/}
               <Route path='/industryhome' element ={<IndustryHome/>} /> {/*industryhome*/}
