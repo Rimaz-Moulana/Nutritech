@@ -24,9 +24,39 @@ const VideoSchema = new mongoose.Schema({
   recommendation: String,
   annotatedtime:String,
   annotateddate:String,
+  finalcomment:[
+    {
+      text: String,
+      commenter: String,
+      status: String,
+      commentedtime:String,
+      commenteddate: String,
+    }
+  ],
+
+  finalflag:[
+    {
+      status:String,
+      email:String,
+      expertreviewedtime:String,
+      expertrevieweddate:String,
+    }
+  ],
+
+  panelstatus:[
+    {
+      status:String,
+      email:String,
+      expertreviewedtime:String,
+      expertrevieweddate:String,
+    }
+  ],
+
   comment:[
     {
       text: String,
+      commenter: String,
+      status: String,
       commentedtime:String,
       commenteddate: String,
 
@@ -36,6 +66,8 @@ const VideoSchema = new mongoose.Schema({
   reply:[
     {
       text: String,
+      replyer: String,
+      status: String,
       repliedtime:String,
       replieddate: String,
 

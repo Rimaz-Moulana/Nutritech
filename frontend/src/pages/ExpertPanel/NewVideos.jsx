@@ -11,10 +11,11 @@ import Sidebar from '../../components/sidebar/SideBar';
 function NewVideos() {
 
   const [videoData, setVideoData] = useState([]);
+  const [Data, setData] = useState([]);
   const [isChecked, setIsChecked] = useState(() => {
     return JSON.parse(localStorage.getItem('isChecked')) || false;
   });
-
+  const email  = localStorage.getItem('email');
 
   const handleCheckboxChange = () => {
     const newCheckedState = !isChecked;
@@ -27,14 +28,27 @@ function NewVideos() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
-      const data = await response.json();
-      setVideoData(data);
+      try {
+        const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
+        const data = await response.json();
+  
+        // Filter out videos where the commenter's email doesn't match the user's email
+        const filteredData = data.filter(video => {
+          return !video.comment.some(comment => comment.commenter === email);
+        });
+  
+        // Update the state with the filtered data
+        setVideoData(data);
+        setData(filteredData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
   
     fetchData();
-  }, []); 
-
+  }, [email]); // Add email to the dependency array to re-fetch data when email changes
+  
+console.log("Data",Data);
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -76,7 +90,7 @@ function NewVideos() {
       <div>
       <VideoContainer
         type={'expertnew'}
-        videoData={videoData}
+        videoData={Data}
         viewType={isChecked ? 'Grid' : 'List'}         
       /> 
       </div>

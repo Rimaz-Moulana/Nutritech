@@ -22,6 +22,7 @@ export default function login() {
 
             // Save token to local storage
             localStorage.setItem('token', token);
+            localStorage.setItem('email', formData.email);
 
             // Redirect to dashboard or any other page after successful login
             window.location.href = redirect;
