@@ -51,7 +51,7 @@ exports.addNewProduct = async (req,res) => {
 
     try{
         const {productName, brand ,description ,parentCompany ,productCategory,packagingMaterial,packagingMaterialTouching
-            , variation, countryProduct, servingSize ,
+            , size, count, countryProduct, servingSize ,
             sugarType ,
             lactose  ,
             vitamin ,
@@ -110,7 +110,8 @@ exports.addNewProduct = async (req,res) => {
                 productCategory ,
                 packagingMaterial  ,
                 packagingMaterialTouching ,
-                variation,
+                size,
+                count,
                 countryProduct  ,
                 servingSize ,
                 sugarType ,
