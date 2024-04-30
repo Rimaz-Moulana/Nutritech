@@ -71,11 +71,11 @@ export default function AddedProduct() {
       </div>    
 
     <BlankPage type={type} />
-    <div className='inline-flex ml-[11%] w-[80%]'>
+    {/* <div className='inline-flex ml-[11%] w-[80%]'>
     <h1 className="mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Product</h1>
     <AddNewProduct />
 
-    </div>
+    </div> */}
     </div>
   );
 }
