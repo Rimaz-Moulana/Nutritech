@@ -29,5 +29,24 @@ exports.postAnnotations = async (videoId, annotations, req) => {
   }
 };
 
+exports.postReannotation = async (videoId, reannotations, req) => {
+  try {
+    return await VideoModel.findByIdAndUpdate(
+      videoId,
+      {
+        $set: { reannotations: reannotations },
+        status: 'annotated',
+        annotatedtime: getCurrentDateTime(),
+        annotateddate: new Date().toLocaleDateString(),
+      },
+      { new: true }
+    );
+  } catch (error) {
+    console.error(`Error saving asage}`);
+    throw error;
+  }
+};
+
+
 
 

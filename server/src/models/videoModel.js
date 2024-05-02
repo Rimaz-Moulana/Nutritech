@@ -23,11 +23,19 @@ const VideoSchema = new mongoose.Schema({
   recommendation: String,
   annotatedtime:String,
   annotateddate:String,
+  message:[
+    {
+      text: String,
+      user: String,
+      messagetime:String,
+      messagedate: String,
+    }
+  ],
   finalcomment:[
     {
       text: String,
+      status:String,
       commenter: String,
-      status: String,
       commentedtime:String,
       commenteddate: String,
     }
@@ -74,6 +82,15 @@ const VideoSchema = new mongoose.Schema({
   ],
   
   annotations: [
+    {
+      timestamp: String,
+      rule: String,
+      details: String,
+      recommendation: String,
+    },
+  ],
+
+  reannotations: [
     {
       timestamp: String,
       rule: String,

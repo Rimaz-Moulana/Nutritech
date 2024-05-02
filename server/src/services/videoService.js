@@ -22,6 +22,10 @@ exports.getAnnotatorAnnotatedVideos = async(req,res)=>{
   return await VideoModel.find({ status:{ $in: ['annotated','red','green']} })
 }
 
+exports.getAnnotatorReannotateVideos = async(req,res)=>{
+  return await VideoModel.find({ status:'reannotate' })
+}
+
 exports.getAnnotatedVideosForExpert = async(req,res)=>{
   return await VideoModel.find({ status:'annotated'})
 }
@@ -82,7 +86,7 @@ exports.deleteVideo = async (videoId) => {
 };
 
 exports.getSimilarProductAds = async (videoId) => {
-  console.log(videoId)
+  // console.log(videoId)
   try {
     // Find the video with the provided videoId
     const currentVideoData = await VideoModel.findOne({ _id: videoId });
@@ -98,7 +102,7 @@ exports.getSimilarProductAds = async (videoId) => {
       brand,
       product,
       variation,
-      status: { $in: ['annotated', 'unannotated', 'pending','green','red'] },
+      status: { $in: ['annotated', 'unannotated', 'reannotate','pending','green','red'] },
       _id: { $ne: videoId } // Exclude the current video from the results
     });
 
@@ -113,7 +117,7 @@ exports.getSimilarProductAds = async (videoId) => {
 exports.getAll = async (req, res) => {
     return await VideoModel.find({
       brand: 'Maggi',
-      status: { $in: ['annotated', 'unannotated', 'pending', 'green', 'red'] }
+      status: { $in: ['annotated', 'unannotated', 'reannotate', 'pending', 'green', 'red'] }
     });
   
 };
@@ -209,6 +213,34 @@ exports.postComment = async (videoId, comments, email, req) => {
             commenteddate: new Date().toLocaleDateString(),
           },
         },
+        
+      },
+      { new: true }
+    );
+  } catch (error) {
+    console.error(`Error saving comment: ${error.message}`);
+    throw error;
+  }
+};
+
+exports.postMessage = async (videoId, comments, email, req) => {
+  try {
+    console.log(comments);
+    return await VideoModel.findByIdAndUpdate(
+      videoId,
+      {
+        $push: {
+          message: {
+            text: comments,
+            user:email,
+            messagetime: getCurrentDateTime(),
+            messagedate: new Date().toLocaleDateString(),
+          },
+        },
+
+        $set:{
+          status:"reannotate"
+        }
       },
       { new: true }
     );

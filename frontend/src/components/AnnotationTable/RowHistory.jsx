@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import Row from './Row'
-import Modal from 'react-modal';
+import { useRouteError } from 'react-router-dom';
 
 function RowHistory({ videoId, usertype }) {
-  // console.log(usertype)
   const [annotations, setAnnotations] = useState([]);
+  const [videoData, setVideoData] = useState([]);
   const [loading, setLoading] = useState(true);
   const pRefs = useRef([]);
   const [rowCorrectness, setRowCorrectness] = useState({});
@@ -14,6 +13,19 @@ function RowHistory({ videoId, usertype }) {
     // return JSON.parse(localStorage.getItem('isChecked')) || false;
   });
 
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+        const video = response.data;
+        setVideoData(video);
+      } catch (error) {
+        console.error('Error fetching Video:', error);
+      } 
+    };
+  
+    fetchVideo();
+  }, [videoId]);
 
   useEffect(() => {
     const fetchAnnotations = async () => {
@@ -31,7 +43,6 @@ function RowHistory({ videoId, usertype }) {
   }, [videoId]);
 
   useEffect(() => {
-    // Set the height of each p tag based on its content
     pRefs.current.forEach((ref) => {
       if (ref) {
         ref.style.height = `${ref.scrollHeight}px`;
@@ -43,50 +54,133 @@ function RowHistory({ videoId, usertype }) {
     const newCheckedState = !isChecked;
     setIsChecked(newCheckedState);
     setShowModal(true);
-
-    // localStorage.setItem('isChecked', JSON.stringify(newCheckedState));
   }
   
   const closeModal = () => {
     setShowModal(false);
   };
+  console.log(videoData);
   return (
     <div className='ml-0 text-gray-500 item-center'>
-    <table className="w-full bg-white border rounded lg:w-[100%]">
-      <thead>
-        <tr>
-          <th className="border border-gray-300">Time Stamp</th>
-          <th className="border border-gray-300">Regulation</th>
-          <th className="border border-gray-300">Details</th>
-          <th className="border border-gray-300">Recommendation</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-        {annotations.map((annotation, index) => (
-          <React.Fragment key={index}>
+      {usertype !== "industry" && (
+        <>
+          <h1>Annotations</h1>
+          <table className="w-full bg-white border rounded lg:w-[100%]">
+            <thead>
+              <tr>
+                <th className="border border-gray-300">Time Stamp</th>
+                <th className="border border-gray-300">Regulation</th>
+                <th className="border border-gray-300">Details</th>
+                <th className="border border-gray-300">Recommendation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {annotations.map((annotation, index) => (
+                <React.Fragment key={`annotation_${index}`}>
+                  {annotation.rule !== "" && (
+                    <tr>
+                      <td className="border border-gray-300 p-2">{annotation.timestamp}</td>
+                      <td className="border border-gray-300 text-start p-2">{annotation.rule}</td>
+                      <td className="border border-gray-300 text-left p-2">{annotation.details}</td>
+                      <td className="border border-gray-300 text-left p-2">{annotation.recommendation}</td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+          {videoData && videoData[0]?.reannotations && videoData[0].reannotations.map((annotation, index) => (
+            <React.Fragment key={`reannotation_${index}`}>
+              <h2>Annotations after Reannotation</h2>
+              <table className="w-full bg-white border rounded lg:w-[100%]">
+                <thead>
+                  <tr>
+                    <th className="border border-gray-300">Time Stamp</th>
+                    <th className="border border-gray-300">Regulation</th>
+                    <th className="border border-gray-300">Details</th>
+                    <th className="border border-gray-300">Recommendation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <React.Fragment>
+                    {annotation.rule !== "" && (
+                      <tr key={`reannotation_row_${index}`}>
+                        <td className="border border-gray-300 p-2">{annotation.timestamp}</td>
+                        <td className="border border-gray-300 text-start p-2">{annotation.rule}</td>
+                        <td className="border border-gray-300 text-left p-2">{annotation.details}</td>
+                        <td className="border border-gray-300 text-left p-2">{annotation.recommendation}</td>
+                      </tr>
+                    )}
+                  </React.Fragment>
+                </tbody>
+              </table>
+            </React.Fragment>
+          ))}
+        </>
+      )}
 
-            {annotation.rule !== "" && (
-            <tr>
-              <td className="border border-gray-300 p-2">{annotation.timestamp}</td>
-              <td className="border border-gray-300 text-start p-2">{annotation.rule}</td>
-              <td className="border border-gray-300 text-left p-2">{annotation.details}</td>
-              <td className="border border-gray-300 text-left p-2">{annotation.recommendation}</td>
-              {/* {usertype === "expert" && annotation.rule !== "" && (
-                <>
-                  <td className="border border-gray-300 text-center p-2 "><input checked id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 center bg-gray-100 border-gray-300 focus:ring-darkGreen dark:focus:ring-darkGreen dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  /></td>
-                  <td className="border border-gray-300 text-center p-2"><input id="default-radio-2" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-darkGreen dark:focus:ring-darkGreen dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={handleCheckboxChange}/></td>
-                </>
-              )} */}
-            </tr>
-            )}
+      
+      {(usertype === "industry" && videoData && videoData.length > 0 && !videoData[0].reannotations) && (
+        <div className='ml-0 text-gray-500 item-center'>
+          <h1>Annotations</h1>
+          <table className="w-full bg-white border rounded lg:w-[100%]">
+            <thead>
+              <tr>
+                <th className="border border-gray-300">Time Stamp</th>
+                <th className="border border-gray-300">Regulation</th>
+                <th className="border border-gray-300">Details</th>
+                <th className="border border-gray-300">Recommendation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {annotations.map((annotation, index) => (
+                <React.Fragment key={`annotation_${index}`}>
+                  {annotation.rule !== "" && (
+                    <tr>
+                      <td className="border border-gray-300 p-2">{annotation.timestamp}</td>
+                      <td className="border border-gray-300 text-start p-2">{annotation.rule}</td>
+                      <td className="border border-gray-300 text-left p-2">{annotation.details}</td>
+                      <td className="border border-gray-300 text-left p-2">{annotation.recommendation}</td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-          </React.Fragment>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  
+{(usertype === "industry" && videoData && videoData[0]?.reannotations && videoData[0]?.reannotations.length > 0) && (
+        <React.Fragment>
+          <h2>Annotations</h2>
+          <table className="w-full bg-white border rounded lg:w-[100%]">
+            <thead>
+              <tr>
+                <th className="border border-gray-300">Time Stamp</th>
+                <th className="border border-gray-300">Regulation</th>
+                <th className="border border-gray-300">Details</th>
+                <th className="border border-gray-300">Recommendation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {videoData[0].reannotations.map((reannotation, index) => (
+                <React.Fragment key={`reannotation_${index}`}>
+                  {reannotation.rule !== "" && (
+                    <tr key={`reannotation_row_${index}`}>
+                      <td className="border border-gray-300 p-2">{reannotation.timestamp}</td>
+                      <td className="border border-gray-300 text-start p-2">{reannotation.rule}</td>
+                      <td className="border border-gray-300 text-left p-2">{reannotation.details}</td>
+                      <td className="border border-gray-300 text-left p-2">{reannotation.recommendation}</td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </React.Fragment>
+      )}
+
+    </div>
   );
 }
 

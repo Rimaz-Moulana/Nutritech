@@ -12,7 +12,25 @@ import Sidebar from '../../components/sidebar/SideBar';
 function ReviewHistory() {
 const navigate= useNavigate();
 const {videoId} = useParams(); 
- 
+const [videoData, setVideoData] = useState([]);
+const [loading,setLoading] =useState(true);
+//   const [RuleData, setRuleData] = useState([]);
+
+useEffect(() => {
+const fetchReviewDetails = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+    setVideoData(response.data.video);
+  } catch (error) {
+    console.error('Error fetching ReviewDetails:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+fetchReviewDetails();
+}, [videoId]);
+
   let text;
 
  
@@ -32,8 +50,9 @@ const {videoId} = useParams();
         <div className='mt-12 ml-24'>
             <Annotations videoId={videoId} usertype={"expert"}/>
         </div>
-
+        {/* {!videoData.reannotations>0 && ( */}
         <ViewComment videoId={videoId} type={"comment"}/>
+        
         <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
         <button
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'

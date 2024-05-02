@@ -34,8 +34,8 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
   }, [productFilter]);
 
 
-  const handleAnnotate = (videoId) => {
-    navigate(`/annotation/${videoId}`);
+  const handleAnnotate = (videoId,category) => {
+    navigate(`/annotation/${category}/${videoId}`);
   };
 
   const ViewAnnotate = (videoId) => {
@@ -193,7 +193,17 @@ const filteredVideos = videoData?.filter((video) => {
               <img
                 src={pen}
                 alt="Annotate"
-                onClick={() => handleAnnotate(video._id)} // Pass video ID to handleAnnotate
+                onClick={() => handleAnnotate(video._id,"annotate")} // Pass video ID to handleAnnotate
+              />
+            </div>
+          )}
+
+        {type === 'reannotate' && !("industry" === type) &&(
+            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+              <img
+                src={pen}
+                alt="reannotate"
+                onClick={() => handleAnnotate(video._id,"reannotation")} // Pass video ID to handleAnnotate
               />
             </div>
           )}
@@ -402,8 +412,14 @@ const filteredVideos = videoData?.filter((video) => {
              {video.status === 'unannotated' && type!=="reviewvideo" && type!=="history" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-11 py-2.5 text-center me-2 mb-2 "
-                 onClick={() => handleAnnotate(video._id)}
+                 onClick={() => handleAnnotate(video._id,"annotate")}
                >Annotate</button>
+             )}
+              {video.status === 'reannotate' && type!=="reviewvideo" && type!=="history" && (
+               <button
+               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-11 py-2.5 text-center me-2 mb-2 "
+                 onClick={() => handleAnnotate(video._id,"reannotation")}
+               >Reannotate</button>
              )}
              {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type!=="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertred" && type!=="expertnew" && type!=="history" && type!=="expertreviewed" && (
                <button
