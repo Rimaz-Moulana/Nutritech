@@ -1,6 +1,7 @@
 
 // const videoService = require('../services/videoService');
 const Video = require('../models/videoModel')
+const { convertVideoToText } = require('../services/videoService');
 
 const VideoService = require('../services/videoService')
 
@@ -84,23 +85,39 @@ exports.getuploadhistory= async (req,res)=>{
 }
 
 
-exports.addvideo = async (req,res) => {
+exports.addvideo = async (req, res) => {
+  try {
+      const { brand, product, variation, category, createdIn, createdAt, duration } = req.body;
+      const videoPath = req.file.path;
 
-    try{
-        const { brand, product , variation , category, createdIn, createdAt,duration} = req.body;
-        const videoPath = req.file.path
-        // console.log(req.body)
-        const newVideo = new Video({brand,product,variation,category, videoPath, createdIn, createdAt, duration, status: 'pending', uploader:'Sirasa'});
-        // console.log(newVideo)
-        await newVideo.save();
-       
-        return res.status(201).json({success: true, newVideo});
+      // Convert uploaded video to text
+      // const text = await convertVideoToText(videoPath);
+      // console.log('hi'+text)
 
-    } catch(error){
-        console.error(error);
-        return res.status(500).json({ success: false, message: 'Server Error'});
-    }
-}
+      // Create a new video object
+      const newVideo = new Video({
+          brand,
+          product,
+          variation,
+          category,
+          videoPath,
+          createdIn,
+          createdAt,
+          duration,
+          status: 'pending',
+          uploader: 'Sirasa'
+      });
+
+      // Save the new video
+      await newVideo.save();
+
+      // Send response with converted text
+      res.status(201).json({ success: true, newVideo });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
 
 exports.getpendingvideos= async (req,res)=>{
   try {
@@ -162,10 +179,6 @@ exports.deleteVideo = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
-
-
-
 
 exports.getSimilarAds = async (req, res) => {
   try {

@@ -59,6 +59,7 @@ function Register() {
                     <option value="sensor manager">Sensor Manager</option>
                     <option value="researcher">Researcher</option>
                     <option value="admin">Admin</option>
+                    <option value="head">Head</option>
                 </select>
             </div>
             <div className='flex text-center'>

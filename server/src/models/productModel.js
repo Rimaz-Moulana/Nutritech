@@ -22,24 +22,24 @@ const productSchema = new mongoose.Schema({
         total: String,
         remarks : String,
         ingredients : String,
-        energy1: Number, 
-        energy2 : Number, //per 100g
-        protein1 : Number,
-        protein2 : Number,//per 100g
-        totalFat1: Number,
-        totalFat2 : Number, //per 100g
-        SFA1: Number,
-        SFA2 : Number, //per 100g
-        carbo1 : Number,
-        carbo2: Number,
-        sugar1: Number,
-        sugar2: Number,
-        salt1 : Number,
-        salt2 : Number,
-        sodium1 : Number,
-        sodium2 : Number,
-        transFat1 : Number,
-        transFat2 : Number, //per 100g
+        energy1: String, 
+        energy2 : String, //per 100g
+        protein1 : String,
+        protein2 : String,//per 100g
+        totalFat1: String,
+        totalFat2 : String, //per 100g
+        SFA1: String,
+        SFA2 : String, //per 100g
+        carbo1 : String,
+        carbo2: String,
+        sugar1: String,
+        sugar2: String,
+        salt1 : String,
+        salt2 : String,
+        sodium1 : String,
+        sodium2 : String,
+        transFat1 : String,
+        transFat2 : String, //per 100g
         ash1 : String,
         ash2 : String,
         WPROfoodcode : String,

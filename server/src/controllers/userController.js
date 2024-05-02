@@ -13,6 +13,7 @@ exports.getAllUsers = async (req, res) => {
 
 // Get single user
 exports.getUserById = async (req, res) => {
+  
   try {
     const user = await User.findById(req.params.id);
     res.json(user);
@@ -54,7 +55,7 @@ exports.addUser = async (req, res) => {
 
 // Update user
 exports.updateUser = async (req, res) => {
-  console.log(req.body)
+  console.log(req.body+req.params.id)
   try {
     const user = await User.findById(req.params.id);
     if (user == null) {
@@ -62,7 +63,7 @@ exports.updateUser = async (req, res) => {
     }
 
     user.username = req.body.username || user.username;
-    user.password = req.body.password || user.password;
+    user.password = await bcrypt.hash( req.body.password, 10) || user.password;
     user.email = req.body.email || user.email;
     user.userRole = req.body.userRole || user.userRole;
 

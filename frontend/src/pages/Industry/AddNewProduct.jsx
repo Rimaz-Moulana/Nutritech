@@ -63,7 +63,7 @@ export default function ProductDetails() {
             SFA1: '',
             SFA2 : '',
             carbo1 : '',
-            carbo2: '',
+            carbo2 : '',
             sugar1: '',
             sugar2: '',
             salt1 : '',
@@ -98,10 +98,13 @@ export default function ProductDetails() {
             setFormData({ ...formData, [name]: value });
           };
         
-          const handleFileChange = (e) => {
-            setFormData({ ...formData, videoFile: e.target.files[0] });
+          const handleFileChange = (file) => {
+            console.log(file);
+            setFormData({ ...formData, videoFile:file });
+            
           };
 
+          console.log(formData.videoFile)
           const handleImageFile = (file) => {
             console.log(file.file)
             switch (file.index) {
@@ -137,7 +140,7 @@ export default function ProductDetails() {
             formD.append('countryProduct',formData.countryProduct)
             formD.append('servingSize',formData.servingSize)
             formD.append('sugarType', formData.sugarType);
-            formD.append('lactos', formData.lactose)
+            formD.append('lactose', formData.lactose)
             formD.append('vitamin',formData.vitamin)
             formD.append('mineral', formData.mineral)
             formD.append('omega', formData.omega )
@@ -184,7 +187,7 @@ export default function ProductDetails() {
             formD.append('image',formData.imageBack);
             formD.append('image',formData.imageLeft);
             formD.append('image',formData.imageRight);
-            formD.append('createdAt', formData.createdAt);
+            // formD.append('createdAt', formData.createdAt);
             
             
             try {
@@ -198,8 +201,6 @@ export default function ProductDetails() {
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');
               }
-
-              
           };
 
   return (

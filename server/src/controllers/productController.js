@@ -12,6 +12,18 @@ exports.addProduct = async(req,res)=>{
     }
 }
 
+exports.updateProduct = async(req,res)=>{
+    const productId = req.params.productId;
+    const updatedData = req.body;
+
+    try {
+        const updatedProduct = await productService.updateProduct(productId, updatedData);
+        res.json(updatedProduct);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 exports.getAllProduct = async(req,res ) =>{
     try {
         const allProduct = await productService.getAllProducts();
@@ -85,7 +97,7 @@ exports.addNewProduct = async (req,res) => {
             console.log(req.body)
             const videoPath = req.files[0].path
             console.log(videoPath)
-            console.log(req.file)
+            console.log(req.files)
             const imageFront = req.files[1].path
             const imageBack = req.files[2].path
             const imageLeft = req.files[3].path
@@ -124,7 +136,7 @@ exports.addNewProduct = async (req,res) => {
                 carbo2 ,
                 sugar1 ,
                 sugar2 ,
-                salt1  ,
+                salt1 ,
                 salt2  ,
                 sodium1  ,
                 sodium2  ,
