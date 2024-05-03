@@ -5,10 +5,8 @@ import AddNewProduct from '../../components/button/AddNewProductBtn';
 import ProductBar from '../../components/fields/ProductBar';
 import LogTable from '../../components/tables/LogTable';
 import BlankPage from '../../components/theme/BlankPage';
-import { useParams } from 'react-router-dom';
 
 export default function AddedProduct() {
-  const {type} = useParams()
 
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);

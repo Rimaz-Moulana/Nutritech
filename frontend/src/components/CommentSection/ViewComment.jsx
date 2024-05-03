@@ -271,4 +271,6 @@ function ViewComment({ videoId, type }) {
   );
 }
 
+}
+
 export default ViewComment;
