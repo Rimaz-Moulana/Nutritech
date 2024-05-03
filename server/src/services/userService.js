@@ -26,6 +26,7 @@ exports.addUser = async (userData) => {
 
 // Update user
 exports.updateUser = async (userId, updatedUserData) => {
+  console.log(userId, updatedUserData)
   return await User.findByIdAndUpdate(userId, updatedUserData, { new: true });
 };
 

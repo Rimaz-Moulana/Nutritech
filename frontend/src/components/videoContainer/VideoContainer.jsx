@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ReactPlayer from 'react-player';
 import { useNavigate } from 'react-router-dom';
 import history from '../../../src/assets/Images/history.png';
 import pen from '../../../src/assets/Images/pen.png';
 import review from '../../../src/assets/Images/review.png';
-import ReactPlayer from 'react-player';
-import blue from '../../assets/Images/blue.png'
-import white from '../../assets/Images/white.png'
-import yellow from '../../assets/Images/yellow.png'
-import red from '../../assets/Images/redflag.png'
-import green from '../../assets/Images/greenflag.png'
-import Dropdown from '../fields/dropdown';
+import blue from '../../assets/Images/blue.png';
+import green from '../../assets/Images/greenflag.png';
+import red from '../../assets/Images/redflag.png';
+import white from '../../assets/Images/white.png';
+import yellow from '../../assets/Images/yellow.png';
 
 function VideoContainer({ type,videoData,viewType,videotype }) {
   // console.log(viewType)
@@ -41,10 +40,13 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
   const ViewAnnotate = (videoId) => {
     navigate(`/annotationhistory/${videoId}`)
   };
-
+const Viewvideohistory=(videoId) => {
+  navigate(`/videohistory/${videoId}`)
+};
   const ViewHistory = (videoId) => {
     navigate(`/videohistory/${videoId}`)
   };
+
 
   const ViewReviewHistory = (videoId) => {
     navigate(`/expertreviewhistory/${videoId}`)
@@ -235,7 +237,7 @@ const filteredVideos = videoData?.filter((video) => {
             <div className="flex h-8 w-full icon-overlay absolute top-0 mt-2 mr-2 right-0 justify-between ">
               <img src={red} alt="red" />
               {type==="industry" && (
-                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
+                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => Viewvideohistory(video._id)}/>
               )}
               {(type==="expertred" || type ==="expert") && type!=="history" &&(
                 <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => handleApprove(video._id)}/>

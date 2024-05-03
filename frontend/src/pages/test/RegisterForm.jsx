@@ -53,12 +53,13 @@ function Register() {
             </div>
             <div className='flex items-center justify-between mb-4'>
             <select className="shadow appearance-none border  bg-white rounded w-[70%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="role" value={formData.role} onChange={handleChange}>
-                    <option value="annotator">Annotator</option>
+            <option value="annotator">Annotator</option>
                     <option value="industry">Industry</option>
                     <option value="expert panel">Expert Panel</option>
                     <option value="sensor manager">Sensor Manager</option>
                     <option value="researcher">Researcher</option>
                     <option value="admin">Admin</option>
+                    <option value="expert head">Expert Head</option>
                 </select>
             </div>
             <div className='flex text-center'>

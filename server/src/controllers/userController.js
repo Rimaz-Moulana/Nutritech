@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const userService = require('../services/userService');
+const bcrypt = require('bcryptjs');
 
 // Get all users
 exports.getAllUsers = async (req, res) => {
@@ -53,27 +54,33 @@ exports.addUser = async (req, res) => {
   }
 };
 
-// Update user
 exports.updateUser = async (req, res) => {
-  console.log(req.body+req.params.id)
   try {
-    const user = await User.findById(req.params.id);
-    if (user == null) {
+    const userId = req.params.id; // Extracting user ID from route parameters
+    // console.log(req.body)
+    const { username, password, email, role } = req.body; // Destructuring request body
+    console.log(role)
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.username = req.body.username || user.username;
-    user.password = await bcrypt.hash( req.body.password, 10) || user.password;
-    user.email = req.body.email || user.email;
-    user.userRole = req.body.userRole || user.userRole;
+    // Update user fields if provided in the request body
+    if (username) user.username = username;
+    if (password) user.password = await bcrypt.hash(password, 10);
+    if (email) user.email = email;
+    if (role) user.role = role;
 
+    // Save updated user
     const updatedUser = await user.save();
-    res.json(updatedUser);
+    res.json(updatedUser); // Respond with updated user object
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    // Handle errors
+    console.error('Error updating user:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
-
 // Delete user
 exports.deleteUser = async (req, res) => {
   try {

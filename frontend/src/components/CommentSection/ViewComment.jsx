@@ -37,10 +37,58 @@ function ViewComment({ videoId, type }) {
     fetchReviewDetails();
   }, [videoId]);
 
+  console.log("Data ",type);
+
   console.log("Data ",Data.comment);
+
 
   const renderCommentsAndReplies = () => {
     const result = [];
+
+
+    if(type==="industry" || type==="annotator" ){
+      if(Data.finalcomment[0] ){     
+        result.push(
+          <div key={`finalcomment-${0}`} className='bg-gray-300 text-black mt-4 p-3 text-xl text-left'>
+            {/* {console.log(Data.reply[i][j].text)} */}
+    
+            <p className='text-gray-600'>{Data.finalcomment[0].commenter}</p>
+            {Data.finalcomment[0].text}
+            {/* {console.log(Data.reply[i][j].text)} */}
+            <div className='flex space-x-8 text-sm mt-4'>
+              <p>{Data.finalflag[0].status}</p>
+              <p>{Data.finalcomment[0].replieddate}</p>
+              <p>{Data.finalcomment[0].repliedtime}</p>
+            </div>
+          </div>
+        );
+      }
+    if(type!=="annotator"){
+      if (Data.reply && Data.reply.length > 0 && Data.reply[i]) {
+        // Interleave replies
+        // for (let j = 0; j < Data.reply.length; j++) {
+          
+          result.push(
+            <div key={`reply-${i}`} className='bg-gray-300 text-black mt-4 p-3 text-xl text-left'>
+              {/* {console.log(Data.reply[i][j].text)} */}
+      
+              <p className='text-gray-600'>{Data.reply[i].replyer}</p>
+              {Data.reply[i].text}
+              {/* {console.log(Data.reply[i][j].text)} */}
+              <div className='flex space-x-8 text-sm mt-4'>
+                {/* <p>{Data.reply[i].status}</p> */}
+                <p>{Data.reply[i].replieddate}</p>
+                <p>{Data.reply[i].repliedtime}</p>
+              </div>
+            </div>
+          );
+
+
+        }
+      }
+    }
+
+    if (userData.role=="expert head" && type!=="Industry") {
 
     if (userData.role=="expert head") {
       // Interleave comments and replies
@@ -89,7 +137,11 @@ function ViewComment({ videoId, type }) {
                 {Data.reply[i].text}
                 {/* {console.log(Data.reply[i][j].text)} */}
                 <div className='flex space-x-8 text-sm mt-4'>
+
+                  {/* <p>{Data.reply[i].status}</p> */}
+
                   <p>{Data.reply[i].status}</p>
+
                   <p>{Data.reply[i].replieddate}</p>
                   <p>{Data.reply[i].repliedtime}</p>
                 </div>
@@ -110,7 +162,11 @@ function ViewComment({ videoId, type }) {
             {Data.finalcomment[0].text}
             {/* {console.log(Data.reply[i][j].text)} */}
             <div className='flex space-x-8 text-sm mt-4'>
+
+              <p>{Data.finalflag[0].status}</p>
+
               <p>{Data.finalcomment[0].status}</p>
+
               <p>{Data.finalcomment[0].replieddate}</p>
               <p>{Data.finalcomment[0].repliedtime}</p>
             </div>
@@ -198,6 +254,12 @@ function ViewComment({ videoId, type }) {
             <Comments type={type} videoId={videoId} />
           </div>
           )}
+
+      {(type ==="industry" && Data.finalcomment) && (
+          <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
+            <Comments type={"reply"} videoId={videoId} />
+          </div>
+          )}
         </>
       ) : (
         <div className='bg-darkGreen text-white mt-4 p-3 text-xl text-left'>
@@ -205,9 +267,10 @@ function ViewComment({ videoId, type }) {
         </div>
       )}
 
-      
     </div>
   );
+}
+
 }
 
 export default ViewComment;
