@@ -44,7 +44,6 @@ import ExpertPanelNewVideos from './pages/ExpertPanel/NewVideos';
 import RedFlag from './pages/ExpertPanel/RedFlag';
 import ReviewHistory from './pages/ExpertPanel/ReviewHistory';
 import ApproveVideos from './pages/ExpertPanel/ReviewVideos';
-import ViewProductDetails from './pages/SensorManager/ViewProductDetails.jsx';
 // import ExpertRules from './pages/ExpertPanel/Rules';
 import IndustryHistory from './pages/Industry/History';
 import SensorManagerProducts from './pages/SensorManager/Products';
