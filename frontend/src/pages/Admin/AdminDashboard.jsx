@@ -113,6 +113,7 @@ const UserList = () => {
                 <option value="Annotator">Annotator</option>
                 <option value="Industry">Industry</option>
                 <option value="Expert Panel">Expert Panel</option>
+                <option value="Expert Panel">Expert Head</option>
                 <option value="Sensor Manager">Sensor Manager</option>
                 <option value="Researcher">Researcher</option>
                 <option value="Admin">Admin</option>

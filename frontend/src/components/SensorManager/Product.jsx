@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 function Product({productData}) {
-    // console.log(productData)
+    // console.log("from component",productData);
     const navigate = useNavigate();
     const [startDate, setStartDate] = useState(null);
     let fact;
@@ -24,12 +24,17 @@ function Product({productData}) {
 }
     
   
-  const filteredProducts = productData?.filter((product) => {
-    const productMatch = productFilter === 'all' || product.product === productFilter;
-    
-    const uploadedDateMatch = !startDate || new Date(product.date).toLocaleDateString() == startDate.toLocaleDateString();   
-    return productMatch && uploadedDateMatch; 
-  });
+const filteredProducts = productData?.filter((product) => {
+  // Check if the product matches the filter criteria
+  const productMatch = productFilter === 'all' || product.product === productFilter;
+  
+  // Check if the product's upload date matches the selected start date
+  const uploadedDateMatch = !startDate || new Date(product.date).toLocaleDateString() === startDate.toLocaleDateString();
+ 
+  // Return true if both productMatch and uploadedDateMatch conditions are satisfied
+  return productMatch && uploadedDateMatch; 
+});
+
 
   return (
     <div className='h-full h-min-screen mt-4 text-black w-full min-w-screen'>
