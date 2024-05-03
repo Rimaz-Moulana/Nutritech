@@ -48,9 +48,10 @@ const UserList = () => {
   const handleEditSubmit = async () => {
     console.log(editedUserData)
     try {
-      await axios.put(`http://localhost:3000/api/users/updateUser/${editedUserData._id}`, editedUserData);
+      const res = await axios.put(`http://localhost:3000/api/users/updateUser/${editedUserData._id}`, editedUserData);
       setEditingUser(null);
       fetchUsers();
+      console.log(res.data)
     } catch (error) {
       console.error('Error updating user:', error);
     }
@@ -104,18 +105,23 @@ const UserList = () => {
               <input type="text" name="username" value={editedUserData.username} onChange={handleEditChange} className="w-full border border-gray-400 p-2 rounded" />
             </div>
             <div className="mb-4">
+              <label className="block mb-1">Password:</label>
+              <input type="password" name="password" value={editedUserData.password} onChange={handleEditChange} className="w-full border border-gray-400 p-2 rounded" />
+            </div>
+            <div className="mb-4">
               <label className="block mb-1">Email:</label>
               <input type="email" name="email" value={editedUserData.email} onChange={handleEditChange} className="w-full border border-gray-400 p-2 rounded" />
             </div>
             <div className="mb-4">
               <label className="block mb-1">User Role:</label>
               <select name="role" value={editedUserData.role} onChange={handleEditChange} className="w-full border border-gray-400 p-2 rounded">
-                <option value="Annotator">Annotator</option>
-                <option value="Industry">Industry</option>
-                <option value="Expert Panel">Expert Panel</option>
-                <option value="Sensor Manager">Sensor Manager</option>
-                <option value="Researcher">Researcher</option>
-                <option value="Admin">Admin</option>
+                    <option value="annotator">Annotator</option>
+                    <option value="industry">Industry</option>
+                    <option value="expert panel">Expert Panel</option>
+                    <option value="sensor manager">Sensor Manager</option>
+                    <option value="researcher">Researcher</option>
+                    <option value="admin">Admin</option>
+                    <option value="head">Head</option>
               </select>
             </div>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleEditSubmit}>Save</button>
