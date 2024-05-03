@@ -268,6 +268,40 @@ exports.postComment = async (videoId, comments, email, req) => {
 // module.exports = { convertVideoToText };
 
 
+
+//video to text
+// const speechClient = new SpeechClient();
+
+// const convertVideoToText = async (videoPath) => {
+//     try {
+//         // Reads a local audio file and converts it to text
+//         const [response] = await speechClient.recognize({
+//             config: {
+//                 encoding: 'LINEAR16',
+//                 sampleRateHertz: 16000,
+//                 languageCode: 'si-LK', // Specify the language code for Sinhala
+//             },
+//             audio: {
+//                 content: fs.readFileSync(videoPath).toString('base64'),
+//             },
+//         });
+
+//         // Get transcription result
+//         const transcription = response.results
+//             .map(result => result.alternatives[0].transcript)
+//             .join('\n');
+
+//         return transcription;
+//     } catch (error) {
+//         console.error('Error converting audio to text:', error);
+//         throw error;
+//     }
+// };
+
+// module.exports = {
+//     convertVideoToText,
+// };
+
 exports.postFinal = async (videoId, comments, email, req) => {
   try {
     return await VideoModel.findByIdAndUpdate(

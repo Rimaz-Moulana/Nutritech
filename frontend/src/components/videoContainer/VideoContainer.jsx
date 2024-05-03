@@ -53,6 +53,15 @@ const Viewvideohistory=(videoId) => {
   };
 
 
+  const ViewHistory = (videoId) => {
+    navigate(`/videohistory/${videoId}`)
+  };
+
+  const ViewReviewHistory = (videoId) => {
+    navigate(`/expertreviewhistory/${videoId}`)
+  };
+
+
   const handleReview = (videoId) => {
     navigate(`/reviewvideo/${videoId}`);
   };

@@ -56,8 +56,11 @@ import ResearcherHome from './pages/Researcher/Home';
 
 import AddUser from './pages/Admin/AddUser.jsx';
 import AllUsers from './pages/Admin/AdminDashboard.jsx';
-import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
 import VideoHistory from './pages/Industry/VideoHistory.jsx';
+
+import VideoHistory from './pages/Industry/VideoHistory.jsx';
+import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
+
 
 
 

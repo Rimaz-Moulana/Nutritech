@@ -5,8 +5,10 @@ import AddNewProduct from '../../components/button/AddNewProductBtn';
 import ProductBar from '../../components/fields/ProductBar';
 import LogTable from '../../components/tables/LogTable';
 import BlankPage from '../../components/theme/BlankPage';
+import { useParams } from 'react-router-dom';
 
 export default function AddedProduct() {
+  const {type} = useParams()
 
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -57,6 +59,7 @@ export default function AddedProduct() {
   return (
     <div className='w-full min-h-screen overflow-x-auto xl:overflow-hidden bg-backgroundGreen place-items-center'>
 
+
       <BlankPage type="annotator" />
       <div className='inline-flex ml-[11%] w-[80%]'>
         <h1 className="mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Product</h1>
@@ -72,6 +75,10 @@ export default function AddedProduct() {
 
     <BlankPage type={type} />
     {/* <div className='inline-flex ml-[11%] w-[80%]'>
+
+    <BlankPage type={type} />
+    <div className='inline-flex ml-[11%] w-[80%]'>
+
     <h1 className="mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Product</h1>
     <AddNewProduct />
 
