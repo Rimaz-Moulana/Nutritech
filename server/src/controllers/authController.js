@@ -45,16 +45,13 @@ async function login(req, res) {
                 break;
             case 'head':
                 dashboardRoute = '/headhome'
-                dashboardRoute = '/expertpanelhome';
                 break;
             case 'expert head':
                 dashboardRoute = '/expertpanelhome';
                 break;
                 // dashboardRoute = '/expertpanelhome';
                 // break;
-            case 'expert head':
-                dashboardRoute = '/expertpanelhome';
-                break;
+
             default:
                 dashboardRoute = '/'; // Default route
         }

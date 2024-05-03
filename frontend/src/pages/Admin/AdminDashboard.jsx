@@ -121,7 +121,7 @@ const UserList = () => {
                     <option value="sensor manager">Sensor Manager</option>
                     <option value="researcher">Researcher</option>
                     <option value="admin">Admin</option>
-                    <option value="head">Head</option>
+                    <option value="expert head">Expert Head</option>
               </select>
             </div>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleEditSubmit}>Save</button>
