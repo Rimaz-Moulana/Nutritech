@@ -37,6 +37,10 @@ exports.getPendingProducts= async() => {
     return await Product.find({ status: 'pending' });
 }
 
+exports.getProductDetails = async(productName,brand,size,unit) =>{
+  return await Product.find({ productName:productName,brand:brand,size:size,unit:unit});
+}
+
 exports.getProduct = async(productId)=>{
     return await Product.findOne({ _id: productId })
   }

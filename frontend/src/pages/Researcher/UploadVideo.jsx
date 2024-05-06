@@ -17,7 +17,8 @@ function UploadVideo() {
     const [formData, setFormData] = useState({
         brand: '',
         product: '',
-        variation: '',
+        unit: '',
+        size: '',
         category: '',
         createdIn: new Date().toLocaleDateString(),
         createdAt: formattedTime ,
@@ -49,7 +50,8 @@ function UploadVideo() {
         const formD = new FormData();
         formD.append('brand', formData.brand);
         formD.append('product', formData.product);
-        formD.append('variation', formData.variation);
+        formD.append('unit', formData.unit);
+        formD.append('size', formData.size);
         formD.append('category', formData.category);
         formD.append('createdIn', formData.createdIn);
         formD.append('createdAt', formData.createdAt);
@@ -72,7 +74,7 @@ function UploadVideo() {
             },
             iconColor: '#294B29',
           });
-          window.history.back();
+          // window.history.back();
 
           }catch(error){
             console.error('Error uploading video:', error);

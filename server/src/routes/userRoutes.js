@@ -9,4 +9,5 @@ router.get('/profile', authMiddleware.authenticateUser, (req, res) => {
 });
 router.get('/getUser/:email', userController.getUserByEmail);
 
+
 module.exports = router;

@@ -3,7 +3,9 @@ import React, { useState } from 'react'
 import UploadImage from '../../components/UploadImage/UploadImageIndustry'
 import VideoUpload from '../../components/UploadVideo/VideoUploadIndustry'
 import DropDown from '../../components/fields/dropdown'
+import DropdownSize from "../../components/fields/dropdownSize"
 import DropDownWhite from '../../components/fields/dropdownWhite'
+import Numberfield from '../../components/fields/numberfield'
 import TextFiledsmallWhite from '../../components/fields/textFieldSmallWhite'
 import TextFiledWhite from '../../components/fields/textFieldWhite'
 import TextFiledWhite2 from '../../components/fields/textFieldWhite2'
@@ -34,13 +36,14 @@ export default function ProductDetails() {
         const [uploadStatus, setUploadStatus] = useState('');
         const [formData, setFormData] = useState({
             productName: '',
-            brand: '',
+            brand: '', 
             description: '',
             parentCompany: '',
             productCategory: '',
             packagingMaterial : '',
             packagingMaterialTouching: '',
-            variation : '',
+            size : '',
+            count: '',
             countryProduct: '',
             servingSize: '',
             sugarType: '',
@@ -136,7 +139,8 @@ export default function ProductDetails() {
             formD.append('productCategory',formData.productCategory)
             formD.append('packagingMaterial', formData.packagingMaterial )
             formD.append('packagingMaterialTouching', formData.packagingMaterialTouching);
-            formD.append('variation', formData.variation)
+            formD.append('size', formData.size)
+            formD.append("count", formData.count)
             formD.append('countryProduct',formData.countryProduct)
             formD.append('servingSize',formData.servingSize)
             formD.append('sugarType', formData.sugarType);
@@ -201,6 +205,8 @@ export default function ProductDetails() {
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');
               }
+
+              
           };
 
   return (
@@ -222,7 +228,11 @@ export default function ProductDetails() {
                 <TextFiled placeholder="Description" name='description' onChange={handleChange} />
                 <TextFiled placeholder="Packaging Material" name='packagingMaterial' onChange={handleChange} />
                 <TextFiled placeholder="Packaging Material(touching)" name='packagingMaterialTouching' onChange={handleChange} />
-                <TextFiled placeholder="Variation"  name='variation' onChange={handleChange} />
+                <div className='p-2'>
+                <DropdownSize placeholder="Size"  name='size' onChange1={handleChange}  />
+                <Numberfield placeholder="Count"  name='count'  onChange2={handleChange}/>
+                </div>
+                
                 
             <div className=''>
                 <TextFiledWhite placeholder="Country of the product" name='countryProduct' onChange={handleChange} />

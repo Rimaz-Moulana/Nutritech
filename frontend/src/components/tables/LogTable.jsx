@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function LogTable(props) {
+export default function LogTable({props}) {
   const navigate = useNavigate()
   const [products, setProducts] = useState([]);
   const [selectedProductIndex, setSelectedProductIndex] = useState(null);
