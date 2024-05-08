@@ -41,6 +41,11 @@ exports.getProductDetails = async(productName,brand,size,unit) =>{
   return await Product.find({ productName:productName,brand:brand,size:size,unit:unit});
 }
 
+exports.getDetails = async(productName,brand) =>{
+  return await Product.find({ productName:productName,brand:brand});
+}
+
+
 exports.getProduct = async(productId)=>{
     return await Product.findOne({ _id: productId })
   }
