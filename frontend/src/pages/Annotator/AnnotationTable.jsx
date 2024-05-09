@@ -112,6 +112,8 @@ function AnnotationTable() {
   };
 
   const submit = async (e) => {
+
+    console.log(rowsData);
     e.preventDefault();
     try {
       if(category==="reannotation"){
@@ -119,7 +121,7 @@ function AnnotationTable() {
         reannotations: rowsData,
       });
       }else{
-        await axios.post(`http://localhost:3000/annotations/reannotation/${videoId}`, {
+        await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
         annotations: rowsData,
       });
       }

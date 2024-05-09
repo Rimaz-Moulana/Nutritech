@@ -386,13 +386,13 @@ useEffect(() => {
 
 console.log(productData);
   return (
-    <div>
-    <div className='lg:flex justify-right ml-24 justify-between'>
-         <div className='w-full h-full mt-12'>
-         <div className='w-50% h-40% items-center'>
+    
+    <div className='mt-12 lg:flex justify-between max-w-screen p-8'>
+         <div className='items-center p-4 bg-gray-300'>
+         
             {(text === "video" || text==="expert" || text==="experthistory") && (
               <ReactPlayer
-                className='react-player fixed-bottom'
+                className='react-player'
                 url={handleurl(Data.videoPath)}
                 width='100%'
                 height='100%'
@@ -402,10 +402,9 @@ console.log(productData);
 
             {(text === "product") && (
                <img
-               className='fixed-bottom ml-t'
+               className='fixed-bottom h-96 w-[100%] '
                src={handleurl(Data.imageFront)}
                alt="Product Image"
-               style={{ width: '100%', height: 'auto', marginTop:30 }}
            />
             )}
             {/* : (
@@ -415,14 +414,14 @@ console.log(productData);
                 className="w-full h-auto"
               />
             ) */}
-        </div>
+       
 
         </div> 
-      
-        <form className="w-full mt-24 max-w-sm lg:ml-36">
+      <div className='p-4 mt-8'>
+        <form className="w-full max-w-sm">
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Brand Name
       </label>
     </div>
@@ -432,7 +431,7 @@ console.log(productData);
   </div>
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Product
       </label>
     </div>
@@ -447,7 +446,7 @@ console.log(productData);
   </div>
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Size
       </label>
     </div>
@@ -459,7 +458,7 @@ console.log(productData);
   {Data.finalflag && Data.finalflag.length !== 0 && (
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Flag
       </label>
     </div>
@@ -481,7 +480,7 @@ console.log(productData);
 {productData && productData.length > 0 && productData[0].healthfact && (
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Status
       </label>
     </div>
@@ -555,13 +554,10 @@ console.log(productData);
   </div>
   )}
 </form>
-
+</div>
 
     </div>
-    <div>
-      
-    </div>
-  </div>
+  
   )
 }
 

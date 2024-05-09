@@ -40,13 +40,11 @@ fetchReviewDetails();
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
       <Sidebar type="expert"/>
       </div>
-      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64 ">
-        <div className='px-12'>
+      <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
+       
         <Navbar type='annotator' />
-        </div>
-        <div className='flex justify-between z-9999 mt-24'>
         <VideowithReview Id={videoId} text={"experthistory"}/>
-        </div>
+      
         <div className='mt-12 ml-24'>
             <Annotations videoId={videoId} usertype={"expert"}/>
         </div>

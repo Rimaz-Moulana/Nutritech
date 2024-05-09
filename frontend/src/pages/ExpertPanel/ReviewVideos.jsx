@@ -48,14 +48,13 @@ useEffect(() => {
         <div className='mt-12 ml-24'>
             <Annotations videoId={videoId} usertype={"expert"}/>   
         </div>
-        {!videoData.reannotations>0 && (
+        {!videoData.reannotations || !videoData.length>0 && (
           <div className='mt-8 w-full'>
           <p>Write a message to annotator, if video should be reannotate</p>
           <Comments videoId={videoId} type={"comment"} section={"message"}/>
         </div>
-        )
+         )
         }
-        
 
         <ViewComment videoId={videoId} type={"comment"}/>
         <div className='mt-8 w-full'>

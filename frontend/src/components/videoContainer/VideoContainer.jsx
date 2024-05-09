@@ -177,6 +177,8 @@ const filteredVideos = videoData?.filter((video) => {
               <p>Uploaded Date: {video.createdIn}</p>
               <p>Uploaded Time: {video.createdAt}</p>
               <p>Uploader: {video.uploader}</p>
+              <p>Category: {video.category}</p>
+              <p>Size: {video.size} {video.unit}</p>
               
               {type === 'annotated' && !("industry" === type) && (
               <>
@@ -224,12 +226,12 @@ const filteredVideos = videoData?.filter((video) => {
               <img src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
             </div>
           )}
-
+{/* 
             {type==="reviewvideo" && (
               <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
               <img src={history} alt="Annotated" />
             </div>
-             )}
+             )} */}
 
           {(video.status === 'annotated' && type==="expertnew") &&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
@@ -360,6 +362,7 @@ const filteredVideos = videoData?.filter((video) => {
         {/* <th className='px-3'> {' '}</th> */}
         <th className='px-2'>Brand {' '}</th>
          <th className='px-2'> Product{' '}</th>
+         {/* <th className='px-2'> Category{' '}</th> */}
          <th className='px-2'> Size{' '}</th>
          <th>
            Status
@@ -373,7 +376,7 @@ const filteredVideos = videoData?.filter((video) => {
              <th className='px-2'>Annotated Time</th>
            </>
          )}
-         {type!=="history" && (
+         {type!=="history" && type!="reviewvideo" && (
          <th className='px-2 mt-12'>Actions</th>
          )} 
        </tr>
@@ -396,7 +399,8 @@ const filteredVideos = videoData?.filter((video) => {
           </td>
           <td className='pr-2'>{video.brand}</td>
            <td className='px-2'>{video.product}</td>
-           <td className='px-2'>{video.variation}</td>
+            {/* <td className='px-2'>{video.category}</td> */}
+           <td className='px-2'>{video.size} {video.unit}</td>
            <td className='px-2'>{video.status}</td>
            <td className='px-2'>{video.createdIn}</td>
            <td className='px-2'>{video.createdAt}</td>
@@ -456,12 +460,12 @@ const filteredVideos = videoData?.filter((video) => {
              >View Details</button>
              )} */}
 
-             {type==="reviewvideo" && (
+             {/* {type==="reviewvideo" && (
               <button
               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 lg:px-8 py-2.5 sm:px-2 "
                 onClick={() => handleApprove(video._id)}
             >View Details</button>
-             )}
+             )} */}
 
              {video.status === 'green' && (type==="expert" || type==='expertgreen') && type!=="history" && type!="expertreviewed" && (
                <button
