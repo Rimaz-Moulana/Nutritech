@@ -432,7 +432,7 @@ const filteredVideos = videoData?.filter((video) => {
              >View History</button>
              )}
 
-            {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type==="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertnew" && type!=="history" && type!=="expertreviewed" (
+            {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type==="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertnew" && type!=="history" && type!=="expertreviewed" &&(
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => ViewHistory(video._id)}

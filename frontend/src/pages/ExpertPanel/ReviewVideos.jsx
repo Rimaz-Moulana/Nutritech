@@ -10,9 +10,8 @@ import ViewComment from '../../components/CommentSection/ViewComment';
 import axios from 'axios';
 
 function ReviewVideos() {
-
   const navigate= useNavigate();
-const {videoId} = useParams(); 
+  const {videoId} = useParams(); 
   const [videoData, setVideoData] = useState([]);
   const [loading,setLoading] =useState(true);
 //   const [RuleData, setRuleData] = useState([]);
@@ -72,8 +71,7 @@ useEffect(() => {
                  onClick={() => window.history.back()}>
                   Cancel
                 </button>
-      </div>
-        
+      </div>       
       </div>
     </div>
   );

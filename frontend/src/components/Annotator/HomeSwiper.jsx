@@ -6,6 +6,9 @@ import ReactPlayer from 'react-player';
 // import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const HomeSwiper = ({count,type}) => {
+  const handlepath = () =>{
+    
+  }
   
   return (
     <div className='h-36 w-36 bg-gray-300 p-4 rounded'>
@@ -13,7 +16,7 @@ const HomeSwiper = ({count,type}) => {
       <div>
         <p>{count}</p>
       </div>
-      <div><button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" >All Videos</button></div>
+      <div><button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handlepath}>All Videos</button></div>
     </div>
   );
 }
