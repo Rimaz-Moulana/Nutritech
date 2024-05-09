@@ -150,11 +150,7 @@ exports.addNewProduct = async (req,res) => {
               if (req.files[4]) imageRight = req.files[4].path;
             }
 
-
-            
-            
-
-            const duration = req.duration;
+            const duration = req.body.duration;
             // const newProduct = await productService.addNewProduct();
     
             const newProduct = new Product({
