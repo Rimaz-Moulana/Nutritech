@@ -1,5 +1,6 @@
 const productService = require('../services/productService')
 const Product = require('../../src/models/productModel')
+const Video = require("../../src/models/videoModel")
 
 
 exports.addProduct = async(req,res)=>{
@@ -66,8 +67,18 @@ exports.getProduct = async(req,res ) =>{
 exports.addNewProduct = async (req,res) => {
 
     try{
-        const {productName, brand ,description ,parentCompany ,productCategory,packagingMaterial,packagingMaterialTouching
-            , size, count, countryProduct, servingSize ,
+        const {
+            product,
+            brand ,
+            description ,
+            parentCompany ,
+            category,
+            packagingMaterial,
+            packagingMaterialTouching, 
+            unit, 
+            size, 
+            countryProduct, 
+            servingSize ,
             sugarType ,
             lactose  ,
             vitamin ,
@@ -98,7 +109,8 @@ exports.addNewProduct = async (req,res) => {
             transFat1  ,
             transFat2  ,
             ash1  ,
-            ash2  ,WPROfoodcode  ,
+            ash2  ,
+            WPROfoodcode  ,
             WPROPermitted  ,
             WPROPermittedRemark  ,
             SEAROfoodcode  ,
@@ -108,26 +120,53 @@ exports.addNewProduct = async (req,res) => {
             SLpermitted ,
             SLfoodcodePermittedRemark ,
             status,
-            createdTime  ,
-            CreatedData  } = req.body;
-            console.log(req.body)
-            const videoPath = req.files[0].path
-            console.log(videoPath)
-            console.log(req.files)
-            const imageFront = req.files[1].path
-            const imageBack = req.files[2].path
-            const imageLeft = req.files[3].path
-            const imageRight = req.files[4].path
+            createdAt  ,
+            createdIn  } = req.body;
+            //console.log(req.body)
+            //const videoPath = req.files[0].path
+           // console.log(videoPath)
+            //console.log(req.files)
+            let videoPath = null;
+            let imageLeft = null;
+            let imageFront = null;
+            let imageBack = null;
+            let imageRight = null;
+
+            
+            if(req.files.length==2){
+              imageFront = req.files[0].path;
+              imageBack = req.files[1].path;
+            }
+            else if(req.files.length == 3){
+              if (req.files[0]) videoPath = req.files[0].path;
+              imageFront = req.files[1].path;
+              imageBack = req.files[2].path;
+            }
+            else{
+              if (req.files[0]) videoPath = req.files[0].path;
+              imageFront = req.files[1].path;
+              imageBack = req.files[2].path;
+              if (req.files[3]) imageLeft = req.files[3].path;
+              if (req.files[4]) imageRight = req.files[4].path;
+            }
+
+
+            
+            
+
+            const duration = req.duration;
             // const newProduct = await productService.addNewProduct();
     
-            const newProduct = new Product({productName, brand ,
+            const newProduct = new Product({
+                product, 
+                brand ,
                 description ,
                 parentCompany ,
-                productCategory ,
+                category ,
                 packagingMaterial  ,
                 packagingMaterialTouching ,
+                unit,
                 size,
-                count,
                 countryProduct  ,
                 servingSize ,
                 sugarType ,
@@ -170,8 +209,8 @@ exports.addNewProduct = async (req,res) => {
                 SLfoodCode ,
                 SLpermitted ,
                 SLfoodcodePermittedRemark ,
-                createdTime  ,
-                CreatedData ,
+                createdAt  ,
+                createdIn ,
                 status,
                 videoPath  ,
                 imageFront,
@@ -179,6 +218,30 @@ exports.addNewProduct = async (req,res) => {
                 imageLeft,
                 imageRight})
         // const newProduct = new Product({ videoPath});
+
+        console.log(req.body.duration)
+        if(videoPath){
+          const newVideo = new Video({
+            category,
+            product, 
+            brand,
+            unit,
+            size,
+            videoPath,
+            createdAt  ,
+            createdIn , 
+            duration,
+            status,
+            uploader: 'Sirasa'
+            
+        });
+          await newVideo.save();
+        }
+        
+
+        // Save the new video
+        
+
         console.log(newProduct)
         await newProduct.save();
        

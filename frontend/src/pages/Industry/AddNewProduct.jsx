@@ -35,15 +35,15 @@ export default function ProductDetails() {
         const [images,setImages] = useState([null, null])
         const [uploadStatus, setUploadStatus] = useState('');
         const [formData, setFormData] = useState({
-            productName: '',
+            product: '',
             brand: '', 
             description: '',
             parentCompany: '',
-            productCategory: '',
+            category: '',
             packagingMaterial : '',
             packagingMaterialTouching: '',
+            unit: '',
             size : '',
-            count: '',
             countryProduct: '',
             servingSize: '',
             sugarType: '',
@@ -86,14 +86,15 @@ export default function ProductDetails() {
             SLfoodCode: '',
             SLpermitted: '',
             SLfoodcodePermittedRemark: '',
-            createdTime: cTime ,
-            CreatedData : cDate ,
+            createdAt: cTime ,
+            createdIn : cDate ,
             videoFile : '',
             status: status,
             imageFront: '',
             imageBack: '',
             imageLeft: '',
-            imageRight: ''
+            imageRight: '',
+            duration: ''
         })
 
         const handleChange = (e) => {
@@ -102,9 +103,24 @@ export default function ProductDetails() {
           };
         
           const handleFileChange = (file) => {
-            console.log(file);
-            setFormData({ ...formData, videoFile:file });
-            
+            // const file = e.target.files[0];
+            console.log(file)
+            if(file) {
+              const videoElement = document.createElement('video');
+            const fileURL = URL.createObjectURL(file);
+          
+            videoElement.addEventListener('loadedmetadata', () => {
+              const durationInSeconds = Math.round(videoElement.duration);
+              console.log('Duration in seconds:', durationInSeconds);
+              setFormData({ ...formData, videoFile: file , duration: durationInSeconds });
+            });
+          
+            videoElement.src = fileURL;
+            }
+            else{
+              setFormData({ ...formData, videoFile:null , videoFileURL:null });
+            }
+
           };
 
           console.log(formData.videoFile)
@@ -132,15 +148,15 @@ export default function ProductDetails() {
           const handleSubmit = async (event) => {
             event.preventDefault();
             const formD = new FormData();
-            formD.append('productName',formData.productName );
+            formD.append('product',formData.product );
             formD.append('brand', formData.brand);
             formD.append('description', formData.description )
             formD.append('parentCompany',formData.parentCompany)
-            formD.append('productCategory',formData.productCategory)
+            formD.append('category',formData.category)
             formD.append('packagingMaterial', formData.packagingMaterial )
             formD.append('packagingMaterialTouching', formData.packagingMaterialTouching);
+            formD.append('unit', formData.unit)
             formD.append('size', formData.size)
-            formD.append("count", formData.count)
             formD.append('countryProduct',formData.countryProduct)
             formD.append('servingSize',formData.servingSize)
             formD.append('sugarType', formData.sugarType);
@@ -183,14 +199,15 @@ export default function ProductDetails() {
             formD.append('SLfoodCode',formData.SLfoodCode)
             formD.append('SLpermitted',formData.SLpermitted)
             formD.append('SLfoodcodePermittedRemark',formData.SLfoodcodePermittedRemark);
-            formD.append('createdTime', cTime);
-            formD.append('CreatedData' , cDate)
+            formD.append('createdAt', cTime);
+            formD.append('createdIn' , cDate)
             formD.append('status', status)
             formD.append('video', formData.videoFile);
             formD.append('image',formData.imageFront);
             formD.append('image',formData.imageBack);
             formD.append('image',formData.imageLeft);
             formD.append('image',formData.imageRight);
+            formD.append('duration',formData.duration)
             // formD.append('createdAt', formData.createdAt);
             
             
@@ -221,22 +238,22 @@ export default function ProductDetails() {
         <form onSubmit={handleSubmit}>
         <div className='ml-0 lg:inline-flex sm:flex'>
             <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
-                <TextFiled placeholder="Product Name"  name='productName' onChange={handleChange} />
+                <TextFiled placeholder="Product Name"  name='product' onChange={handleChange} />
                 <TextFiled placeholder="Brand"  name='brand' onChange={handleChange} />
-                <TextFiled placeholder="Parent Company" name='parentCompany' onChange={handleChange} />
-                <DropDown  placeholder="Product Category" name='productCategory' onChange={handleChange} />
                 <TextFiled placeholder="Description" name='description' onChange={handleChange} />
-                <TextFiled placeholder="Packaging Material" name='packagingMaterial' onChange={handleChange} />
-                <TextFiled placeholder="Packaging Material(touching)" name='packagingMaterialTouching' onChange={handleChange} />
+                <TextFiled placeholder="Parent Company" name='parentCompany' onChange={handleChange} />
+                <DropDown  placeholder="Product Category" name='category' onChange={handleChange} />
+                <TextFiled placeholder="Packaging Material(Out Side)" name='packagingMaterial' onChange={handleChange} />
+                <TextFiled placeholder="Packaging Material(In Side)" name='packagingMaterialTouching' onChange={handleChange} />
                 <div className='p-2'>
-                <DropdownSize placeholder="Size"  name='size' onChange1={handleChange}  />
-                <Numberfield placeholder="Count"  name='count'  onChange2={handleChange}/>
+                <DropdownSize placeholder="Unit"  name='unit' onChange1={handleChange}  />
+                <Numberfield placeholder="Size"  name='size'  onChange2={handleChange}/>
                 </div>
                 
                 
             <div className=''>
                 <TextFiledWhite placeholder="Country of the product" name='countryProduct' onChange={handleChange} />
-                <DropDownWhite defOptions="Serving Size"  name='servingSize' onChange={handleChange} />
+                <TextFiledWhite placeholder="Serving Size"  name='servingSize' onChange={handleChange} />
                 <DropDownWhite defOptions="Sugar Type" name='sugarType' onChange={handleChange} />
                 <DropDownWhite defOptions="Lactose/Maltodextrin" name='lactose' onChange={handleChange} />
                 <TextFiledWhite placeholder="Vitamin" name='vitamin' onChange={handleChange} />
