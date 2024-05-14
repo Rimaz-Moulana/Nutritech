@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 
-const Sidebar = ({type}) => {
+const Sidebar = ({type,onValueChange}) => {
   const [isEnlarge, setEnlarge] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate(); 
@@ -227,6 +227,7 @@ const Sidebar = ({type}) => {
 
   const handleEnlargeClick = () => {
     setEnlarge(!isEnlarge);
+    onValueChange(!isEnlarge);
   };
 
   return (

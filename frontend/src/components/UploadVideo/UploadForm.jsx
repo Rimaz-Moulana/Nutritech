@@ -14,7 +14,7 @@ function UploadForm({handleChange}) {
                 <Unit placeholder='Size' name="size" onChange={handleChange} />
                 <div>
                 <Dropdown  placeholder="Product Category" name='category' onChange={handleChange} />
-                </div>
+      </div>
 </div>
 
 

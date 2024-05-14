@@ -104,10 +104,10 @@ const filteredVideos = videoData?.filter((video) => {
     <div className='w-full ml-auto pr-2 pl-2'> 
     {viewType=== 'Grid'  &&(
       <div className='sm:w-auto right-0'>
-        <div className=' items-end'>
+        <div className=''>
       {type !== "industry" && (
         <>
-            <select className='bg-white text-xs p-1 items-end mt-2 mb-2 rounded w-[25%]'
+            <select className='bg-white mt-2 ml-4 p-1 mb-2 rounded w-[75%] items-end sm:w-auto'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
@@ -152,7 +152,7 @@ const filteredVideos = videoData?.filter((video) => {
       )}
     </div>
       
-    <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 p-4 mt-8 mr-5 mb-8 bg-backgroundGreen">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 mt-8 mr-5 mb-8 bg-backgroundGreen">
       {filteredVideos.map((video, index) => (
         <div key={index} className='relative'>
           <div className=''>
@@ -305,11 +305,11 @@ const filteredVideos = videoData?.filter((video) => {
   )}
 
  {viewType==="List" && (
-   <div className='h-full mt-4 text-black w-full min-w-screen'>
-    <div className='items-end'>
+   <div className=' text-black w-full min-w-screen'>
+    <div className=''>
     {type !== "industry" && (
       <>
-    <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
+    <select className='bg-white mt-2 ml-4 p-1 mb-2 rounded items-end w-[75%] sm:w-auto'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
@@ -353,7 +353,7 @@ const filteredVideos = videoData?.filter((video) => {
            </>
     )}
     </div>
-    <div className='h-full mt-4 overflow-x-auto xl:overflow-hidden text-black place-items-center pr-4'> 
+    <div className='h-full mt-4 overflow-x-auto xl:overflow-hidden text-black place-items-center pr-4 p-4 mr-5 mb-8 bg-backgroundGreen'> 
    <table className='h-full mt-8 w-full'>
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>
