@@ -13,7 +13,6 @@ function UploadForm({handleChange}) {
                 <div className='p-2 sm:mr-4 w-[98.%]'>
                 <Unit placeholder='Size' name='size' onChange={handleChange} />
                 <DropdownSize placeholder="Unit"  name='unit' onChange={handleChange}  />
-                
                 </div>
                 <div className='sm:mr-4 w-[98%]p-2'>
                 <Dropdown  placeholder="Product Category" name='category' onChange={handleChange} />

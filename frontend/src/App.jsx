@@ -135,7 +135,7 @@ function App(){
               <Route path='/users' element={<AllUsers />} />
               <Route path='/reviewedvideos' element={<ReviewedVideos />} />
 
-              <Route path='/product/view/:size/:product/:brand' element={<ViewProductDetails />} />
+              <Route path='/product/view/:size/:product/:brand/:unit' element={<ViewProductDetails />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

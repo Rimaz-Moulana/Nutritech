@@ -83,7 +83,7 @@ import Table from '../../components/tables/TableProduct';
 import BlankPage from '../../components/theme/BlankPage';
 
 export default function AddedProduct() {
-  const { product, brand, size, unit } = useParams();
+  const { product, brand, size,unit } = useParams();
   const {type} = useParams();
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // Added loading state
@@ -91,14 +91,15 @@ export default function AddedProduct() {
 
   useEffect(() => {
     fetchData();
-  }, [product, brand, unit, size]); // Added dependency array for useEffect
+  }, [product, brand, size,unit]); // Added dependency array for useEffect
 
   const fetchData = async () => {
     setIsLoading(true); // Set loading state to true when fetching data
     setError(null); // Reset error state before fetching data
     try {
       const response = await axios.get(`http://localhost:3000/api/product/view/${size}/${product}/${brand}`);
-      setAllProducts(response.data);
+      const result = response.data.filter(product => product.unit === unit); 
+      setAllProducts(result);
       console.log(response.data);
       console.log(allProducts);
     } catch (error) {
