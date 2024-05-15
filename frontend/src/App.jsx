@@ -62,7 +62,6 @@ import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
 
 
 
-
 import './App.css';
 
 
@@ -135,6 +134,8 @@ function App(){
               <Route path='/addUser' element={<AddUser />} />
               <Route path='/users' element={<AllUsers />} />
               <Route path='/reviewedvideos' element={<ReviewedVideos />} />
+
+              <Route path='/product/view/:size/:product/:brand' element={<ViewProductDetails />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

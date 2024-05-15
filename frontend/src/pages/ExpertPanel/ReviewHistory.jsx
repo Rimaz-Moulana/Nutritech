@@ -1,12 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-import Navbar from '../../components/navbar/Navbar';
-import VideowithReview from '../../components/SensorManager/VideowithReview';
-import Annotations from '../../components/AnnotationTable/RowHistory'
-import Comments from '../../components/CommentSection/Comments';
+import Annotations from '../../components/AnnotationTable/RowHistory';
 import ViewComment from '../../components/CommentSection/ViewComment';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
+import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewHistory() {
@@ -15,6 +13,11 @@ const {videoId} = useParams();
  
   let text;
 
+  const handlePoductDetails = (product,brand,size,unit) =>{
+    navigate(`/product/${product}/${brand}/${size}/${unit}`)
+  }
+
+  console.log(responseData.product,responseData.brand,responseData.size,responseData.unit)
  
   // console.log(Data)
   return (
@@ -35,7 +38,8 @@ const {videoId} = useParams();
 
         <ViewComment videoId={videoId} type={"comment"}/>
         <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
-        <button
+ 
+        <button  onClick={handlePoductDetails(responseData.product,responseData.brand,responseData.size,responseData.unit)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details

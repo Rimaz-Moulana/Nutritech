@@ -11,8 +11,9 @@ function UploadForm({handleChange}) {
                 <TextFiledWhiteForm type={1} name='brand' onChange={handleChange} />
                 <TextFiledWhiteForm type={2} name='product' onChange={handleChange} />
                 <div className='p-2 sm:mr-4 w-[98.%]'>
-                <DropdownSize placeholder="Unit"  name='unit' onChange={handleChange}  />
                 <Unit placeholder='Size' name='size' onChange={handleChange} />
+                <DropdownSize placeholder="Unit"  name='unit' onChange={handleChange}  />
+                
                 </div>
                 <div className='sm:mr-4 w-[98%]p-2'>
                 <Dropdown  placeholder="Product Category" name='category' onChange={handleChange} />

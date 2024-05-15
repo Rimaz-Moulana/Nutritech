@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import VideoContainer from '../../components/videoContainer/VideoContainer';
-import Navbar from '../../components/navbar/Navbar';
-import VideowithReview from '../../components/SensorManager/VideowithReview';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
+import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function ReviewVideos() {
+  const navigate = useNavigate();
   const { videoId } = useParams();
   const [responseData, setResponseData] = useState([]);
   // const { videoReviewData, brandVideoData } = responseData;
@@ -38,8 +39,13 @@ function ReviewVideos() {
   
     fetchReviewDetails();
   }, [videoId]);
+
+  const handlePoductDetails = (product,brand,size,unit) =>{
+    navigate(`/product/${product}/${brand}/${size}/${unit}`)
+  }
   
-  console.log(responseData)
+  //console.log(responseData)
+  console.log(responseData.product,responseData.brand,responseData.size,responseData.unit)
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -79,7 +85,7 @@ function ReviewVideos() {
       </label>
 
       <div className=" flex items-end justify-center z-10 h-full"> {/* Position cancel button at the bottom */}
-        <button
+        <button onClick={handlePoductDetails(responseData.product,responseData.brand,responseData.size,responseData.unit)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details
