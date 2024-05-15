@@ -75,19 +75,19 @@ function Row({
 
   return (
     <div>
-    <div className='lg:flex sm:relative item-center p-3 center-l lg:ml-[5%]'>  
-    <div className=''>
+    <div className='lg:flex sm:relative item-center p-3 justify-center'>  
+    <div className='pr-8'>
     <div className="relative justify-center border-gray-200 border-1 rounded-sm">
-      <label id='timestamp' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Stamp</label>
-      <select className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleTimestampChange}>
+      <label id='timestamp' className="justify-center pr-8 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Stamp</label>
+      <select className="w-[100%] lg:w-[100%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleTimestampChange}>
          {generateTimestampOptions().map((option, index) => (
                 <option key={index}>{option}</option>
               ))}
       </select>
     </div>
-    <div className="relative mt-4 min-w-[200px] border-gray-200 border-1 rounded-sm">
+    <div className="relative mt-4 lg:max-w-[100%] sm:max-w-[50%] border-gray-200 border-1 rounded-sm">
       <label id='rules' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regulation</label>
-      <select className="bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleRuleChange}>
+      <select className="w-[100%] lg:w-[100%] bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleRuleChange}>
       <option >Select</option>
       {/* <p>Regulation </p> */}
       {rules.map((rule, index) => (
@@ -101,15 +101,15 @@ function Row({
     </div>
 <div className='lg:flex sm:relative'>
 <div className='px-3' >
-    <div className="relative h-full mb-6 border-gray-200 border-1 rounded-sm px-3">
+    <div className="relative h-full  border-gray-200 border-1 rounded-sm">
     <label id='details' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white px-3">Details</label>
-      <textarea type="text" id="small-input" className="block w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDetailsChange}></textarea>
+      <textarea type="text" id="small-input" className="block w-[100%] lg:w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleDetailsChange}></textarea>
     </div>
       </div>
 
-      <div className="relative h-full mb-6 border-gray-200 border-1 rounded-sm px-3">
+      <div className="relative h-full  border-gray-200 border-1 rounded-sm">
           <label id='reccomendation' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white px-3">Recommendation</label>
-            <textarea type="text" id="small-input" className="block w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleRecommendationChange}></textarea>
+            <textarea type="text" id="small-input" className="block w-[100%] lg:w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" onChange={handleRecommendationChange}></textarea>
           </div>
 </div>
 
