@@ -309,7 +309,7 @@ function ViewComment({ videoId, type }) {
           // for (let j = 0; j < Data.reply.length; j++) {
             
             result.push(
-              <div key={`reply-${i}`} className='bg-gray-300 text-black mt-4 p-3 text-xl text-left'>
+              <div key={`reply-${i}`} className='bg-gray-200 text-black mt-4 p-3 text-xl text-left'>
                 {/* {console.log(Data.reply[i][j].text)} */}
         
                 <p className='text-gray-600'>{Data.reply[i].replyer}</p>

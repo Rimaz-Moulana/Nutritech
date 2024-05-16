@@ -78,15 +78,15 @@ function Row({
     <div className='lg:flex sm:relative item-center p-3 justify-center'>  
     <div className='pr-8'>
     <div className="relative justify-center border-gray-200 border-1 rounded-sm">
-      <label id='timestamp' className="justify-center pr-8 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Stamp</label>
-      <select className="w-[100%] lg:w-[100%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleTimestampChange}>
+      <label id='timestamp' className="justify-center pr-8 block mb-4 text-sm font-medium text-gray-900 dark:text-white">Time Stamp</label>
+      <select className="w-[100%] lg:w-[100%] mb-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleTimestampChange}>
          {generateTimestampOptions().map((option, index) => (
                 <option key={index}>{option}</option>
               ))}
       </select>
     </div>
     <div className="relative mt-4 lg:max-w-[100%] sm:max-w-[50%] border-gray-200 border-1 rounded-sm">
-      <label id='rules' className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regulation</label>
+      <label id='rules' className="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Regulation</label>
       <select className="w-[100%] lg:w-[100%] bg-gray-50 border mt-1 border-gray-300 text-gray-900 text-sm rounded focus:ring-sidebarGreen focus:border-sidebarGreen block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sidebarGreen dark:focus:border-sidebarGreen" onChange={handleRuleChange}>
       <option >Select</option>
       {/* <p>Regulation </p> */}

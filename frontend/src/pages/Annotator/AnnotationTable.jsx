@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Sidebar from '../../components/sidebar/SideBar';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
 
 function AnnotationTable() {
   const navigate = useNavigate();
@@ -211,8 +212,8 @@ function AnnotationTable() {
       </div>
       <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='annotator' />
-        <div className='w-full mt-28'>
-          <Videowithtext videoId={videoId}/>
+        <div className='w-full mt-[10%]'>
+        <VideowithReview Id={videoId} text={"video"}/>
         </div>
         <div className='mt-4 mr-8 bg-gray-300'>
           
@@ -236,11 +237,11 @@ function AnnotationTable() {
         )}
       
       </div>
-        <div className='px-3 h-full mb-8 mt-10 text-sm font-semibold text-black'>
+        <div className='px-3 h-full mt-10 text-sm font-semibold text-black mb-8'>
           <div className='lg:flex-end'>
-            <p className='text-lg'>Does this video violated advertising rules and regulations?</p>
+            <p className='text-lg mb-4'>Does this video violated advertising rules and regulations?</p>
             
-            <div className='flex place-content-center'>
+            <div className='flex place-content-center mb-12'>
               <button
                 className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
                   isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
