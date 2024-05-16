@@ -54,6 +54,7 @@ async function login(req, res) {
 
             default:
                 dashboardRoute = '/'; // Default route
+                break;
         }
 
         res.status(200).json({ token, redirect: dashboardRoute });

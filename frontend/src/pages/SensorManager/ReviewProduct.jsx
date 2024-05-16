@@ -32,13 +32,21 @@ console.log(responseData)
           </div>
           <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
             <Navbar type='sensormanager'/>
-            <div className='flex justify-between w-full min-w-screen'>
+          
             <VideowithReview Id={productId} text={"product"}/>
            
             
-          </div>
+         
 
-          <Product productData={responseData}/>
+          <div className=" flex items-end justify-center z-10 h-full"> {/* Position cancel button at the bottom */}
+        
+      </div>
+
+      <h1 className='text-xl mt-12 ml-8 font-semibold justify-left'>
+          Existing products related to this product
+       </h1>
+
+          <Product productData={responseData} type={"review"}/>
           </div>
         </div>
   )

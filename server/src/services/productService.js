@@ -41,6 +41,11 @@ exports.getProductDetails = async(productName,brand,size,unit) =>{
   return await Product.find({ productName:productName,brand:brand,size:size,unit:unit});
 }
 
+exports.getDetails = async(productName,brand) =>{
+  return await Product.find({ productName:productName,brand:brand});
+}
+
+
 exports.getProduct = async(productId)=>{
     return await Product.findOne({ _id: productId })
   }
@@ -80,7 +85,6 @@ exports.getProduct = async(productId)=>{
     try {
       // Find the video with the provided videoId
       const currentProductData = await Product.findOne({ _id: productId });
-      // console.log(currentVideoData);
   
       if (!currentProductData) {
         throw new Error('Product not found');
@@ -92,7 +96,7 @@ exports.getProduct = async(productId)=>{
         brand,
         productName,
         variation,
-        status: { $in: ['reviewed'] },
+        status: { $in: ['reviewed','pending'] },
         _id: { $ne: productId } // Exclude the current product from the results
       });
   

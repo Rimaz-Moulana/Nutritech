@@ -27,6 +27,7 @@ router.post('/reviewproduct/:productId', productController.savePendingProduct );
 router.get('/sensormanagerproducts', productController.getAllPendingProducts);
 router.get('/similarproducts/:productId', productController.getAllSimilarProducts);
 router.get("/product/:productName/:brand/:size/:unit", productController.getProductDetails);
+router.get("/productdetails/:productName/:brand", productController.getDetailsOfProduct);
 
 module.exports = router;
 

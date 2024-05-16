@@ -7,15 +7,32 @@ import Annotations from '../../components/AnnotationTable/RowHistory'
 import Comments from '../../components/CommentSection/Comments';
 import Sidebar from '../../components/sidebar/SideBar';
 import ViewComment from '../../components/CommentSection/ViewComment';
+import axios from 'axios';
 
 function ReviewVideos() {
 
   const navigate= useNavigate();
 const {videoId} = useParams(); 
   const [videoData, setVideoData] = useState([]);
+  const [loading,setLoading] =useState(true);
 //   const [RuleData, setRuleData] = useState([]);
+
+useEffect(() => {
+  const fetchReviewDetails = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+      setVideoData(response.data.video);
+    } catch (error) {
+      console.error('Error fetching ReviewDetails:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchReviewDetails();
+}, [videoId]);
  
-  console.log(videoData)
+  // console.log(videoData)
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -29,8 +46,16 @@ const {videoId} = useParams();
         <VideowithReview Id={videoId} text="expert"/>
         </div>
         <div className='mt-12 ml-24'>
-            <Annotations videoId={videoId} usertype={"expert"}/>
+            <Annotations videoId={videoId} usertype={"expert"}/>   
         </div>
+        {!videoData.reannotations || !videoData.length>0 && (
+          <div className='mt-8 w-full'>
+          <p>Write a message to annotator, if video should be reannotate</p>
+          <Comments videoId={videoId} type={"comment"} section={"message"}/>
+        </div>
+         )
+        }
+
         <ViewComment videoId={videoId} type={"comment"}/>
         <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"comment"}/>

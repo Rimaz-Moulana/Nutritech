@@ -33,9 +33,15 @@ exports.getAnnotatedVideos = async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
-
- 
-  
+  exports.getReannotateVideos = async (req, res) => {
+    try {
+      const videos = await VideoService.getAnnotatorReannotateVideos();
+      res.status(200).json(videos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
   exports.getUnannotatedVideos = async (req, res) => {
     try {
       const videos = await VideoService.getAnnotatorUnannotatedVideos();
@@ -242,13 +248,15 @@ exports.postExpertComment= async (req,res)=>{
     const comments = req.body.comment;
     const email = req.body.email;
         const comment = await VideoService.postComment(videoId,comments,email);
-        console.log(comment)
+        // console.log(comment)
         res.json(comment);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
+
 
 exports.postFinalComment= async (req,res)=>{
   try {
@@ -264,12 +272,25 @@ exports.postFinalComment= async (req,res)=>{
     }
 }
 
+exports.postExpertMessage= async (req,res)=>{
+  try {
+    const videoId = req.params.videoId;
+    const comments = req.body.comment;
+    const email = req.body.email;
+        const comment = await VideoService.postMessage(videoId,comments,email);
+        console.log(comment);
+        res.json(comment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 exports.updateExpertHeadFlagReview = async (req,res)=>{
   try {
     const videoId = req.params.videoId;
     const finalflag = req.body.finalflag;
-    console.log(finalflag);
+    // console.log(finalflag);
     
         const Video = await VideoService.updateFinalReview(videoId,finalflag);
         // console.log(Video)

@@ -26,9 +26,9 @@ exports.getUserById = async (req, res) => {
 exports.getUserByEmail = async (req, res) => {
   try {
     const email = req.params.email;
-    console.log(email);
+    // console.log(email);
     const user = await userService.getUserEmail(email);
-    console.log(user);
+    // console.log(user);
     res.json(user);
     // res.status(200).json(user);
   } catch (error) {
