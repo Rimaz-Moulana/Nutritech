@@ -9,9 +9,9 @@ function VideowithReview({Id,text,type}) {
  const videoId = Id;
  const productId =Id;
  const email  = localStorage.getItem('email');
- 
- 
+
  const [Data, setData] = useState([]);
+ const [productData, setProductData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [greenFlagDisabled, setGreenFlagDisabled] = useState(false);
   const [redFlagDisabled, setRedFlagDisabled] = useState(false);
@@ -30,6 +30,7 @@ function VideowithReview({Id,text,type}) {
   
     fetchUser();
 }, []);
+
 
 
   const health = ()=>{
@@ -148,8 +149,7 @@ function VideowithReview({Id,text,type}) {
             localStorage.removeItem('savedButtonDisabled')
             // window.history.back();
           }
-        // });
-        
+        // });  
         
       }
       
@@ -236,49 +236,6 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   };
   
   const padZero = (num) => (num < 10 ? `0${num}` : num);
-
-  // const handleApprove= async(text)=>{
-    
-  //   await axios.post(
-  //     if(userData.role==="expert head") {
-  //   `http://localhost:3000/api/videos/flag/${videoId}`,{
-  //     finalflag:{
-  //       status:"green",
-  //       email:email,
-  //       expertreviewedtime: getCurrentDateTime(),
-  //       expertrevieweddate: new Date().toLocaleDateString()
-
-  //     }
-  //   }
-  // }else{
-  //   `http://localhost:3000/api/videos/flag/${videoId}`,{
-  //     panelstatus:{
-  //       status:"green",
-  //       email:email,
-  //       expertreviewedtime: getCurrentDateTime(),
-  //       expertrevieweddate: new Date().toLocaleDateString()
-
-  //     }
-  //   }});
-  
-   
-
-  //   Swal.fire({
-  //     icon: 'success',
-  //     title: `Done`,
-  //     showConfirmButton: false,
-  //     timer: 2000, 
-  //     customClass: {
-  //       popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
-  //     },
-  //     iconColor: '#294B29',
-  //   });
-  //   if (text !== "expert") {
-  //     window.history.back();
-  //   }
-
-
-  // }
 
   const handleApprove = async (text) => {
     let endpoint;
@@ -402,20 +359,53 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       return videourl;
     }
   };
- console.log(Data)
+//  console.log(Data)
+
+useEffect(() => {
+  
+  const fetchProductDetails = async () => {
+    try {
+      let productName;
+      if(text==="product"){
+        productName= Data.productName;
+      }else{
+        productName= Data.product;
+      }
+      let brand = Data.brand;
+      const response = await axios.get(`http://localhost:3000/api/product/productdetails/${productName}/${brand}`);
+      setProductData(response.data);
+    } catch (error) {
+      console.error('Error fetching ReviewDetails:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProductDetails();
+}, [Data.product,Data.productName,Data.brand, text]);
+
+console.log(productData);
   return (
-    <div>
-    <div className='lg:flex justify-right ml-24'>
-         <div className='w-full h-full mt-12'>
-         <div>
+    
+    <div className='mt-12 lg:flex justify-between max-w-screen p-8'>
+         <div className='items-center p-4 bg-gray-300'>
+         
             {(text === "video" || text==="expert" || text==="experthistory") && (
               <ReactPlayer
-                className='react-player fixed-bottom'
+                className='react-player'
                 url={handleurl(Data.videoPath)}
                 width='100%'
                 height='100%'
                 controls={true}
               />
+            )}
+
+            {(text === "product") && (
+               <img
+               className='fixed-bottom h-96 w-[100%] '
+               src={handleurl(Data.imageFront)}
+               alt="Product Image"
+           />
             )}
             {/* : (
               <img
@@ -424,14 +414,14 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
                 className="w-full h-auto"
               />
             ) */}
-        </div>
+       
 
         </div> 
-      
-        <form className="w-full mt-24 max-w-sm lg:ml-36">
+      <div className='p-4 mt-8'>
+        <form className="w-full max-w-sm">
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Brand Name
       </label>
     </div>
@@ -441,7 +431,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   </div>
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Product
       </label>
     </div>
@@ -456,19 +446,19 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   </div>
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Size
       </label>
     </div>
     <div className="md:w-2/3">
-      <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.variation}</div>
+      <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.count}{Data.size}</div>
     </div>
   </div>
 
   {Data.finalflag && Data.finalflag.length !== 0 && (
   <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 pr-4">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Flag
       </label>
     </div>
@@ -487,6 +477,18 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   </div>
 )}
 
+{productData && productData.length > 0 && productData[0].healthfact && (
+  <div className="md:flex md:items-center mb-6">
+    <div className="md:w-1/3">
+      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
+        Status
+      </label>
+    </div>
+    <div className="md:w-2/3">
+      <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{productData[0].healthfact}</div>
+    </div>
+  </div>
+)}
 
   {text!=='experthistory' && (
   <div className="flex items-center gap-2">
@@ -552,13 +554,10 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   </div>
   )}
 </form>
-
+</div>
 
     </div>
-    <div>
-      
-    </div>
-  </div>
+  
   )
 }
 

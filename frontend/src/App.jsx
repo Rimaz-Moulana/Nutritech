@@ -59,6 +59,7 @@ import AllUsers from './pages/Admin/AdminDashboard.jsx';
 import VideoHistory from './pages/Industry/VideoHistory.jsx';
 
 import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
+import ReannotateVideos from './pages/Annotator/ReannotateVideos.jsx';
 
 
 
@@ -84,9 +85,10 @@ function App(){
               
 
               <Route path="/all" element={<Allvideos/>} />
-              <Route path="/annotation/:videoId" element={<AnnotationTable />} />
+              <Route path="/annotation/:category/:videoId" element={<AnnotationTable />} />
               <Route path="/annotated-videos" element={<AnnotatedVideos/>} />
               <Route path="/unannotated-videos" element={<UnannotatedVideos/>} />
+              <Route path="/reannotatevideos" element={<ReannotateVideos/>} />
               <Route path="/text" element={<Videowithtext/>} />
               <Route path="/test" element={<Product/>} />
               <Route path="/history" element={<History/>} />

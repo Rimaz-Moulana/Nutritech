@@ -17,7 +17,8 @@ function UploadVideo() {
     const [formData, setFormData] = useState({
         brand: '',
         product: '',
-        variation: '',
+        size: '',
+        count:'',
         createdIn: new Date().toLocaleDateString(),
         createdAt: formattedTime ,
         videoFile: null // Assuming you need to upload a video file
@@ -36,7 +37,8 @@ function UploadVideo() {
         const formD = new FormData();
         formD.append('brand', formData.brand);
         formD.append('product', formData.product);
-        formD.append('variation', formData.variation);
+        formD.append('size', formData.size);
+        formD.append('unit', formData.unit);
         formD.append('createdIn', formData.createdIn);
         formD.append('createdAt', formData.createdAt);
         formD.append('video', formData.videoFile);

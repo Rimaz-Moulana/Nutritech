@@ -8,6 +8,7 @@ import ViewComment from '../../components/CommentSection/ViewComment';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import axios from 'axios';
 
 function ReviewVideos() {
 
@@ -18,6 +19,8 @@ const {videoId} = useParams();
   const [loading, setLoading] = useState(false);
 
   console.log(videoId)
+  const [loading,setLoading] =useState(true);
+
 //   const [RuleData, setRuleData] = useState([]);
 
 useEffect(() => {
@@ -29,6 +32,8 @@ useEffect(() => {
       //let result = JSON.parse(res);
       //let firstKeyValues = result.map(obj => obj[Object.keys(obj)[0]]);
       console.log("hi"+response.data[0].brand+responseData[0].unit);
+      const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+      setVideoData(response.data.video);
     } catch (error) {
       console.error('Error fetching ReviewDetails:', error);
     } finally {
@@ -45,6 +50,8 @@ useEffect(() => {
  
   //console.log(videoData)
   console.log("hir"+responseData)
+ 
+  // console.log(videoData)
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -58,8 +65,16 @@ useEffect(() => {
         <VideowithReview Id={videoId} text="expert"/>
         </div>
         <div className='mt-12 ml-24'>
-            <Annotations videoId={videoId} usertype={"expert"}/>
+            <Annotations videoId={videoId} usertype={"expert"}/>   
         </div>
+        {!videoData.reannotations || !videoData.length>0 && (
+          <div className='mt-8 w-full'>
+          <p>Write a message to annotator, if video should be reannotate</p>
+          <Comments videoId={videoId} type={"comment"} section={"message"}/>
+        </div>
+         )
+        }
+
         <ViewComment videoId={videoId} type={"comment"}/>
         <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"comment"}/>

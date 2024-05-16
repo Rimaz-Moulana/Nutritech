@@ -8,13 +8,16 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Sidebar from '../../components/sidebar/SideBar';
+import RowHistory from '../../components/AnnotationTable/RowHistory';
 
 function AnnotationTable() {
   const navigate = useNavigate();
   const { videoId } = useParams();
+  const { category } = useParams();
 
   const [isYesSelected, setIsYesSelected] = useState(true);
   const [videoDuration, setDuration] = useState([]);
+  const [videoData, setData]=useState([]);
 
   const handleYesClick = () => {
     setIsYesSelected(true);
@@ -109,11 +112,20 @@ function AnnotationTable() {
   };
 
   const submit = async (e) => {
+
+    console.log(rowsData);
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
+      if(category==="reannotation"){
+        await axios.post(`http://localhost:3000/annotations/reannotation/${videoId}`, {
+        reannotations: rowsData,
+      });
+      }else{
+        await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
         annotations: rowsData,
       });
+      }
+      
 
       Swal.fire({
         icon: 'success',
@@ -168,6 +180,8 @@ function AnnotationTable() {
     const fetchVideo = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+        const video = response.data;
+        setData(video);
         const data = response.data[0].duration;  // Access the data property directly
         setDuration(data);
       } catch (error) {
@@ -178,7 +192,7 @@ function AnnotationTable() {
     fetchVideo();
   }, [videoId]);
   
-console.log(videoDuration)
+console.log(videoData)
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex z-10 '>
       <div className='fixed h-full hidden sm:flex flex-col'>
@@ -189,6 +203,27 @@ console.log(videoDuration)
         <div className='w-full mt-28'>
           <Videowithtext videoId={videoId}/>
         </div>
+        <div className='mt-4 flex bg-gray-300'>
+          
+        <div className=''>
+        {videoData[0] && videoData[0].message && videoData[0].message.length > 0 && category === "reannotation" && (
+          <div>
+          <div className='flex p-2'>
+            <p>Message from expert head: </p>
+            <p>{videoData[0].message[0].text}</p>
+
+            
+          </div>
+          <div className='justify-center mb-8 mt-10 text-sm font-semibold text-black center-l lg:w-[100%]'>
+            <h1>Annotation History</h1>
+              <RowHistory videoId={videoId}/>
+            </div>
+          </div>
+          
+
+        )}
+      </div>  
+      </div>
         <div className='px-3 h-full mb-8 mt-10 text-sm font-semibold text-black'>
           <div className='lg:flex-end'>
             <p className='text-lg'>Does this video violated advertising rules and regulations?</p>

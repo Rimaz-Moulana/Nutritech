@@ -284,6 +284,14 @@ const Sidebar = ({type}) => {
               >
                 Unannotated Videos
               </Link>
+              <Link
+                to="/reannotatevideos"
+                className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                onClick={() => handleItemClick(2)}
+              >
+                Reannotated Videos
+              </Link>
+              
             </div>
           )}
         </div>

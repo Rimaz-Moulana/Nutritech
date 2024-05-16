@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import axios here
 import Swal from 'sweetalert2';
 
-function Comments({ videoId, type }) {
+function Comments({ videoId, type,section }) {
   const [comment, setComment] = useState('');
   const [reply,setReply]=useState('');
   const [loading, setLoading] = useState(false);
   const email  = localStorage.getItem('email');
-  // console.log(videoId)
+  
   let text;
 
   const [userData, setUserData] = useState([]);
@@ -48,10 +48,14 @@ function Comments({ videoId, type }) {
         setLoading(true);
   
         const response = await axios.post(
+          section==="message" ? `http://localhost:3000/api/videos/message/${videoId}` :
+          
           userData.role==="expert head" ? `http://localhost:3000/api/videos/finalcomment/${videoId}` :
+
           type === "comment"
             ?
              `http://localhost:3000/api/videos/comment/${videoId}`
+             
             : `http://localhost:3000/api/videos/reply/${videoId}`,
           { comment, email }
         );
@@ -92,7 +96,7 @@ function Comments({ videoId, type }) {
           <textarea
             placeholder={`Type ${type}...`}
             className='w-1/2 ml-8 h-16 text-black'
-            required
+            // {type !== "message" && required}
             value={comment}
             onChange={handleCommentChange}
           />

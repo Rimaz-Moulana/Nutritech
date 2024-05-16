@@ -15,8 +15,25 @@ const [loading, setLoading] = useState(true);
 const [allProducts, setAllProducts] = useState([]);
 const [isLoading, setIsLoading] = useState(false); // Added loading state
 const [error, setError] = useState(null); // Added error state
+const [videoData, setVideoData] = useState([]);
+const [loading,setLoading] =useState(true);
+//   const [RuleData, setRuleData] = useState([]);
 
- 
+useEffect(() => {
+const fetchReviewDetails = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+    setVideoData(response.data.video);
+  } catch (error) {
+    console.error('Error fetching ReviewDetails:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+fetchReviewDetails();
+}, [videoId]);
+
   let text;
 
   useEffect(() => {
@@ -68,18 +85,17 @@ const [error, setError] = useState(null); // Added error state
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
       <Sidebar type="expert"/>
       </div>
-      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64 ">
-        <div className='px-12'>
+      <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
+       
         <Navbar type='annotator' />
-        </div>
-        <div className='flex justify-between z-9999 mt-24'>
         <VideowithReview Id={videoId} text={"experthistory"}/>
-        </div>
+      
         <div className='mt-12 ml-24'>
             <Annotations videoId={videoId} usertype={"expert"}/>
         </div>
-
+        {/* {!videoData.reannotations>0 && ( */}
         <ViewComment videoId={videoId} type={"comment"}/>
+        
         <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
  
         <button  onClick={handlePoductDetails(responseData.size,responseData.product,responseData.brand)}
