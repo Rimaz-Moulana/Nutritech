@@ -490,7 +490,8 @@ useEffect(() => {
   </div>
 )}
 
-  {text!=='experthistory' && (
+
+  {text!=='experthistory' && type!=="annotator"  && (
   <div className="flex items-center gap-2">
     <div className="md:w-2/3">
      
@@ -502,7 +503,7 @@ useEffect(() => {
   onClick={() => { buttonDisabled ? null : handleOpen(text,"red") }}
   // onClick={() => { /*Data.status!=="annotated" ? null :*/ handleOpen(text,"red") }}
 >
-{text === "expert" && (
+{text === "expert" && type!=="annotator"&& (
     <div className="flex items-center w-full">
       Red Flag
       <img src={red} className="h-4 w-4 ml-4" alt="" />
@@ -527,13 +528,13 @@ useEffect(() => {
   onClick={() => (text === "expert" ? (Data.status!=="annotated" ? null : handleOpen(text,"green")) : handlesave())}
   disabled={loading}
 >
-  {text === "expert" && (
+  {text === "expert" && type!=="annotator"&& (
     <div className="flex items-center w-full">
       Green Flag
       <img src={green} className="h-4 w-4 ml-4" alt="" />
     </div>
   )}
-  {text !== "expert" && (
+  {text !== "expert" && type!=="annotator" && (
     "Save"
   )}
 </button>
@@ -541,7 +542,7 @@ useEffect(() => {
 
     </div>
     <div className="md:w-2/3">
-    {text !== "expert" && (
+    {text !== "expert" && type!=="annotator"&&  (
       <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2" type="button"
        onClick={() => window.history.back()}>
         Cancel
