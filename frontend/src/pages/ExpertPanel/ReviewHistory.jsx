@@ -16,7 +16,7 @@ const [allProducts, setAllProducts] = useState([]);
 const [isLoading, setIsLoading] = useState(false); // Added loading state
 const [error, setError] = useState(null); // Added error state
 const [videoData, setVideoData] = useState([]);
-const [loading,setLoading] =useState(true);
+// const [loading,setLoading] =useState(true);
 //   const [RuleData, setRuleData] = useState([]);
 
 useEffect(() => {
