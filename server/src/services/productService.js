@@ -37,8 +37,21 @@ exports.getPendingProducts= async() => {
     return await Product.find({ status: 'pending' });
 }
 
-exports.getProductDetails = async(productName,brand,size,unit) =>{
-  return await Product.find({ productName:productName,brand:brand,size:size,unit:unit});
+exports.getDemo = async (size,product,brand) => {
+  try {
+
+    // Await the database query and handle errors
+    const products = await Product.find({size:size,product:product,brand:brand});
+
+    return products;
+  } catch (error) {
+    console.error('Error in getDemo:', error);
+    throw error; // Rethrow the error for the caller to handle
+  }
+}
+
+exports.getProductDetails = async(product,brand,size,unit) =>{
+  return await Product.find({ product:product,brand:brand,size:size,unit:unit});
 }
 
 exports.getDetails = async(productName,brand) =>{
