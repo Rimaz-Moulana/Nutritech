@@ -38,7 +38,8 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
   };
 
   const ViewAnnotate = (videoId) => {
-    navigate(`/annotationhistory/${videoId}`)
+    const user= type;
+    navigate(`/annotationhistory/${videoId}/${user}`)
   };
 const Viewvideohistory=(videoId) => {
   navigate(`/videohistory/${videoId}`)

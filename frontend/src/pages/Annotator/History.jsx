@@ -13,6 +13,12 @@ function History() {
   const [data, setData] = useState([]);
   let [isEnlarge, setEnlarge] = useState(true);
 
+  let {user}=useParams();
+
+  if(user==="annotated"){
+    user="annotator"
+  }
+
   useEffect(() => {
     const fetchAnnotations = async () => {
       try {
@@ -40,7 +46,7 @@ function History() {
   return (
     <div className='bg-backgroundGreen w-full lg:overflow-x-hidden min-w-screen flex min-h-screen sm:text-sm'> {/* Make the main container a flex column */}
       <div className="fixed hidden sm:flex flex-col">
-        <Sidebar type="annotator" onValueChange={handleValueChange}  />
+        <Sidebar type={user} onValueChange={handleValueChange}  />
       </div>
       <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}> {/* Make this div take up remaining vertical space */}
         <Navbar type='annotator' />

@@ -108,7 +108,7 @@ function App(){
               <Route path="/reviewvideo/:videoId" element={<ReviewVideos/>} />
               <Route path="/rules/:type" element={<Rules/>} />
               <Route path="/editrules" element={<EditRule/>} />
-              <Route path="/annotationhistory/:videoId" element={<AnnotationHistory/>} />
+              <Route path="/annotationhistory/:videoId/:user" element={<AnnotationHistory/>} />
 
 
               <Route path='/addnewproduct' element={<AddNewProduct />} />

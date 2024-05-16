@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react';
 import Comments from './Comments';
 import red from '../../assets/Images/redflag.png'
 import green from '../../assets/Images/greenflag.png'
+import { useParams } from 'react-router-dom';
 
 function ViewComment({ videoId, type }) {
   const [Data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const email  = localStorage.getItem('email');
+
+  const {user} = useParams();
 
   const [userData, setUserData] = useState([]);
   useEffect(() => {
@@ -330,7 +333,7 @@ function ViewComment({ videoId, type }) {
 
     return result;
   };
-  // console.log(Data)
+  console.log(user);
   return (
     <div className=' lg:w-3/4 p-3 font-semibold mx-auto text-center'>
       <h1 className='text-sidebarGreen text-2xl'>Comment section</h1>
@@ -341,13 +344,13 @@ function ViewComment({ videoId, type }) {
         <>
           {renderCommentsAndReplies()}
 
-          {((type !=="annotator" && !Data.finalcomment) || Data.reply.length>0 && type!="industry" && userData.role=="expert head")&& (
+          {((type !=="annotator" && !Data.finalcomment) ||(Data.reply.length>0 && type!="industry" && userData.role=="expert head"))&& (
           <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
             <Comments type={type} videoId={videoId} />
           </div>
           )}
 
-      {(type ==="industry" && Data.finalcomment && !Data.reply) && (
+      {((type ==="industry" || user==="industry") && Data.finalcomment && !Data.reply.length>0) && (
           <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
             <Comments type={"reply"} videoId={videoId} />
           </div>
