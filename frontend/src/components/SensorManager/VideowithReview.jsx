@@ -6,6 +6,8 @@ import red from '../../assets/Images/redflag.png'
 import green from '../../assets/Images/greenflag.png'
 
 function VideowithReview({Id,text,type}) {
+  console.log("Id",Id);
+
  const videoId = Id;
  const productId =Id;
  const email  = localStorage.getItem('email');
@@ -384,17 +386,15 @@ useEffect(() => {
   fetchProductDetails();
 }, [Data.product,Data.productName,Data.brand, text]);
 
-console.log(productData);
-  return (
-    
-    <div className='mt-12 lg:flex justify-between max-w-screen p-8'>
-         <div className='items-center p-4 bg-gray-300'>
-         
+  return ( 
+    <div className='container lg:flex justify-center max-w-screen gap-[15%]'>
+         <div className='property lg:flex lg:w-1/2 justify-center '> 
+         <div className="image lg:w-1/2">
             {(text === "video" || text==="expert" || text==="experthistory") && (
               <ReactPlayer
                 className='react-player'
                 url={handleurl(Data.videoPath)}
-                width='100%'
+                width='180%'
                 height='100%'
                 controls={true}
               />
@@ -415,21 +415,21 @@ console.log(productData);
               />
             ) */}
        
-
+       </div>
         </div> 
-      <div className='p-4 mt-8'>
-        <form className="w-full max-w-sm">
-  <div className="md:flex md:items-center mb-6">
+      <div className='justify-center items-center lg:w-1/2 pt-5'>
+        <form className="w-full max-w-sm ">
+  <div className="md:flex md:items-center mb-4">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Brand Name
       </label>
     </div>
     <div className="md:w-2/3">
-      <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.brand}</div>
+      <div className="shadow font-semibold text-center bg-white appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.brand}</div>
     </div>
   </div>
-  <div className="md:flex md:items-center mb-6">
+  <div className="md:flex md:items-center mb-4">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Product
@@ -437,26 +437,26 @@ console.log(productData);
     </div>
     <div className="md:w-2/3">
       {(text==="video" || text==="expert" || text==='experthistory') && (
-        <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.product}</div> 
+        <div className="shadow font-semibold text-center bg-white appearance-none border-2  rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.product}</div> 
       )}
       {text==="product" && (
-        <div className="shadow font-semibold text-center bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.productName}</div> 
+        <div className="shadow font-semibold text-center bg-white appearance-none border-2  rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.productName}</div> 
       )}
       </div>
   </div>
-  <div className="md:flex md:items-center mb-6">
+  <div className="md:flex md:items-center mb-4">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Size
       </label>
     </div>
     <div className="md:w-2/3">
-      <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.count}{Data.size}</div>
+      <div className="shadow bg-white appearance-none border-2  rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >80g</div>
     </div>
   </div>
 
   {Data.finalflag && Data.finalflag.length !== 0 && (
-  <div className="md:flex md:items-center mb-6">
+  <div className="md:flex md:items-center mb-4">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Flag
@@ -464,12 +464,12 @@ console.log(productData);
     </div>
     <div className="md:w-2/3 items-center">
       {Data.finalflag[0].status === "red" && (
-        <div className="flex items-center w-full shadow bg-white appearance-none border-2 border-darkGreen rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >
+        <div className="flex items-center w-full shadow bg-white appearance-none border-2  py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >
           {Data.finalflag[0].status} <img src={red} className="h-8 w-8 ml-4" alt="" />
         </div>
       )}
        {Data.finalflag[0].status === "green" && (
-        <div className="flex items-center w-full shadow bg-white appearance-none border-2 border-darkGreen rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >
+        <div className="flex items-center w-full shadow bg-white appearance-none border-2  rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >
           {Data.finalflag[0].status} <img src={green} className="h-8 w-8 ml-4" alt="" />
         </div>
       )}
@@ -478,27 +478,26 @@ console.log(productData);
 )}
 
 {productData && productData.length > 0 && productData[0].healthfact && (
-  <div className="md:flex md:items-center mb-6">
+  <div className="md:flex md:items-center mb-4">
     <div className="md:w-1/3">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Status
       </label>
     </div>
     <div className="md:w-2/3">
-      <div className="shadow bg-white appearance-none border-2 border-darkGreen rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{productData[0].healthfact}</div>
+      <div className="shadow bg-white appearance-none border-2  rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{productData[0].healthfact}</div>
     </div>
   </div>
 )}
 
   {text!=='experthistory' && (
   <div className="flex items-center gap-2">
-    <div className="md:w-1/3"></div>
     <div className="md:w-2/3">
      
     <button
   className={`text-white flex ${
     buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
-  } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2`}
+  } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
   type="button"
   onClick={() => { buttonDisabled ? null : handleOpen(text,"red") }}
   // onClick={() => { /*Data.status!=="annotated" ? null :*/ handleOpen(text,"red") }}
@@ -517,12 +516,12 @@ console.log(productData);
       
       
     </div>
-    <div className="md:w-1/3"></div>
+  
     <div className="w-full md:w-2/3">
     <button
   className={`text-white flex ${
     buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
-  } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2`}
+  } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2`}
   type="button"
   // onClick={() => (text === "expert" ? (buttonDisabled ? null : handleOpen(text,"green")) : handlesave())}
   onClick={() => (text === "expert" ? (Data.status!=="annotated" ? null : handleOpen(text,"green")) : handlesave())}
@@ -541,11 +540,9 @@ console.log(productData);
 
 
     </div>
-    
-    <div className="md:w-1/3"></div>
     <div className="md:w-2/3">
     {text !== "expert" && (
-      <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " type="button"
+      <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2" type="button"
        onClick={() => window.history.back()}>
         Cancel
       </button>

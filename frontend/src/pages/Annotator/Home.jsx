@@ -13,6 +13,7 @@ function Home() {
   const [annotatedVideoData, setAnnotatedVideoData]= useState([]);
   const [unannotatedVideoData, setUnannotatedVideoData]= useState([]);
   const [reannotateVideoData, setreannotateVideoData]=useState([]);
+  let [isEnlarge, setEnlarge] = useState(true);
   
 
   const user = localStorage.getItem('email');
@@ -139,36 +140,61 @@ const allvideos = videoData.length;
 const annotatedvideos=annotatedVideoData.length;
 const unannotatedvideos =unannotatedVideoData.length;
 const reannotatedvideos= reannotateVideoData.length;
+// const navigate = useNavigate();
+
+
+  const handlepath = (type) =>{
+    console.log(type);
+    if(type=="All Videos"){
+      navigate('/all');
+    }else if(type=="Annotated Videos"){
+      navigate('/annotated-videos');
+    }else if(type=="Unannotated Videos"){
+      navigate('/unannotated-videos');
+    }else if(type=="Videos for Reannotation"){
+      navigate('/reannotatevideos');
+    }
+  }
+
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
+
+ 
 
   return (
-    <div className='bg-backgroundGreen w-full lg:overflow-x-hidden min-w-screen flex min-h-screen sm:text-sm'>
+    <div  className={`bg-backgroundGreen w-full lg:overflow-x-hidden min-w-screen flex min-h-screen sm:text-sm `}>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar type="annotator"/>
+        <Sidebar type="annotator" onValueChange={handleValueChange} />
       </div>
-      <div className="w-full mb-10 min-w-screen center-l lg:w-[85%] md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col">
+      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <div className=''>
         <Navbar type='annotator' />
         </div>
-        <div className='p-8'>
-        <div className='flex justify-between z-9999 mt-8 min-w-screen'>
-        
-        
+        <div className='lg:pr-8 lg:pt-8 flex justify-center items-center h-full '>
+          <div className='flex flex-col items-center'>
+        <div className="mt-12 grid grid-cols-2 gap-4 p-8">
+        <div>
+        <HomeSwiper count={allvideos} type={"All Videos"} handlepath={() => handlepath("All Videos")} />
         </div>
-        <div class="grid grid-cols-4 gap-4">
-          <div>
-          <HomeSwiper count={allvideos} type={"All Videos"}/>
-          </div>
-          <div>
-          <HomeSwiper count={annotatedvideos} type={"Annotated Videos"}/>
-          </div>
-          <div>
-          <HomeSwiper count={unannotatedvideos} type={"Unannotated Videos"}/>
-          </div>
-          <div>
-          <HomeSwiper count={reannotatedvideos} type={"Videos for Reannotation"}/>
-          </div>
+        <div>
+          <HomeSwiper count={annotatedvideos} type={"Annotated Videos"} handlepath={()=>handlepath("Annotated Videos")} />
+        </div>
+        <div>
+          <HomeSwiper count={unannotatedvideos} type={"Unannotated Videos"} handlepath={()=>handlepath("Unannotated Videos")} />
+        </div>
+        <div>
+          <HomeSwiper count={reannotatedvideos} type={"Videos for Reannotation"} handlepath={()=>handlepath("Videos for Reannotation")} />
+        </div>
+      </div>
         
         </div> 
+        </div>
         </div>
       
         {/* <div className='flex mt-8 justify-between'>
@@ -180,7 +206,7 @@ const reannotatedvideos= reannotateVideoData.length;
         
       </div>
       
-      </div>
+      
       
    
 

@@ -1,11 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Comments from './Comments';
+import red from '../../assets/Images/redflag.png'
+import green from '../../assets/Images/greenflag.png'
+import { useParams } from 'react-router-dom';
 
 function ViewComment({ videoId, type }) {
   const [Data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const email  = localStorage.getItem('email');
+
+  const {user} = useParams();
 
   const [userData, setUserData] = useState([]);
   useEffect(() => {
@@ -47,19 +52,40 @@ function ViewComment({ videoId, type }) {
             {/* {console.log(Data.reply[i][j].text)} */}
     
             <p className='text-gray-600'>{Data.finalcomment[0].commenter}</p>
-            {Data.finalcomment[0].text}
+             <p className='text-gray-600 text-sm'>Final Comment :</p> 
+             {Data.finalcomment[0].text}
+
+            {Data.finalflag[0].status==="green" && (
+              <>
+              <p className='text-gray-600 text-sm'>Status :</p>
+              <div className='flex'>
+                <p>Green</p>
+                <p className='text-sm text-gray-600'>(Verified)</p>
+                <img src={green} className="h-8 w-8 ml-4" alt="" />
+                
+              </div>
+              </>
+            )}
+            {Data.finalflag[0].status==="red" && (
+              <>
+              <p className='text-gray-600 text-sm'>Status :</p>
+              <div className='flex'>
+                <p>Red</p>
+                <img src={red} className="h-8 w-8 ml-4" alt="" />
+              </div>
+              </>
+            )}
+            
             {/* {console.log(Data.reply[i][j].text)} */}
             <div className='flex space-x-8 text-sm mt-4'>
-              <p>{Data.finalflag[0].status}</p>
-              <p>{Data.finalcomment[0].replieddate}</p>
-              <p>{Data.finalcomment[0].repliedtime}</p>
+              
+              <p>{Data.finalcomment[0].commenteddate}</p>
+              <p>{Data.finalcomment[0].commentedtime}</p>
             </div>
           </div>
         );
       }
     }
-
-  
 
     if (userData && userData.role && userData.role=="expert head" && type!=="Industry" && type!=="annotator") {
       // Interleave comments and replies
@@ -68,11 +94,8 @@ function ViewComment({ videoId, type }) {
         let status='';
       // console.log(Data.panelstatus.lrngth);
       for(let j=0;j<Data.panelstatus.length;j++){
-        console.log(Data.comment[i].commenter);
-        console.log(Data.panelstatus[j].email);
         if(Data.comment[i].commenter==Data.panelstatus[j].email){
           status=Data.panelstatus[j].status;
-          console.log("status :",status);
         }
       }
         result.push(
@@ -80,12 +103,31 @@ function ViewComment({ videoId, type }) {
             {/* {Data.comment[i] && Data.comment[i].commenter && ( */}
               <>
             <p className='text-gray-600'>{Data.comment[i].commenter}</p>
+            <p className='text-gray-600 text-sm'>Comment :</p>
             {Data.comment[i].text}
 
-            {status && (<p className='text-yellow-800'>
-              Flag: {status}
-            </p>)}
-            {console.log(Data.comment[i].text)}
+            {status && status==="green" && (
+             <>
+             <p className='text-gray-600 text-sm'>Status :</p>
+             <div className='flex'>
+               <p>Green</p>
+               <p className='text-sm text-gray-600'>(Verified)</p>
+               <img src={green} className="h-8 w-8 ml-4" alt="" />
+               
+             </div>
+             </>
+          )}
+
+        {status && status==="red" && (
+          <>
+          <p className='text-gray-600 text-sm'>Status :</p>
+             <div className='flex'>
+             <p>Red</p>
+             <img src={red} className="h-8 w-8 ml-4" alt="" />
+           </div>
+           </>
+          )}
+            
             <div className='flex space-x-8 text-sm mt-4'>
               <p>{Data.comment[i].commenteddate}</p>
               <p>{Data.comment[i].commentedtime}</p>
@@ -100,9 +142,10 @@ function ViewComment({ videoId, type }) {
           // Rendering replies
           for (let j = 0; j < Data.reply[i].length; j++) {
               result.push(
-                  <div key={`reply-${i}-${j}`} className='bg-gray-300 text-black mt-4 p-3 text-xl text-left'>
+                  <div key={`reply-${i}-${j}`} className='bg-gray-200 text-black mt-4 p-3 text-xl text-left'>
                       {/* {console.log(Data.reply[i][j].text)} */}
                       <p className='text-gray-600'>{Data.reply[i][j].replyer}</p>
+                      <p className='text-gray-600 text-sm'>Reply :</p> 
                       {Data.reply[i][j].text}
                       {/* {console.log(Data.reply[i][j].text)} */}
                       <div className='flex space-x-8 text-sm mt-4'>
@@ -123,15 +166,33 @@ function ViewComment({ videoId, type }) {
             {/* {console.log(Data.reply[i][j].text)} */}
     
             <p className='text-gray-600'>{Data.finalcomment[0].commenter}</p>
-            {Data.finalcomment[0].text}
+            <p className='text-gray-600 text-sm'>Final Comment :</p> 
+             {Data.finalcomment[0].text}
             {/* {console.log(Data.reply[i][j].text)} */}
-            <div className='flex space-x-8 text-sm mt-4'>
-            {(Data.finalflag && Data.finalflag.length>0) && (
-               <p className='text-yellow-800'>
-               Flag: {Data.finalflag[0].status}
-             </p>
+            {/* <div className='flex space-x-8 text-sm mt-4'> */}
+            {(Data.finalflag && Data.finalflag.length>0 && Data.finalflag[0].status==="green") && (
+                <>
+                <p className='text-gray-600 text-sm'>Status :</p>
+                <div className='flex'>
+                  <p>Green</p>
+                  <p className='text-sm text-gray-600'>(Verified)</p>
+                  <img src={green} className="h-8 w-8 ml-4" alt="" />
+                  
+                </div>
+                </>
              
             ) }
+
+            {(Data.finalflag && Data.finalflag.length>0 && Data.finalflag[0].status==="red") && (
+              <>
+              <p className='text-gray-600 text-sm'>Status :</p>
+                  <div className='flex'>
+                  <p>Red</p>
+                  <img src={red} className="h-8 w-8 ml-4" alt="" />
+                </div>
+              </>
+            )}
+            <div className='flex space-x-8 text-sm mt-4'>
               <p>{Data.finalcomment[0].commenteddate}</p>
               <p>{Data.finalcomment[0].commentedtime}</p>
             </div>
@@ -164,10 +225,32 @@ function ViewComment({ videoId, type }) {
             {/* {Data.comment[usercommetIndex] && Data.comment[usercommetIndex].commenter && ( */}
               <>
             <p className='text-gray-600'>{Data.comment[usercommetIndex].commenter}</p> 
+            <p className='text-gray-600 text-sm'>Comment :</p> 
             {Data.comment[usercommetIndex].text}
-             <p className='text-yellow-800'>
-              Flag: {status}
-            </p>
+            
+            {status && status==="green" && (
+             <>
+             <p className='text-gray-600 text-sm'>Status :</p>
+             <div className='flex'>
+               <p>Green</p>
+               <p className='text-sm text-gray-600'>(Verified)</p>
+               <img src={green} className="h-8 w-8 ml-4" alt="" />
+               
+             </div>
+             </>
+          )}
+
+        {status && status==="red" && (
+          <>
+
+          <p className='text-gray-600 text-sm'>Status :</p>
+             <div className='flex'>
+             <p>Red</p>
+             <img src={red} className="h-8 w-8 ml-4" alt="" />
+           </div>
+
+           </>
+          )}
             
             <div className='flex space-x-8 text-sm mt-4'>
               <p>{Data.comment[usercommetIndex].commenteddate}</p>
@@ -184,13 +267,32 @@ function ViewComment({ videoId, type }) {
             {/* {Data.finalcomment[0] && Data.finalcomment[0].commenter && ( */}
               <>
             <p className='text-gray-600'>{Data.finalcomment[0].commenter}</p>
-            {Data.finalcomment[0].text}
-            {(Data.finalflag && Data.finalflag.length>0) && (
-               <p className='text-yellow-800'>
-               Flag: {Data.finalflag[0].status}
-             </p>
+            <p className='text-gray-600 text-sm'>Final Comment :</p> 
+             {Data.finalcomment[0].text}
+            {/* {console.log(Data.reply[i][j].text)} */}
+            {/* <div className='flex space-x-8 text-sm mt-4'> */}
+            {(Data.finalflag && Data.finalflag.length>0 && Data.finalflag[0].status==="green") && (
+                <>
+                <p className='text-gray-600 text-sm'>Status :</p>
+                <div className='flex'>
+                  <p>Green</p>
+                  <p className='text-sm text-gray-600'>(Verified)</p>
+                  <img src={green} className="h-8 w-8 ml-4" alt="" />
+                  
+                </div>
+                </>
              
             ) }
+
+            {(Data.finalflag && Data.finalflag.length>0 && Data.finalflag[0].status==="red") && (
+              <>
+              <p className='text-gray-600 text-sm'>Status :</p>
+                  <div className='flex'>
+                  <p>Red</p>
+                  <img src={red} className="h-8 w-8 ml-4" alt="" />
+                </div>
+              </>
+            )}
             
             <div className='flex space-x-8 text-sm mt-4'>
               <p>{Data.finalcomment[0].commenteddate}</p>
@@ -210,10 +312,11 @@ function ViewComment({ videoId, type }) {
           // for (let j = 0; j < Data.reply.length; j++) {
             
             result.push(
-              <div key={`reply-${i}`} className='bg-gray-300 text-black mt-4 p-3 text-xl text-left'>
+              <div key={`reply-${i}`} className='bg-gray-200 text-black mt-4 p-3 text-xl text-left'>
                 {/* {console.log(Data.reply[i][j].text)} */}
         
                 <p className='text-gray-600'>{Data.reply[i].replyer}</p>
+                <p className='text-gray-600 text-sm'>Reply :</p> 
                 {Data.reply[i].text}
                 {/* {console.log(Data.reply[i][j].text)} */}
                 <div className='flex space-x-8 text-sm mt-4'>
@@ -230,10 +333,10 @@ function ViewComment({ videoId, type }) {
 
     return result;
   };
-  // console.log(Data)
+  console.log(user);
   return (
     <div className=' lg:w-3/4 p-3 font-semibold mx-auto text-center'>
-      <h1 className='text-sidebarGreen text-3xl'>Comment section</h1>
+      <h1 className='text-sidebarGreen text-2xl'>Comment section</h1>
 
       {loading ? (
         <div>Loading...</div>
@@ -241,13 +344,13 @@ function ViewComment({ videoId, type }) {
         <>
           {renderCommentsAndReplies()}
 
-          {((type !=="annotator" && !Data.finalcomment) || Data.reply.length>0 && type!="industry" && userData.role=="expert head")&& (
+          {((type !=="annotator" && !Data.finalcomment) ||(Data.reply.length>0 && type!="industry" && userData.role=="expert head"))&& (
           <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
             <Comments type={type} videoId={videoId} />
           </div>
           )}
 
-      {(type ==="industry" && Data.finalcomment && !Data.reply) && (
+      {((type ==="industry" || user==="industry") && Data.finalcomment && !Data.reply.length>0) && (
           <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
             <Comments type={"reply"} videoId={videoId} />
           </div>

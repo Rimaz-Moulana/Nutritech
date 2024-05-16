@@ -6,6 +6,7 @@ import Sidebar from '../../components/sidebar/SideBar';
 
 function Unannotatedvideos() {
   const [unannotatedVideoData, setUnannotatedVideoData] = useState([]);
+  let [isEnlarge, setEnlarge] = useState(true);
 
   const [isChecked, setIsChecked] = useState(() => {
     return JSON.parse(localStorage.getItem('isChecked')) || false;
@@ -35,15 +36,25 @@ function Unannotatedvideos() {
     fetchUnannotatedVideos();
   }, []);
 
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
+  
+
   return (
-    <div className='bg-backgroundGreen lg:overflow-x-hidden flex h-full min-h-screen w-full justify-between pr-3'>
+    <div className='bg-backgroundGreen w-full lg:overflow-x-hidden min-w-screen flex min-h-screen sm:text-sm'>
       <div className="fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar type="annotator"/>
+        <Sidebar type="annotator" onValueChange={handleValueChange}/>
       </div>
-      <div className="w-full sm:w-3/4 ml-0 h-full sm:ml-64">
+      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='annotator'/>
-        <div className='flex justify-between'>
-        <h1 className=' mb-8 mt-32 lg:text-3xl sm:text-xl font-semibold text-sidebarGreen pl-3'>
+        <div className='pr-8 flex justify-between'>
+        <h1 className=' p-2 mb-8 mt-32 lg:text-3xl sm:text-xl font-semibold text-sidebarGreen pl-3'>
            Unannotated Videos
         </h1>
         {/* <GridListView type="annotated" videoData={annotatedVideoData}/> */}

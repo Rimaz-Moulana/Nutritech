@@ -11,6 +11,7 @@ import Sidebar from '../../components/sidebar/SideBar';
 function NewVideos() {
 
   const [videoData, setVideoData] = useState([]);
+  let [isEnlarge, setEnlarge] = useState(true);
   const [Data, setData] = useState([]);
   const [isChecked, setIsChecked] = useState(() => {
     return JSON.parse(localStorage.getItem('isChecked')) || false;
@@ -31,13 +32,9 @@ function NewVideos() {
       try {
         const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
         const data = await response.json();
-  
-        // Filter out videos where the commenter's email doesn't match the user's email
         const filteredData = data.filter(video => {
           return !video.comment.some(comment => comment.commenter === email);
         });
-  
-        // Update the state with the filtered data
         setVideoData(data);
         setData(filteredData);
       } catch (error) {
@@ -48,16 +45,22 @@ function NewVideos() {
     fetchData();
   }, [email]); // Add email to the dependency array to re-fetch data when email changes
   
-console.log("Data",Data);
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
+
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-      <Sidebar type="expert"/>
+      <Sidebar type="expert" onValueChange={handleValueChange}/>
       </div>
-      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64 ">
-        <div className='px-12'>
-        <Navbar type='annotator' />
-        </div>
+      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
+        <Navbar type='expert' />
         <div className='flex justify-between z-9999 mt-12'>
         <h1 className='ml-24 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
            New Videos

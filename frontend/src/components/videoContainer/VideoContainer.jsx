@@ -38,7 +38,8 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
   };
 
   const ViewAnnotate = (videoId) => {
-    navigate(`/annotationhistory/${videoId}`)
+    const user= type;
+    navigate(`/annotationhistory/${videoId}/${user}`)
   };
 const Viewvideohistory=(videoId) => {
   navigate(`/videohistory/${videoId}`)
@@ -104,10 +105,10 @@ const filteredVideos = videoData?.filter((video) => {
     <div className='w-full ml-auto pr-2 pl-2'> 
     {viewType=== 'Grid'  &&(
       <div className='sm:w-auto right-0'>
-        <div className=' items-end'>
+        <div className=''>
       {type !== "industry" && (
         <>
-            <select className='bg-white text-xs p-1 items-end mt-2 mb-2 rounded w-[25%]'
+            <select className='bg-white mt-2 ml-4 p-1 mb-2 rounded w-[75%] items-end sm:w-auto'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
@@ -152,7 +153,7 @@ const filteredVideos = videoData?.filter((video) => {
       )}
     </div>
       
-    <div className="grid h-full h-min-screen grid-cols-2 md:grid-cols-4 gap-6 p-4 mt-8 mr-5 mb-8 bg-backgroundGreen">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 mt-8 mr-5 mb-8 bg-backgroundGreen">
       {filteredVideos.map((video, index) => (
         <div key={index} className='relative'>
           <div className=''>
@@ -305,11 +306,11 @@ const filteredVideos = videoData?.filter((video) => {
   )}
 
  {viewType==="List" && (
-   <div className='h-full mt-4 text-black w-full min-w-screen'>
-    <div className='items-end'>
+   <div className=' text-black w-full min-w-screen'>
+    <div className=''>
     {type !== "industry" && (
       <>
-    <select className='bg-white p-1 items-end mt-2 mb-2 rounded'
+    <select className='bg-white mt-2 ml-4 p-1 mb-2 rounded items-end w-[75%] sm:w-auto'
                 value={productFilter}
                 onChange={(e) => setProductFilter(e.target.value)}
               >
@@ -353,7 +354,7 @@ const filteredVideos = videoData?.filter((video) => {
            </>
     )}
     </div>
-    <div className='h-full mt-4 overflow-x-auto xl:overflow-hidden text-black place-items-center pr-4'> 
+    <div className='h-full mt-4 overflow-x-auto xl:overflow-hidden text-black place-items-center pr-4 p-4 mr-5 mb-8 bg-backgroundGreen'> 
    <table className='h-full mt-8 w-full'>
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>
@@ -432,7 +433,7 @@ const filteredVideos = videoData?.filter((video) => {
              >View History</button>
              )}
 
-            {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type==="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertnew" && type!=="history" && type!=="expertreviewed" (
+            {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type==="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertnew" && type!=="history" && type!=="expertreviewed" &&(
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => ViewHistory(video._id)}

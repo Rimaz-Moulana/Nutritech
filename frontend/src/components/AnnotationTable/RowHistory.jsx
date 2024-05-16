@@ -61,126 +61,137 @@ function RowHistory({ videoId, usertype }) {
   };
   console.log(videoData);
   return (
-    <div className='ml-0 text-gray-500 item-center'>
-      {usertype !== "industry" && (
-        <>
-          <h1>Annotations</h1>
-          <table className="w-full bg-white border rounded lg:w-[100%]">
-            <thead>
-              <tr>
-                <th className="border border-gray-300">Time Stamp</th>
-                <th className="border border-gray-300">Regulation</th>
-                <th className="border border-gray-300">Details</th>
-                <th className="border border-gray-300">Recommendation</th>
+    <div className="text-gray-500 item-center">
+  {usertype !== "industry" && (
+    <div className="container">
+      {/* <h1 className="text-center">Annotations</h1> */}
+      <div className="table-responsive">
+        <table className="w-full table table-bordered">
+          <thead className="bg-gray-200">
+            <tr>
+              <th>Time Stamp</th>
+              <th>Regulation</th>
+              <th>Details</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {annotations.map((annotation, index) => (
+              <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+                {annotation.rule !== "" && (
+                  <>
+                    <td>{annotation.timestamp}</td>
+                    <td>{annotation.rule}</td>
+                    <td>{annotation.details}</td>
+                    <td>{annotation.recommendation}</td>
+                  </>
+                )}
               </tr>
-            </thead>
-            <tbody>
-              {annotations.map((annotation, index) => (
-                <React.Fragment key={`annotation_${index}`}>
-                  {annotation.rule !== "" && (
-                    <tr>
-                      <td className="border border-gray-300 p-2">{annotation.timestamp}</td>
-                      <td className="border border-gray-300 text-start p-2">{annotation.rule}</td>
-                      <td className="border border-gray-300 text-left p-2">{annotation.details}</td>
-                      <td className="border border-gray-300 text-left p-2">{annotation.recommendation}</td>
-                    </tr>
-                  )}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-          {videoData && videoData[0]?.reannotations && videoData[0].reannotations.map((annotation, index) => (
-            <React.Fragment key={`reannotation_${index}`}>
-              <h2>Annotations after Reannotation</h2>
-              <table className="w-full bg-white border rounded lg:w-[100%]">
-                <thead>
-                  <tr>
-                    <th className="border border-gray-300">Time Stamp</th>
-                    <th className="border border-gray-300">Regulation</th>
-                    <th className="border border-gray-300">Details</th>
-                    <th className="border border-gray-300">Recommendation</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <React.Fragment>
-                    {annotation.rule !== "" && (
-                      <tr key={`reannotation_row_${index}`}>
-                        <td className="border border-gray-300 p-2">{annotation.timestamp}</td>
-                        <td className="border border-gray-300 text-start p-2">{annotation.rule}</td>
-                        <td className="border border-gray-300 text-left p-2">{annotation.details}</td>
-                        <td className="border border-gray-300 text-left p-2">{annotation.recommendation}</td>
-                      </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {videoData && videoData[0]?.reannotations && videoData[0].reannotations.length > 0 && (
+        <>
+          <h2 className="text-center">Annotations after Reannotation</h2>
+          <div className="table-responsive">
+            <table className="w-full table table-bordered">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th>Time Stamp</th>
+                  <th>Regulation</th>
+                  <th>Details</th>
+                  <th>Recommendation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {videoData[0].reannotations.map((reannotation, index) => (
+                  <tr key={`reannotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+                    {reannotation.rule !== "" && (
+                      <>
+                        <td>{reannotation.timestamp}</td>
+                        <td>{reannotation.rule}</td>
+                        <td>{reannotation.details}</td>
+                        <td>{reannotation.recommendation}</td>
+                      </>
                     )}
-                  </React.Fragment>
-                </tbody>
-              </table>
-            </React.Fragment>
-          ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </>
       )}
-
-      
-      {(usertype === "industry" && videoData && videoData.length > 0 && !videoData[0].reannotations) && (
-        <div className='ml-0 text-gray-500 item-center'>
-          <h1>Annotations</h1>
-          <table className="w-full bg-white border rounded lg:w-[100%]">
-            <thead>
-              <tr>
-                <th className="border border-gray-300">Time Stamp</th>
-                <th className="border border-gray-300">Regulation</th>
-                <th className="border border-gray-300">Details</th>
-                <th className="border border-gray-300">Recommendation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {annotations.map((annotation, index) => (
-                <React.Fragment key={`annotation_${index}`}>
-                  {annotation.rule !== "" && (
-                    <tr>
-                      <td className="border border-gray-300 p-2">{annotation.timestamp}</td>
-                      <td className="border border-gray-300 text-start p-2">{annotation.rule}</td>
-                      <td className="border border-gray-300 text-left p-2">{annotation.details}</td>
-                      <td className="border border-gray-300 text-left p-2">{annotation.recommendation}</td>
-                    </tr>
-                  )}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-{(usertype === "industry" && videoData && videoData[0]?.reannotations && videoData[0]?.reannotations.length > 0) && (
-        <React.Fragment>
-          <h2>Annotations</h2>
-          <table className="w-full bg-white border rounded lg:w-[100%]">
-            <thead>
-              <tr>
-                <th className="border border-gray-300">Time Stamp</th>
-                <th className="border border-gray-300">Regulation</th>
-                <th className="border border-gray-300">Details</th>
-                <th className="border border-gray-300">Recommendation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {videoData[0].reannotations.map((reannotation, index) => (
-                <React.Fragment key={`reannotation_${index}`}>
-                  {reannotation.rule !== "" && (
-                    <tr key={`reannotation_row_${index}`}>
-                      <td className="border border-gray-300 p-2">{reannotation.timestamp}</td>
-                      <td className="border border-gray-300 text-start p-2">{reannotation.rule}</td>
-                      <td className="border border-gray-300 text-left p-2">{reannotation.details}</td>
-                      <td className="border border-gray-300 text-left p-2">{reannotation.recommendation}</td>
-                    </tr>
-                  )}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </React.Fragment>
-      )}
-
     </div>
+  )}
+
+  {usertype === "industry" && videoData && (
+    <div className="container">
+      <h1 className="text-center">Annotations</h1>
+      <div className="table-responsive">
+        <table className="w-full table table-bordered">
+          <thead className="bg-gray-200">
+            <tr>
+              <th>Time Stamp</th>
+              <th>Regulation</th>
+              <th>Details</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {annotations.map((annotation, index) => (
+              <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+                {annotation.rule !== "" && (
+                  <>
+                    <td>{annotation.timestamp}</td>
+                    <td>{annotation.rule}</td>
+                    <td>{annotation.details}</td>
+                    <td>{annotation.recommendation}</td>
+                  </>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}
+
+  {usertype === "industry" && videoData && videoData[0]?.reannotations && videoData[0].reannotations.length > 0 && (
+    <div className="container">
+      <h2 className="text-center">Annotations</h2>
+      <div className="table-responsive">
+        <table className="w-full table table-bordered">
+          <thead className="bg-gray-200">
+            <tr>
+              <th>Time Stamp</th>
+              <th>Regulation</th>
+              <th>Details</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {videoData[0].reannotations.map((reannotation, index) => (
+              <tr key={`reannotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+                {reannotation.rule !== "" && (
+                  <>
+                    <td>{reannotation.timestamp}</td>
+                    <td>{reannotation.rule}</td>
+                    <td>{reannotation.details}</td>
+                    <td>{reannotation.recommendation}</td>
+                  </>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}
+</div>
+
+
+
   );
 }
 

@@ -11,6 +11,13 @@ import Sidebar from '../../components/sidebar/SideBar';
 function History() {
   const { videoId } = useParams();
   const [data, setData] = useState([]);
+  let [isEnlarge, setEnlarge] = useState(true);
+
+  let {user}=useParams();
+
+  if(user==="annotated"){
+    user="annotator"
+  }
 
   useEffect(() => {
     const fetchAnnotations = async () => {
@@ -27,22 +34,29 @@ function History() {
     fetchAnnotations();
   }, [videoId]);
 
-  console.log(data)
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
 
   return (
-    <div className='bg-backgroundGreen h-full min-h-screen flex flex-col'> {/* Make the main container a flex column */}
+    <div className='bg-backgroundGreen w-full lg:overflow-x-hidden min-w-screen flex min-h-screen sm:text-sm'> {/* Make the main container a flex column */}
       <div className="fixed hidden sm:flex flex-col">
-        <Sidebar type="annotator" />
+        <Sidebar type={user} onValueChange={handleValueChange}  />
       </div>
-      <div className="w-full lg:w-[75%] ml-0 sm:ml-64 flex-grow"> {/* Make this div take up remaining vertical space */}
+      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}> {/* Make this div take up remaining vertical space */}
         <Navbar type='annotator' />
-        <div className='w-full mt-28'>
+        <div className='max-w-screen mt-28'>
           <Videowithtext videoId={videoId}/>
         </div>
-        <h1 className='px-3 mb-8 mt-12 text-3xl font-semibold text-sidebarGreen text-left'>
+        <h1 className='px-3 mb-8 mt-12 text-2xl font-semibold text-sidebarGreen'>
                   Annotations
                 </h1>
-        <div className='px-3 mb-8 mt-10 text-sm font-semibold text-black center-l lg:w-[100%]'>
+        <div className='pr-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
         
           {/* Pass videoId and video to RowHistory */}
           <RowHistory videoId={videoId} />
