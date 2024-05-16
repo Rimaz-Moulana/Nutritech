@@ -9,11 +9,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Sidebar from '../../components/sidebar/SideBar';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
 
 function AnnotationTable() {
   const navigate = useNavigate();
   const { videoId } = useParams();
   const { category } = useParams();
+  let [isEnlarge, setEnlarge] = useState(true);
 
   const [isYesSelected, setIsYesSelected] = useState(true);
   const [videoDuration, setDuration] = useState([]);
@@ -192,43 +194,54 @@ function AnnotationTable() {
     fetchVideo();
   }, [videoId]);
   
-console.log(videoData)
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
+
+  console.log("videoData :",videoData)
+  
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex z-10 '>
       <div className='fixed h-full hidden sm:flex flex-col'>
-        <Sidebar type="annotator" />
+        <Sidebar type="annotator" onValueChange={handleValueChange} />
       </div>
-      <div className='w-full lg:ml-[15%] lg:w-[75%] h-full ml-0 flex-grow z-10 '>
+      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='annotator' />
-        <div className='w-full mt-28'>
-          <Videowithtext videoId={videoId}/>
+        <div className='w-full mt-[5%]'>
+        <VideowithReview Id={videoId} text={"video"} type={"annotator"}/>
         </div>
-        <div className='mt-4 flex bg-gray-300'>
+        <div className='mt-12 mr-8 bg-gray-300'>
           
         <div className=''>
         {videoData[0] && videoData[0].message && videoData[0].message.length > 0 && category === "reannotation" && (
           <div>
-          <div className='flex p-2'>
-            <p>Message from expert head: </p>
-            <p>{videoData[0].message[0].text}</p>
-
-            
-          </div>
-          <div className='justify-center mb-8 mt-10 text-sm font-semibold text-black center-l lg:w-[100%]'>
-            <h1>Annotation History</h1>
-              <RowHistory videoId={videoId}/>
-            </div>
+          <div className='p-2'>
+          <p className="text-sidebarGreen text-xl"><strong>Message from expert head</strong></p>
+            <p>{videoData[0].message[0].text}</p>  
           </div>
           
-
+          </div>
         )}
+     
       </div>  
+        {category === "reannotation" && (
+          <div className='w-full p-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
+          <h1 className='p-2'>Annotation History</h1>
+            <RowHistory videoId={videoId}/>
+        </div>
+        )}
+      
       </div>
-        <div className='px-3 h-full mb-8 mt-10 text-sm font-semibold text-black'>
+        <div className='px-3 h-full mt-10 text-sm font-semibold text-black mb-8'>
           <div className='lg:flex-end'>
-            <p className='text-lg'>Does this video violated advertising rules and regulations?</p>
+            <p className='text-lg mb-4'>Does this video violated advertising rules and regulations?</p>
             
-            <div className='flex place-content-center'>
+            <div className='flex place-content-center mb-12'>
               <button
                 className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
                   isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
@@ -249,7 +262,7 @@ console.log(videoData)
             {isYesSelected && (
               <>
                 {[...Array(rowCount)].map((_, index) => (
-                  <div key={index} className='center-l flex'>
+                  <div key={index} className='center-l'>
                     <Row duration={videoDuration}
                       rowData={rowsData[index] || {
                         timestamp: '',
@@ -266,7 +279,7 @@ console.log(videoData)
                     />
                     {addedrows.includes(index) && (
                       <button
-                        className='rounded-full justify-end h-12 w-12 ml-[5%] mt-[13%] '
+                        className='rounded-full h-12 w-12 mb-8 justify-end'
                         onClick={() => removeRow(index)}
                       >
                         <img className='mr-0 mt-0 h-12 w-12' src={minus} alt='Remove' />
@@ -276,39 +289,43 @@ console.log(videoData)
                 ))}
               </>
             )}
-          </div>
 
-          {isYesSelected && (
-            <div className='flex items-end justify-center mt-4 z-10 h-full'>
-              <div className='flex fixed right-12 bottom-20'>
+{isYesSelected && (
+            <div className='flex z-10 justify-center'>
+              {/* <div className='fixed right-12 bottom-20'> */}
+                
+              {/* </div> */}
+              {/* <div className='flex z-10 justify-center'> */}
                 <button
-                  className='rounded-full bg-gradient-to-r from-buttonGreen to-darkGreen hover:bg-gradient-to-br p-2 ml-[950px] mb-8'
-                  onClick={addRow}
-                >
-                  <img src={plus} alt='Add' />
-                </button>
-              </div>
-              <div className='flex z-10'>
-                <button
-                  className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 '
+                  className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2 '
                   onClick={submit}
                 >
                   Save
                 </button>
                 <button
-                  className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+                  className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2'
                   onClick={viewdetails}
                 >
                   View Product Details
                 </button>
 
-                <button className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                <button className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2"
                  onClick={() => window.history.back()}>
                   Cancel
                 </button>
-              </div>
+
+                <button
+                  className='rounded-full bg-gradient-to-r from-buttonGreen to-darkGreen hover:bg-gradient-to-br p-4 mb-2 ml-8'
+                  onClick={addRow}
+                >
+                  <img src={plus} alt='Add' />
+                </button>
+              {/* </div> */}
             </div>
           )}
+          </div>
+
+         
         </div>
       </div>
     </div>

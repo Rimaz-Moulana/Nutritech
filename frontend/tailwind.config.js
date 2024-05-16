@@ -13,7 +13,7 @@
   theme: {
     theme: {
       screens: {
-        'sm': '340px',
+        'sm': '360px',
         // => @media (min-width: 640px) { ... }
   
         'md': '568px',

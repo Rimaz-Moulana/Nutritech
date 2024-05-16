@@ -7,6 +7,7 @@ import Sidebar from '../../components/sidebar/SideBar';
 function Allvideos() {
   const navigate = useNavigate();
   const [videoData, setVideoData] = useState([]);
+  let [isEnlarge, setEnlarge] = useState(true);
   const [isChecked, setIsChecked] = useState(() => {
     return JSON.parse(localStorage.getItem('isChecked')) || false;
   });
@@ -64,17 +65,31 @@ function Allvideos() {
   fetchData();
 }, []); 
 
+const handleValueChange = (value) => {
+  console.log(value)
+  if(value==true){
+    setEnlarge(true);
+  }else{
+    setEnlarge(false);
+  }
+};
+
   // console.log(videoData)
 
   return (
-    <div className='bg-backgroundGreen lg:overflow-x-hidden flex h-full min-h-screen w-full justify-between pr-3'>
+    <div className='bg-backgroundGreen w-full lg:overflow-x-hidden min-w-screen flex min-h-screen sm:text-sm'>
       <div className="fixed h-full hidden sm:flex flex-col">
-        <Sidebar type="annotator" />
+        <Sidebar type="annotator" onValueChange={handleValueChange} />
       </div>
-      <div className="w-full h-full center-l  lg:ml-[15%] md:ml-[25%] px-3">
+      <div className={`w-full z-10 mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
+        <div>
+          
         <Navbar type='annotator' />
-        <div className='flex justify-between'>
-          <h1 className=' mb-8 mt-32 lg:text-3xl sm:text-xl font-semibold text-sidebarGreen pl-3'>
+        </div>
+        {/* <div className='pr-8 pt-8 flex justify-center items-center h-full'> */}
+          {/* <div className='flex flex-col items-center'> */}
+        <div className='pr-8 flex justify-between'>
+          <h1 className='mb-8 mt-32 lg:text-3xl sm:text-2xl p-2 font-semibold text-sidebarGreen'>
                   All Videos
                 </h1>
 <div className='pr-3'>
@@ -101,8 +116,9 @@ function Allvideos() {
           Grid View
         </span>
       </label>
-</div>
-     
+{/* </div> */}
+     {/* </div> */}
+     </div>
 </div>
         
 <VideoContainer 

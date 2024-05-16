@@ -9,9 +9,8 @@ const getCurrentDateTime = () => {
 
 const padZero = (num) => (num < 10 ? `0${num}` : num);
 
-
 exports.getAnnotatorAllVideos = async (req, res) => { 
-    return await VideoModel.find({ status: { $in: ['annotated', 'unannotated'] } });
+    return await VideoModel.find({ status: { $in: ['annotated', 'unannotated','red','green','reannotate'] } });
 };
 
 

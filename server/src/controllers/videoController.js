@@ -87,7 +87,7 @@ exports.getuploadhistory= async (req,res)=>{
 
 exports.addvideo = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
       const { brand, product, unit,size, category, createdIn, createdAt, duration } = req.body;
       const videoPath = req.file.path;
 

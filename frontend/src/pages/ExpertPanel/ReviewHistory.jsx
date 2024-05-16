@@ -9,6 +9,7 @@ import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewHistory() {
 const navigate= useNavigate();
+let [isEnlarge, setEnlarge] = useState(true);
 const {videoId} = useParams(); 
 const [responseData, setResponseData] = useState([]);
 const [loading, setLoading] = useState(true);
@@ -77,16 +78,24 @@ fetchReviewDetails();
   }
 
   console.log(allProducts)
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
  
   // console.log(Data)
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-      <Sidebar type="expert"/>
+      <Sidebar type="expert" onValueChange={handleValueChange}/>
       </div>
-      <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
+      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
        
-        <Navbar type='annotator' />
+        <Navbar type='expert' />
         <VideowithReview Id={videoId} text={"experthistory"}/>
       
         <div className='mt-12 ml-24'>

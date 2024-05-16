@@ -9,9 +9,13 @@ import Sidebar from '../../components/sidebar/SideBar';
 function Home() {
   const navigate= useNavigate();
   const [videoData, setVideoData] = useState([]);
-  // const [userData, setUserData] = useState([]);
+  const [newVideoData, setNewVideoData]= useState([]);
+  const [redVideoData, setRedVideoData]= useState([]);
+  const [greenVideoData, setGreenVideoData]=useState([]);
   const email  = localStorage.getItem('email');
   const [userData, setUserData] = useState([]);
+  let [isEnlarge, setEnlarge] = useState(true);
+
   useEffect(() => {
     const fetchUser = async () => {
        try {
@@ -28,13 +32,42 @@ function Home() {
     fetchUser();
 }, []);
 
-  const handleVideos = () =>{
-    console.log('button clicked')
-    navigate('/annotator/all')
-  }
-  const handleProducts = () =>{
-    navigate('/annotator/product');
-  }
+useEffect(() => {
+  const fetchData = async () => {
+     const response = await fetch('http://localhost:3000/api/videos/redflag');
+    const data = await response.json();
+    setRedVideoData(data);
+  };
+
+  fetchData();
+}, []); 
+
+
+useEffect(() => {
+  const fetchData = async () => {
+     const response = await fetch('http://localhost:3000/api/videos/greenflag');
+    const data = await response.json();
+    setGreenVideoData(data);
+  };
+
+  fetchData();
+}, []); 
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
+      const data = await response.json();
+      setNewVideoData(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+ 
 
   const [products, setProducts] = useState([]);
 
@@ -93,45 +126,60 @@ function Home() {
     }
   }
  
+  const newVideos = newVideoData.length;
+  const redVideos = redVideoData.length;
+  const greenVideos = greenVideoData.length;
+
+  const handlepath = (type) =>{
+    console.log(type);
+    if(type=="New Videos"){
+      navigate('/expertpanelnew');
+    }else if(type=="Red flag Videos"){
+      navigate('/red');
+    }else if(type=="Green flag Videos"){
+      navigate('/green');
+    }
+  }
+
+  const handleValueChange = (value) => {
+    // console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
+
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar type="expert"/>
+        <Sidebar type="expert" onValueChange={handleValueChange}/>
       </div>
-      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
+      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <div className='p-1'>
-        <Navbar />
+        <Navbar type={"expert"}/>
         </div>
         <div className='flex justify-between z-9999 mt-12'>
-        <h1 className='ml-8 mb-8 mt-12 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
-           Videos
-        </h1>
-        <button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleVideos}>All Videos</button>
         </div>
-        <HomeSwiper videoData={videoData}/>
-        <div className='flex mt-24 justify-between'>
-        <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
-        <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
+        <div className="mt-12 grid grid-cols-2 gap-4 p-8">
+        <div>
+        <HomeSwiper count={newVideos} type={"New Videos"}  handlepath={() => handlepath("New Videos")}/>
+        </div>
+
+        <div>
+        <HomeSwiper count={redVideos} type={"Red flag Videos"}  handlepath={() => handlepath("Red flag Videos")}/>
+        </div>
+
+        <div>
+        <HomeSwiper count={greenVideos} type={"Green flag videos"}  handlepath={() => handlepath("Green flag Videos")}/>
+        </div>
         </div>
         
-        <div className='flex'>
-
-        {/* <ProductTable data={products} /> */}
-        </div>
-        {/* <div className='mt-4 left-0'>
-        <ProductTable data={products} />
-        </div> */}
-        <div className='mt-4 left-0'>
-
-        <ProductTable data={products} />
-        </div>
-      </div>
-
-      </div>
+       
       
-    // </div>
+     </div>
 
-    // </div>
+     </div>
 
   );
 }
