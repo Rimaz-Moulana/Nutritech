@@ -1,14 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useNavigate } from 'react-router-dom';
 
-export default function LogTable(props) {
+export default function LogTable({Products}) {
   const navigate = useNavigate();
+  console.log(Products)
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
+  const [product, setProducts] = useState([]);
   const [selectedProductIndex, setSelectedProductIndex] = useState(null);
 
+  // setProducts(products);
   const openDetailsModal = (index) => {
     setSelectedProductIndex(index);
   };
@@ -17,20 +18,20 @@ export default function LogTable(props) {
     setSelectedProductIndex(null);
   };
 
-  useEffect(() => {
-    // Fetch data when the component mounts
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   // Fetch data when the component mounts
+  //   fetchData();
+  // }, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/api/product/getAll');
-      setProducts(response.data);
-      console.log(products);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get('http://localhost:3000/api/product/getall');
+  //     setProducts(response.data);
+  //     console.log(product);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
 
   const filterKeys = ['_id', 'createdTime', 'CreatedData', '__v'];
 
@@ -87,7 +88,7 @@ export default function LogTable(props) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((product, index) => (
+            {Products.map((product, index) => (
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
                   {product.productName}
@@ -114,8 +115,8 @@ export default function LogTable(props) {
                     className='fixed-bottom'
                     //src={require('E:/Nutritech/frontend/src/assets/videos/1711444464892-redflag.png')}
                     // src='frontend/src/assets/videos/1711444464892-blue.png'
-                    width='100%'
-                    height='100%'
+                    // width='100%'
+                    // height='100%'
                     // controls={true}
                     />
                    
@@ -123,9 +124,19 @@ export default function LogTable(props) {
                   {
                     <img 
                     className='fixed-bottom'
-                    src={handleurl(product.imageBack)}
-                    width='100%'
-                    height='100%'
+                    // src={handleurl(product.imageBack)}
+                    // width='100%'
+                    // height='100%'
+                    // // controls={true}
+                    />
+                   
+                  }
+                  {
+                    <img 
+                    className='fixed-bottom'
+                    // src={handleurl(product.imageLeft)}
+                    // width='100%'
+                    // height='100%'
                     // controls={true}
                     />
                    
@@ -133,22 +144,11 @@ export default function LogTable(props) {
                   {
                     <img 
                     className='fixed-bottom'
-                    src={handleurl(product.imageLeft)}
-                    width='100%'
-                    height='100%'
+                    // src={handleurl(product.imageRight)}
+                    // width='100%'
+                    // height='100%'
                     // controls={true}
                     />
-                   
-                  }
-                  {
-                    <img 
-                    className='fixed-bottom'
-                    src={handleurl(product.imageRight)}
-                    width='100%'
-                    height='100%'
-                    // controls={true}
-                    />
-                   
                   }
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
@@ -162,9 +162,9 @@ export default function LogTable(props) {
                     <button
                       className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2'
                       onClick={() => openDetailsModal(index)}>View Details</button>
-                    <button
+                    {/* <button
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-                      onClick={() => handleEdit(product._id)}>Edit</button>
+                      onClick={() => handleEdit(product._id)}>Edit</button> */}
                   </div>
                   {selectedProductIndex === index && (
                     <div className="modal absolute z-10 top-full bg-gray-50 rounded-sm shadow-lg p-1" style={{ top: 'calc(100% + 5px)', right: 0 }}>

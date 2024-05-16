@@ -63,7 +63,6 @@ import ReannotateVideos from './pages/Annotator/ReannotateVideos.jsx';
 
 
 
-
 import './App.css';
 
 
@@ -137,6 +136,8 @@ function App(){
               <Route path='/addUser' element={<AddUser />} />
               <Route path='/users' element={<AllUsers />} />
               <Route path='/reviewedvideos' element={<ReviewedVideos />} />
+
+              <Route path='/product/view/:size/:product/:brand/:unit' element={<ViewProductDetails />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

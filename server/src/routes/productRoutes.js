@@ -26,8 +26,11 @@ router.delete('/reviewproduct/:productId', productController.deleteProduct);
 router.post('/reviewproduct/:productId', productController.savePendingProduct );
 router.get('/sensormanagerproducts', productController.getAllPendingProducts);
 router.get('/similarproducts/:productId', productController.getAllSimilarProducts);
+router.get('/view/:product/:brand/:unit/:size', productController.getProductDetails);
+router.get('/view/:size/:product/:brand', productController.getDemo);
 router.get("/product/:productName/:brand/:size/:unit", productController.getProductDetails);
 router.get("/productdetails/:productName/:brand", productController.getDetailsOfProduct);
+
 
 module.exports = router;
 
