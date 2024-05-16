@@ -21,6 +21,7 @@ router.post('/industry/add', upload.single('video') , productController.addNewPr
 
 router.get('/all', videoController.getAllVideos);
 router.get('/annotated-videos', videoController.getAnnotatedVideos);
+router.get('/reannotate-videos', videoController.getReannotateVideos);
 router.get('/annotatedvideosExpert', videoController.getAnnotatedVideosForExperts);
 
 router.get('/unannotated-videos', videoController.getUnannotatedVideos);
@@ -33,6 +34,7 @@ router.get('/sensormanagerallvideos',videoController.getsensormanagernallvideos)
 router.post('/reviewvideo/:videoId', videoController.saveSensorManagerReview );
 router.delete('/reviewvideo/:videoId', videoController.deleteVideo);
 router.get('/annotation/:videoId', videoController.getAnnotatingVideo);
+
 // router.get('/reviewvideo/:videoId', videoController.handleReview ); // list the vieos where brand, product and variation are similar to video that is going to review
 router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );//get the video to review
 router.get('/brandproducts/:videoId', videoController.getSimilarAds );
@@ -43,6 +45,7 @@ router.post('/flag/:videoId', videoController.updateExpertFlagReview );
 router.get('/redflag', videoController.AllRedFlagVideos );
 router.get('/greenflag', videoController.AllGreenFlagVideos );
 router.post('/comment/:videoId', videoController.postExpertComment );
+router.post('/message/:videoId', videoController.postExpertMessage );
 router.post('/reply/:videoId', videoController.postIndustryReply );
 router.post('/finalcomment/:videoId', videoController.postFinalComment);
 router.post('/finalflag/:videoId', videoController.updateExpertHeadFlagReview );

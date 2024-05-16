@@ -5,78 +5,20 @@ import 'slick-carousel/slick/slick-theme.css';
 import ReactPlayer from 'react-player';
 // import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const HomeSwiper = ({videoData}) => {
+const HomeSwiper = ({count,type}) => {
   
-  console.log(videoData)
-  const sliderRef = useRef(null);
-
-  const SampleNextArrow=(props)=>{
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "gray", color:"black" }}
-        onClick={onClick}
-      />
-    );
-  }
-  
-  const SamplePrevArrow=(props)=> {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "gray", color:"black"}}
-        onClick={onClick}
-      />
-    );
-  }
-
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    // nextArrow: <FaChevronRight />, // Use imported arrow icons
-    // prevArrow: <FaChevronLeft />,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow /> 
-  };
-
-  const handleVideo = (inputUrl) =>{
-    const url = inputUrl.replace(/\\/g, '/');
-  
-  // Split the URL based on backslash ("\")
-    const urlParts = url.split('/');
-  
-  // Take the last part of the array
-    const desiredPart = urlParts[urlParts.length - 1];
-  // console.log(desiredPart)
-  return desiredPart;
-  }
-
   return (
-    <div className='p-4'>
-        <div className=''>
-        <Slider {...settings} ref={sliderRef}>
-        {videoData.map((video, index) => (
-          <div key={index} className=' gap-2 p-4 h-44'>
-              <ReactPlayer
-                className='react-player p-1'
-                url={`/videos/${handleVideo(video.videoPath)}`}
-                width='100%'
-                height='100%'
-                controls={true}
-            />
-              {/* Your browser does not support the video tag. */}
-            {/* </video> */}
-          </div>
-        ))}  
-      </Slider>
-        </div>  
+    <div className='h-36 w-36 bg-gray-300 p-4 rounded'>
+      <h1>{type}</h1>
+      <div>
+        <p>{count}</p>
+      </div>
+      <div><button className="text-white mt-24 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" >All Videos</button></div>
     </div>
   );
-};
+}
+
+
+
 
 export default HomeSwiper;

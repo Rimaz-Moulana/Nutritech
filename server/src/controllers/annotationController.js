@@ -32,9 +32,23 @@ const postAnnotations =  async (req, res) => {
   }
 };
 
+const postReannotations =  async (req, res) => {
+  const videoId = req.params.videoId;
+  const reannotations = req.body.reannotations;
+
+  try {
+    const updatedVideo = await AnnotationService.postReannotation(videoId, reannotations, req);
+    res.json(updatedVideo);
+  } catch (error) {
+    console.error(`Error in postAnnotations controller: ${error.message}`);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   getAnnotationHistory,
   postAnnotations,
+  postReannotations,
 };
 
 
