@@ -54,6 +54,8 @@ export default function AddedProduct() {
     }
   };
 
+  console.log(filteredProducts)
+
   return (
     <div className='w-full min-h-screen overflow-x-auto xl:overflow-hidden bg-backgroundGreen place-items-center'>
 

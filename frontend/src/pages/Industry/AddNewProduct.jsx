@@ -238,16 +238,16 @@ export default function ProductDetails() {
         <form onSubmit={handleSubmit}>
         <div className='ml-0 lg:inline-flex sm:flex'>
             <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
-                <TextFiled placeholder="Product Name"  name='product' onChange={handleChange} />
-                <TextFiled placeholder="Brand"  name='brand' onChange={handleChange} />
-                <TextFiled placeholder="Description" name='description' onChange={handleChange} />
-                <TextFiled placeholder="Parent Company" name='parentCompany' onChange={handleChange} />
-                <DropDown  placeholder="Product Category" name='category' onChange={handleChange} />
-                <TextFiled placeholder="Packaging Material(Out Side)" name='packagingMaterial' onChange={handleChange} />
-                <TextFiled placeholder="Packaging Material(In Side)" name='packagingMaterialTouching' onChange={handleChange} />
+                <TextFiled placeholder="Product Name(Required)"  name='product' onChange={handleChange} />
+                <TextFiled placeholder="Brand(Required)"  name='brand' onChange={handleChange} />
+                <TextFiled placeholder="Description(Required)" name='description' onChange={handleChange} />
+                <TextFiled placeholder="Parent Company(Required)" name='parentCompany' onChange={handleChange} />
+                <DropDown  placeholder="Product Category(Required)" name='category' onChange={handleChange} />
+                <TextFiled placeholder="Packaging Material(Out Side)(Required)" name='packagingMaterial' onChange={handleChange} />
+                <TextFiled placeholder="Packaging Material(In Side)(Required)" name='packagingMaterialTouching' onChange={handleChange} />
                 <div className='p-2'>
-                <DropdownSize placeholder="Unit"  name='unit' onChange1={handleChange}  />
-                <Numberfield placeholder="Size"  name='size'  onChange2={handleChange}/>
+                <DropdownSize placeholder="Unit(Required)"  name='unit' onChange1={handleChange}  />
+                <Numberfield placeholder="Size(Required)"  name='size'  onChange2={handleChange}/>
                 </div>
                 
                 
@@ -350,18 +350,18 @@ export default function ProductDetails() {
         <div className='flex-inline py-10 '>
             <div className='inline-block w-44'>
             <div className='flex text-center'>
-                <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
+                <button onClick={() => window.history.back()} className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Cancel
                 </button>
                 </div>
             </div>
-            <div className='inline-block w-44'>
+            {/* <div className='inline-block w-44'>
             <div className='flex text-center'>
                 <button className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Draft
                 </button>
                 </div>
-            </div>
+            </div> */}
             <div className='inline-block w-44'>
             <div className='flex text-center'>
                 <button onClick={handleSubmit} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">

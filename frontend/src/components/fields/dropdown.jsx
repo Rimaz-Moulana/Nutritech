@@ -34,11 +34,11 @@ export default function dropdown({ value,id,name, onChange}) {
         <select
         id={id} // Use the provided id
         name={name} // Use the provided name
-        className="border rounded w-[70%] h-8 py-0 px-3 bg-[#BDC69A] text-gray-600 dark:bg-gray-700"
+        className="border rounded w-[70%] h-8 py-0 px-3 bg-[#ffffff] text-gray-600 dark:bg-gray-700"
         value={value} // Set the selected value
         onChange={onChange} // Handle changes
       >
-            <option className='' selected>Product Category</option>
+            <option className='' selected>Product Category(Required)</option>
             
             {optionsArray.map((option) => (
             <option key={option.value} value={option.value}>
