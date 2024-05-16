@@ -8,7 +8,6 @@ import ViewComment from '../../components/CommentSection/ViewComment';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
-import axios from 'axios';
 
 function ReviewVideos() {
 
@@ -19,7 +18,6 @@ const {videoId} = useParams();
   const [loading, setLoading] = useState(false);
 
   console.log(videoId)
-  const [loading,setLoading] =useState(true);
 
 //   const [RuleData, setRuleData] = useState([]);
 
@@ -31,8 +29,7 @@ useEffect(() => {
       console.log(response.data);
       //let result = JSON.parse(res);
       //let firstKeyValues = result.map(obj => obj[Object.keys(obj)[0]]);
-      console.log("hi"+response.data[0].brand+responseData[0].unit);
-      const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+      console.log("hi"+response.data[0].brand+responseData[0])
       setVideoData(response.data.video);
     } catch (error) {
       console.error('Error fetching ReviewDetails:', error);
