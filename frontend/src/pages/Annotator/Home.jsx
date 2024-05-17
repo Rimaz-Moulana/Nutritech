@@ -180,16 +180,16 @@ const reannotatedvideos= reannotateVideoData.length;
           <div className='flex flex-col items-center'>
         <div className="mt-12 grid grid-cols-2 gap-4 p-8">
         <div>
-        <HomeSwiper count={allvideos} type={"All Videos"} handlepath={() => handlepath("All Videos")} />
+        <HomeSwiper count={allvideos} type={"All Videos"} user={"Annotator"} handlepath={() => handlepath("All Videos")} />
         </div>
         <div>
-          <HomeSwiper count={annotatedvideos} type={"Annotated Videos"} handlepath={()=>handlepath("Annotated Videos")} />
+          <HomeSwiper count={annotatedvideos} type={"Annotated Videos"} user={"Annotator"}  handlepath={()=>handlepath("Annotated Videos")} />
         </div>
         <div>
-          <HomeSwiper count={unannotatedvideos} type={"Unannotated Videos"} handlepath={()=>handlepath("Unannotated Videos")} />
+          <HomeSwiper count={unannotatedvideos} type={"Unannotated Videos"} user={"Annotator"}  handlepath={()=>handlepath("Unannotated Videos")} />
         </div>
         <div>
-          <HomeSwiper count={reannotatedvideos} type={"Videos for Reannotation"} handlepath={()=>handlepath("Videos for Reannotation")} />
+          <HomeSwiper count={reannotatedvideos} type={"Videos for Reannotation"} user={"Annotator"} handlepath={()=>handlepath("Videos for Reannotation")} />
         </div>
       </div>
         

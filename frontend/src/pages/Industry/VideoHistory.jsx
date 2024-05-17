@@ -7,6 +7,7 @@ import Comments from '../../components/CommentSection/Comments';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import axios from 'axios';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
 
 function History() {
   const { videoId } = useParams();

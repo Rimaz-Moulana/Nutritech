@@ -183,8 +183,10 @@ function AnnotationTable() {
       try {
         const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
         const video = response.data;
+        console.log(video)
         setData(video);
         const data = response.data[0].duration;  // Access the data property directly
+        console.log(data);
         setDuration(data);
       } catch (error) {
         console.error('Error fetching Video:', error);

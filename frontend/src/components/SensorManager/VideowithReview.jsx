@@ -387,7 +387,7 @@ useEffect(() => {
 }, [Data.product,Data.productName,Data.brand, text]);
 
   return ( 
-    <div className='container lg:flex justify-center max-w-screen gap-[15%]'>
+    <div className='mt-20 container lg:flex justify-center max-w-screen gap-[15%]'>
          <div className='property lg:flex lg:w-1/2 justify-center '> 
          <div className="image lg:w-1/2">
             {(text === "video" || text==="expert" || text==="experthistory") && (
