@@ -87,7 +87,7 @@ function ViewComment({ videoId, type }) {
       }
     }
 
-    if (userData && userData.role && userData.role=="expert head" && type!=="Industry" && type!=="annotator") {
+    else if (userData && userData.role && userData.role=="expert head" && type!=="Industry" && type!=="annotator") {
       // Interleave comments and replies
       if(Data.comment){
       for (let i = 0; i < Data.comment.length; i++) {
