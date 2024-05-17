@@ -13,10 +13,13 @@ let [isEnlarge, setEnlarge] = useState(true);
 const {videoId} = useParams(); 
 const [responseData, setResponseData] = useState([]);
 const [loading, setLoading] = useState(true);
+
 const [allProducts, setAllProducts] = useState([]);
 const [isLoading, setIsLoading] = useState(false); // Added loading state
 const [error, setError] = useState(null); // Added error state
-const [videoData, setVideoData] = useState([]);
+const [videoData, setVideoData] = useState([]);=
+// const [loading,setLoading] =useState(true);
+
 //   const [RuleData, setRuleData] = useState([]);
 
 useEffect(() => {
@@ -86,6 +89,48 @@ fetchReviewDetails();
       setEnlarge(false);
     }
   };
+  useEffect(() => {
+    const fetchReviewDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        setResponseData(response.data);
+      } catch (error) {
+        console.error('Error fetching ReviewDetails:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchReviewDetails();
+  }, [videoId]);
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, [responseData.product, responseData.brand, responseData.size]); // Added dependency array for useEffect
+
+  // const fetchData = async () => {
+  //   setIsLoading(true); // Set loading state to true when fetching data
+  //   setError(null); // Reset error state before fetching data
+  //   try {
+  //     const response = await axios.get(`http://localhost:3000/api/product/view/${responseData.size}/${responseData.product}/${responseData.brand}`);
+  //     //const result = response.data.filter(product => product.unit === unit); 
+  //     //setAllProducts(result);
+  //     setAllProducts(response.data);
+  //     console.log(response.data);
+  //     console.log(allProducts);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //     setError('Error fetching data. Please try again.'); // Set error message
+  //   } finally {
+  //     setIsLoading(false); // Set loading state to false after fetching data
+  //   }
+  // };
+
+  const handlePoductDetails = (product,brand,size) =>{
+    navigate(`/product/view/${size}${product}/${brand}`)
+  }
+
+  console.log(allProducts)
  
   // console.log(Data)
   return (
