@@ -49,7 +49,7 @@ function ReviewVideos() {
         <Navbar type='sensormanager'/>
        
        <VideowithReview Id={videoId} text={"video"}/>
-       <div className='flex justify-between mt-8'>
+       <div className='flex justify-between mt-16'>
        <h1 className='text-xl ml-8 font-semibold'>
           Existing Ads related to this product
        </h1>
@@ -88,7 +88,7 @@ function ReviewVideos() {
        </div>
       
 
-      <div className='left-0'>
+      <div className='mt-8 left-0'>
       <VideoContainer type={"reviewvideo"}  videoData={responseData} viewType={isChecked ? 'Grid' : 'List'} />
       </div>
        

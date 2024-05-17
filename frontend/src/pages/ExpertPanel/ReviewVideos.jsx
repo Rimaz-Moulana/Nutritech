@@ -8,9 +8,12 @@ import Comments from '../../components/CommentSection/Comments';
 import Sidebar from '../../components/sidebar/SideBar';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import axios from 'axios';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Button, Modal } from 'flowbite-react';
+import Message from '../../components/Popup/Message';
 
 function ReviewVideos() {
-  const navigate= useNavigate();
+  // const navigate= useNavigate();
   const {videoId} = useParams(); 
   let [isEnlarge, setEnlarge] = useState(true);
   const [videoData, setVideoData] = useState([]);
@@ -40,8 +43,13 @@ const handleValueChange = (value) => {
     setEnlarge(false);
   }
 };
+
+const [openModal, setOpenModal] = useState(false);
+const handleMessage = () => {
+  setOpenModal(true); // Set openModal state to true to display the modal
+};
  
-  // console.log(videoData)
+  console.log(videoData);
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
     <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -58,17 +66,39 @@ const handleValueChange = (value) => {
         <Annotations videoId={videoId} usertype={"expert"}/>  
   
         {!videoData.reannotations || !videoData.reannotations.length > 0 && (
-          <div className='mt-8 w-full'>
-            <p>Write a message to annotator, if video should be reannotated</p>
-            <Comments videoId={videoId} type={"comment"} section={"message"}/>
-          </div>
+
+<div className='mt-8 w-full'>
+<p>Write a message to annotator, if video should be reannotated</p>
+<button 
+          className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          onClick={handleMessage}
+        >
+          Send Message
+        </button>
+
+
+</div>
         )}
       </div>
+
+      {openModal && (
+        <div className="fixed border-2 inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gray-300">
+        <Modal show={openModal} size="sm" onClose={() => setOpenModal(false)} popup>
+            <Modal.Header />
+            <Modal.Body className='p-0 shadow justify-center'>
+              <div className="p-0 text-center">
+                {/* <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" /> */}
+                <Comments videoId={videoId} type={"message"} section={"message"}/>
+              </div>
+            </Modal.Body>
+          </Modal>
+          </div>
+        )}
       
       <ViewComment videoId={videoId} type={"comment"}/>
-      <div className='mt-8 w-full'>
-        <Comments videoId={videoId} type={"comment"}/>
-      </div>
+          <div className='mt-8 w-full'>
+          <Comments videoId={videoId} type={"comment"}/>
+        </div>
   
       <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
         <button

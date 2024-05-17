@@ -195,14 +195,7 @@ const reannotatedvideos= reannotateVideoData.length;
         
         </div> 
         </div>
-        </div>
-      
-        {/* <div className='flex mt-8 justify-between'>
-        <h1 className='ml-8 mb-4 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
-        <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
-        </div> */}
-        
-       
+        </div> 
         
       </div>
       

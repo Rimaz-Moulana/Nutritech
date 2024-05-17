@@ -75,6 +75,8 @@ function Comments({ videoId, type,section }) {
         },
         iconColor: '#294B29',
       });
+
+      window.history.back();
       
     } catch (error) {
       console.error('Error submitting comment:', error);
