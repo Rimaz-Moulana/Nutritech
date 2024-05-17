@@ -3,16 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AddNewProduct from '../../components/button/AddNewProductBtn';
 import ProductBar from '../../components/fields/ProductBar';
-import LogTable from '../../components/tables/LogTable';
+import LogTable from '../../components/tables/ProductTableAnnotator';
 import BlankPage from '../../components/theme/BlankPage';
 
 export default function AddedProduct() {
-
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const {type} = useParams()
-
-  const [products, setProducts] = useState([]);
+  const { type } = useParams();
 
   useEffect(() => {
     fetchData();
@@ -54,6 +51,9 @@ export default function AddedProduct() {
     }
   };
 console.log(filteredProducts);
+
+  // console.log(filteredProducts);
+  //console.log("hi"+handleFilter);
   return (
     <div className='w-full min-h-screen overflow-x-auto xl:overflow-hidden bg-backgroundGreen place-items-center'>
       <BlankPage type="annotator" />
@@ -65,20 +65,12 @@ console.log(filteredProducts);
       <div className='w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64'>
         <div className=''>
         <ProductBar handleFilter={()=>handleFilter(filter)} />
+          <ProductBar handleFilter={handleFilter} />
           <LogTable products={filteredProducts} />
         </div>
       </div>    
 
-    <BlankPage type={type} />
-    {/* <div className='inline-flex ml-[11%] w-[80%]'>
-
-    <BlankPage type={type} />
-    <div className='inline-flex ml-[11%] w-[80%]'>
-
-    <h1 className="mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Product</h1>
-    <AddNewProduct />
-
-    </div> */}
+      {/* <BlankPage type={type} /> */}
     </div>
   );
 }

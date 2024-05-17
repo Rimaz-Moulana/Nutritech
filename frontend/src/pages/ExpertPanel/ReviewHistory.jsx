@@ -1,20 +1,22 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import React, { useEffect, useNavigate, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '../../components/navbar/Navbar';
-import VideowithReview from '../../components/SensorManager/VideowithReview';
-import Annotations from '../../components/AnnotationTable/RowHistory'
-import Comments from '../../components/CommentSection/Comments';
+import Annotations from '../../components/AnnotationTable/RowHistory';
 import ViewComment from '../../components/CommentSection/ViewComment';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
+import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewHistory() {
 const navigate= useNavigate();
 let [isEnlarge, setEnlarge] = useState(true);
 const {videoId} = useParams(); 
+const [responseData, setResponseData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [allProducts, setAllProducts] = useState([]);
+const [isLoading, setIsLoading] = useState(false); // Added loading state
+const [error, setError] = useState(null); // Added error state
 const [videoData, setVideoData] = useState([]);
-const [loading,setLoading] =useState(true);
 //   const [RuleData, setRuleData] = useState([]);
 
 useEffect(() => {
@@ -34,6 +36,48 @@ fetchReviewDetails();
 
   let text;
 
+  useEffect(() => {
+    const fetchReviewDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        setResponseData(response.data);
+      } catch (error) {
+        console.error('Error fetching ReviewDetails:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchReviewDetails();
+  }, [videoId]);
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, [responseData.product, responseData.brand, responseData.size]); // Added dependency array for useEffect
+
+  // const fetchData = async () => {
+  //   setIsLoading(true); // Set loading state to true when fetching data
+  //   setError(null); // Reset error state before fetching data
+  //   try {
+  //     const response = await axios.get(`http://localhost:3000/api/product/view/${responseData.size}/${responseData.product}/${responseData.brand}`);
+  //     //const result = response.data.filter(product => product.unit === unit); 
+  //     //setAllProducts(result);
+  //     setAllProducts(response.data);
+  //     console.log(response.data);
+  //     console.log(allProducts);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //     setError('Error fetching data. Please try again.'); // Set error message
+  //   } finally {
+  //     setIsLoading(false); // Set loading state to false after fetching data
+  //   }
+  // };
+
+  const handlePoductDetails = (product,brand,size) =>{
+    navigate(`/product/view/${size}${product}/${brand}`)
+  }
+
+  console.log(allProducts)
   const handleValueChange = (value) => {
     console.log(value)
     if(value==true){
@@ -61,7 +105,8 @@ fetchReviewDetails();
         <ViewComment videoId={videoId} type={"comment"}/>
         
         <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
-        <button
+ 
+        <button  onClick={handlePoductDetails(responseData.size,responseData.product,responseData.brand)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details

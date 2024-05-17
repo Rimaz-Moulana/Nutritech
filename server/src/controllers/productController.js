@@ -36,12 +36,29 @@ exports.getAllProduct = async(req,res ) =>{
     
 }
 
+exports.getDemo = async(req,res)=>{
+  try{
+    const {size,product,brand} = req.params;
+    // const sizeNumber = parseInt(size, 10);
+    const demo = await productService.getDemo(size,product,brand);
+    
+    if(!demo){
+      return res.status(404).json({message:"Product not found"});
+    }
+    res.status(200).json(demo);
+  }
+  catch (error){
+    console.error("Error fetching product details:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 exports.getProductDetails = async (req, res) => {
   try {
-    const { productName, brand, size, unit } = req.params;
-    const product = await ProductService.getProductDetails(productName, brand, size, unit);
-
-    if (!product) {
+    const { product, brand, unit,size } = req.params;
+    const products = await productService.getProductDetails(product, brand,unit);
+    console.log(products);
+    if (!products) {
       return res.status(404).json({ message: "Product not found" });
     }
 
@@ -82,7 +99,7 @@ exports.getProduct = async(req,res ) =>{
 }
 
 exports.addNewProduct = async (req,res) => {
-
+      console.log(req.body)
     try{
         const {
             product,
@@ -167,11 +184,7 @@ exports.addNewProduct = async (req,res) => {
               if (req.files[4]) imageRight = req.files[4].path;
             }
 
-
-            
-            
-
-            const duration = req.duration;
+            const duration = req.body.duration;
             // const newProduct = await productService.addNewProduct();
     
             const newProduct = new Product({
