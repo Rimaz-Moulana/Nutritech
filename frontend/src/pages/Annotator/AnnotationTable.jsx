@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../../components/navbar/Navbar';
-import Row from '../../components/AnnotationTable/Row';
-import Videowithtext from '../../components/AnnotationTable/Videowithtext';
-import plus from '../../assets/Images/plus.png';
-import minus from '../../assets/Images/minus.png';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Sidebar from '../../components/sidebar/SideBar';
+import minus from '../../assets/Images/minus.png';
+import plus from '../../assets/Images/plus.png';
+import Row from '../../components/AnnotationTable/Row';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
+import Navbar from '../../components/navbar/Navbar';
+import Sidebar from '../../components/sidebar/SideBar';
 
 function AnnotationTable() {
   const navigate = useNavigate();
@@ -60,8 +59,8 @@ function AnnotationTable() {
     });
   };
 
-  const viewdetails = () => {
-    navigate('/product');
+  const viewdetails = (size,product,brand,unit) => {
+    navigate(`/product/view/${size}/${product}/${brand}/${unit}`);
   };
 
   const [addedrows, setAddedRows] = useState(() => {
@@ -184,6 +183,7 @@ function AnnotationTable() {
         const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
         const video = response.data;
         setData(video);
+        console.log("Monday 2 ->", video);
         const data = response.data[0].duration;  // Access the data property directly
         setDuration(data);
       } catch (error) {
@@ -304,7 +304,7 @@ function AnnotationTable() {
                 </button>
                 <button
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2'
-                  onClick={viewdetails}
+                  onClick={()=>viewdetails(videoData[0].size,videoData[0].product,videoData[0].brand,videoData[0].unit)}
                 >
                   View Product Details
                 </button>
