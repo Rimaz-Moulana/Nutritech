@@ -10,8 +10,8 @@ export default function dropdown({ value,id,name, onChange2}) {
                 id = {id}
                 name = {name}
                 onChange={ onChange2}
-                placeholder='Size'
-                className="shadow appearance-none border placeholder-gray-600 rounded w-[25%] h-8 py-0 px-5 bg-[#BDC69A]  text-black  focus:outline-none focus:shadow-outline"
+                placeholder='Size(Required)'
+                className="shadow appearance-none border placeholder-gray-600 rounded w-[25%] h-8 py-0 px-5 bg-[#ffffff]  text-black  focus:outline-none focus:shadow-outline"
                  />
   )
 }

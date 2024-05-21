@@ -99,7 +99,7 @@ exports.getProduct = async(req,res ) =>{
 }
 
 exports.addNewProduct = async (req,res) => {
-
+      console.log(req.body)
     try{
         const {
             product,

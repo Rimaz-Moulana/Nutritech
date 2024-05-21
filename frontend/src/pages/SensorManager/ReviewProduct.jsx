@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../../components/navbar/Navbar'
-import { useParams } from 'react-router-dom';
-import VideowithReview from '../../components/SensorManager/VideowithReview';
-import Product from '../../components/SensorManager/Product';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Product from '../../components/SensorManager/Product';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
+import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewProduct() {
@@ -15,6 +15,7 @@ function ReviewProduct() {
       try {
         const response = await axios.get(`http://localhost:3000/api/product/similarproducts/${productId}`);
         setResponseData(response.data);
+        console.log("Respose:"+response.data[0]);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {
