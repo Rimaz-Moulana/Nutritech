@@ -88,6 +88,12 @@ const VideoSchema = new mongoose.Schema({
       rule: String,
       details: String,
       recommendation: String,
+      acceptance: [
+        {
+        user: String,
+        decision: String,
+      }
+      ]
     },
   ],
 

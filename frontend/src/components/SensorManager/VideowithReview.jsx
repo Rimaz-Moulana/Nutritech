@@ -231,6 +231,10 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     }
   };
 
+  const viewdetails = () => {
+    navigate('/product');
+  };
+
   const getCurrentDateTime = () => {
     const currentDate = new Date();
     const formattedDateTime = `${padZero(currentDate.getHours())}:${padZero(currentDate.getMinutes())}:${padZero(currentDate.getSeconds())}`;
@@ -490,6 +494,16 @@ useEffect(() => {
   </div>
 )}
 
+{type==="annotator" && (
+     <button
+     className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2'
+     onClick={viewdetails}
+   >
+     View Product Details
+   </button>
+)}
+   
+
 
   {text!=='experthistory' && type!=="annotator"  && (
   <div className="flex justify-center gap-6">
@@ -538,8 +552,7 @@ useEffect(() => {
   )}
 </button>
 
-
-    </>
+ </>
     <>
     <div>
     {text !== "expert" &&  (

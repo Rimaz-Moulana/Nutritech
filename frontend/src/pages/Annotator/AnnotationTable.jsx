@@ -60,9 +60,7 @@ function AnnotationTable() {
     });
   };
 
-  const viewdetails = () => {
-    navigate('/product');
-  };
+ 
 
   const [addedrows, setAddedRows] = useState(() => {
     const storedrows = localStorage.getItem('addedrows');
@@ -241,9 +239,9 @@ function AnnotationTable() {
       </div>
         <div className='px-3 h-full mt-10 text-sm font-semibold text-black mb-8'>
           <div className='lg:flex-end'>
-            <p className='text-lg mb-4'>Does this video violated advertising rules and regulations?</p>
+            {/* <p className='text-lg mb-4'>Does this video violated advertising rules and regulations?</p> */}
             
-            <div className='flex place-content-center mb-12'>
+            {/* <div className='flex place-content-center mb-12'>
               <button
                 className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
                   isYesSelected ? 'text-primary bg-sidebarGreen text-white' : 'text-body-color'
@@ -260,8 +258,8 @@ function AnnotationTable() {
               >
                 No
               </button>
-            </div>
-            {isYesSelected && (
+            </div> */}
+            {/* {isYesSelected && ( */}
               <>
                 {[...Array(rowCount)].map((_, index) => (
                   <div key={index} className='center-l'>
@@ -290,9 +288,9 @@ function AnnotationTable() {
                   </div>
                 ))}
               </>
-            )}
+            {/* )} */}
 
-{isYesSelected && (
+{/* {isYesSelected && ( */}
             <div className='flex z-10 justify-center'>
               {/* <div className='fixed right-12 bottom-20'> */}
                 
@@ -304,12 +302,7 @@ function AnnotationTable() {
                 >
                   Save
                 </button>
-                <button
-                  className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2'
-                  onClick={viewdetails}
-                >
-                  View Product Details
-                </button>
+             
 
                 <button className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2"
                  onClick={() => window.history.back()}>
@@ -324,7 +317,7 @@ function AnnotationTable() {
                 </button>
               {/* </div> */}
             </div>
-          )}
+          {/* )} */}
           </div>
 
          

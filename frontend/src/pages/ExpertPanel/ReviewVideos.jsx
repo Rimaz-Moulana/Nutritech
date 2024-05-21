@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import Annotations from '../../components/AnnotationTable/RowHistory';
 import Comments from '../../components/CommentSection/Comments';
 import ViewComment from '../../components/CommentSection/ViewComment';
-import axios from 'axios';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { Button, Modal } from 'flowbite-react';
 import Message from '../../components/Popup/Message';
@@ -65,7 +64,7 @@ const handleMessage = () => {
   setOpenModal(true); // Set openModal state to true to display the modal
 };
  
-  console.log(videoData);
+  // console.log(videoData.reannotations.length);
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
     <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -80,21 +79,8 @@ const handleMessage = () => {
       </div>
       <div className='mt-12 ml-24'>
         <Annotations videoId={videoId} usertype={"expert"}/>  
-  
-        {!videoData.reannotations || !videoData.reannotations.length > 0 && (
 
-<div className='mt-8 w-full'>
-<p>Write a message to annotator, if video should be reannotated</p>
-<button 
-          className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          onClick={handleMessage}
-        >
-          Send Message
-        </button>
-
-
-</div>
-        )}
+        {/* )} */}
       </div>
 
       {openModal && (
