@@ -80,10 +80,11 @@ const handleMessage = () => {
       <div className='mt-12 ml-24'>
         <Annotations videoId={videoId} usertype={"expert"}/>  
 
-        {/* )} */}
+
       </div>
 
-      {openModal && (
+<div>
+{openModal && (
         <div className="fixed border-2 inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gray-300">
         <Modal show={openModal} size="sm" onClose={() => setOpenModal(false)} popup>
             <Modal.Header />
@@ -96,8 +97,8 @@ const handleMessage = () => {
           </Modal>
           </div>
         )}
-      
-      <ViewComment videoId={videoId} type={"comment"}/>
+
+<ViewComment videoId={videoId} type={"comment"}/>
           <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"comment"}/>
         </div>
@@ -115,7 +116,15 @@ const handleMessage = () => {
         >
           Cancel
         </button>
-      </div>       
+      </div>   
+
+      <div>
+        
+      </div>
+
+</div>
+   
+       
     </div>
   </div>
   

@@ -44,8 +44,8 @@ function ReviewVideos() {
     navigate(`/product/view/${size}${product}/${brand}`)
   }
   
-  console.log(responseData)
-  console.log(responseData.product,responseData.brand,responseData.size,responseData.unit)
+  // console.log(responseData)
+  // console.log(responseData.product,responseData.brand,responseData.size,responseData.unit)
   
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
