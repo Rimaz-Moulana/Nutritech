@@ -91,11 +91,11 @@ function Comments({ videoId, type,section }) {
   }, [comment]);
 
   return (
-    <div>
+    <>
         <div>
           <textarea
             placeholder={`Type ${type}...`}
-            className='w-1/2 ml-8 h-16 text-black'
+            className='w-full sm:w-1/2 ml-8 h-16 text-black'
             // {type !== "message" && required}
             value={comment}
             onChange={handleCommentChange}
@@ -110,8 +110,8 @@ function Comments({ videoId, type,section }) {
         </button>
         {/* <button className="mb-12 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 " onClick={() => window.history.back()}>Cancel</button> */}
       </div>
-      
-    </div>
+      </>
+  
   );
 }
 
