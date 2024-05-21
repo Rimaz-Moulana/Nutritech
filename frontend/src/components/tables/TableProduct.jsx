@@ -58,6 +58,14 @@ export default function LogTable({Products}) {
     //}
   };
 
+  const handleUrlImage = (inputurl) => {
+    const url = inputurl.replace(/\\/g, '/');
+      const desiredPart = url.split('/').pop();
+      const imageurl = `${desiredPart}`;
+      console.log('Image URL:',imageurl);
+      return imageurl;
+  }
+
   return (
     <div className='w-full sm:text-sm sm:p-2'>
       <div className="overflow-x-auto">
@@ -91,7 +99,7 @@ export default function LogTable({Products}) {
             {Products.map((product, index) => (
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
-                  {product.productName}
+                  {product.product}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
                   {product.brand}
@@ -113,49 +121,44 @@ export default function LogTable({Products}) {
                      //console.log(product.imageFront)
                     <img 
                     className='fixed-bottom'
-                    //src={require('E:/Nutritech/frontend/src/assets/videos/1711444464892-redflag.png')}
-                    // src='frontend/src/assets/videos/1711444464892-blue.png'
-                    // width='100%'
-                    // height='100%'
-                    // controls={true}
+                    src={handleUrlImage(product.imageFront)}
+                    width='50%'
+                    height='50%'
                     />
                    
                   }
                   {
                     <img 
                     className='fixed-bottom'
-                    // src={handleurl(product.imageBack)}
-                    // width='100%'
-                    // height='100%'
-                    // // controls={true}
+                    src={handleUrlImage(product.imageBack)}
+                    width='50%'
+                    height='50%'
                     />
                    
                   }
                   {
                     <img 
                     className='fixed-bottom'
-                    // src={handleurl(product.imageLeft)}
-                    // width='100%'
-                    // height='100%'
-                    // controls={true}
+                    src={handleUrlImage(product.imageLeft)}
+                    width='50%'
+                    height='50%'
                     />
                    
                   }
                   {
                     <img 
                     className='fixed-bottom'
-                    // src={handleurl(product.imageRight)}
-                    // width='100%'
-                    // height='100%'
-                    // controls={true}
+                    src={handleUrlImage(product.imageRight)}
+                    width='50%'
+                    height='50%'
                     />
                   }
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
-                  {product.createdTime}
+                  {product.createdAt}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
-                  {product.CreatedData}
+                  {product.createdIn}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
                   <div className="text-center">
