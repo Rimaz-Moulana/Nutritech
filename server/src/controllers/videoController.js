@@ -91,6 +91,7 @@ exports.addvideo = async (req, res) => {
       const { brand, product, unit,size, category, createdIn, createdAt, duration } = req.body;
       const videoPath = req.file.path;
 
+      console.log(duration);
       // Convert uploaded video to text
       // const text = await convertVideoToText(videoPath);
       // console.log('hi'+text)
@@ -198,6 +199,56 @@ exports.getSimilarAds = async (req, res) => {
 exports.getAllUploadedVideos= async (req,res)=>{
   try {
         const Videos = await VideoService.getAll();
+        res.json(Videos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.getPendingUploadedVideos= async (req,res)=>{
+  try {
+        const Videos = await VideoService.getPending();
+        res.json(Videos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.getUnannotatedUploadedVideos= async (req,res)=>{
+  try {
+        const Videos = await VideoService.getUnannotated();
+        res.json(Videos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.getAnnotatedUploadedVideos= async (req,res)=>{
+  try {
+        const Videos = await VideoService.getAnnotated();
+        res.json(Videos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.getGreenUploadedVideos= async (req,res)=>{
+  try {
+        const Videos = await VideoService.getGreen();
+        res.json(Videos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.getRedUploadedVideos= async (req,res)=>{
+  try {
+        const Videos = await VideoService.getRed();
         res.json(Videos);
     } catch (error) {
         console.error(error);

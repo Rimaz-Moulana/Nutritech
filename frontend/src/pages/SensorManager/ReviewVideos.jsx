@@ -7,7 +7,7 @@ import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function ReviewVideos() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { videoId } = useParams();
   const [responseData, setResponseData] = useState([]);
   // const { videoReviewData, brandVideoData } = responseData;
@@ -46,7 +46,7 @@ function ReviewVideos() {
     navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
   }
   
-  console.log("hi"+responseData)
+  console.log(responseData)
   console.log(responseData.product,responseData.brand,responseData.size,responseData.unit)
   
   return (
@@ -58,7 +58,7 @@ function ReviewVideos() {
         <Navbar type='sensormanager'/>
        
        <VideowithReview Id={videoId} text={"video"}/>
-       <div className='flex justify-between mt-8'>
+       <div className='flex justify-between mt-16'>
        <h1 className='text-xl ml-8 font-semibold'>
           Existing Ads related to this product
        </h1>
@@ -88,7 +88,7 @@ function ReviewVideos() {
       </label>
 
       <div className=" flex items-end justify-center z-10 h-full"> {/* Position cancel button at the bottom */}
-        <button onClick={()=>handlePoductDetails(responseData[0].size,responseData[0].product,responseData[0].brand,responseData[0].unit)}
+        <button onClick={handlePoductDetails(responseData.product,responseData.brand,responseData.size)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details
@@ -97,7 +97,7 @@ function ReviewVideos() {
        </div>
       
 
-      <div className='left-0'>
+      <div className='mt-8 left-0'>
       <VideoContainer type={"reviewvideo"}  videoData={responseData} viewType={isChecked ? 'Grid' : 'List'} />
       </div>
        

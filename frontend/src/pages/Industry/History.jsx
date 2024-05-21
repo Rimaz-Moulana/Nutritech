@@ -9,6 +9,7 @@ function History() {
     const navigate= useNavigate();
     const [videoData, setVideoData] = useState([]);
     let status; 
+    let [isEnlarge, setEnlarge] = useState(true);
     const [isChecked, setIsChecked] = useState(() => {
         // Retrieve the checkbox state from localStorage, defaulting to false if not found
         return JSON.parse(localStorage.getItem('isChecked')) || false;
@@ -74,13 +75,22 @@ function History() {
       
       });
 
-      console.log(videoData)
+      
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
+
     return (
       <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
         <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar type="industry"/>
+        <Sidebar type="industry" onValueChange={handleValueChange}/>
         </div>
-        <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
+        <div className={`w-full z-10 mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
           <div className='p-1'>
           <Navbar type='industry' />
           </div>
@@ -91,7 +101,7 @@ function History() {
           <button className="mt-24 text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
            onClick={handleupload}>Upload a video</button>
           </div>    
-          <div className='mt-8 ml-8 h-12 w-full bg-white rounded'>
+          <div className='mt-8 ml-8 mr-8 h-12 w-[95%] bg-white rounded'>
             <div className='flex justify-between'>
                 <h1 className='ml-8 text-lg p-2'>{videoFilter} Videos</h1>
                 

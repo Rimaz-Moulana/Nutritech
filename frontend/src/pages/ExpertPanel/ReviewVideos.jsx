@@ -5,12 +5,15 @@ import { useParams } from 'react-router-dom';
 import Annotations from '../../components/AnnotationTable/RowHistory';
 import Comments from '../../components/CommentSection/Comments';
 import ViewComment from '../../components/CommentSection/ViewComment';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Button, Modal } from 'flowbite-react';
+import Message from '../../components/Popup/Message';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewVideos() {
-  const navigate= useNavigate();
+  // const navigate= useNavigate();
   const {videoId} = useParams(); 
   let [isEnlarge, setEnlarge] = useState(true);
   const [videoData, setVideoData] = useState([]);
@@ -55,8 +58,13 @@ const handleValueChange = (value) => {
     setEnlarge(false);
   }
 };
+
+const [openModal, setOpenModal] = useState(false);
+const handleMessage = () => {
+  setOpenModal(true); // Set openModal state to true to display the modal
+};
  
-  // console.log(videoData)
+  // console.log(videoData.reannotations.length);
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
     <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -71,19 +79,29 @@ const handleValueChange = (value) => {
       </div>
       <div className='mt-12 ml-24'>
         <Annotations videoId={videoId} usertype={"expert"}/>  
-  
-        {!videoData.reannotations || !videoData.reannotations.length > 0 && (
-          <div className='mt-8 w-full'>
-            <p>Write a message to annotator, if video should be reannotated</p>
-            <Comments videoId={videoId} type={"comment"} section={"message"}/>
+
+
+      </div>
+
+<div>
+{openModal && (
+        <div className="fixed border-2 inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gray-300">
+        <Modal show={openModal} size="sm" onClose={() => setOpenModal(false)} popup>
+            <Modal.Header />
+            <Modal.Body className='p-0 shadow justify-center'>
+              <div className="p-0 text-center">
+                {/* <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" /> */}
+                <Comments videoId={videoId} type={"message"} section={"message"}/>
+              </div>
+            </Modal.Body>
+          </Modal>
           </div>
         )}
-      </div>
-      
-      <ViewComment videoId={videoId} type={"comment"}/>
-      <div className='mt-8 w-full'>
-        <Comments videoId={videoId} type={"comment"}/>
-      </div>
+
+<ViewComment videoId={videoId} type={"comment"}/>
+          <div className='mt-8 w-full'>
+          <Comments videoId={videoId} type={"comment"}/>
+        </div>
   
       <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
       <button onClick={() => handlePoductDetails(responseData[0].size,responseData[0].product,responseData[0].brand,responseData[0].unit)}
@@ -97,7 +115,15 @@ const handleValueChange = (value) => {
         >
           Cancel
         </button>
-      </div>       
+      </div>   
+
+      <div>
+        
+      </div>
+
+</div>
+   
+       
     </div>
   </div>
   

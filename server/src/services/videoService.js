@@ -49,7 +49,7 @@ exports.getsensormanagernewvideos= async(req,res)=>{
 
 }
 exports.getsensormanagerallvideo= async(req,res)=>{
-  return await VideoModel.find({ status:{ $in: ['pending','unannotated']} });
+  return await VideoModel.find({ status:{ $in: ['pending','unannotated','annotated','red','green','reannotate']} });
 
 }
 
@@ -118,8 +118,42 @@ exports.getAll = async (req, res) => {
     return await VideoModel.find({
       brand: 'Maggi',
       status: { $in: ['annotated', 'unannotated', 'reannotate', 'pending', 'green', 'red'] }
-    });
-  
+    }); 
+};
+
+exports.getPending = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status: 'pending' }
+  ); 
+};
+
+exports.getUnannotated = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status:{ $in: [ 'unannotated', 'reannotate'] }
+    });  
+};
+
+exports.getAnnotated = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status: 'annotated' }
+  ); 
+};
+
+exports.getGreen = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status: 'green' }
+  ); 
+};
+
+exports.getRed = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status: 'red' }
+  ); 
 };
 
 exports.updateReview = async (videoId, panelstatus) => {

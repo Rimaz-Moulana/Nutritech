@@ -55,6 +55,7 @@ const Viewvideohistory=(videoId) => {
 
 
   const handleReview = (videoId) => {
+    console.log("hello");
     navigate(`/reviewvideo/${videoId}`);
   };
 
@@ -227,12 +228,12 @@ const filteredVideos = videoData?.filter((video) => {
               <img src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
             </div>
           )}
-{/* 
-            {type==="reviewvideo" && (
+
+            {type==="reviewvideo" && video.status==="pending" && (
               <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
-              <img src={history} alt="Annotated" />
+              <img src={review} alt="Review" onClick={() => handleReview(video._id)} />
             </div>
-             )} */}
+             )}
 
           {(video.status === 'annotated' && type==="expertnew") &&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
@@ -406,6 +407,7 @@ const filteredVideos = videoData?.filter((video) => {
            <td className='px-2'>{video.createdIn}</td>
            <td className='px-2'>{video.createdAt}</td>
            <td className='px-2'>{video.uploader}</td>
+          
            {type === 'annotated' && (
              <>
                <td className='px-2'>{video.annotateddate}</td>
@@ -467,6 +469,12 @@ const filteredVideos = videoData?.filter((video) => {
                 onClick={() => handleApprove(video._id)}
             >View Details</button>
              )} */}
+
+{(type==="reviewvideo" && video.status==="pending") && (
+              // <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+              <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 lg:px-8 py-2.5 sm:px-2 " onClick={() => handleReview(video._id)}>Review</button>
+            // </div>
+             )}
 
              {video.status === 'green' && (type==="expert" || type==='expertgreen') && type!=="history" && type!="expertreviewed" && (
                <button

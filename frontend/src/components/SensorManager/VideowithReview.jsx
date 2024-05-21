@@ -231,6 +231,10 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     }
   };
 
+  const viewdetails = () => {
+    navigate('/product');
+  };
+
   const getCurrentDateTime = () => {
     const currentDate = new Date();
     const formattedDateTime = `${padZero(currentDate.getHours())}:${padZero(currentDate.getMinutes())}:${padZero(currentDate.getSeconds())}`;
@@ -387,7 +391,7 @@ useEffect(() => {
 }, [Data.product,Data.productName,Data.brand, text]);
 
   return ( 
-    <div className='container lg:flex justify-center max-w-screen gap-[15%]'>
+    <div className='mt-20 container lg:flex justify-center max-w-screen gap-[15%]'>
          <div className='property lg:flex lg:w-1/2 justify-center '> 
          <div className="image lg:w-1/2">
             {(text === "video" || text==="expert" || text==="experthistory") && (
@@ -456,8 +460,8 @@ useEffect(() => {
   </div>
 
   {Data.finalflag && Data.finalflag.length !== 0 && (
-  <div className="md:flex md:items-center mb-4">
-    <div className="md:w-1/3">
+  <div className="md:flex md:items-center mb-4 gap-4">
+    <div className="md:w-1/3 gap-4">
       <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
         Flag
       </label>
@@ -490,20 +494,31 @@ useEffect(() => {
   </div>
 )}
 
+{type==="annotator" && (
+     <button
+     className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2'
+     onClick={viewdetails}
+   >
+     View Product Details
+   </button>
+)}
+   
+
 
   {text!=='experthistory' && type!=="annotator"  && (
-  <div className="flex items-center gap-2">
-    <div className="md:w-2/3">
-     
+  <div className="flex justify-center gap-6">
+    {/* <div className="flex justify-btween"> 
+     */}
+     <>
     <button
-  className={`text-white flex ${
+  className={`text-white w:auto flex ${
     buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
   } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
   type="button"
   onClick={() => { buttonDisabled ? null : handleOpen(text,"red") }}
   // onClick={() => { /*Data.status!=="annotated" ? null :*/ handleOpen(text,"red") }}
 >
-{text === "expert" && type!=="annotator"&& (
+{text === "expert" && type!=="annotator" &&  (
     <div className="flex items-center w-full">
       Red Flag
       <img src={red} className="h-4 w-4 ml-4" alt="" />
@@ -512,15 +527,12 @@ useEffect(() => {
   {text !== "expert" && (
     "Decline"
   )}
-</button>
-
-      
-      
-    </div>
+</button>     
+{/* </div> */}
   
-    <div className="w-full md:w-2/3">
+    {/* <div className="w-full md:w-2/3"> */}
     <button
-  className={`text-white flex ${
+  className={`text-white w-auto flex ${
     buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
   } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2`}
   type="button"
@@ -528,27 +540,31 @@ useEffect(() => {
   onClick={() => (text === "expert" ? (Data.status!=="annotated" ? null : handleOpen(text,"green")) : handlesave())}
   disabled={loading}
 >
-  {text === "expert" && type!=="annotator"&& (
-    <div className="flex items-center w-full">
+  {text === "expert" && type!=="annotator" && (
+    <div className="flex w-full">
       Green Flag
       <img src={green} className="h-4 w-4 ml-4" alt="" />
     </div>
   )}
+
   {text !== "expert" && type!=="annotator" && (
     "Save"
   )}
 </button>
 
-
-    </div>
-    <div className="md:w-2/3">
-    {text !== "expert" && type!=="annotator"&&  (
-      <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2" type="button"
+ </>
+    <>
+    <div>
+    {text !== "expert" &&  (
+      <div className="md:w-2/3">
+      <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2" type="button"
        onClick={() => window.history.back()}>
         Cancel
       </button>
+      </div>
     )}
     </div>
+    </>
   </div>
   )}
 </form>

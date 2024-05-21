@@ -312,7 +312,7 @@ function ViewComment({ videoId, type }) {
           // for (let j = 0; j < Data.reply.length; j++) {
             
             result.push(
-              <div key={`reply-${i}`} className='bg-gray-200 text-black mt-4 p-3 text-xl text-left'>
+              <div key={`reply-${i}`} className='bg-blue-200 text-black mt-4 p-3 text-xl text-left'>
                 {/* {console.log(Data.reply[i][j].text)} */}
         
                 <p className='text-gray-600'>{Data.reply[i].replyer}</p>
@@ -333,9 +333,9 @@ function ViewComment({ videoId, type }) {
 
     return result;
   };
-  console.log(user);
+  console.log(userData.role);
   return (
-    <div className=' lg:w-3/4 p-3 font-semibold mx-auto text-center'>
+    <div className=' mt-12 lg:w-3/4 p-3 font-semibold mx-auto text-center'>
       <h1 className='text-sidebarGreen text-2xl'>Comment section</h1>
 
       {loading ? (
@@ -344,20 +344,23 @@ function ViewComment({ videoId, type }) {
         <>
           {renderCommentsAndReplies()}
 
-          {((type !=="annotator" && !Data.finalcomment) ||(Data.reply.length>0 && type!="industry" && userData.role=="expert head"))&& (
+          {((type !=="annotator" && !Data.finalcomment  ) ||(Data.reply.length>0 && type!="industry"))&& (
           <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
+            <h1></h1>
             <Comments type={type} videoId={videoId} />
           </div>
           )}
 
       {((type ==="industry" || user==="industry") && Data.finalcomment && !Data.reply.length>0) && (
+        
           <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
+            
             <Comments type={"reply"} videoId={videoId} />
           </div>
           )}
         </>
       ) : (
-        <div className='bg-darkGreen text-white mt-4 p-3 text-xl text-left'>
+        <div className='text-black mt-4 p-3 text-xl'>
           Not yet reviewed this video
         </div>
       )}

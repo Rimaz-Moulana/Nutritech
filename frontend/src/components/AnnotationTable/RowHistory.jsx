@@ -61,39 +61,104 @@ function RowHistory({ videoId, usertype }) {
   };
   console.log(videoData);
   return (
-    <div className="text-gray-500 item-center">
-  {usertype !== "industry" && (
-    <div className="container">
-      {/* <h1 className="text-center">Annotations</h1> */}
-      <div className="table-responsive">
-        <table className="w-full table table-bordered">
-          <thead className="bg-gray-200">
-            <tr>
-              <th>Time Stamp</th>
-              <th>Regulation</th>
-              <th>Details</th>
-              <th>Recommendation</th>
-            </tr>
-          </thead>
-          <tbody>
-            {annotations.map((annotation, index) => (
-              <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
-                {annotation.rule !== "" && (
-                  <>
-                    <td>{annotation.timestamp}</td>
-                    <td>{annotation.rule}</td>
-                    <td>{annotation.details}</td>
-                    <td>{annotation.recommendation}</td>
-                  </>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {videoData && videoData[0]?.reannotations && videoData[0].reannotations.length > 0 && (
-        <>
-          <h2 className="text-center">Annotations after Reannotation</h2>
+    <div className="text-gray-500 item-center mr-12">
+      {usertype !== "industry" && (
+        <div className="container">
+          <div className="table-responsive">
+            <table className="w-full table table-bordered">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th >Time Stamp</th>
+                  <th>Regulation</th>
+                  <th className='w-[30%]'>Details</th>
+                  <th className='w-[30%]'>Recommendation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {annotations.map((annotation, index) => (
+                  <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+                    {annotation.rule !== "" && (
+                      <>
+                        <td>{annotation.timestamp}</td>
+                        <td>{annotation.rule}</td>
+                        <td className="p-4 text-left" style={{ wordWrap: 'break-word' }}>{annotation.details}</td>
+                        <td className="p-6 text-left" style={{ wordWrap: 'break-word' }}>{annotation.recommendation}</td>
+                      </>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {videoData && videoData[0]?.reannotations && videoData[0].reannotations.length > 0 && (
+            <>
+              <h2 className="text-center">Annotations after Reannotation</h2>
+              <div className="table-responsive">
+                <table className="w-full table table-bordered">
+                  <thead className="bg-gray-200">
+                    <tr>
+                      <th>Time Stamp</th>
+                      <th>Regulation</th>
+                      <th>Details</th>
+                      <th>Recommendation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {videoData[0].reannotations.map((reannotation, index) => (
+                      <tr key={`reannotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+                        {reannotation.rule !== "" && (
+                          <>
+                            <td>{reannotation.timestamp}</td>
+                            <td>{reannotation.rule}</td>
+                            <td style={{ wordWrap: 'break-word' }}>{reannotation.details}</td>
+                            <td>{reannotation.recommendation}</td>
+                          </>
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+      {usertype === "industry" && videoData && (
+        <div className="container">
+          <h1 className="text-center">Annotations</h1>
+          <div className="table-responsive">
+            <table className="w-full table table-bordered">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th>Time Stamp</th>
+                  <th>Regulation</th>
+                  <th>Details</th>
+                  <th>Recommendation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {annotations.map((annotation, index) => (
+                  <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+                    {annotation.rule !== "" && (
+                      <>
+                        <td>{annotation.timestamp}</td>
+                        <td>{annotation.rule}</td>
+                        <td style={{ wordWrap: 'break-word' }}>{annotation.details}</td>
+                        <td>{annotation.recommendation}</td>
+                      </>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {usertype === "industry" && videoData && videoData[0]?.reannotations && videoData[0].reannotations.length > 0 && (
+        <div className="container">
+          <h2 className="text-center">Annotations</h2>
           <div className="table-responsive">
             <table className="w-full table table-bordered">
               <thead className="bg-gray-200">
@@ -111,7 +176,7 @@ function RowHistory({ videoId, usertype }) {
                       <>
                         <td>{reannotation.timestamp}</td>
                         <td>{reannotation.rule}</td>
-                        <td>{reannotation.details}</td>
+                        <td style={{ wordWrap: 'break-word' }}>{reannotation.details}</td>
                         <td>{reannotation.recommendation}</td>
                       </>
                     )}
@@ -120,75 +185,9 @@ function RowHistory({ videoId, usertype }) {
               </tbody>
             </table>
           </div>
-        </>
+        </div>
       )}
     </div>
-  )}
-
-  {usertype === "industry" && videoData && (
-    <div className="container">
-      <h1 className="text-center">Annotations</h1>
-      <div className="table-responsive">
-        <table className="w-full table table-bordered">
-          <thead className="bg-gray-200">
-            <tr>
-              <th>Time Stamp</th>
-              <th>Regulation</th>
-              <th>Details</th>
-              <th>Recommendation</th>
-            </tr>
-          </thead>
-          <tbody>
-            {annotations.map((annotation, index) => (
-              <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
-                {annotation.rule !== "" && (
-                  <>
-                    <td>{annotation.timestamp}</td>
-                    <td>{annotation.rule}</td>
-                    <td>{annotation.details}</td>
-                    <td>{annotation.recommendation}</td>
-                  </>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )}
-
-  {usertype === "industry" && videoData && videoData[0]?.reannotations && videoData[0].reannotations.length > 0 && (
-    <div className="container">
-      <h2 className="text-center">Annotations</h2>
-      <div className="table-responsive">
-        <table className="w-full table table-bordered">
-          <thead className="bg-gray-200">
-            <tr>
-              <th>Time Stamp</th>
-              <th>Regulation</th>
-              <th>Details</th>
-              <th>Recommendation</th>
-            </tr>
-          </thead>
-          <tbody>
-            {videoData[0].reannotations.map((reannotation, index) => (
-              <tr key={`reannotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
-                {reannotation.rule !== "" && (
-                  <>
-                    <td>{reannotation.timestamp}</td>
-                    <td>{reannotation.rule}</td>
-                    <td>{reannotation.details}</td>
-                    <td>{reannotation.recommendation}</td>
-                  </>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )}
-</div>
 
 
 
