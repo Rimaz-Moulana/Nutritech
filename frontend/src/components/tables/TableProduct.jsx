@@ -52,16 +52,18 @@ export default function LogTable({Products}) {
     //} else {
       const url = inputurl.replace(/\\/g, '/');
       const desiredPart = url.split('/').pop();
-      const videourl = `/videos/${desiredPart}`;
+      const cleanedPart = desiredPart.replace(/^\d+-/, '');
+      const videourl = `/videos/${cleanedPart}`;
       console.log('Video URL:', videourl);
       return videourl;
     //}
   };
 
   const handleUrlImage = (inputurl) => {
-    const url = inputurl.replace(/\\/g, '/');
+      const url = inputurl.replace(/\\/g, '/');
       const desiredPart = url.split('/').pop();
-      const imageurl = `${desiredPart}`;
+      const cleanedPart = desiredPart.replace(/^\d+-/, '');
+      const imageurl = `/${ cleanedPart}`;
       console.log('Image URL:',imageurl);
       return imageurl;
   }
@@ -73,7 +75,7 @@ export default function LogTable({Products}) {
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-lg font-medium text-black uppercase tracking-wider">
-                Product Name
+                Product & Brand Name 
               </th>
               <th scope="col" className="px-6 py-3 text-lg font-medium text-black uppercase tracking-wider">
                 Uploader
@@ -96,10 +98,11 @@ export default function LogTable({Products}) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
+          
             {Products.map((product, index) => (
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
-                  {product.product}
+                  {product.product+","+product.brand}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
                   {product.brand}
@@ -118,7 +121,7 @@ export default function LogTable({Products}) {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
                 {
-                     //console.log(product.imageFront)
+                    
                     <img 
                     className='fixed-bottom'
                     src={handleUrlImage(product.imageFront)}
