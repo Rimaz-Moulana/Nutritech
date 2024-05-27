@@ -19,8 +19,26 @@ function ReviewVideos() {
   const [videoData, setVideoData] = useState([]);
   const [responseData, setResponseData] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const email  = localStorage.getItem('email');
+//   const [userData, setUserData] = useState([]);
 
-  console.log(videoId)
+//   useEffect(() => {
+//     const fetchUser = async () => {
+//        try {
+//           // const email  = localStorage.getItem('email');
+//           const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+//           // console.log("response",response); // Logging the response data directly
+//           setUserData(response.data); // Setting the response data to the state
+//        } catch (error) {
+//           console.error('Error fetching user:', error);
+//           // Handle error (e.g., set error state, show error message)
+//        }
+//     };
+  
+//     fetchUser();
+// }, []);
+
+//   console.log(videoId)
 
 //   const [RuleData, setRuleData] = useState([]);
 

@@ -92,6 +92,8 @@ const VideoSchema = new mongoose.Schema({
         {
         user: String,
         decision: String,
+        date:String,
+        time:String
       }
       ]
     },

@@ -75,6 +75,63 @@ exports.saveSensorManagerReviewStatus = async (videoId) => {
   }
 };
 
+exports.updateDecisionForUser = async (req, res) => {
+  const { annotation, decision, email, type } = req.body;
+  const { videoId } = req.params;
+  console.log(annotation);
+  console.log(type);
+// status
+  try {
+    const video = await VideoModel.findById(videoId);
+
+    if (!video) {
+      return res.status(404).json({ message: 'Video not found' });
+      
+    }
+    
+
+    let targetAnnotation;
+    if (type === "reannotations") {
+      
+      targetAnnotation = video.reannotations.find(reann =>
+        reann.timestamp === annotation.timestamp &&
+        reann.rule === annotation.rule &&
+        reann.details === annotation.details &&
+        reann.recommendation === annotation.recommendation
+      );
+
+      
+    } else {
+      targetAnnotation = video.annotations.find(ann =>
+        ann.timestamp === annotation.timestamp &&
+        ann.rule === annotation.rule &&
+        ann.details === annotation.details &&
+        ann.recommendation === annotation.recommendation
+      );
+    }
+
+    // if (!targetAnnotation) {
+    //   return res.status(404).json({ message: 'Annotation not found' });
+    // }
+
+    
+
+    targetAnnotation.acceptance.push({
+      user: email,
+      decision:decision,
+      date: new Date().toLocaleDateString(),
+      time: getCurrentDateTime(),
+    });
+
+
+    await video.save();
+
+    // res.status(200).json({ message: 'Decision added successfully' });
+  } catch (error) {
+    console.error(`Error saving decision: ${error.message}`);
+    // res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 exports.deleteVideo = async (videoId) => {
   try {
     const deletedVideo = await VideoModel.findByIdAndDelete(videoId);

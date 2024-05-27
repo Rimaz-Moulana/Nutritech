@@ -7,8 +7,9 @@ function RowHistory({ videoId, usertype }) {
   const [videoData, setVideoData] = useState([]);
   const [loading, setLoading] = useState(true);
   const pRefs = useRef([]);
-  const [rowCorrectness, setRowCorrectness] = useState({});
+  const [decision, setDecision] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const email  = localStorage.getItem('email');
   const [isChecked, setIsChecked] = useState(() => {
     // return JSON.parse(localStorage.getItem('isChecked')) || false;
   });
@@ -59,7 +60,39 @@ function RowHistory({ videoId, usertype }) {
   const closeModal = () => {
     setShowModal(false);
   };
-  console.log(videoData);
+  // console.log(decision);
+  const handleDecision = async (decision, annotation, type) => {
+    try {
+      const response = await axios.post(`http://localhost:3000/api/videos/decision/${videoId}`, {
+        decision,
+        annotation: {
+          timestamp: annotation.timestamp,
+          rule: annotation.rule,
+          details: annotation.details,
+          recommendation: annotation.recommendation,
+        },
+        email,
+        type,
+      });
+
+      // Update the local state to reflect the new decision
+      const updatedAnnotations = annotations.map((ann) => {
+        if (ann.timestamp === annotation.timestamp && ann.rule === annotation.rule) {
+          return {
+            ...ann,
+            acceptance: [...ann.acceptance, { user: email, decision }]
+          };
+        }
+        return ann;
+      });
+
+      setAnnotations(updatedAnnotations);
+      alert('Decision submitted successfully');
+    } catch (error) {
+      console.error('Error submitting decision:', error);
+    }
+  };
+
   return (
     <div className="text-gray-500 item-center mr-12">
       {usertype !== "industry" && (
@@ -72,6 +105,10 @@ function RowHistory({ videoId, usertype }) {
                   <th>Regulation</th>
                   <th className='w-[30%]'>Details</th>
                   <th className='w-[30%]'>Recommendation</th>
+                  {usertype !== "annotator" && usertype !== "industry" && videoData && (!videoData[0]?.reannotations || videoData[0]?.reannotations.length === 0) && (
+                    <th className='w-[20%]'>Decision</th>
+                  )}
+                
                 </tr>
               </thead>
               <tbody>
@@ -83,6 +120,24 @@ function RowHistory({ videoId, usertype }) {
                         <td>{annotation.rule}</td>
                         <td className="p-4 text-left" style={{ wordWrap: 'break-word' }}>{annotation.details}</td>
                         <td className="p-6 text-left" style={{ wordWrap: 'break-word' }}>{annotation.recommendation}</td>
+                        {annotation.acceptance.some(acc => acc.user === email) ? (
+                          <td>{annotation.acceptance.find(acc => acc.user === email).decision}</td>
+                        ) : (
+                          usertype !== "annotator" && usertype !== "industry" && videoData && (!videoData[0]?.reannotations || videoData[0]?.reannotations.length === 0) && (
+                            <td className='" flex items-end justify-center mt-4 z-10 h-full"'>
+                              <button
+                                className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+                                onClick={() => handleDecision("Agree", annotation, "annotations")}>
+                                Agree
+                              </button>
+                              <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                onClick={() => handleDecision("Disagree", annotation, "annotations")}>
+                                Disagree
+                              </button>
+                            </td>
+                          )
+                        )}
+                       
                       </>
                     )}
                   </tr>
@@ -101,6 +156,9 @@ function RowHistory({ videoId, usertype }) {
                       <th>Regulation</th>
                       <th>Details</th>
                       <th>Recommendation</th>
+                      {usertype !== "annotator" && usertype !== "industry" && (
+                                <th className='w-[20%]'>Decision</th>
+                      )}
                     </tr>
                   </thead>
                   <tbody>
@@ -112,6 +170,24 @@ function RowHistory({ videoId, usertype }) {
                             <td>{reannotation.rule}</td>
                             <td style={{ wordWrap: 'break-word' }}>{reannotation.details}</td>
                             <td>{reannotation.recommendation}</td>
+                            {reannotation.acceptance.some(acc => acc.user === email) ? (
+                          <td>{reannotation.acceptance.find(acc => acc.user === email).decision}</td>
+                        ) : (
+                          
+                            <td className='" flex items-end justify-center mt-4 z-10 h-full"'>
+                              <button
+                                className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+                                onClick={() => handleDecision("Agree", reannotation, "annotations")}>
+                                Agree
+                              </button>
+                              <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                onClick={() => handleDecision("Disagree", reannotation, "annotations")}>
+                                Disagree
+                              </button>
+                            </td>
+                          
+                        )}
+                            
                           </>
                         )}
                       </tr>
