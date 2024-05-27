@@ -218,7 +218,7 @@ exports.updateReview = async (videoId, panelstatus) => {
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
-        $set: {
+        $push: {
           panelstatus:panelstatus,
           
         }

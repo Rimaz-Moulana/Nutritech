@@ -320,6 +320,8 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
               expertrevieweddate: new Date().toLocaleDateString()
             }
           };
+
+
         }
       
         try {
@@ -365,7 +367,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       return videourl;
     }
   };
-//  console.log(Data)
+ console.log(Data)
 
 useEffect(() => {
   
@@ -390,188 +392,187 @@ useEffect(() => {
   fetchProductDetails();
 }, [Data.product,Data.productName,Data.brand, text]);
 
+const handlePoductDetails = (size,product,brand,unit) =>{
+  navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
+}
+
   return ( 
-    <div className='mt-20 container lg:flex justify-center max-w-screen gap-[15%]'>
-         <div className='property lg:flex lg:w-1/2 justify-center '> 
-         <div className="image lg:w-1/2">
-            {(text === "video" || text==="expert" || text==="experthistory") && (
-              <ReactPlayer
-                className='react-player'
-                url={handleurl(Data.videoPath)}
-                width='180%'
-                height='100%'
-                controls={true}
-              />
-            )}
-
-            {(text === "product") && (
-               <img
-               className='fixed-bottom h-96 w-[100%] '
-               src={handleurl(Data.imageFront)}
-               alt="Product Image"
-           />
-            )}
-            {/* : (
-              <img
-                // src={handleUrl(Data.frontimage)}  // Replace with your image path handling logic
-                alt="Image"
-                className="w-full h-auto"
-              />
-            ) */}
-       
-       </div>
-        </div> 
-      <div className='justify-center items-center lg:w-1/2 pt-5'>
-        <form className="w-full max-w-sm ">
-  <div className="md:flex md:items-center mb-4">
-    <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
-        Brand Name
-      </label>
-    </div>
-    <div className="md:w-2/3">
-      <div className="shadow font-semibold text-center bg-white appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.brand}</div>
-    </div>
-  </div>
-  <div className="md:flex md:items-center mb-4">
-    <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
-        Product
-      </label>
-    </div>
-    <div className="md:w-2/3">
-      {(text==="video" || text==="expert" || text==='experthistory') && (
-        <div className="shadow font-semibold text-center bg-white appearance-none border-2  rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.product}</div> 
-      )}
-      {text==="product" && (
-        <div className="shadow font-semibold text-center bg-white appearance-none border-2  rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{Data.productName}</div> 
-      )}
-      </div>
-  </div>
-  <div className="md:flex md:items-center mb-4">
-    <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
-        Size
-      </label>
-    </div>
-    <div className="md:w-2/3">
-      <div className="shadow bg-white appearance-none border-2  rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >80g</div>
-    </div>
-  </div>
-
-  {Data.finalflag && Data.finalflag.length !== 0 && (
-  <div className="md:flex md:items-center mb-4 gap-4">
-    <div className="md:w-1/3 gap-4">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
-        Flag
-      </label>
-    </div>
-    <div className="md:w-2/3 items-center">
-      {Data.finalflag[0].status === "red" && (
-        <div className="flex items-center w-full shadow bg-white appearance-none border-2  py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >
-          {Data.finalflag[0].status} <img src={red} className="h-8 w-8 ml-4" alt="" />
-        </div>
-      )}
-       {Data.finalflag[0].status === "green" && (
-        <div className="flex items-center w-full shadow bg-white appearance-none border-2  rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >
-          {Data.finalflag[0].status} <img src={green} className="h-8 w-8 ml-4" alt="" />
-        </div>
-      )}
-    </div>
-  </div>
-)}
-
-{productData && productData.length > 0 && productData[0].healthfact && (
-  <div className="md:flex md:items-center mb-4">
-    <div className="md:w-1/3">
-      <label className="block text-black font-bold text-left mb-1 md:mb-0 ">
-        Status
-      </label>
-    </div>
-    <div className="md:w-2/3">
-      <div className="shadow bg-white appearance-none border-2  rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen" >{productData[0].healthfact}</div>
-    </div>
-  </div>
-)}
-
-{type==="annotator" && (
-     <button
-     className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2'
-     onClick={viewdetails}
-   >
-     View Product Details
-   </button>
-)}
-   
-
-
-  {text!=='experthistory' && type!=="annotator"  && (
-  <div className="flex justify-center gap-6">
-    {/* <div className="flex justify-btween"> 
-     */}
-     <>
-    <button
-  className={`text-white w:auto flex ${
-    buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
-  } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
-  type="button"
-  onClick={() => { buttonDisabled ? null : handleOpen(text,"red") }}
-  // onClick={() => { /*Data.status!=="annotated" ? null :*/ handleOpen(text,"red") }}
->
-{text === "expert" && type!=="annotator" &&  (
-    <div className="flex items-center w-full">
-      Red Flag
-      <img src={red} className="h-4 w-4 ml-4" alt="" />
-    </div>
-  )}
-  {text !== "expert" && (
-    "Decline"
-  )}
-</button>     
-{/* </div> */}
-  
-    {/* <div className="w-full md:w-2/3"> */}
-    <button
-  className={`text-white w-auto flex ${
-    buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"
-  } focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2`}
-  type="button"
-  // onClick={() => (text === "expert" ? (buttonDisabled ? null : handleOpen(text,"green")) : handlesave())}
-  onClick={() => (text === "expert" ? (Data.status!=="annotated" ? null : handleOpen(text,"green")) : handlesave())}
-  disabled={loading}
->
-  {text === "expert" && type!=="annotator" && (
-    <div className="flex w-full">
-      Green Flag
-      <img src={green} className="h-4 w-4 ml-4" alt="" />
-    </div>
-  )}
-
-  {text !== "expert" && type!=="annotator" && (
-    "Save"
-  )}
-</button>
-
- </>
+    <div className='mt-12 container lg:flex justify-center max-w-screen gap-[15%]'>
+  {type !== "videoDecision" && (
     <>
-    <div>
-    {text !== "expert" &&  (
-      <div className="md:w-2/3">
-      <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2" type="button"
-       onClick={() => window.history.back()}>
-        Cancel
-      </button>
+      <div className='property lg:flex lg:w-1/2 justify-center'>
+        <div className="image lg:w-1/2">
+          {(text === "video" || text === "expert" || text === "experthistory") && (
+            <ReactPlayer
+              className='react-player'
+              url={handleurl(Data.videoPath)}
+              width='180%'
+              height='100%'
+              controls={true}
+            />
+          )}
+          {text === "product" && (
+            <img
+              className='fixed-bottom h-96 w-[100%]'
+              src={handleurl(Data.imageFront)}
+              alt="Product Image"
+            />
+          )}
+        </div>
       </div>
-    )}
-    </div>
+      <div className='justify-center items-center lg:w-1/2 pt-5'>
+        <form className="w-full max-w-sm">
+          <div className="md:flex md:items-center mb-4">
+            <div className="md:w-1/3">
+              <label className="block text-black font-bold text-left mb-1 md:mb-0">Brand Name</label>
+            </div>
+            <div className="md:w-2/3">
+              <div className="shadow font-semibold text-center bg-white appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">
+                {Data.brand}
+              </div>
+            </div>
+          </div>
+          <div className="md:flex md:items-center mb-4">
+            <div className="md:w-1/3">
+              <label className="block text-black font-bold text-left mb-1 md:mb-0">Product</label>
+            </div>
+            <div className="md:w-2/3">
+              <div className="shadow font-semibold text-center bg-white appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">
+                {text === "product" ? Data.productName : Data.product}
+              </div>
+            </div>
+          </div>
+          <div className="md:flex md:items-center mb-4">
+            <div className="md:w-1/3">
+              <label className="block text-black font-bold text-left mb-1 md:mb-0">Size</label>
+            </div>
+            <div className="md:w-2/3">
+              <div className="shadow bg-white appearance-none border-2 rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">80g</div>
+            </div>
+          </div>
+          {type !== "videoDecision" && Data.finalflag && Data.finalflag.length !== 0 && (
+            <div className="md:flex md:items-center mb-4 gap-4">
+              <div className="md:w-1/3">
+                <label className="block text-black font-bold text-left mb-1 md:mb-0">Flag</label>
+              </div>
+              <div className="md:w-2/3 items-center">
+                <div className="flex items-center w-full shadow bg-white appearance-none border-2 rounded py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">
+                  {Data.finalflag[0].status}
+                  <img src={Data.finalflag[0].status === "red" ? red : green} className="h-8 w-8 ml-4" alt="" />
+                </div>
+              </div>
+            </div>
+          )}
+          {productData && productData.length > 0 && productData[0].healthfact && (
+            <div className="md:flex md:items-center mb-4">
+              <div className="md:w-1/3">
+                <label className="block text-black font-bold text-left mb-1 md:mb-0">Status</label>
+              </div>
+              <div className="md:w-2/3">
+                <div className="shadow bg-white appearance-none border-2 rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">
+                  {productData[0].healthfact}
+                </div>
+              </div>
+            </div>
+          )}
+          {text !== 'experthistory' && text!=="expert" && type !== "annotator" && type !== "videoDecision" && (
+            <div className="flex justify-center gap-6">
+              <button
+                className={`text-white w:auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
+                type="button"
+                onClick={() => { buttonDisabled ? null : handleOpen(text, "red") }}
+              >
+                {text !== "expert" ? "Decline" : "Red Flag"}
+              </button>
+              <button
+                className={`text-white w-auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2`}
+                type="button"
+                onClick={() => (text === "expert" ? (Data.status !== "annotated" ? null : handleOpen(text, "green")) : handlesave())}
+                disabled={loading}
+              >
+                {text !== "expert" ? "Save" : "Green Flag"}
+              </button>
+              {text !== "expert" && (
+                <div className="md:w-2/3">
+                  <button
+                    className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2"
+                    type="button"
+                    onClick={() => window.history.back()}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+          {text==="expert" && (
+            <button onClick={() => handlePoductDetails(responseData[0].size,responseData[0].product,responseData[0].brand,responseData[0].unit)}
+            className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+            >
+            View Product Details
+           </button>
+          )}
+        </form>
+      </div>
     </>
-  </div>
   )}
-</form>
+{type === "videoDecision" && (
+  <>
+
+    {Data.panelstatus && Data.panelstatus.length > 0 && Data.panelstatus.some(status => status.email === email) ? (
+      <>
+  <div> 
+  {Data.panelstatus.find(status => status.email === email)?.status === "red" ? (
+    
+    <img src={red} alt="" />
+  ) : (
+    <img src={green} alt="" />
+  )}
+  </div> 
+  
+  
+  <div>{Data.panelstatus.find(status => status.email === email)?.status}</div>
+
+</>
+
+    ) : (
+      <>
+        {text !== 'experthistory' && type !== "annotator" && (
+          <div className="flex justify-center gap-6">
+            <button
+              className={`text-white w-auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
+              type="button"
+              onClick={() => { buttonDisabled ? null : handleOpen(text, "red") }}
+            >
+              {text === "expert" && (
+                <div className="flex items-center w-full">
+                  Red Flag
+                  <img src={red} className="h-4 w-4 ml-4" alt="" />
+                </div>
+              )}
+            </button>
+            <button
+              className={`text-white w-auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2`}
+              type="button"
+              onClick={() => handleOpen(text, "green")}
+              disabled={loading}
+            >
+              {text === "expert" && (
+                <div className="flex w-full">
+                  Green Flag
+                  <img src={green} className="h-4 w-4 ml-4" alt="" />
+                </div>
+              )}
+            </button>
+          </div>
+        )}
+      </>
+    )}
+  </>
+)}
+
 </div>
 
-    </div>
-  
   )
 }
 

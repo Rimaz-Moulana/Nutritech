@@ -62,9 +62,7 @@ useEffect(() => {
   fetchReviewDetails();
 }, [videoId]);
 
-    const handlePoductDetails = (size,product,brand,unit) =>{
-      navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
-    }
+   
  
   //console.log(videoData)
   console.log("hir"+responseData)
@@ -92,7 +90,7 @@ const handleMessage = () => {
       
       <Navbar type='expert' />
       
-      <div className='flex justify-between z-9999 mt-24'>
+      <div className=' justify-between z-9999 mt-24'>
         <VideowithReview Id={videoId} text="expert"/>
       </div>
       <div className='mt-12 ml-24'>
@@ -101,7 +99,8 @@ const handleMessage = () => {
 
       </div>
 
-<div>
+<div className='flex justify-center gap-[10%]'>
+  <div className='w-1/2'>
 {openModal && (
         <div className="fixed border-2 inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gray-300">
         <Modal show={openModal} size="sm" onClose={() => setOpenModal(false)} popup>
@@ -120,13 +119,21 @@ const handleMessage = () => {
           <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"comment"}/>
         </div>
-  
+    
+
+      <div>
+        
+      </div>
+      </div>
+      <div className="mt-16 " >
+        <h1 className='text-2xl font-bold text-sidebarGreen'>Decision for Video</h1>
+        <VideowithReview Id={videoId} text="expert" type="videoDecision"/>
+      </div>
+
+</div>
+   
       <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
-      <button onClick={() => handlePoductDetails(responseData[0].size,responseData[0].product,responseData[0].brand,responseData[0].unit)}
-                  className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
-                  >
-                  View Product Details
-                 </button>
+      
   
         <button 
           className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
@@ -134,14 +141,7 @@ const handleMessage = () => {
         >
           Cancel
         </button>
-      </div>   
-
-      <div>
-        
-      </div>
-
-</div>
-   
+      </div> 
        
     </div>
   </div>
