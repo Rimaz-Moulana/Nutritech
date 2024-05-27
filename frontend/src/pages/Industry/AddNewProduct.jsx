@@ -238,13 +238,21 @@ export default function ProductDetails() {
         <form onSubmit={handleSubmit}>
         <div className='ml-0 lg:inline-flex sm:flex'>
             <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Product Name(Required)</label>
                 <TextFiled placeholder="Product Name(Required)"  name='product' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Brand(Required)</label>
                 <TextFiled placeholder="Brand(Required)"  name='brand' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Description(Required)</label>
                 <TextFiled placeholder="Description(Required)" name='description' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Parent Company(Required)</label>
                 <TextFiled placeholder="Parent Company(Required)" name='parentCompany' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Product Category(Required)</label>
                 <DropDown  placeholder="Product Category(Required)" name='category' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Packaging Material(Out Side)(Required)</label>
                 <TextFiled placeholder="Packaging Material(Out Side)(Required)" name='packagingMaterial' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Packaging Material(In Side)(Required)</label>
                 <TextFiled placeholder="Packaging Material(In Side)(Required)" name='packagingMaterialTouching' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Unit with size(Required)</label>
                 <div className='p-2'>
                 <DropdownSize placeholder="Unit(Required)"  name='unit' onChange1={handleChange}  />
                 <Numberfield placeholder="Size(Required)"  name='size'  onChange2={handleChange}/>
@@ -252,18 +260,31 @@ export default function ProductDetails() {
                 
                 
             <div className=''>
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Country of the product</label>
                 <TextFiledWhite placeholder="Country of the product" name='countryProduct' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Serving Size</label>
                 <TextFiledWhite placeholder="Serving Size"  name='servingSize' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Sugar Type</label>
                 <DropDownWhite defOptions="Sugar Type" name='sugarType' onChange={handleChange} />
+                \<label className='block px-5 text-left ml-[14%] font-semibold'>Lactose/Maltodextrin</label>
                 <DropDownWhite defOptions="Lactose/Maltodextrin" name='lactose' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Vitamin</label>
                 <TextFiledWhite placeholder="Vitamin" name='vitamin' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Mineral</label>
                 <TextFiledWhite placeholder="Mineral" name='mineral' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>DHA/Omega 3 Fatty Acid/DHA</label>
                 <DropDownWhite  defOptions="DHA/Omega 3 Fatty Acid/DHA"  name='omega' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Polyunsaturated fatty acids</label>
                 <DropDownWhite  defOptions="Polyunsaturated fatty acids"  name='acids' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Probiotics</label>
                 <TextFiledWhite placeholder="Probiotics" name='probiotics' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Reconstituted method (Y/N/C)</label>
                 <TextFiledWhite placeholder="Reconstituted method (Y/N/C)"   name='method' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Reconstituted total volume(ml)</label>
                 <TextFiledWhite placeholder="Reconstituted total volume(ml)" name='total' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Preparation instruction or other remarks(only if reconstituted method is 'Y' or 'C')</label>
                 <TextFiledWhite placeholder="Preparation instruction or other remarks(only if reconstituted method is 'Y' or 'C')" name='remarks' onChange={handleChange}  />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Ingredient as in the label (separete by comma)</label>
                 <div className='p-2'>
                     <input
                             type="text"
@@ -298,7 +319,7 @@ export default function ProductDetails() {
                 <label className='inline-block py-1 text-justify  ' >SFA(g)</label>
                 <TextFiledsmall name='SFA1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='SFA2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Carbo(ga)</label>
+                <label className='inline-block py-1 text-justify ' >Carbo(g)</label>
                 <TextFiledsmall  name='carbo1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='carbo2' onChange={handleChange} />
                 <label className='inline-block py-1 text-justify ' >Sugars(g)</label>
@@ -318,23 +339,23 @@ export default function ProductDetails() {
                 <TextFiledsmallWhite  name='ash2' onChange={handleChange} />
                 </div>
                 <div className='grid float-start gap-0 grid-cols-2 w-full p-2 sm:w-full mb-20'>
-                <label className='inline-block text-justify ml-0 py-3  ' >WHO_WPRO_foodcode Product</label>
+                <label className='inline-block text-justify ml-0 py-3  ' >WHO WPRO foodcode Product</label>
                 <TextFiledWhite2  name='WPROfoodcode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO_WPRO_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >WHO WPRO permitted</label>
                 <TextFiledWhite2  name='WPROPermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO_WPRO_permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >WHO WPRO permitted Remark</label>
                 <TextFiledWhite2  name='WPROPermittedRemark' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO_SEARO_foodcode_Product</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >WHO SEARO foodcode Product</label>
                 <TextFiledWhite2 name='SEAROfoodcode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO_SEARO_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >WHO SEARO permitted</label>
                 <TextFiledWhite2 name='SEAROpermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3  ' >WHO_SEARO_permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3  ' >WHO SEARO permitted Remark</label>
                 <TextFiledWhite2 name='SEAROpermittedRemark' onChange={handleChange} />
                 <label className='inline-block text-justify ml-0 py-3   ' >SL food Code</label>
                 <TextFiledWhite2 name='SLfoodCode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >SL_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   ' >SL permitted</label>
                 <TextFiledWhite2 name='SLpermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3  ' >SL_foodcode__permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3  ' >SL foodcode permitted Remark</label>
                 <TextFiledWhite2  name='SLfoodcodePermittedRemark' onChange={handleChange} />
                 </div>
                 <h1 className='text-2xl lg:ml-8 mb-2  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Pack Images</h1>
