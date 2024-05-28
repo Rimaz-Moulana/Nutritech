@@ -302,81 +302,88 @@ export default function ProductDetails() {
                     <input
                             type="text"
                             name='ingredients' onChange={handleChange} 
-                            className="shadow appearance-none placeholder-gray-400 border rounded w-[70%] h-10 py-2 px-5 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none placeholder-gray-400 border rounded w-[70%] h-20 py-2 px-5 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Ingredient as in the label (separete by comma)" />
                 </div>
-                <div className='py-2 '>
+                {/* <div className='py-2 '>
                     <h1 className='text-2xl lg:ml-36  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Advertisement Video</h1>
                 </div>
                 <div className='p-2 lg:ml-32 '>
                 <VideoUpload handleFileChange={handleFileChange}/>
                 
-                </div>
+                </div> */}
             </div>
             </div>
             <div className='flex-inline mt-1 md:w-1/2'>
             <div className='text ml-64'>
-            <label className='inline-block pt-5 text-xl '>Per 100g/ml</label>
-            <label className='inline-block px-36 pt-5 text-xl '>Per Serving</label>
+            <label className='inline-block pt-5 text-xl font-semibold'>Per 100g/ml</label>
+            <label className='inline-block lg:px-[26%] sm:px-[13.5%] pt-5 text-xl font-semibold'>Per Serving</label>
             </div>
                 <div className='grid float-start gap-0 grid-cols-3 p-3'>
-                <label className='inline-block py-1 text-justify text-black ' >Energy(kcal)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Energy(kcal)(Required)</label>
                 <TextFiledsmall name='energy1' onChange={handleChange} />
                 <TextFiledsmallWhite name='energy2' onChange={handleChange} />
-                <label className='inline-block py-1  text-justify' >Protein(g)</label>
+                <label className='inline-block py-1  text-justify font-semibold' >Protein(g)(Required)</label>
                 <TextFiledsmall name='protein1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='protein2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Total Fat(g)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Total Fat(g)(Required)</label>
                 <TextFiledsmall name='totalFat1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='totalFat2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify  ' >SFA(g)</label>
+                <label className='inline-block py-1 text-justify  font-semibold' >SFA(g)(Required)</label>
                 <TextFiledsmall name='SFA1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='SFA2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Carbo(g)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Carbo(g)(Required)</label>
                 <TextFiledsmall  name='carbo1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='carbo2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Sugars(g)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Sugars(g)(Required)</label>
                 <TextFiledsmall  name='sugar1' onChange={handleChange} />
                 <TextFiledsmallWhite name='sugar2' onChange={handleChange} />
-                <label className='inline-block py-1  text-justify' >Salt(g)</label>
+                <label className='inline-block py-1  text-justify font-semibold' >Salt(g)(Required)</label>
                 <TextFiledsmall name='salt1' onChange={handleChange} />
                 <TextFiledsmallWhite name='salt2' onChange={handleChange} />
-                <label className='inline-block py-1  text-justify ' >Sodium(g)</label>
+                <label className='inline-block py-1  text-justify font-semibold' >Sodium(g)(Required)</label>
                 <TextFiledsmall name='sodium1' onChange={handleChange} />
                 <TextFiledsmallWhite name='sodium2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Trans Fat(g)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Trans Fat(g)(Required)</label>
                 <TextFiledsmall  name='transFat1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='transFat2' onChange={handleChange} />
-                <label className='inline-block py-1  text-justify ' >Ash</label>
+                <label className='inline-block py-1  text-justify font-semibold' >Ash(Required)</label>
                 <TextFiledsmall name='ash1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='ash2' onChange={handleChange} />
                 </div>
                 <div className='grid float-start gap-0 grid-cols-2 w-full p-2 sm:w-full mb-20'>
-                <label className='inline-block text-justify ml-0 py-3  ' >WHO WPRO foodcode Product</label>
+                <label className='inline-block text-justify ml-0 py-3  font-semibold' >WHO WPRO foodcode Product</label>
                 <TextFiledWhite2  name='WPROfoodcode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO WPRO permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >WHO WPRO permitted</label>
                 <TextFiledWhite2  name='WPROPermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO WPRO permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >WHO WPRO permitted Remark</label>
                 <TextFiledWhite2  name='WPROPermittedRemark' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO SEARO foodcode Product</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >WHO SEARO foodcode Product</label>
                 <TextFiledWhite2 name='SEAROfoodcode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO SEARO permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >WHO SEARO permitted</label>
                 <TextFiledWhite2 name='SEAROpermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3  ' >WHO SEARO permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3  font-semibold' >WHO SEARO permitted Remark</label>
                 <TextFiledWhite2 name='SEAROpermittedRemark' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >SL food Code</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >SL food Code</label>
                 <TextFiledWhite2 name='SLfoodCode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >SL permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >SL permitted</label>
                 <TextFiledWhite2 name='SLpermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3  ' >SL foodcode permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3  font-semibold' >SL foodcode permitted Remark</label>
                 <TextFiledWhite2  name='SLfoodcodePermittedRemark' onChange={handleChange} />
                 </div>
-                <h1 className='text-2xl lg:ml-8 mb-2  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Pack Images</h1>
+                <h1 className='text-2xl lg:ml-8 sm:ml-40  md:mr-50 text-left font-semibold text-sidebarGreen'>Upload Pack Images</h1>
                 <div className='py-2'>
     
                 <div className='inline-block'>
                     <UploadImage onChangeImagesFile={handleImageFile} />
                     {/* <UploadImage /> */}
+                    <div className='py-2'>
+                    <h1 className='text-2xl lg:ml-8  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Advertisement Video</h1>
+                      </div>
+                      <div className='p-2 lg:ml-6 '>
+                      <VideoUpload handleFileChange={handleFileChange}/>
+                
+                </div>
                 </div>   
                 </div>
             </div>

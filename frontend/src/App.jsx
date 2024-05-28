@@ -8,7 +8,7 @@ import AddedProduct from './pages/Annotator/AddedProduct';
 import Allvideos from './pages/Annotator/Allvideos';
 import AnnotatedVideos from './pages/Annotator/AnnotatedVideos';
 import AnnotationTable from './pages/Annotator/AnnotationTable';
-import ProductDetails from './pages/Annotator/ProductDetails';
+import ProductDetails from './pages/Annotator/EditProductDetails';
 import UnannotatedVideos from './pages/Annotator/UnannotatedVideos.jsx';
 
 import { default as Login } from './pages/test/Login.jsx';
@@ -58,8 +58,8 @@ import AddUser from './pages/Admin/AddUser.jsx';
 import AllUsers from './pages/Admin/AdminDashboard.jsx';
 import VideoHistory from './pages/Industry/VideoHistory.jsx';
 
-import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
 import ReannotateVideos from './pages/Annotator/ReannotateVideos.jsx';
+import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
 
 
 
