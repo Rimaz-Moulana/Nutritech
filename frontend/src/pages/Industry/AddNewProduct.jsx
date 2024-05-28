@@ -317,7 +317,7 @@ export default function ProductDetails() {
             <div className='flex-inline mt-1 md:w-1/2'>
             <div className='text ml-64'>
             <label className='inline-block pt-5 text-xl font-semibold'>Per 100g/ml</label>
-            <label className='inline-block lg:px-[26%] sm:px-[13.5%] pt-5 text-xl font-semibold'>Per Serving</label>
+            <label className='inline-block lg:px-[17%] md:px[5%] px-[14.1%]  sm:px-[5%] pt-5 text-xl font-semibold'>Per Serving</label>
             </div>
                 <div className='grid float-start gap-0 grid-cols-3 p-3'>
                 <label className='inline-block py-1 text-justify font-semibold' >Energy(kcal)(Required)</label>
