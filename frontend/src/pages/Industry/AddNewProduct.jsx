@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import Swal from 'sweetalert2'
 import UploadImage from '../../components/UploadImage/UploadImageIndustry'
 import VideoUpload from '../../components/UploadVideo/VideoUploadIndustry'
 import DropDown from '../../components/fields/dropdown'
@@ -218,6 +219,18 @@ export default function ProductDetails() {
               const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
               console.log(response.data);
               setUploadStatus("Product uploaded successfully!");
+              Swal.fire({
+                icon: 'success',
+                title: 'Product uploaded successfully!',
+                showConfirmButton: false,
+                timer: 2000, 
+                customClass: {
+                  popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+                },
+                iconColor: '#294B29',
+              });
+              window.history.back();
+    
               }catch(error){
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');
