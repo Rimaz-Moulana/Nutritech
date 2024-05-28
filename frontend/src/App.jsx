@@ -60,7 +60,7 @@ import VideoHistory from './pages/Industry/VideoHistory.jsx';
 
 import ReannotateVideos from './pages/Annotator/ReannotateVideos.jsx';
 import ReviewedVideos from './pages/ExpertPanel/ReviewedVideos.jsx';
-
+import Reports from "./pages/Researcher/Report.jsx";
 
 
 import './App.css';
@@ -138,6 +138,7 @@ function App(){
               <Route path='/reviewedvideos' element={<ReviewedVideos />} />
 
               <Route path='/product/view/:size/:product/:brand/:unit' element={<ViewProductDetails />} />
+              <Route path='/reports' element={<Reports />} />
             {/* </Route> */}
         </Routes>
     </BrowserRouter>

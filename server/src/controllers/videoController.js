@@ -256,6 +256,17 @@ exports.postExpertComment= async (req,res)=>{
     }
 }
 
+exports.finalCommentVideos = async(req,res)=>{
+  try{
+    const videos = await VideoService.finalCommentVideos();
+    res.json(videos);
+  }
+  catch(error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+
+}
 
 
 exports.postFinalComment= async (req,res)=>{

@@ -1,11 +1,11 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import edit from '../../assets/Images/edit.png';
 import home from '../../assets/Images/home.png';
 import menu from '../../assets/Images/menu.png';
 import foodproducts from '../../assets/Images/products.png';
 import video from '../../assets/Images/video.png';
-import edit from '../../assets/Images/edit.png'
-import axios from 'axios';
 
 
 
@@ -216,7 +216,7 @@ const Sidebar = ({type,onValueChange}) => {
         } else if (index === navResearcher.findIndex((item) => item.text === 'Rules & Regulations')) {
           navigate(`/rules/${type}`);
         }  else if (index===navResearcher.findIndex((item)=>item.text === "Reports")){
-    
+          navigate('/reports');
         } else {
           navigate('/researcherhome');
         }

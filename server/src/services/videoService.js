@@ -223,6 +223,26 @@ exports.postComment = async (videoId, comments, email, req) => {
   }
 };
 
+exports.finalCommentVideos = async(req,res)=>{
+  try{
+    return await VideoModel.findByIdAndUpdate(
+      {
+        $set: {
+          finalflag:finalflag,
+          status:finalstatus
+        }
+      },
+      {
+        new: true
+      }
+    )
+  }
+  catch (error) {
+    console.error(`Error saving comment: ${error.message}`);
+    throw error;
+  }
+}
+
 exports.postMessage = async (videoId, comments, email, req) => {
   try {
     console.log(comments);
