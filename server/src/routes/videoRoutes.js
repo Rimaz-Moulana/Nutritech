@@ -48,6 +48,7 @@ router.post('/comment/:videoId', videoController.postExpertComment );
 router.post('/message/:videoId', videoController.postExpertMessage );
 router.post('/reply/:videoId', videoController.postIndustryReply );
 router.post('/finalcomment/:videoId', videoController.postFinalComment);
-router.post("/finalcomment", videoController.finalCommentVideos)
+router.get("/finalcomment", videoController.finalCommentVideos)
+router.get("/report/:videoId", videoController.videoReport)
 router.post('/finalflag/:videoId', videoController.updateExpertHeadFlagReview );
 module.exports = router;

@@ -268,6 +268,18 @@ exports.finalCommentVideos = async(req,res)=>{
 
 }
 
+exports.videoReport = async (req,res)=>{
+  try{
+    const videoId =req.params.videoId;
+    // console.log(videoId);
+    const videoDetails = await VideoService.VideoReport(videoId);
+    res.json(videoDetails);
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
 
 exports.postFinalComment= async (req,res)=>{
   try {

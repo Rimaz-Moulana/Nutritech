@@ -9,16 +9,7 @@ export default function LogTable() {
   const [product, setProducts] = useState([]);
   const [selectedProductIndex, setSelectedProductIndex] = useState(null);
   const [error, setError] = useState(null);
-
-  // setProducts(products);
-  const openDetailsModal = (index) => {
-    setSelectedProductIndex(index);
-  };
-
-  const closeDetailsModal = () => {
-    setSelectedProductIndex(null);
-  };
-
+  
   useEffect(() => {
     // Fetch data when the component mounts
     fetchData();
@@ -39,7 +30,7 @@ export default function LogTable() {
   const filterKeys = ['_id', 'createdTime', 'CreatedData', '__v'];
 
   const handleEdit = (videoId) => {
-    navigate(`/product/${videoId}`);
+    navigate(`/reportsdownload/${videoId}`);
   };
 
 //   const handleUrlImage = (inputurl) => {
@@ -130,7 +121,7 @@ export default function LogTable() {
                   <div className="text-center">
                     <button
                       className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2'
-                      onClick={() => openDetailsModal(index)}>View & Download Reports</button>
+                      onClick={() => handleEdit(product._id)}>View & Download Reports</button>
                     {/* <button
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
                       onClick={() => handleEdit(product._id)}>Edit</button> */}
