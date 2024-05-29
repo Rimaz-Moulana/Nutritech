@@ -68,7 +68,7 @@ export default function LogTable() {
         <table className="min-w-full table-auto divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th scope="col" className="px-6 py-3 text-lg font-medium text-black uppercase tracking-wider">
+              <th scope="col" className="px-2 py-3 text-lg font-medium text-black uppercase tracking-wider">
                 Product & Brand Name 
               </th>
               <th scope="col" className="px-6 py-3 text-lg font-medium text-black uppercase tracking-wider">

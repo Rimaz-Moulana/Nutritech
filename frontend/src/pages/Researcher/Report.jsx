@@ -73,7 +73,7 @@ function Home() {
         <div className='flex mt-20 justify-between'>
         <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Annotated Vidoes</h1>
         </div>
-        <div className='w-full mb-10 sm:w-3/4 ml-0 h-full z-10 '>
+        <div className='w-full lg:mb-10 lg:ml-5 sm:w-[90%] h-full z-10 '>
         {isLoading ? (
           <p>Loading...</p>
         ) : error ? (
