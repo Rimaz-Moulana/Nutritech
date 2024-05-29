@@ -116,7 +116,7 @@ function Row({
       </div>
 
       <div className="relative h-full  border-gray-200 border-1 rounded-sm">
-          <label id='reccomendation' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white px-3">Suggesions</label>
+          <label id='reccomendation' htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white px-3">Comments</label>
             <textarea type="text" id="small-input" className="block w-[100%] lg:w-96 h-60 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required onChange={handleRecommendationChange}></textarea>
           </div>
 </div>

@@ -10,7 +10,7 @@ const getCurrentDateTime = () => {
 const padZero = (num) => (num < 10 ? `0${num}` : num);
 
 exports.getAnnotatorAllVideos = async (req, res) => { 
-    return await VideoModel.find({ status: { $in: ['annotated', 'unannotated','red','green','reannotate'] } });
+    return await VideoModel.find({ status: { $in: ['annotated', 'unannotated','Red','Green','reannotate'] } });
 };
 
 
@@ -19,7 +19,7 @@ exports.getAnnotatorUnannotatedVideos = async(req,res)=>{
 }
 
 exports.getAnnotatorAnnotatedVideos = async(req,res)=>{
-  return await VideoModel.find({ status:{ $in: ['annotated','red','green']} })
+  return await VideoModel.find({ status:{ $in: ['annotated','Red','Green']} })
 }
 
 exports.getAnnotatorReannotateVideos = async(req,res)=>{
@@ -49,7 +49,7 @@ exports.getsensormanagernewvideos= async(req,res)=>{
 
 }
 exports.getsensormanagerallvideo= async(req,res)=>{
-  return await VideoModel.find({ status:{ $in: ['pending','unannotated','annotated','red','green','reannotate']} });
+  return await VideoModel.find({ status:{ $in: ['pending','unannotated','annotated','Red','Green','reannotate']} });
 
 }
 
@@ -159,7 +159,7 @@ exports.getSimilarProductAds = async (videoId) => {
       brand,
       product,
       variation,
-      status: { $in: ['annotated', 'unannotated', 'reannotate','pending','green','red'] },
+      status: { $in: ['annotated', 'unannotated', 'reannotate','pending','Green','Red'] },
       _id: { $ne: videoId } // Exclude the current video from the results
     });
 
@@ -174,7 +174,7 @@ exports.getSimilarProductAds = async (videoId) => {
 exports.getAll = async (req, res) => {
     return await VideoModel.find({
       brand: 'Maggi',
-      status: { $in: ['annotated', 'unannotated', 'reannotate', 'pending', 'green', 'red'] }
+      status: { $in: ['annotated', 'unannotated', 'reannotate', 'pending', 'Green', 'Red'] }
     }); 
 };
 
@@ -202,14 +202,14 @@ exports.getAnnotated = async (req, res) => {
 exports.getGreen = async (req, res) => {
   return await VideoModel.find({
     brand: 'Maggi',
-    status: 'green' }
+    status: 'Green' }
   ); 
 };
 
 exports.getRed = async (req, res) => {
   return await VideoModel.find({
     brand: 'Maggi',
-    status: 'red' }
+    status: 'Red' }
   ); 
 };
 
@@ -282,12 +282,12 @@ exports.updateFinalReview = async (videoId,finalflag ) => {
 
 
 exports.getAllRedFlagVideos= async(req,res)=>{
-  return await VideoModel.find({ status: 'red' });
+  return await VideoModel.find({ status: 'Red' });
 
 }
 
 exports.getAllGreenFlagVideos= async(req,res)=>{
-  return await VideoModel.find({ status: 'green' });
+  return await VideoModel.find({ status: 'Green' });
 
 }
 

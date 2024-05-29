@@ -104,7 +104,7 @@ function RowHistory({ videoId, usertype }) {
                   <th >Time Stamp</th>
                   <th>Regulation</th>
                   <th className='w-[30%]'>Details</th>
-                  <th className='w-[30%]'>Recommendation</th>
+                  <th className='w-[30%]'>Comments</th>
                   {usertype !== "annotator" && usertype !== "industry" && videoData && (!videoData[0]?.reannotations || videoData[0]?.reannotations.length === 0) && (
                     <th className='w-[20%]'>Decision</th>
                   )}
@@ -118,8 +118,8 @@ function RowHistory({ videoId, usertype }) {
                       <>
                         <td>{annotation.timestamp}</td>
                         <td>{annotation.rule}</td>
-                        <td className="p-4 text-left" style={{ wordWrap: 'break-word' }}>{annotation.details}</td>
-                        <td className="p-6 text-left" style={{ wordWrap: 'break-word' }}>{annotation.recommendation}</td>
+                        <td className="p-4 text-center" style={{ wordWrap: 'break-word' }}>{annotation.details}</td>
+                        <td className="p-6 text-center" style={{ wordWrap: 'break-word' }}>{annotation.recommendation}</td>
                         {annotation.acceptance.some(acc => acc.user === email) ? (
                           <td>{annotation.acceptance.find(acc => acc.user === email).decision}</td>
                         ) : (

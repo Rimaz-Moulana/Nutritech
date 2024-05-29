@@ -115,7 +115,7 @@ const handleMessage = () => {
           </div>
         )}
 
-<ViewComment videoId={videoId} type={"comment"}/>
+        <ViewComment videoId={videoId} type={"comment"}/>
           <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"comment"}/>
         </div>
@@ -125,8 +125,8 @@ const handleMessage = () => {
         
       </div>
       </div>
-      <div className="mt-16 " >
-        <h1 className='text-2xl font-bold text-sidebarGreen'>Decision for Video</h1>
+      <div className="mt-16 p-4 bg-gray-200 rounded h-fit border-gray-800" >
+        <h1 className='text-2xl font-bold text-sidebarGreen '>Decision for Video</h1>
         <VideowithReview Id={videoId} text="expert" type="videoDecision"/>
       </div>
 
