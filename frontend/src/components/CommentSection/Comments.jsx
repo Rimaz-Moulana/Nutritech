@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import axios here
 import Swal from 'sweetalert2';
 
-function Comments({ videoId, type,section }) {
+function Comments({ videoId, type,section,onClose}) {
   const [comment, setComment] = useState('');
   const [reply,setReply]=useState('');
   const [loading, setLoading] = useState(false);
@@ -41,7 +41,7 @@ function Comments({ videoId, type,section }) {
     setComment(newComment);
     // localStorage.setItem('savedComment', newComment);
   };
-
+console.log(section);
   const handleSubmit = async () => {
     try {
       if (comment.trim() !== '') {
@@ -75,6 +75,7 @@ function Comments({ videoId, type,section }) {
         },
         iconColor: '#294B29',
       });
+     
 
       // window.history.back();
       
@@ -97,8 +98,8 @@ function Comments({ videoId, type,section }) {
         <div>
           <textarea
             placeholder={`Type ${type}...`}
-            className='w-full sm:w-1/2 ml-8 h-16 text-black'
-            // {type !== "message" && required}
+            className='w-[75%] h-24 ml-8  text-black'
+            required={type !== "message"}
             value={comment}
             onChange={handleCommentChange}
           />

@@ -162,36 +162,35 @@ function RowHistory({ videoId, usertype }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {videoData[0].reannotations.map((reannotation, index) => (
-                      <tr key={`reannotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
-                        {reannotation.rule !== "" && (
-                          <>
-                            <td>{reannotation.timestamp}</td>
-                            <td>{reannotation.rule}</td>
-                            <td style={{ wordWrap: 'break-word' }}>{reannotation.details}</td>
-                            <td>{reannotation.recommendation}</td>
-                            {reannotation.acceptance.some(acc => acc.user === email) ? (
-                          <td>{reannotation.acceptance.find(acc => acc.user === email).decision}</td>
-                        ) : (
-                          
-                            <td className='" flex items-end justify-center mt-4 z-10 h-full"'>
-                              <button
-                                className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
-                                onClick={() => handleDecision("Agree", reannotation, "annotations")}>
-                                Agree
-                              </button>
-                              <button className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                onClick={() => handleDecision("Disagree", reannotation, "annotations")}>
-                                Disagree
-                              </button>
-                            </td>
-                          
-                        )}
-                            
-                          </>
-                        )}
-                      </tr>
-                    ))}
+                  {videoData[0].reannotations.map((reannotation, index) => (
+  <tr key={`reannotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+    {reannotation.rule !== "" && (
+      <>
+        <td>{reannotation.timestamp}</td>
+        <td>{reannotation.rule}</td>
+        <td style={{ wordWrap: 'break-word' }}>{reannotation.details}</td>
+        <td>{reannotation.recommendation}</td>
+        {Array.isArray(reannotation.acceptance) && reannotation.acceptance.some(acc => acc.user === email) ? (
+          <td>{reannotation.acceptance.find(acc => acc.user === email).decision}</td>
+        ) : (
+          <td className="flex items-end justify-center mt-4 z-10 h-full">
+            <button
+              className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              onClick={() => handleDecision("Agree", reannotation, "annotations")}>
+              Agree
+            </button>
+            <button
+              className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              onClick={() => handleDecision("Disagree", reannotation, "annotations")}>
+              Disagree
+            </button>
+          </td>
+        )}
+      </>
+    )}
+  </tr>
+))}
+
                   </tbody>
                 </table>
               </div>

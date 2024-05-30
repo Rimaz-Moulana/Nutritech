@@ -421,7 +421,7 @@ let greenCount = 0;
 let endpoint;
 let data;
 
-if (Data.panelstatus && Data.panelstatus.length > 0) {
+if (Data.panelstatus && Data.panelstatus.length > 0 && userData.role==="expert head") {
   for (let i = 0; i < Data.panelstatus.length; i++) {
     if (Data.panelstatus[i].status === "red") {
       redCount += 1;
@@ -435,9 +435,7 @@ if (Data.panelstatus && Data.panelstatus.length > 0) {
     data = {
       finalflag: {
         status: "Red",
-        email: email,
-        expertreviewedtime: getCurrentDateTime(),
-        expertrevieweddate: new Date().toLocaleDateString()
+        
       }
     };
   } else if (greenCount > redCount) {
@@ -445,9 +443,15 @@ if (Data.panelstatus && Data.panelstatus.length > 0) {
     data = {
       finalflag: {
         status: "Green",
-        email: email,
-        expertreviewedtime: getCurrentDateTime(),
-        expertrevieweddate: new Date().toLocaleDateString()
+        
+      }
+    };
+  }else{
+    endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
+    data = {
+      finalflag: {
+        status: "No flag",
+        
       }
     };
   }
@@ -522,7 +526,7 @@ if (endpoint && data) {
               <div className="shadow bg-white appearance-none border-2 rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">80g</div>
             </div>
           </div>
-          {type !== "videoDecision" && type!=="expertDecision" && text!=="experthistory" && Data.finalflag && Data.finalflag.length !== 0 && (
+          {/* {type !== "videoDecision" && type!=="expertDecision" && text!=="experthistory" && Data.finalflag && Data.finalflag.length !== 0 && (
             <div className="md:flex md:items-center mb-4 gap-4">
               <div className="md:w-1/3">
                 <label className="block text-black font-bold text-left mb-1 md:mb-0">Flag</label>
@@ -534,7 +538,7 @@ if (endpoint && data) {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
           {productData && productData.length > 0 && productData[0].healthfact && (
             <div className="md:flex md:items-center mb-4">
               <div className="md:w-1/3">

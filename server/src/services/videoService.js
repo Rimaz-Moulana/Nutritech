@@ -27,9 +27,8 @@ exports.getAnnotatorReannotateVideos = async(req,res)=>{
 }
 
 exports.getAnnotatedVideosForExpert = async(req,res)=>{
-  return await VideoModel.find({ status:'annotated'})
+  return await VideoModel.find({ status:{ $in: ['No flag','Red','Green']}})
 }
-
 
 
 exports.getAnnotationVideo = async(videoId)=>{
@@ -194,7 +193,7 @@ exports.getUnannotated = async (req, res) => {
 
 exports.getAnnotated = async (req, res) => {
   return await VideoModel.find({
-    brand: 'Maggi',
+    // brand: 'Maggi',
     status: 'annotated' }
   ); 
 };

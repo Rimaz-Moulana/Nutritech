@@ -8,6 +8,8 @@ import Rule from '../../components/Rule';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 import Sidebar from '../../components/sidebar/SideBar';
 
+
+
 function NewVideos() {
 
   const [videoData, setVideoData] = useState([]);
@@ -18,6 +20,21 @@ function NewVideos() {
   });
   const email  = localStorage.getItem('email');
 
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          setUserData(response.data); // Setting the response data to the state
+       } catch (error) {
+          console.error('Error fetching user:', error);
+       }
+    };
+  
+    fetchUser();
+}, []);
+
+
   const handleCheckboxChange = () => {
     const newCheckedState = !isChecked;
     setIsChecked(newCheckedState);
@@ -27,23 +44,29 @@ function NewVideos() {
 
   const navigate= useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
-        const data = await response.json();
-        const filteredData = data.filter(video => {
-          return !video.comment.some(comment => comment.commenter === email);
+  const fetchData = async (url, email, setVideoData, setData) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      const filteredData = data.filter(video => {
+          return !video.panelstatus.some(status => status.email === email);
         });
-        setVideoData(data);
-        setData(filteredData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+      setVideoData(data);
+      setData(filteredData);
+      console.log(filteredData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
   
-    fetchData();
-  }, [email]); // Add email to the dependency array to re-fetch data when email changes
+  useEffect(() => {
+    const url = userData.role === "expert head" 
+      ? 'http://localhost:3000/api/videos/annotatedvideosExpert' 
+      : 'http://localhost:3000/api/videos/allAnnotatedUploadedVideos';
+    
+    fetchData(url, email, setVideoData, setData);
+  }, [email, userData.role, setVideoData, setData]); // Add dependencies
   
   const handleValueChange = (value) => {
     console.log(value)

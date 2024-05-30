@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import Navbar from '../../components/navbar/Navbar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 import Sidebar from '../../components/sidebar/SideBar';
+import axios from 'axios';
 
 function ReviewedVideos() {
   const [Data, setData] = useState([]);
@@ -11,6 +12,19 @@ function ReviewedVideos() {
     return JSON.parse(localStorage.getItem('isChecked')) || false;
   });
   const email  = localStorage.getItem('email');
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          setUserData(response.data); // Setting the response data to the state
+       } catch (error) {
+          console.error('Error fetching user:', error);
+       }
+    };
+  
+    fetchUser();
+}, []);
 
   const handleCheckboxChange = () => {
     const newCheckedState = !isChecked;
@@ -19,27 +33,30 @@ function ReviewedVideos() {
     localStorage.setItem('isChecked', JSON.stringify(newCheckedState));
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
-        const data = await response.json();
-  
-        // Filter out videos where the commenter's email doesn't match the user's email
-        const filteredData = data.filter(video => {
-          return video.comment.some(comment => comment.commenter === email) && video.status ==="annotated";
+  const fetchData = async (url, email, setData) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      const filteredData = data.filter(video => {
+          return video.panelstatus.some(status => status.email === email);
         });
+      // setVideoData(data)
+      setData(filteredData);
+      console.log(filteredData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
   
-        // Update the state with the filtered data
-        // setVideoData(data);
-        setData(filteredData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-  
-    fetchData();
-  }, [email]); // Add email to the dependency array to re-fetch data when email changes
+  useEffect(() => {
+    const url = userData.role === "expert head" 
+      ? 'http://localhost:3000/api/videos/annotatedvideosExpert' 
+      : 'http://localhost:3000/api/videos/allAnnotatedUploadedVideos';
+    
+    fetchData(url, email, setData);
+  }, [email, userData.role, setData]); // Add dependencies
+
   const handleValueChange = (value) => {
     console.log(value)
     if(value==true){

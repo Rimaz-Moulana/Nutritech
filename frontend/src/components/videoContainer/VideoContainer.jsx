@@ -235,7 +235,7 @@ const filteredVideos = videoData?.filter((video) => {
             </div>
              )}
 
-          {(video.status === 'annotated' && type==="expertnew") &&(
+          {((video.status === 'annotated'|| video.status === 'Red'||video.status === 'Green' || video.status === 'No flag') && type==="expertnew") &&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
               <img src={pen} alt="Annotated" onClick={() => handleApprove(video._id)}/>
             </div>
@@ -428,7 +428,7 @@ const filteredVideos = videoData?.filter((video) => {
                  onClick={() => handleAnnotate(video._id,"reannotation")}
                >Reannotate</button>
              )}
-             {(video.status === 'annotated' || video.status==="red" || video.status==="green" )&& type!=="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertred" && type!=="expertnew" && type!=="history" && type!=="expertreviewed" && (
+             {(video.status === 'annotated' || video.status==="Red" || video.status==="Green" )&& type!=="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertred" && type!=="expertnew" && type!=="history" && type!=="expertreviewed" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => ViewAnnotate(video._id)}
@@ -449,7 +449,7 @@ const filteredVideos = videoData?.filter((video) => {
              >View History</button>
              )}
 
-              {video.status === 'annotated' && type==="expertnew" && type!=="history" && (
+              {(video.status === 'annotated'|| video.status === 'Red'||video.status === 'Green' || video.status === 'No flag') && type==="expertnew" && type!=="history" && (
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
                  onClick={() => handleApprove(video._id)}

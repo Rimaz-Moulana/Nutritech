@@ -266,7 +266,7 @@ function ViewComment({ videoId, type }) {
         </table>
       )}
 
-      {((type !== "annotator" && !Data.finalcomment) || (Data.reply.length > 0 && type !== "industry")) && (
+      {((type !== "annotator" && !Data.finalcomment) || (Data && Data.reply && Data.reply.length > 0 && type !== "industry")) && (
         <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
           <h1></h1>
           <Comments type={type} videoId={videoId} />
