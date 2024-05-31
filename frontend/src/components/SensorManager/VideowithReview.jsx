@@ -433,26 +433,17 @@ if (Data.panelstatus && Data.panelstatus.length > 0 && userData.role==="expert h
   if (redCount > greenCount) {
     endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
     data = {
-      finalflag: {
-        status: "Red",
-        
-      }
+      finalflag: "Red",
     };
   } else if (greenCount > redCount) {
     endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
     data = {
-      finalflag: {
-        status: "Green",
-        
-      }
+      finalflag: "Green",
     };
   }else{
     endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
     data = {
-      finalflag: {
-        status: "No flag",
-        
-      }
+      finalflag: "No flag"
     };
   }
 }
@@ -708,14 +699,14 @@ if (endpoint && data) {
             )}
           </>
         // )
-      ) : ( Data.status==="Red"? (
+      ) : ( Data.finalflag==="Red"? (
         <div className="flex items-center w-full">
         Red Flag
         <img src={red} className="h-4 w-4 ml-4" alt="" />
       </div>
   
          ):(
-          Data.status==="Red"?  (
+          Data.finalflag==="Green"?  (
           <div className="flex w-full">
          Green Flag
          <img src={green} className="h-4 w-4 ml-4" alt="" />

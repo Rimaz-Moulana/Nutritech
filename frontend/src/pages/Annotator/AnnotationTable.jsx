@@ -232,7 +232,7 @@ function AnnotationTable() {
         {category === "reannotation" && (
           <div className='w-full p-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
           <h1 className='p-2'>Annotation History</h1>
-            <RowHistory videoId={videoId}/>
+            <RowHistory videoId={videoId}usertype={"annotator"}/>
         </div>
         )}
       

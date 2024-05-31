@@ -44,14 +44,46 @@ function NewVideos() {
 
   const navigate= useNavigate();
 
+  // const fetchData = async (url, email, setVideoData, setData) => {
+  //   try {
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+      
+  //     const filteredData = data.filter(video => {
+  //         return !video.panelstatus.some(status => status.email === email);
+  //       });
+  //     setVideoData(data);
+  //     setData(filteredData);
+  //     console.log(filteredData);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+  
+  // useEffect(() => {
+  //   const url = userData.role === "expert head" 
+  //     ? 'http://localhost:3000/api/videos/annotatedvideosExpert' 
+  //     : 'http://localhost:3000/api/videos/allAnnotatedUploadedVideos';
+    
+  //   fetchData(url, email, setVideoData, setData);
+  // }, [email, userData.role, setVideoData, setData]); // Add dependencies
+  
+
   const fetchData = async (url, email, setVideoData, setData) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      
+  
+      // Filter videos based on the conditions
       const filteredData = data.filter(video => {
-          return !video.panelstatus.some(status => status.email === email);
-        });
+        // If the user is an expert head, no filtering based on panelstatus
+        if (userData.role === "expert head") {
+          return true;
+        }
+        // If the user is not an expert head, apply the filtering
+        return (video.status === "annotated" && !video.panelstatus.some(status => status.email === email));
+      });
+  
       setVideoData(data);
       setData(filteredData);
       console.log(filteredData);
@@ -64,9 +96,10 @@ function NewVideos() {
     const url = userData.role === "expert head" 
       ? 'http://localhost:3000/api/videos/annotatedvideosExpert' 
       : 'http://localhost:3000/api/videos/allAnnotatedUploadedVideos';
-    
+  
     fetchData(url, email, setVideoData, setData);
-  }, [email, userData.role, setVideoData, setData]); // Add dependencies
+  }, [email, userData.role, setVideoData, setData]);
+
   
   const handleValueChange = (value) => {
     console.log(value)
@@ -76,6 +109,7 @@ function NewVideos() {
       setEnlarge(false);
     }
   };
+  console.log(Data);
 
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>

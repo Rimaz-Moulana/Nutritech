@@ -27,7 +27,7 @@ exports.getAnnotatorReannotateVideos = async(req,res)=>{
 }
 
 exports.getAnnotatedVideosForExpert = async(req,res)=>{
-  return await VideoModel.find({ status:{ $in: ['No flag','Red','Green']}})
+  return await VideoModel.find({ status:"annotated"})
 }
 
 
@@ -116,6 +116,63 @@ exports.updateDecisionForUser = async (req, res) => {
     
 
     targetAnnotation.acceptance.push({
+      user: email,
+      decision:decision,
+      date: new Date().toLocaleDateString(),
+      time: getCurrentDateTime(),
+    });
+
+
+    await video.save();
+
+    // res.status(200).json({ message: 'Decision added successfully' });
+  } catch (error) {
+    console.error(`Error saving decision: ${error.message}`);
+    // res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+exports.updateFinalDecisionForUser = async (req, res) => {
+  const { annotation, decision, email, type } = req.body;
+  const { videoId } = req.params;
+  console.log(type)
+  
+// status
+  try {
+    const video = await VideoModel.findById(videoId);
+
+    if (!video) {
+      return res.status(404).json({ message: 'Video not found' });
+      
+    }
+
+    let targetAnnotation;
+    if (type === "reannotations") {
+      
+      targetAnnotation = video.reannotations.find(reann =>
+        reann.timestamp === annotation.timestamp &&
+        reann.rule === annotation.rule &&
+        reann.details === annotation.details &&
+        reann.recommendation === annotation.recommendation
+      );
+
+      
+    } else {
+      targetAnnotation = video.annotations.find(ann =>
+        ann.timestamp === annotation.timestamp &&
+        ann.rule === annotation.rule &&
+        ann.details === annotation.details &&
+        ann.recommendation === annotation.recommendation
+      );
+    }
+
+    // if (!targetAnnotation) {
+    //   return res.status(404).json({ message: 'Annotation not found' });
+    // }
+
+    
+
+    targetAnnotation.finalacceptance.push({
       user: email,
       decision:decision,
       date: new Date().toLocaleDateString(),
@@ -236,14 +293,13 @@ exports.updateReview = async (videoId, panelstatus) => {
 
 
 exports.updateFinalReview = async (videoId,finalflag ) => {
-  const finalstatus=finalflag.status;
+  // const finalstatus=finalflag.status;
   try {
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
         $set: {
           finalflag:finalflag,
-          status:finalstatus
         }
       },
       {
@@ -425,6 +481,8 @@ exports.postMessage = async (videoId, comments, email, req) => {
 
 exports.postFinal = async (videoId, comments, email, req) => {
   try {
+    const video = await VideoModel.findById(videoId);
+    const finalstatus = video.finalflag;
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
@@ -436,6 +494,10 @@ exports.postFinal = async (videoId, comments, email, req) => {
             commenteddate: new Date().toLocaleDateString(),
           },
         },
+        $set: {
+          status:finalstatus,
+          // status:finalstatus
+        }
       },
       { new: true }
     );

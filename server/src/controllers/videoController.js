@@ -153,6 +153,16 @@ exports.updateDecision= async (req,res)=>{
     }
 }
 
+exports.updateFinalDecision= async (req,res)=>{
+  
+  try {
+        const video = await VideoService.updateFinalDecisionForUser(req);
+        res.json(video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 
 

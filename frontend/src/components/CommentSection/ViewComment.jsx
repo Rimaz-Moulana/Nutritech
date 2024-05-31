@@ -53,13 +53,13 @@ function ViewComment({ videoId, type }) {
             <td className='p-2'>Final Comment</td>
             <td className='p-2'>{Data.finalcomment[0].text}</td>
             <td className='p-2'>
-              {Data.finalflag[0].status === "green" && (
+              {Data.status === "Green" && (
                 <>
                   <span>Green</span>
                   {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
                 </>
               )}
-              {Data.finalflag[0].status === "red" && (
+              {Data.status === "Red" && (
                 <>
                   <span>Red</span>
                   {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
@@ -88,13 +88,13 @@ function ViewComment({ videoId, type }) {
               <td className='p-2'>Comment</td>
               <td className='p-2'>{Data.comment[i].text}</td>
               <td className='p-2'>
-                {status === "green" && (
+                {status === "Green" && (
                   <>
                     <span>Green</span>
                     {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
                   </>
                 )}
-                {status === "red" && (
+                {status === "Red" && (
                   <>
                     <span>Red</span>
                     {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
@@ -129,13 +129,13 @@ function ViewComment({ videoId, type }) {
             <td className='p-2'>Final Comment</td>
             <td className='p-2'>{Data.finalcomment[0].text}</td>
             <td className='p-2'>
-              {Data.finalflag[0].status === "green" && (
+              {Data.status === "Green" && (
                 <>
                   <span>Green</span>
                   {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
                 </>
               )}
-              {Data.finalflag[0].status === "red" && (
+              {Data.status === "Red" && (
                 <>
                   <span>Red</span>
                   {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
@@ -194,13 +194,13 @@ function ViewComment({ videoId, type }) {
             <td className='p-2'>Final Comment</td>
             <td className='p-2'>{Data.finalcomment[0].text}</td>
             <td className='p-2'>
-              {Data.finalflag[0].status === "green" && (
+              {Data.status === "Green" && (
                 <>
                   <span>Green</span>
                   {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
                 </>
               )}
-              {Data.finalflag[0].status === "red" && (
+              {Data.status === "Red" && (
                 <>
                   <span>Red</span>
                   {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}

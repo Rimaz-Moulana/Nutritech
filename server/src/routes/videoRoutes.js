@@ -55,6 +55,6 @@ router.post('/reply/:videoId', videoController.postIndustryReply );
 router.post('/finalcomment/:videoId', videoController.postFinalComment);
 router.post('/finalflag/:videoId', videoController.updateExpertHeadFlagReview );
 router.post('/decision/:videoId', videoController.updateDecision );
-
+router.post('/finaldecision/:videoId', videoController.updateFinalDecision );
 
 module.exports = router;
