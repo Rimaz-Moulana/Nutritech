@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
-import GridListView from '../../components/Toggle/GridListView';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function Unannotatedvideos() {
+  const navigate = useNavigate();
   const [unannotatedVideoData, setUnannotatedVideoData] = useState([]);
   let [isEnlarge, setEnlarge] = useState(true);
 
@@ -22,12 +23,36 @@ function Unannotatedvideos() {
   useEffect(() => {
     const fetchUnannotatedVideos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/videos/unannotated-videos');
+        console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+        const response = await fetch('http://localhost:3000/api/videos/unannotated-videos',config);
         if (!response.ok) {
           throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
         }
         const data = await response.json();
         setUnannotatedVideoData(data);
+
+      }else{
+        navigate('/');
+      }
       } catch (error) {
         console.error(error);
       }

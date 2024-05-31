@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../../components/navbar/Navbar';
-import Videowithtext from '../../components/AnnotationTable/Videowithtext';
-import RowHistory from '../../components/AnnotationTable/RowHistory';
-import { useParams } from 'react-router-dom';
-import Comments from '../../components/CommentSection/Comments';
-import ViewComment from '../../components/CommentSection/ViewComment';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import RowHistory from '../../components/AnnotationTable/RowHistory';
+import Videowithtext from '../../components/AnnotationTable/Videowithtext';
+import ViewComment from '../../components/CommentSection/ViewComment';
+import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function History() {
+  const navigate = useNavigate();
   const { videoId } = useParams();
   const [data, setData] = useState([]);
   let [isEnlarge, setEnlarge] = useState(true);
@@ -22,8 +22,32 @@ function History() {
   useEffect(() => {
     const fetchAnnotations = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`);
+        console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`, config);
         setData(response.data.annotations);
+
+      }else{
+        navigate('/');
+      }
       } catch (error) {
         console.error('Error fetching annotations:', error);
       } finally {
@@ -42,6 +66,10 @@ function History() {
       setEnlarge(false);
     }
   };
+
+  const handleViewDetails = (size,product,brand,unit) => {
+    navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
+  }
 
   return (
     <div className='bg-backgroundGreen w-full lg:overflow-x-hidden min-w-screen flex min-h-screen sm:text-sm'> {/* Make the main container a flex column */}
@@ -70,7 +98,7 @@ function History() {
           <Comments videoId={videoId} type={"reply"}/>
         </div> */}
       <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
-        <button
+        <button onClick={()=>handleViewDetails(data[0].size,data[0].product,data[0].brand,data[0].unit)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details

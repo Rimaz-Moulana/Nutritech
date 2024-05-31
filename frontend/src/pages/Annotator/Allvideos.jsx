@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function Allvideos() {
   const navigate = useNavigate();
@@ -27,8 +27,9 @@ function Allvideos() {
       
       try{
         console.log("fetching session details..");
-      const authData = localStorage.getItem('token');
-      console.log(authData)
+      
+        const authData = localStorage.getItem('token');
+        console.log(authData)
 
       setTimeout(() => {
         // Remove token from local storage after 5 seconds

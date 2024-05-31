@@ -117,14 +117,35 @@ function AnnotationTable() {
     console.log(rowsData);
     e.preventDefault();
     try {
+      console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+      
       if(category==="reannotation"){
         await axios.post(`http://localhost:3000/annotations/reannotation/${videoId}`, {
         reannotations: rowsData,
-      });
+      } , config);
       }else{
         await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
         annotations: rowsData,
-      });
+      }, config);
       }
       
 
@@ -142,6 +163,10 @@ function AnnotationTable() {
       localStorage.removeItem('addedrows');
       localStorage.removeItem('rowsData');
       window.history.back();
+
+    }else{
+      navigate('/')
+    }
     } catch (error) {
       console.error('Error saving annotations:', error);
     }
@@ -150,6 +175,26 @@ function AnnotationTable() {
   const submitNone = async () => {
     // e.preventDefault();
     try {
+      console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
       const response = await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
         annotations: {
           timestamp: '',
@@ -157,7 +202,7 @@ function AnnotationTable() {
           details: '',
           recommendation: '',
         }
-      });
+      }, config );
   
       Swal.fire({
         icon: 'success',
@@ -170,6 +215,11 @@ function AnnotationTable() {
         iconColor: '#294B29',
       });
       window.history.back();
+
+    }
+    else{
+      navigate('/');
+    }
     } catch (error) {
       console.error('Error saving annotations:', error);
     }
@@ -180,12 +230,37 @@ function AnnotationTable() {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+        console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`, config);
         const video = response.data;
         setData(video);
         console.log("Monday 2 ->", video);
         const data = response.data[0].duration;  // Access the data property directly
         setDuration(data);
+
+      }
+      else{
+          navigate('/');
+      }
       } catch (error) {
         console.error('Error fetching Video:', error);
       } 
