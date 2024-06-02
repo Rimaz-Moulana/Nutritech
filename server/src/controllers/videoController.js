@@ -142,6 +142,29 @@ exports.getsensormanagernallvideos= async (req,res)=>{
     }
 }
 
+exports.updateDecision= async (req,res)=>{
+  
+  try {
+        const video = await VideoService.updateDecisionForUser(req);
+        res.json(video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.updateFinalDecision= async (req,res)=>{
+  
+  try {
+        const video = await VideoService.updateFinalDecisionForUser(req);
+        res.json(video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
 
 exports.saveSensorManagerReview= async (req,res)=>{
   try {

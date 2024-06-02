@@ -11,6 +11,7 @@ import Message from '../../components/Popup/Message';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import MessagePopup from '../../components/Popup/MessagePopup';
 
 function ReviewVideos() {
   // const navigate= useNavigate();
@@ -19,21 +20,35 @@ function ReviewVideos() {
   const [videoData, setVideoData] = useState([]);
   const [responseData, setResponseData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const email  = localStorage.getItem('email');
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          // const email  = localStorage.getItem('email');
+          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          // console.log("response",response); // Logging the response data directly
+          setUserData(response.data); // Setting the response data to the state
+       } catch (error) {
+          console.error('Error fetching user:', error);
+          // Handle error (e.g., set error state, show error message)
+       }
+    };
+  
+    fetchUser();
+}, []);
 
   console.log(videoId)
 
-//   const [RuleData, setRuleData] = useState([]);
+  const [RuleData, setRuleData] = useState([]);
 
 useEffect(() => {
   const fetchReviewDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
-      setResponseData(response.data);
-      console.log(response.data);
-      //let result = JSON.parse(res);
-      //let firstKeyValues = result.map(obj => obj[Object.keys(obj)[0]]);
-      console.log("hi"+response.data[0].brand+responseData[0])
-      setVideoData(response.data.video);
+      const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+      console.log(response.data[0]);
+      setVideoData(response.data[0]);
     } catch (error) {
       console.error('Error fetching ReviewDetails:', error);
     } finally {
@@ -44,12 +59,7 @@ useEffect(() => {
   fetchReviewDetails();
 }, [videoId]);
 
-    const handlePoductDetails = (size,product,brand,unit) =>{
-      navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
-    }
- 
-  //console.log(videoData)
-  console.log("hir"+responseData)
+
 const handleValueChange = (value) => {
   console.log(value)
   if(value==true){
@@ -63,8 +73,11 @@ const [openModal, setOpenModal] = useState(false);
 const handleMessage = () => {
   setOpenModal(true); // Set openModal state to true to display the modal
 };
+const closePopup = () => {
+  setOpenModal(false);
+};
  
-  // console.log(videoData.reannotations.length);
+
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
     <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
@@ -74,7 +87,7 @@ const handleMessage = () => {
       
       <Navbar type='expert' />
       
-      <div className='flex justify-between z-9999 mt-24'>
+      <div className=' justify-between z-9999 mt-24'>
         <VideowithReview Id={videoId} text="expert"/>
       </div>
       <div className='mt-12 ml-24'>
@@ -83,12 +96,19 @@ const handleMessage = () => {
 
       </div>
 
-<div>
+<div className='flex justify-center gap-[10%]'>
+  <div className='w-1/2 '>
+    {(userData.role ==="expert head" && videoData && videoData.reannotations && videoData.reannotations.length < 1) && (
+      <button
+      className="text-white bg-gradient-to-t justify-center from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 lg:px-8 py-2.5 sm:px-2 "
+        onClick={() => handleMessage(videoId)}
+    >Send a message to annotator for annotating again</button>
+    )}
 {openModal && (
         <div className="fixed border-2 inset-0 z-50 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-10 bg-gray-300">
         <Modal show={openModal} size="sm" onClose={() => setOpenModal(false)} popup>
             <Modal.Header />
-            <Modal.Body className='p-0 shadow justify-center'>
+            <Modal.Body className='p-0 shadow justify-center bg-backgroundGreen'>
               <div className="p-0 text-center">
                 {/* <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" /> */}
                 <Comments videoId={videoId} type={"message"} section={"message"}/>
@@ -96,33 +116,41 @@ const handleMessage = () => {
             </Modal.Body>
           </Modal>
           </div>
+        // <Message videoId={videoId} onClose={closePopup}/>
         )}
 
-<ViewComment videoId={videoId} type={"comment"}/>
+        <ViewComment videoId={videoId} type={"comment"}/>
           <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"comment"}/>
         </div>
-  
+    
+
+      <div>
+        
+      </div>
+      </div>
+      <div className="mt-16 p-4 bg-gray-200 rounded h-fit border-gray-800" >
+        <h1 className='text-2xl font-bold text-sidebarGreen '>Decision for Video</h1>
+        <VideowithReview Id={videoId} text="expert" type="videoDecision"/>
+      </div>
+
+</div>
+   
       <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
+
       <button onClick={() => handlePoductDetails(responseData[0].size,responseData[0].product,responseData[0].brand,responseData[0].unit)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details
                  </button>
+
         <button 
           className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           onClick={() => window.history.back()}
         >
           Cancel
         </button>
-      </div>   
-
-      <div>
-        
-      </div>
-
-</div>
-   
+      </div> 
        
     </div>
   </div>

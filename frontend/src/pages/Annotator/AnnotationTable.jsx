@@ -214,10 +214,10 @@ function AnnotationTable() {
       </div>
       <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='annotator' />
-        <div className='w-full mt-[5%]'>
+        <div className='w-full mt-[2%]'>
         <VideowithReview Id={videoId} text={"video"} type={"annotator"}/>
         </div>
-        <div className='mt-12 mr-8 bg-gray-300'>
+        <div className='mt-0 mr-8 bg-gray-300'>
           
         <div className=''>
         {videoData[0] && videoData[0].message && videoData[0].message.length > 0 && category === "reannotation" && (
@@ -234,12 +234,12 @@ function AnnotationTable() {
         {category === "reannotation" && (
           <div className='w-full p-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
           <h1 className='p-2'>Annotation History</h1>
-            <RowHistory videoId={videoId}/>
+            <RowHistory videoId={videoId}usertype={"annotator"}/>
         </div>
         )}
       
       </div>
-        <div className='px-3 h-full mt-10 text-sm font-semibold text-black mb-8'>
+        <div className='px-3 h-full mt-4 text-sm font-semibold text-black mb-8'>
           <div className='lg:flex-end'>
             {/* <p className='text-lg mb-4'>Does this video violated advertising rules and regulations?</p> */}
             

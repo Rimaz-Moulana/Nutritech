@@ -21,7 +21,6 @@ function VideowithReview({Id,text,type}) {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [panelStatus, setPanelStatus]=useState("");
   const [userEmailExits, setUserEmailExists]=useState(false);
-  const [showButtons, setShowButtons] = useState(false);
 
   const [userData, setUserData] = useState([]);
   useEffect(() => {
@@ -260,7 +259,6 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
         }
       };
     } else {
-      
       endpoint = `http://localhost:3000/api/videos/flag/${videoId}`;
       data = {
         panelstatus: {
@@ -294,6 +292,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     }
   };
   
+  
 
   const handleDelete = async (text) => {
     try {
@@ -313,7 +312,6 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
             }
           };
         } else {
-          setPanelStatus("red");
           endpoint = `http://localhost:3000/api/videos/flag/${videoId}`;
           data = {
             panelstatus: {
@@ -399,12 +397,41 @@ const handlePoductDetails = (size,product,brand,unit) =>{
   navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
 }
 
-  const handleStatus = () => {
-    
-      setShowButtons(true);
-  
-  };
-  console.log(showButtons);
+// const getTheFlag = () => {
+
+
+
+const handleStatus=()=>{
+  {type !== "annotator" && (
+    <div className="flex justify-center gap-6">
+      <button
+        className={`text-white w-auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
+        type="button"
+        onClick={() => { if (!buttonDisabled) handleOpen(text, "red") }}
+      >
+        {text === "expert" && (
+          <div className="flex items-center w-full">
+            Red Flag
+            <img src={red} className="h-4 w-4 ml-4" alt="" />
+          </div>
+        )}
+      </button>
+      <button
+        className={`text-white w-auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2`}
+        type="button"
+        onClick={() => handleOpen(text, "green")}
+        disabled={loading}
+      >
+        {text === "expert" && (
+          <div className="flex w-full">
+            Green Flag
+            <img src={green} className="h-4 w-4 ml-4" alt="" />
+          </div>
+        )}
+      </button>
+    </div>
+  )}
+}
 
 // for(let i=0;i<Data.panelstatus?.length;i++){
 //   if(Data.panelstatus[i].email==email){
@@ -415,53 +442,8 @@ const handlePoductDetails = (size,product,brand,unit) =>{
 // }
 
 // console.log(userEmailExits)
-const userPanelStatus = Data.panelstatus?.find(status => status.email === email);
-let redCount = 0;
-let greenCount = 0;
-let endpoint;
-let data;
-
-if (Data.panelstatus && Data.panelstatus.length > 0 && userData.role==="expert head") {
-  for (let i = 0; i < Data.panelstatus.length; i++) {
-    if (Data.panelstatus[i].status === "red") {
-      redCount += 1;
-    } else if (Data.panelstatus[i].status === "green") {
-      greenCount += 1;
-    }
-  }
-
-  if (redCount > greenCount) {
-    endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
-    data = {
-      finalflag: "Red",
-    };
-  } else if (greenCount > redCount) {
-    endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
-    data = {
-      finalflag: "Green",
-    };
-  }else{
-    endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
-    data = {
-      finalflag: "No flag"
-    };
-  }
-}
-
-if (endpoint && data) {
-  // Make sure to wrap the request in an async function if you're using it inside a React component or another async function
-  const updateFinalFlag = async () => {
-    try {
-      await axios.post(endpoint, data);
-      
-    } catch (error) {
-      console.error('Error updating final flag status:', error);
-    }
-  };
-
-  updateFinalFlag();
-}
-
+const userExistsInPanelStatus = Data.panelstatus?.some(status => status.email === email);
+console.log(userExistsInPanelStatus);
 
   return ( 
     <div className='mt-16 container lg:flex justify-center max-w-screen gap-[15%]'>
@@ -517,7 +499,7 @@ if (endpoint && data) {
               <div className="shadow bg-white appearance-none border-2 rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">80g</div>
             </div>
           </div>
-          {/* {type !== "videoDecision" && type!=="expertDecision" && text!=="experthistory" && Data.finalflag && Data.finalflag.length !== 0 && (
+          {type !== "videoDecision" && type!=="expertDecision" && text!=="experthistory" && Data.finalflag && Data.finalflag.length !== 0 && (
             <div className="md:flex md:items-center mb-4 gap-4">
               <div className="md:w-1/3">
                 <label className="block text-black font-bold text-left mb-1 md:mb-0">Flag</label>
@@ -529,7 +511,7 @@ if (endpoint && data) {
                 </div>
               </div>
             </div>
-          )} */}
+          )}
           {productData && productData.length > 0 && productData[0].healthfact && (
             <div className="md:flex md:items-center mb-4">
               <div className="md:w-1/3">
@@ -583,22 +565,21 @@ if (endpoint && data) {
       </div>
     </>
   )}
-{(type === "videoDecision" || type==="expertDecision") && type!=="annotator"  && (
+{(type === "videoDecision" || type==="expertDecision") && (
   <>
-    {userPanelStatus ? (   
+    {userExistsInPanelStatus ? (   
       
   <>
   
     <div> 
-      {userPanelStatus.status === "red" ? (
+      {userExistsInPanelStatus.status === "red" ? (
         <img src={red} alt="Red status" />
       ) : (
         <img src={green} alt="Green status" />
       )}
     </div> 
-    <div>{userPanelStatus.status}</div>
-    <div>
-    {(Data.finalcomment && Data.finalcomment.length===0 && !showButtons) && (
+    <div>{userExistsInPanelStatus.status}</div>
+    {!Data.finalcomment && type === "expertDecision" && (
       <div>
         <button
           className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
@@ -608,67 +589,22 @@ if (endpoint && data) {
         </button>
       </div>
     )}
-
-     {showButtons && (
-              <div className="flex justify-center gap-6 ">
-                <button
-                  className={`text-white w-auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
-                  type="button"
-                  onClick={() => { if (!buttonDisabled) handleOpen(text, "red") }}
-                >
-                  {text === "expert" && (
-                    <div className="flex items-center w-full">
-                      Red Flag
-                      <img src={red} className="h-4 w-4 ml-4" alt="" />
-                    </div>
-                  )}
-                </button>
-                <button
-                  className={`text-white w-auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2`}
-                  type="button"
-                  onClick={() => handleOpen(text, "green")}
-                  disabled={loading}
-                >
-                  {text === "expert" && (
-                    <div className="flex w-full">
-                      Green Flag
-                      <img src={green} className="h-4 w-4 ml-4" alt="" />
-                    </div>
-                  )}
-                </button>
-              </div>
-            )}
-            </div>
   </>
 )  : (
-      userData.role !== "expert head" ? (
-        
-    //     (userPanelStatus && userPanelStatus.status === "red") ? (
-    //       <>
-
-    //       <div>Red Flaged</div>
-    //       <img src={red} alt="" />
-    //       {(Data.finalcomment && Data.finalcomment.length===0) && (
-    //   // <div>
-    //     <button
-    //       className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
-    //       onClick={handleStatus}
-    //     >
-    //       Change Decision
-    //     </button>
-    //   // </div>
-    // )}
-    //       </>
-    //     ) :
-    //  panelStatus.status === "green" ? (
-    //       <>
-    //       <div>Green Flaged</div>
-    //       <img src={green} alt="" />
-    //       </>
-    //     ) : 
-    // (
+      userData.role === "expert head" ? (
+        panelStatus === "Red" ? (
           <>
-            {(type !== "annotator" || showButtons) && (
+          <div>Red Flaged</div>
+          <img src={red} alt="" />
+          </>
+        ) : panelStatus === "Green" ? (
+          <>
+          <div>Green Flaged</div>
+          <img src={green} alt="" />
+          </>
+        ) : (
+          <>
+            {type !== "annotator" && (
               <div className="flex justify-center gap-6 ">
                 <button
                   className={`text-white w-auto flex ${buttonDisabled ? "bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
@@ -698,27 +634,8 @@ if (endpoint && data) {
               </div>
             )}
           </>
-        // )
-      ) : ( Data.finalflag==="Red"? (
-        <div className="flex items-center w-full">
-        Red Flag
-        <img src={red} className="h-4 w-4 ml-4" alt="" />
-      </div>
-  
-         ):(
-          Data.finalflag==="Green"?  (
-          <div className="flex w-full">
-         Green Flag
-         <img src={green} className="h-4 w-4 ml-4" alt="" />
-       </div>
-       ):(
-        <div className="flex w-full">
-        No Flag
-        
-      </div>
-       )
-       )
-      )
+        )
+      ) : null
     )}
   </>
 )}
