@@ -224,7 +224,7 @@ const filteredVideos = videoData?.filter((video) => {
           )}
 
           {type === 'annotated' && !("industry" === type) && (type!=="expert")&&(
-            <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
+            <div className="h-24 z-50 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
               <img src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
             </div>
           )}

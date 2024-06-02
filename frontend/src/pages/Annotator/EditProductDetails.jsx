@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import DropDownWhite from '../../components/fields/dropdownWhite'
 import TextFiledsmallWhite from '../../components/fields/textFieldSmallWhite'
 import TextFiledWhite from '../../components/fields/textFieldWhite'
@@ -113,7 +114,18 @@ export default function ProductDetails() {
             const response = await axios.put(`http://localhost:3000/api/product/industry/update/${productId}`, formData);
             console.log(response.data);
             setUploadStatus("New Product updated successfully!");
-
+            Swal.fire({
+                icon: 'success',
+                title: 'Product updated successfully!',
+                showConfirmButton: false,
+                timer: 2000, 
+                customClass: {
+                  popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+                },
+                iconColor: '#294B29',
+              });
+              window.history.back();
+    
             // Clear draft data from local storage upon successful submission
             localStorage.removeItem('productDraft');
         } catch(error) {

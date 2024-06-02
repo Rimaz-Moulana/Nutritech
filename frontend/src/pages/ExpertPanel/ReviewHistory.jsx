@@ -8,6 +8,7 @@ import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewHistory() {
+
   const navigate = useNavigate();
   let [isEnlarge, setEnlarge] = useState(true);
   const { videoId } = useParams(); 
@@ -48,13 +49,57 @@ function ReviewHistory() {
     fetchReviewDetails();
   }, [videoId]);
 
+
   const handlePoductDetails = (product, brand, size) => {
     navigate(`/product/view/${size}${product}/${brand}`);
   };
 
+
   const handleValueChange = (value) => {
     setEnlarge(value);
   };
+  useEffect(() => {
+    const fetchReviewDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        setResponseData(response.data);
+      } catch (error) {
+        console.error('Error fetching ReviewDetails:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchReviewDetails();
+  }, [videoId]);
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, [responseData.product, responseData.brand, responseData.size]); // Added dependency array for useEffect
+
+  // const fetchData = async () => {
+  //   setIsLoading(true); // Set loading state to true when fetching data
+  //   setError(null); // Reset error state before fetching data
+  //   try {
+  //     const response = await axios.get(`http://localhost:3000/api/product/view/${responseData.size}/${responseData.product}/${responseData.brand}`);
+  //     //const result = response.data.filter(product => product.unit === unit); 
+  //     //setAllProducts(result);
+  //     setAllProducts(response.data);
+  //     console.log(response.data);
+  //     console.log(allProducts);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //     setError('Error fetching data. Please try again.'); // Set error message
+  //   } finally {
+  //     setIsLoading(false); // Set loading state to false after fetching data
+  //   }
+  // };
+
+  const handlePoductDetails = (product,brand,size,unit) =>{
+    navigate(`/product/view/${size}${product}/${brand}/${unit}`)
+  }
+
+  console.log(allProducts)
  
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
@@ -67,6 +112,7 @@ function ReviewHistory() {
         <div className='mt-12 ml-24'>
           <Annotations videoId={videoId} usertype={"expert"} />
         </div>
+
         <ViewComment videoId={videoId} type={"comment"} />
         <div className="mt-16 " >
         <h1 className='text-2xl font-bold text-sidebarGreen'>Decision for Video</h1>
@@ -86,6 +132,7 @@ function ReviewHistory() {
             Cancel
           </button>
         </div>
+
       </div>
     </div>
   );
