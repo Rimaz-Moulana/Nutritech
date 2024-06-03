@@ -1,12 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
-import ProductTable from '../../components/tables/LogTable';
-import Rule from '../../components/Rule';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function GreenFlag() {
 
@@ -28,9 +24,33 @@ function GreenFlag() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/greenflag');
+      console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+       const response = await fetch('http://localhost:3000/api/videos/greenflag', config);
       const data = await response.json();
       setVideoData(data);
+
+      }else{
+        navigate('/');
+      }
     };
   
     fetchData();

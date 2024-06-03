@@ -4,9 +4,9 @@ import React from 'react';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
-import Sidebar from '../../components/sidebar/SideBar';
 import Navbar from '../../components/navbar/Navbar';
+import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 
 function History() {
@@ -28,12 +28,36 @@ function History() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/videos/history');
+        console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+        const response = await fetch('http://localhost:3000/api/videos/history', config);
         if (!response.ok) {
           throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
         }
         const data = await response.json();
         setVideoData(data);
+
+      }else{
+        navigate('/');
+      }
       } catch (error) {
         console.error(error);
       }

@@ -25,9 +25,33 @@ export default function LogTable() {
   const fetchData = async () => {
     setError(null);
     try {
+      console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
       const response = await axios.get(`http://localhost:3000/api/videos/report/${videoId}`);
       setVideo(response.data);
       console.log(video);
+
+      }else{
+        navigate('/')
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
       setError('Error fetching data. Please try again.'); // Set error message

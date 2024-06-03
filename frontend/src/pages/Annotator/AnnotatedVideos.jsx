@@ -32,7 +32,7 @@ function AnnotatedVideos() {
         // Allvideos.jsx
         console.log("fetching session details..");
         const authData = localStorage.getItem('token');
-        // console.log(authData)
+        console.log(authData)
 
         setTimeout(() => {
           // Remove token from local storage after 5 seconds
@@ -41,8 +41,9 @@ function AnnotatedVideos() {
       }, 7200000); // 2hours
 
       if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
+          const parsedAuthData = JSON.parse(authData);
+          const { accessToken } = parsedAuthData;  // Ensure the structure of parsedAuthData has accessToken
+          console.log(accessToken);
         const config = {
           headers : {
             'Content-Type': 'application/json',
@@ -50,7 +51,10 @@ function AnnotatedVideos() {
           },
           withCredentials: true,
         };
+       // Replace with your actual API endpoint
+           
         const response = await fetch('http://localhost:3000/api/videos/annotated-videos',config);
+        console.log('Data:', response.data);
         const data = await response.json();
         setannotatedVideoData(data);
 

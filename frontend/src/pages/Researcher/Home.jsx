@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
-import ProductTable from '../../components/tables/LogTable';
 import Sidebar from '../../components/sidebar/SideBar';
+import ProductTable from '../../components/tables/LogTable';
 
 function Home() {
 
@@ -32,9 +32,33 @@ function Home() {
   
   const fetchData = async () => {
     try {
-      console.log("hi")
-      const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+      console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+      const response = await axios.get('http://localhost:3000/api/product/getAll' , config); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
       setProducts(response.data);
+
+      }
+      else{
+        navigate('/')
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -43,12 +67,36 @@ function Home() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/videos/history');
+        console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+        const response = await fetch('http://localhost:3000/api/videos/history',config);
         if (!response.ok) {
           throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
         }
         const data = await response.json();
         setVideoData(data);
+
+      }else{
+        navigate("/");
+      }
       } catch (error) {
         console.error(error);
       }
@@ -62,8 +110,8 @@ function Home() {
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <Sidebar type="researcher"/>
       </div>
-      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
-        <div className='p-1'>
+      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-72">
+        <div className='p-5'>
         <Navbar type='researcher' />
         </div>
         <div className=' flex items-end mt-24 mr-4'>
