@@ -25,7 +25,8 @@ export default function LogTable({props}) {
     try {
       console.log("hi")
       console.log("fetching session details..");
-        const authData = localStorage.getItem('token');
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
         // console.log(authData)
 
         setTimeout(() => {

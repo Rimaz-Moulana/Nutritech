@@ -157,25 +157,25 @@ useEffect(() => {
   const fetchUnannotatedVideos = async () => {
     try {
       console.log("fetching session details..");
-        const authData = localStorage.getItem('token');
-        // console.log(authData)
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
 
-        setTimeout(() => {
-          // Remove token from local storage after 5 seconds
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-      }, 7200000); // 2hours
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
 
-      if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
       const response = await fetch('http://localhost:3000/api/videos/unannotated-videos', config);
       if (!response.ok) {
         throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
@@ -201,26 +201,26 @@ useEffect(() => {
   const fetchData = async () => {
     // try {
       // Allvideos.jsx
-        console.log("fetching session details..");
-        const authData = localStorage.getItem('token');
-        // console.log(authData)
+      console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
 
-        setTimeout(() => {
-          // Remove token from local storage after 5 seconds
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-      }, 7200000); // 2hours
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
 
-      if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
       const response = await fetch('http://localhost:3000/api/videos/reannotate-videos', config);
       const data = await response.json();
       setreannotateVideoData(data);

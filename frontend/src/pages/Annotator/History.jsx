@@ -23,25 +23,25 @@ function History() {
     const fetchAnnotations = async () => {
       try {
         console.log("fetching session details..");
-        const authData = localStorage.getItem('token');
-        // console.log(authData)
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
 
-        setTimeout(() => {
-          // Remove token from local storage after 5 seconds
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-      }, 7200000); // 2hours
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
 
-      if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
         const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`, config);
         setData(response.data.annotations);
 

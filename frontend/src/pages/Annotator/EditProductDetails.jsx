@@ -89,7 +89,8 @@ export default function ProductDetails() {
         imageFront: '',
         imageBack: '',
         imageLeft: '',
-        imageRight: ''
+        imageRight: '',
+        uploader:'',
     })
 
     useEffect(() => {
@@ -113,25 +114,25 @@ export default function ProductDetails() {
         console.log(formData)
         try {
             console.log("fetching session details..");
-        const authData = localStorage.getItem('token');
-        // console.log(authData)
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
 
-        setTimeout(() => {
-          // Remove token from local storage after 5 seconds
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-      }, 7200000); // 2hours
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
 
-      if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
             const response = await axios.put(`http://localhost:3000/api/product/industry/update/${productId}`, formData, config);
             console.log(response.data);
             setUploadStatus("New Product updated successfully!");
@@ -224,7 +225,8 @@ export default function ProductDetails() {
             imageFront: '',
             imageBack: '',
             imageLeft: '',
-            imageRight: ''
+            imageRight: '',
+            uploader : "",
         });
     
     }
@@ -232,10 +234,34 @@ export default function ProductDetails() {
     const fetchData = async () => {
         console.log("hi")
         try {
-            const response = await axios.get(`http://localhost:3000/api/product/industry/getProduct/${productId}`);
+            console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+            const response = await axios.get(`http://localhost:3000/api/product/industry/getProduct/${productId}`, config);
             const productData = response.data;
             setFormData(productData);
             console.log(response.data);
+
+    }else{
+        navigate('/');
+    }
         } catch(error) {
             console.error('Error adding product:', error);
             setUploadStatus("Error occurred!");

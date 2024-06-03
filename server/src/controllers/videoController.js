@@ -87,10 +87,11 @@ exports.getuploadhistory= async (req,res)=>{
 
 exports.addvideo = async (req, res) => {
   try {
-    // console.log(req.body);
-      const { brand, product, unit,size, category, createdIn, createdAt, duration } = req.body;
+      console.log(req.body);
+      const { brand, product, unit,size, category, createdIn, createdAt, duration , uploader } = req.body;
       const videoPath = req.file.path;
 
+      console.log(videoPath)
       // Convert uploaded video to text
       // const text = await convertVideoToText(videoPath);
       // console.log('hi'+text)
@@ -102,12 +103,12 @@ exports.addvideo = async (req, res) => {
           unit,
           size,
           category,
-          videoPath,
+          videoPath:videoPath,
           createdIn,
           createdAt,
           duration,
           status: 'pending',
-          uploader: 'Sirasa'
+          uploader: uploader,
       });
 
       // Save the new video

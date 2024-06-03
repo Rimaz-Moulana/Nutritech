@@ -18,9 +18,9 @@ export default function LogTable() {
   const fetchData = async () => {
     setError(null);
     try {
-      console.log("fetching session details..");
-        const authData = localStorage.getItem('token');
-        // console.log(authData)
+        console.log("fetching session details..");
+        const authData = JSON.stringify(localStorage.getItem('token'));
+        console.log("authData:", authData);
 
         setTimeout(() => {
           // Remove token from local storage after 5 seconds

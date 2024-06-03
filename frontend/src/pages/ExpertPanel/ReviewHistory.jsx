@@ -25,8 +25,33 @@ const [videoData, setVideoData] = useState([]);
 useEffect(() => {
 const fetchReviewDetails = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+    console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+    const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, config);
     setVideoData(response.data.video);
+
+    }
+    else{
+    navigate('/')
+    }
   } catch (error) {
     console.error('Error fetching ReviewDetails:', error);
   } finally {
@@ -42,8 +67,33 @@ fetchReviewDetails();
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`, config);
         setResponseData(response.data);
+        
+    }
+        else{
+          navigate("/")
+        }
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {
@@ -92,8 +142,32 @@ fetchReviewDetails();
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`, config);
         setResponseData(response.data);
+
+    }else{
+      navigate('/')
+    }
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {

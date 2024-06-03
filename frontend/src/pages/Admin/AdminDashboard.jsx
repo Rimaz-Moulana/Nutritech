@@ -20,17 +20,32 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/users/getAllUsers');
-      setUsers(response.data);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
+      console.log("fetching session details..");
+        const authData = JSON.stringify(localStorage.getItem('token'));
+        console.log("authData:", authData);
 
-  const deleteUser = async (userId) => {
-    try {
-      await axios.delete(`http://localhost:3000/api/users/deleteUser/${userId}`);
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+      await axios.delete(`http://localhost:3000/api/users/deleteUser/${userId}` , config);
       fetchUsers();
+
+      }else{
+        navigate("/");
+      }
     } catch (error) {
       console.error('Error deleting user:', error);
     }
@@ -48,10 +63,34 @@ const UserList = () => {
   const handleEditSubmit = async () => {
     console.log(editedUserData)
     try {
-      const res = await axios.put(`http://localhost:3000/api/users/updateUser/${editedUserData._id}`, editedUserData);
+      console.log("fetching session details..");
+        const authData = JSON.stringify(localStorage.getItem('token'));
+        console.log("authData:", authData);
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+      const res = await axios.put(`http://localhost:3000/api/users/updateUser/${editedUserData._id}`, editedUserData , config);
       setEditingUser(null);
       fetchUsers();
       console.log(res.data)
+
+      }else{
+        navigate("/");
+      }
     } catch (error) {
       console.error('Error updating user:', error);
     }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Navbar from '../../components/navbar/Navbar';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function ReviewedVideos() {
+  const navigate = useNavigate();
   const [Data, setData] = useState([]);
   let [isEnlarge, setEnlarge] = useState(true);
   const [isChecked, setIsChecked] = useState(() => {
@@ -22,6 +23,26 @@ function ReviewedVideos() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
         const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
         const data = await response.json();
   
@@ -33,6 +54,10 @@ function ReviewedVideos() {
         // Update the state with the filtered data
         // setVideoData(data);
         setData(filteredData);
+
+      }else{
+        navigate('/')
+      }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
