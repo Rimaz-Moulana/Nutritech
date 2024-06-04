@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import Swal from 'sweetalert2'
 import UploadImage from '../../components/UploadImage/UploadImageIndustry'
 import VideoUpload from '../../components/UploadVideo/VideoUploadIndustry'
 import DropDown from '../../components/fields/dropdown'
@@ -218,6 +219,18 @@ export default function ProductDetails() {
               const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
               console.log(response.data);
               setUploadStatus("Product uploaded successfully!");
+              Swal.fire({
+                icon: 'success',
+                title: 'Product uploaded successfully!',
+                showConfirmButton: false,
+                timer: 2000, 
+                customClass: {
+                  popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+                },
+                iconColor: '#294B29',
+              });
+              window.history.back();
+    
               }catch(error){
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');
@@ -238,13 +251,21 @@ export default function ProductDetails() {
         <form onSubmit={handleSubmit}>
         <div className='ml-0 lg:inline-flex sm:flex'>
             <div className='mt-4 md:w-1/2 lg:ml-40 sm:ml-5'>
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Product Name(Required)</label>
                 <TextFiled placeholder="Product Name(Required)"  name='product' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Brand(Required)</label>
                 <TextFiled placeholder="Brand(Required)"  name='brand' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Description(Required)</label>
                 <TextFiled placeholder="Description(Required)" name='description' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Parent Company(Required)</label>
                 <TextFiled placeholder="Parent Company(Required)" name='parentCompany' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Product Category(Required)</label>
                 <DropDown  placeholder="Product Category(Required)" name='category' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Packaging Material(Out Side)(Required)</label>
                 <TextFiled placeholder="Packaging Material(Out Side)(Required)" name='packagingMaterial' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Packaging Material(In Side)(Required)</label>
                 <TextFiled placeholder="Packaging Material(In Side)(Required)" name='packagingMaterialTouching' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Unit with size(Required)</label>
                 <div className='p-2'>
                 <DropdownSize placeholder="Unit(Required)"  name='unit' onChange1={handleChange}  />
                 <Numberfield placeholder="Size(Required)"  name='size'  onChange2={handleChange}/>
@@ -252,97 +273,117 @@ export default function ProductDetails() {
                 
                 
             <div className=''>
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Country of the product</label>
                 <TextFiledWhite placeholder="Country of the product" name='countryProduct' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Serving Size</label>
                 <TextFiledWhite placeholder="Serving Size"  name='servingSize' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Sugar Type</label>
                 <DropDownWhite defOptions="Sugar Type" name='sugarType' onChange={handleChange} />
+                \<label className='block px-5 text-left ml-[14%] font-semibold'>Lactose/Maltodextrin</label>
                 <DropDownWhite defOptions="Lactose/Maltodextrin" name='lactose' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Vitamin</label>
                 <TextFiledWhite placeholder="Vitamin" name='vitamin' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Mineral</label>
                 <TextFiledWhite placeholder="Mineral" name='mineral' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>DHA/Omega 3 Fatty Acid/DHA</label>
                 <DropDownWhite  defOptions="DHA/Omega 3 Fatty Acid/DHA"  name='omega' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Polyunsaturated fatty acids</label>
                 <DropDownWhite  defOptions="Polyunsaturated fatty acids"  name='acids' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Probiotics</label>
                 <TextFiledWhite placeholder="Probiotics" name='probiotics' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Reconstituted method (Y/N/C)</label>
                 <TextFiledWhite placeholder="Reconstituted method (Y/N/C)"   name='method' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Reconstituted total volume(ml)</label>
                 <TextFiledWhite placeholder="Reconstituted total volume(ml)" name='total' onChange={handleChange} />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Preparation instruction or other remarks(only if reconstituted method is 'Y' or 'C')</label>
                 <TextFiledWhite placeholder="Preparation instruction or other remarks(only if reconstituted method is 'Y' or 'C')" name='remarks' onChange={handleChange}  />
+                <label className='block px-5 text-left ml-[14%] font-semibold'>Ingredient as in the label (separete by comma)</label>
                 <div className='p-2'>
                     <input
                             type="text"
                             name='ingredients' onChange={handleChange} 
-                            className="shadow appearance-none placeholder-gray-400 border rounded w-[70%] h-10 py-2 px-5 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none placeholder-gray-400 border rounded w-[70%] h-20 py-2 px-5 bg-[#ffffff]  text-black leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Ingredient as in the label (separete by comma)" />
                 </div>
-                <div className='py-2 '>
+                {/* <div className='py-2 '>
                     <h1 className='text-2xl lg:ml-36  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Advertisement Video</h1>
                 </div>
                 <div className='p-2 lg:ml-32 '>
                 <VideoUpload handleFileChange={handleFileChange}/>
                 
-                </div>
+                </div> */}
             </div>
             </div>
             <div className='flex-inline mt-1 md:w-1/2'>
             <div className='text ml-64'>
-            <label className='inline-block pt-5 text-xl '>Per 100g/ml</label>
-            <label className='inline-block px-36 pt-5 text-xl '>Per Serving</label>
+            <label className='inline-block pt-5 text-xl font-semibold'>Per 100g/ml</label>
+            <label className='inline-block lg:px-[26%] sm:px-[13.5%] pt-5 text-xl font-semibold'>Per Serving</label>
             </div>
                 <div className='grid float-start gap-0 grid-cols-3 p-3'>
-                <label className='inline-block py-1 text-justify text-black ' >Energy(kcal)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Energy(kcal)(Required)</label>
                 <TextFiledsmall name='energy1' onChange={handleChange} />
                 <TextFiledsmallWhite name='energy2' onChange={handleChange} />
-                <label className='inline-block py-1  text-justify' >Protein(g)</label>
+                <label className='inline-block py-1  text-justify font-semibold' >Protein(g)(Required)</label>
                 <TextFiledsmall name='protein1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='protein2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Total Fat(g)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Total Fat(g)(Required)</label>
                 <TextFiledsmall name='totalFat1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='totalFat2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify  ' >SFA(g)</label>
+                <label className='inline-block py-1 text-justify  font-semibold' >SFA(g)(Required)</label>
                 <TextFiledsmall name='SFA1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='SFA2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Carbo(ga)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Carbo(g)(Required)</label>
                 <TextFiledsmall  name='carbo1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='carbo2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Sugars(g)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Sugars(g)(Required)</label>
                 <TextFiledsmall  name='sugar1' onChange={handleChange} />
                 <TextFiledsmallWhite name='sugar2' onChange={handleChange} />
-                <label className='inline-block py-1  text-justify' >Salt(g)</label>
+                <label className='inline-block py-1  text-justify font-semibold' >Salt(g)(Required)</label>
                 <TextFiledsmall name='salt1' onChange={handleChange} />
                 <TextFiledsmallWhite name='salt2' onChange={handleChange} />
-                <label className='inline-block py-1  text-justify ' >Sodium(g)</label>
+                <label className='inline-block py-1  text-justify font-semibold' >Sodium(g)(Required)</label>
                 <TextFiledsmall name='sodium1' onChange={handleChange} />
                 <TextFiledsmallWhite name='sodium2' onChange={handleChange} />
-                <label className='inline-block py-1 text-justify ' >Trans Fat(g)</label>
+                <label className='inline-block py-1 text-justify font-semibold' >Trans Fat(g)(Required)</label>
                 <TextFiledsmall  name='transFat1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='transFat2' onChange={handleChange} />
-                <label className='inline-block py-1  text-justify ' >Ash</label>
+                <label className='inline-block py-1  text-justify font-semibold' >Ash(Required)</label>
                 <TextFiledsmall name='ash1' onChange={handleChange} />
                 <TextFiledsmallWhite  name='ash2' onChange={handleChange} />
                 </div>
                 <div className='grid float-start gap-0 grid-cols-2 w-full p-2 sm:w-full mb-20'>
-                <label className='inline-block text-justify ml-0 py-3  ' >WHO_WPRO_foodcode Product</label>
+                <label className='inline-block text-justify ml-0 py-3  font-semibold' >WHO WPRO foodcode Product</label>
                 <TextFiledWhite2  name='WPROfoodcode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO_WPRO_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >WHO WPRO permitted</label>
                 <TextFiledWhite2  name='WPROPermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO_WPRO_permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >WHO WPRO permitted Remark</label>
                 <TextFiledWhite2  name='WPROPermittedRemark' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO_SEARO_foodcode_Product</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >WHO SEARO foodcode Product</label>
                 <TextFiledWhite2 name='SEAROfoodcode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >WHO_SEARO_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >WHO SEARO permitted</label>
                 <TextFiledWhite2 name='SEAROpermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3  ' >WHO_SEARO_permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3  font-semibold' >WHO SEARO permitted Remark</label>
                 <TextFiledWhite2 name='SEAROpermittedRemark' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >SL food Code</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >SL food Code</label>
                 <TextFiledWhite2 name='SLfoodCode' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3   ' >SL_permitted</label>
+                <label className='inline-block text-justify ml-0 py-3   font-semibold' >SL permitted</label>
                 <TextFiledWhite2 name='SLpermitted' onChange={handleChange} />
-                <label className='inline-block text-justify ml-0 py-3  ' >SL_foodcode__permitted Remark</label>
+                <label className='inline-block text-justify ml-0 py-3  font-semibold' >SL foodcode permitted Remark</label>
                 <TextFiledWhite2  name='SLfoodcodePermittedRemark' onChange={handleChange} />
                 </div>
-                <h1 className='text-2xl lg:ml-8 mb-2  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Pack Images</h1>
+                <h1 className='text-2xl lg:ml-8 sm:ml-40  md:mr-50 text-left font-semibold text-sidebarGreen'>Upload Pack Images</h1>
                 <div className='py-2'>
     
                 <div className='inline-block'>
                     <UploadImage onChangeImagesFile={handleImageFile} />
                     {/* <UploadImage /> */}
+                    <div className='py-2'>
+                    <h1 className='text-2xl lg:ml-8  sm:ml-40  md:mr-50 text-left  font-semibold text-sidebarGreen'>Upload Advertisement Video</h1>
+                      </div>
+                      <div className='p-2 lg:ml-6 '>
+                      <VideoUpload handleFileChange={handleFileChange}/>
+                
+                </div>
                 </div>   
                 </div>
             </div>

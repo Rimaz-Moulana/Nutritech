@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 function Product({productData,type}) {
@@ -13,7 +13,8 @@ function Product({productData,type}) {
       return localStorage.getItem('productFilter') || 'all';
     });
 
-
+    const res = JSON.stringify(productData[0]);
+    console.log("hello product: "+ productData[0] +res);
   
     useEffect(() => {
       // Update localStorage when productFilter changes
@@ -23,7 +24,9 @@ function Product({productData,type}) {
   const handleProduct = (productId) => {
     navigate(`/reviewproduct/${productId}`);
 }
-    
+    const handleProductDetails = (size,product,brand,unit) => {
+      navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
+    }
   
 const filteredProducts = productData?.filter((product) => {
   // Check if the product matches the filter criteria
@@ -81,7 +84,7 @@ const filteredProducts = productData?.filter((product) => {
            />
           {type==="review" && (
              <div className=" flex items-end justify-center z-10 h-full"> {/* Position cancel button at the bottom */}
-             <button
+             <button onClick={() => handleProductDetails(productData[0].size,productData[0].product,productData[0].brand,productData[0].unit)}
                 className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                 >
                 View Product Details

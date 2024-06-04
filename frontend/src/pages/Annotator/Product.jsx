@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from '../../components/navbar/Navbar';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
-import ProductDetails from '../Annotator/ProductDetails'
+import ProductDetails from './EditProductDetails';
 
 function Product() {
   return (
