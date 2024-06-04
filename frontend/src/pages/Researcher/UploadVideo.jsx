@@ -29,9 +29,24 @@ function UploadVideo() {
 
   const findByEmail = async (email) => {
     try {
+      const token = localStorage.getItem('token');
+      console.log("token:", token);
+
+      if (token) {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true,
+        };
+
       const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
       setVideoUploader(response.data);
       console.log("userdata:", response.data.username);
+      }else{
+        navigate('/')
+      }
     } catch (e) {
       console.log("error:", e);
     }
@@ -76,9 +91,16 @@ function UploadVideo() {
       formD.append('uploader', videoUploader.username);
 
       console.log("formD:", formD);
-
+    
       const token = localStorage.getItem('token');
       console.log("token:", token);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
 
       if (token) {
         const config = {
@@ -102,6 +124,7 @@ function UploadVideo() {
           },
           iconColor: '#294B29',
         });
+        window.history.back();
       } else {
         navigate('/');
       }

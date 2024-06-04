@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import Image from '../../assets/Images/NutriTech Logo-04 1.png';
 import Reg from '../../assets/Images/reg.jpg';
 
@@ -24,6 +25,16 @@ function Register() {
         try {
             await axios.post('http://localhost:3000/api/register', formData);
             // Redirect to login page or any other page after successful registration
+            Swal.fire({
+              icon: 'success',
+              title: 'User added successfully!',
+              showConfirmButton: false,
+              timer: 2000,
+              customClass: {
+                popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+              },
+              iconColor: '#294B29',
+            });
             navigate('/')
         } catch (error) {
             console.error('Registration failed:', error);

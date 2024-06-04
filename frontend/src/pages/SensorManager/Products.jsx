@@ -1,18 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Product from '../../components/SensorManager/Product';
 import Navbar from '../../components/navbar/Navbar';
-import Product from '../../components/SensorManager/Product'; 
 import Sidebar from '../../components/sidebar/SideBar';
 
 
 function Products() {
 
     const [productData,setProductData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect (()=>{
         const fetchData = async () => {
-            const response = await fetch('http://localhost:3000/api/product/sensormanagerproducts');
+          const token = localStorage.getItem('token');
+          console.log("token:", token);
+  
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+  
+  
+        if (token) {
+          const config = {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: `Bearer ${token}`
+            },
+            withCredentials: true,
+          };
+            const response = await fetch('http://localhost:3000/api/product/sensormanagerproducts', config);
             const data = await response.json();
             setProductData(data);
+        }else{
+          navigate('/')
+        }
         };
         fetchData();
     },[])

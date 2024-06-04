@@ -45,7 +45,7 @@ export default function LogTable() {
           },
           withCredentials: true,
         };
-      const response = await axios.get(`http://localhost:3000/api/videos/report/${videoId}`);
+      const response = await axios.get(`http://localhost:3000/api/videos/report/${videoId}`, config);
       setVideo(response.data);
       console.log(video);
 
