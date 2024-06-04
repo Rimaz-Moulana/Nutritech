@@ -1,6 +1,8 @@
+import { LogoutOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import edit from '../../assets/Images/edit.png';
 import home from '../../assets/Images/home.png';
 import menu from '../../assets/Images/menu.png';
@@ -153,6 +155,39 @@ const Sidebar = ({ type, onValueChange }) => {
     onValueChange(!isEnlarge);
   };
 
+
+  // ... other navigation definitions (unchanged)
+
+  const handleLogout = async () => {
+    const confirmLogout = await Swal.fire({
+      title: 'Are you sure you want to log out?',
+      text: "You'll be redirected to the login page.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: "#5a7d59",
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, log out',
+      customClass: {
+        popup: 'bg-backgroundGreen text-sidebarGreen', // Use Tailwind CSS class directly
+      },
+    });
+
+    if (confirmLogout.isConfirmed) {
+      try {
+        // Implement backend logout logic if necessary (e.g., API call to invalidate token)
+        localStorage.removeItem('token'); // Remove token from local storage
+        localStorage.removeItem('email'); // Remove email from local storage
+        navigate('/'); // Redirect to login page
+      } catch (error) {
+        console.error('Error during logout:', error);
+        Swal.fire(
+          'Logout Unsuccessful', 
+          'An error occurred while logging out. Please try again.', 
+          'error');
+      }
+    }
+  };
+
   return (
     <div id="app" className="min-h-screen fixed bg-sidebarGreen lg:max-w-[15%] text-left">
       <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
@@ -236,9 +271,10 @@ const Sidebar = ({ type, onValueChange }) => {
           ))}
         </nav>
         <footer className="inline-flex flex-col justify-end">
-          <Link to="/logout" className="py-2 text-white hover:bg-darkGreen rounded-lg text-center">
-            Logout
-          </Link>
+        <button className="py-2 px-2 flex items-center text-white hover:bg-darkGreen rounded-lg text-center font-bold" onClick={handleLogout}>
+        <LogoutOutlined style={{ marginRight: '10px' }} />
+        Logout
+      </button>
         </footer>
       </header>
     </div>
