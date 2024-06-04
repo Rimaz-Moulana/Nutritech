@@ -2,10 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
-import Rule from '../../components/Rule';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
-import ProductTable from '../../components/tables/LogTable';
 
 function Home() {
 
@@ -56,7 +54,7 @@ function Home() {
         };
         const response = await fetch('http://localhost:3000/api/videos/sensormanagerallvideos', config);
 
-        const response = await fetch('http://localhost:3000/api/videos/allUploadedVideos',config);
+        //const response = await fetch('http://localhost:3000/api/videos/allUploadedVideos',config);
 
         const data = await response.json();
         setVideoData(data);
