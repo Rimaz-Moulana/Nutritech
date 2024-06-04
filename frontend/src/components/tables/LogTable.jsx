@@ -24,8 +24,33 @@ export default function LogTable({props}) {
     
     try {
       console.log("hi")
-      const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+      console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+      const response = await axios.get('http://localhost:3000/api/product/getAll' , config); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
       setProducts(response.data);
+
+      }else{
+        navigate('/')
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }

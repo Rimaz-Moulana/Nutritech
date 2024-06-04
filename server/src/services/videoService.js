@@ -369,6 +369,27 @@ exports.postComment = async (videoId, comments, email, req) => {
   }
 };
 
+exports.VideoReport = async (videoId)=> {
+  try {
+    //console.log(videoId);
+    return await VideoModel.findOne({_id:videoId});
+
+  }catch(error){
+    console.error(`Error saving comment: ${error.message}`);
+    throw error;
+  }
+}
+
+exports.finalCommentVideos = async(req,res)=>{
+  try{
+    return await VideoModel.find({status: {$in: ['annotated'] }});
+  }
+  catch (error) {
+    console.error(`Error saving comment: ${error.message}`);
+    throw error;
+  }
+}
+
 exports.postMessage = async (videoId, comments, email, req) => {
   try {
     console.log(comments);

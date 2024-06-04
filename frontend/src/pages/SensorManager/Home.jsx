@@ -2,11 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
-import Navbar from '../../components/navbar/Navbar';
-import ProductTable from '../../components/tables/LogTable';
-import Rules from '../Rules';
 import Rule from '../../components/Rule';
+import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import ProductTable from '../../components/tables/LogTable';
 
 function Home() {
 
@@ -36,9 +35,35 @@ function Home() {
     const fetchData = async () => {
       // try {
         // Allvideos.jsx
-        const response = await fetch('http://localhost:3000/api/videos/allUploadedVideos');
+
+        const token = localStorage.getItem('token');
+        console.log("token:", token);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+
+      if (token) {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true,
+        };
+        const response = await fetch('http://localhost:3000/api/videos/sensormanagerallvideos', config);
+
+        const response = await fetch('http://localhost:3000/api/videos/allUploadedVideos',config);
+
         const data = await response.json();
         setVideoData(data);
+
+      }else{
+        navigate('/')
+      }
 
     };
 
@@ -49,12 +74,41 @@ function Home() {
   useEffect(() => {
     const fetchUnannotatedVideos = async () => {
       try {
+
+        const token = localStorage.getItem('token');
+        console.log("token:", token);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+
+      if (token) {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true,
+        };
+        const response = await axios.get('http://localhost:3000/api/rules/rules', config);
+        const data = response.data;
+        console.log(data); // This should log the fetched data
+        setRuleData(data);
+
+      }else{
+        navigate("/")
+      }
+
         const response = await fetch('http://localhost:3000/api/videos/sensormanagerallvideos');
         if (!response.ok) {
           throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
         }
         const data = await response.json();
         setUnannotatedVideoData(data);
+
       } catch (error) {
         console.error(error);
       }

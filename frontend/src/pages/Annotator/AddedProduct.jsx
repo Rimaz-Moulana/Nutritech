@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import AddNewProduct from '../../components/button/AddNewProductBtn';
 import ProductBar from '../../components/fields/ProductBar';
 import LogTable from '../../components/tables/ProductTableAnnotator';
 import BlankPage from '../../components/theme/BlankPage';
 
 export default function AddedProduct() {
+  const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const { type } = useParams();
@@ -17,9 +18,33 @@ export default function AddedProduct() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/product/getAll');
+      console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+      const response = await axios.get('http://localhost:3000/api/product/getAll', config);
       setAllProducts(response.data);
       setFilteredProducts(response.data); // Initially set filtered products to all products
+      }
+      else{
+        navigate('/');
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }

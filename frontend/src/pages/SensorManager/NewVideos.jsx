@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import GridListView from '../../components/Toggle/GridListView';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function NewVideos() {
   const [pendingVideoData, setPendingVideoData] = useState([]);
+  const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(() => {
     // Retrieve the checkbox state from localStorage, defaulting to false if not found
     return JSON.parse(localStorage.getItem('isChecked')) || false;
@@ -24,10 +25,31 @@ function NewVideos() {
     const fetchData = async () => {
       // try {
         // Allvideos.jsx
-        const response = await fetch('http://localhost:3000/api/videos/sensormanagernewvideo');
+        const token = localStorage.getItem('token');
+        console.log("token:", token);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+
+      if (token) {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true,
+        };
+        const response = await fetch('http://localhost:3000/api/videos/sensormanagernewvideo', config);
         const data = await response.json();
         setPendingVideoData(data);
 
+      }else{
+        navigate('/')
+      }
     };
 
     fetchData();

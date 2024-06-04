@@ -6,26 +6,17 @@ import Videowithtext from '../../components/AnnotationTable/Videowithtext';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
-import VideowithReview from '../../components/SensorManager/VideowithReview';
 
 function History() {
-  const navigate = useNavigate();
   const { videoId } = useParams();
   const [data, setData] = useState([]);
-  let [isEnlarge, setEnlarge] = useState(true);
-
-  let {user}=useParams();
-
-  if(user==="annotated"){
-    user="annotator"
-  }
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAnnotations = async () => {
       try {
-        console.log("fetching session details..");
-      const authData = JSON.stringify(localStorage.getItem('token'));
-      console.log("authData:", authData);
+        const token = localStorage.getItem('token');
+        console.log("token:", token);
 
       setTimeout(() => {
         // Remove token from local storage after 5 seconds
@@ -33,22 +24,21 @@ function History() {
         localStorage.removeItem('email');
     }, 7200000); // 2hours
 
-    if(authData){
-      const {accessToken} = authData;
-      console.log(accessToken);
-      const config = {
-        headers : {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        },
-        withCredentials: true,
-      };
+
+      if (token) {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true,
+        };
         const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`, config);
         setData(response.data.annotations);
 
       }else{
-        navigate('/');
-      }
+          navigate('/')
+        }
       } catch (error) {
         console.error('Error fetching annotations:', error);
       } finally {
@@ -59,47 +49,36 @@ function History() {
     fetchAnnotations();
   }, [videoId]);
 
-  const handleValueChange = (value) => {
-    console.log(value)
-    if(value==true){
-      setEnlarge(true);
-    }else{
-      setEnlarge(false);
-    }
-  };
-
-  const handleViewDetails = (size,product,brand,unit) => {
-    navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
-  }
+  console.log(data)
 
   return (
-    <div className='bg-backgroundGreen w-full lg:overflow-x-hidden min-w-screen flex min-h-screen sm:text-sm'> {/* Make the main container a flex column */}
+    <div className='bg-backgroundGreen h-full min-h-screen flex flex-col'> {/* Make the main container a flex column */}
       <div className="fixed hidden sm:flex flex-col">
-        <Sidebar type={user} onValueChange={handleValueChange}  />
+        <Sidebar type="industry" />
       </div>
-      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}> {/* Make this div take up remaining vertical space */}
+      <div className="w-full lg:w-[75%] ml-0 sm:ml-64 flex-grow"> {/* Make this div take up remaining vertical space */}
         <Navbar type='annotator' />
-        <div className='max-w-screen mt-28'>
-        <VideowithReview Id={videoId} text={"video"} type={"annotator"}/>
+        <div className='w-full mt-28'>
+          <Videowithtext videoId={videoId}/>
         </div>
-        <h1 className='px-3 mb-8 mt-12 text-2xl font-semibold text-sidebarGreen'>
+        <h1 className='px-3 mb-8 mt-12 text-3xl font-semibold text-sidebarGreen text-left'>
                   Annotations
                 </h1>
-        <div className='pr-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
+        <div className='px-3 mb-8 mt-10 text-sm font-semibold text-black center-l lg:w-[100%]'>
         
           {/* Pass videoId and video to RowHistory */}
-          <RowHistory videoId={videoId} usertype={"annotator"}/>
+          <RowHistory videoId={videoId} usertype={"industry"}/>
         </div>
 
         <div className='px-3 center-l w-full'>
-          <ViewComment videoId={videoId} type={"annotator"}/>
+          <ViewComment videoId={videoId} type={"industry"}/>
         </div>
 
         {/* <div className='mt-8 w-full'>
           <Comments videoId={videoId} type={"reply"}/>
         </div> */}
       <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
-        <button onClick={()=>handleViewDetails(data[0].size,data[0].product,data[0].brand,data[0].unit)}
+        <button
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details

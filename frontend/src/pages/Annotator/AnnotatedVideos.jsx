@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
-import GridListView from '../../components/Toggle/GridListView';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function AnnotatedVideos() {
-  
+  const navigate = useNavigate();
   const [annotatedVideoData, setannotatedVideoData] = useState([]);
   let [isEnlarge, setEnlarge] = useState(true);
   const [isChecked, setIsChecked] = useState(() => {
@@ -28,12 +28,42 @@ function AnnotatedVideos() {
   useEffect(() => {
     // Fetch data from your backend API
     const fetchData = async () => {
-      // try {
+      try {
         // Allvideos.jsx
-        const response = await fetch('http://localhost:3000/api/videos/annotated-videos');
+        console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+       // Replace with your actual API endpoint
+           
+        const response = await fetch('http://localhost:3000/api/videos/annotated-videos',config);
+        console.log('Data:', response.data);
         const data = await response.json();
         setannotatedVideoData(data);
 
+      }else{
+        navigate('/');
+      }
+      }catch(error){
+        console.error(error);
+      }
+       
     };
 
     fetchData();
@@ -62,7 +92,7 @@ function AnnotatedVideos() {
         </h1>
         
         <div className='pr-3'>
-<label className='themeSwitcherTwo shadow-card relative mt-32 lg:h-10 md:h-8 sm:h-6  inline-flex  cursor-pointer select-none rounded-md bg-white '>
+        <label className='themeSwitcherTwo shadow-card relative mt-32 lg:h-10 md:h-8 sm:h-6  inline-flex  cursor-pointer select-none rounded-md bg-white '>
         <input
           type='checkbox'
           className='sr-only'
