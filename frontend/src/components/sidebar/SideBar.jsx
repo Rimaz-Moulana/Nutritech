@@ -271,7 +271,7 @@ const Sidebar = ({ type, onValueChange }) => {
           ))}
         </nav>
         <footer className="inline-flex flex-col justify-end">
-        <button className="py-2 px-2 flex items-center text-white hover:bg-darkGreen rounded-lg text-center font-bold" onClick={handleLogout}>
+        <button className="py-2 px-2 flex items-center text-white hover:bg-darkGreen rounded-lg text-center font-bold text-lg" onClick={handleLogout}>
         <LogoutOutlined style={{ marginRight: '10px' }} />
         Logout
       </button>
