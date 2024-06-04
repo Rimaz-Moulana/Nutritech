@@ -89,7 +89,6 @@ console.log(filteredProducts);
       
       <div className='w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64'>
         <div className=''>
-        <ProductBar handleFilter={()=>handleFilter(filter)} />
           <ProductBar handleFilter={handleFilter} />
           <LogTable products={filteredProducts} />
         </div>

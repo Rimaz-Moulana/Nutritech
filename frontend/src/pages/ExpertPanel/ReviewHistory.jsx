@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Annotations from '../../components/AnnotationTable/RowHistory';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
@@ -8,58 +8,6 @@ import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 
 function ReviewHistory() {
-
-const navigate= useNavigate();
-let [isEnlarge, setEnlarge] = useState(true);
-const {videoId} = useParams(); 
-const [responseData, setResponseData] = useState([]);
-const [loading, setLoading] = useState(true);
-
-const [allProducts, setAllProducts] = useState([]);
-const [isLoading, setIsLoading] = useState(false); // Added loading state
-const [error, setError] = useState(null); // Added error state
-const [videoData, setVideoData] = useState([]);
-// const [loading,setLoading] =useState(true);
-
-//   const [RuleData, setRuleData] = useState([]);
-
-useEffect(() => {
-const fetchReviewDetails = async () => {
-  try {
-    console.log("fetching session details..");
-      const authData = JSON.stringify(localStorage.getItem('token'));
-      console.log("authData:", authData);
-
-      setTimeout(() => {
-        // Remove token from local storage after 5 seconds
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-    }, 7200000); // 2hours
-
-    if(authData){
-      const {accessToken} = authData;
-      console.log(accessToken);
-      const config = {
-        headers : {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        },
-        withCredentials: true,
-      };
-    const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, config);
-    setVideoData(response.data.video);
-
-    }
-    else{
-    navigate('/')
-    }
-  } catch (error) {
-    console.error('Error fetching ReviewDetails:', error);
-  } finally {
-    setLoading(false);
-  }
-};
-
 
   const navigate = useNavigate();
   let [isEnlarge, setEnlarge] = useState(true);
@@ -89,33 +37,8 @@ const fetchReviewDetails = async () => {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        console.log("fetching session details..");
-      const authData = JSON.stringify(localStorage.getItem('token'));
-      console.log("authData:", authData);
-
-      setTimeout(() => {
-        // Remove token from local storage after 5 seconds
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-    }, 7200000); // 2hours
-
-    if(authData){
-      const {accessToken} = authData;
-      console.log(accessToken);
-      const config = {
-        headers : {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        },
-        withCredentials: true,
-      };
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`, config);
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
         setResponseData(response.data);
-        
-    }
-        else{
-          navigate("/")
-        }
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {
@@ -138,32 +61,8 @@ const fetchReviewDetails = async () => {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        console.log("fetching session details..");
-      const authData = JSON.stringify(localStorage.getItem('token'));
-      console.log("authData:", authData);
-
-      setTimeout(() => {
-        // Remove token from local storage after 5 seconds
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-    }, 7200000); // 2hours
-
-    if(authData){
-      const {accessToken} = authData;
-      console.log(accessToken);
-      const config = {
-        headers : {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        },
-        withCredentials: true,
-      };
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`, config);
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
         setResponseData(response.data);
-
-    }else{
-      navigate('/')
-    }
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {
@@ -196,9 +95,6 @@ const fetchReviewDetails = async () => {
   //   }
   // };
 
-  const handlePoductDetails = (product,brand,size,unit) =>{
-    navigate(`/product/view/${size}${product}/${brand}/${unit}`)
-  }
 
   console.log(allProducts)
  
