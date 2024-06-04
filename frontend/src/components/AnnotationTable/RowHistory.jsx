@@ -198,7 +198,7 @@ function RowHistory({ videoId, usertype }) {
                       <th>Regulation</th>
                       <th>Details</th>
                       <th>Recommendation</th>
-                      {usertype !== "annotator" && usertype !== "industry" && (
+                      {usertype !== "annotator" && usertype !== "industry" && userData.role!=="expert panel" && (
                                 <th className='w-[20%]'>Decision</th>
                       )}
                     </tr>
@@ -217,7 +217,7 @@ function RowHistory({ videoId, usertype }) {
                         ? reannotation.finalacceptance[0].decision 
                         : reannotation.acceptance?.find(status => status.email === email)?.decision}
                     </td>
-                  ) : (usertype === "expert" ? (
+                  ) : (usertype === "expert" && userData.role!=="expert panel"? (
                     reannotation.finalacceptance?.some(acc => acc.user === email) ? (
                       <td>{reannotation.finalacceptance.find(acc => acc.user === email).decision}</td>
                     ) : (
