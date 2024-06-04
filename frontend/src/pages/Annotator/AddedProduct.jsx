@@ -75,6 +75,7 @@ export default function AddedProduct() {
       setFilteredProducts(lastWeekProducts);
     }
   };
+console.log(filteredProducts);
 
   // console.log(filteredProducts);
   //console.log("hi"+handleFilter);
@@ -88,6 +89,7 @@ export default function AddedProduct() {
       
       <div className='w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64'>
         <div className=''>
+        <ProductBar handleFilter={()=>handleFilter(filter)} />
           <ProductBar handleFilter={handleFilter} />
           <LogTable products={filteredProducts} />
         </div>

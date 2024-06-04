@@ -278,29 +278,22 @@ const reannotatedvideos= reannotateVideoData.length;
           <div className='flex flex-col items-center'>
         <div className="mt-12 grid grid-cols-2 gap-4 p-8">
         <div>
-        <HomeSwiper count={allvideos} type={"All Videos"} handlepath={() => handlepath("All Videos")} />
+        <HomeSwiper count={allvideos} type={"All Videos"} user={"Annotator"} handlepath={() => handlepath("All Videos")} />
         </div>
         <div>
-          <HomeSwiper count={annotatedvideos} type={"Annotated Videos"} handlepath={()=>handlepath("Annotated Videos")} />
+          <HomeSwiper count={annotatedvideos} type={"Annotated Videos"} user={"Annotator"}  handlepath={()=>handlepath("Annotated Videos")} />
         </div>
         <div>
-          <HomeSwiper count={unannotatedvideos} type={"Unannotated Videos"} handlepath={()=>handlepath("Unannotated Videos")} />
+          <HomeSwiper count={unannotatedvideos} type={"Unannotated Videos"} user={"Annotator"}  handlepath={()=>handlepath("Unannotated Videos")} />
         </div>
         <div>
-          <HomeSwiper count={reannotatedvideos} type={"Videos for Reannotation"} handlepath={()=>handlepath("Videos for Reannotation")} />
+          <HomeSwiper count={reannotatedvideos} type={"Videos for Reannotation"} user={"Annotator"} handlepath={()=>handlepath("Videos for Reannotation")} />
         </div>
       </div>
         
         </div> 
         </div>
-        </div>
-      
-        {/* <div className='flex mt-8 justify-between'>
-        <h1 className='ml-8 mb-4 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
-        <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
-        </div> */}
-        
-       
+        </div> 
         
       </div>
       

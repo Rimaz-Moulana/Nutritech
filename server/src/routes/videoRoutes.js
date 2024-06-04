@@ -40,6 +40,11 @@ router.get('/reviewvideo/:videoId', videoController.fetchSensorManagerReview );/
 router.get('/brandproducts/:videoId', videoController.getSimilarAds );
 
 router.get('/allUploadedVideos', videoController.getAllUploadedVideos );
+router.get('/allPendingUploadedVideos', videoController.getPendingUploadedVideos );
+router.get('/allUnannotatedUploadedVideos', videoController.getUnannotatedUploadedVideos );
+router.get('/allAnnotatedUploadedVideos', videoController.getAnnotatedUploadedVideos );
+router.get('/allRedUploadedVideos', videoController.getRedUploadedVideos );
+router.get('/allGreenUploadedVideos', videoController.getGreenUploadedVideos );
 // router.post('/redflag/:videoId', videoController.updateExpertReviewtored );
 router.post('/flag/:videoId', videoController.updateExpertFlagReview );
 router.get('/redflag', videoController.AllRedFlagVideos );
@@ -51,4 +56,7 @@ router.post('/finalcomment/:videoId', videoController.postFinalComment);
 router.get("/finalcomment", videoController.finalCommentVideos)
 router.get("/report/:videoId", videoController.videoReport)
 router.post('/finalflag/:videoId', videoController.updateExpertHeadFlagReview );
+router.post('/decision/:videoId', videoController.updateDecision );
+router.post('/finaldecision/:videoId', videoController.updateFinalDecision );
+
 module.exports = router;

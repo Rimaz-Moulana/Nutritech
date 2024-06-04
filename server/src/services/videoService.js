@@ -10,7 +10,7 @@ const getCurrentDateTime = () => {
 const padZero = (num) => (num < 10 ? `0${num}` : num);
 
 exports.getAnnotatorAllVideos = async (req, res) => { 
-    return await VideoModel.find({ status: { $in: ['annotated', 'unannotated','red','green','reannotate'] } });
+    return await VideoModel.find({ status: { $in: ['annotated', 'unannotated','Red','Green','reannotate'] } });
 };
 
 
@@ -19,7 +19,7 @@ exports.getAnnotatorUnannotatedVideos = async(req,res)=>{
 }
 
 exports.getAnnotatorAnnotatedVideos = async(req,res)=>{
-  return await VideoModel.find({ status:{ $in: ['annotated','red','green']} })
+  return await VideoModel.find({ status:{ $in: ['annotated','Red','Green']} })
 }
 
 exports.getAnnotatorReannotateVideos = async(req,res)=>{
@@ -27,9 +27,8 @@ exports.getAnnotatorReannotateVideos = async(req,res)=>{
 }
 
 exports.getAnnotatedVideosForExpert = async(req,res)=>{
-  return await VideoModel.find({ status:'annotated'})
+  return await VideoModel.find({ status:"annotated"})
 }
-
 
 
 exports.getAnnotationVideo = async(videoId)=>{
@@ -49,7 +48,7 @@ exports.getsensormanagernewvideos= async(req,res)=>{
 
 }
 exports.getsensormanagerallvideo= async(req,res)=>{
-  return await VideoModel.find({ status:{ $in: ['pending','unannotated']} });
+  return await VideoModel.find({ status:{ $in: ['pending','unannotated','annotated','Red','Green','reannotate']} });
 
 }
 
@@ -75,6 +74,120 @@ exports.saveSensorManagerReviewStatus = async (videoId) => {
   }
 };
 
+exports.updateDecisionForUser = async (req, res) => {
+  const { annotation, decision, email, type } = req.body;
+  const { videoId } = req.params;
+  console.log(annotation);
+  console.log(type);
+// status
+  try {
+    const video = await VideoModel.findById(videoId);
+
+    if (!video) {
+      return res.status(404).json({ message: 'Video not found' });
+      
+    }
+    
+
+    let targetAnnotation;
+    if (type === "reannotations") {
+      
+      targetAnnotation = video.reannotations.find(reann =>
+        reann.timestamp === annotation.timestamp &&
+        reann.rule === annotation.rule &&
+        reann.details === annotation.details &&
+        reann.recommendation === annotation.recommendation
+      );
+
+      
+    } else {
+      targetAnnotation = video.annotations.find(ann =>
+        ann.timestamp === annotation.timestamp &&
+        ann.rule === annotation.rule &&
+        ann.details === annotation.details &&
+        ann.recommendation === annotation.recommendation
+      );
+    }
+
+    // if (!targetAnnotation) {
+    //   return res.status(404).json({ message: 'Annotation not found' });
+    // }
+
+    
+
+    targetAnnotation.acceptance.push({
+      user: email,
+      decision:decision,
+      date: new Date().toLocaleDateString(),
+      time: getCurrentDateTime(),
+    });
+
+
+    await video.save();
+
+    // res.status(200).json({ message: 'Decision added successfully' });
+  } catch (error) {
+    console.error(`Error saving decision: ${error.message}`);
+    // res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+exports.updateFinalDecisionForUser = async (req, res) => {
+  const { annotation, decision, email, type } = req.body;
+  const { videoId } = req.params;
+  console.log(type)
+  
+// status
+  try {
+    const video = await VideoModel.findById(videoId);
+
+    if (!video) {
+      return res.status(404).json({ message: 'Video not found' });
+      
+    }
+
+    let targetAnnotation;
+    if (type === "reannotations") {
+      
+      targetAnnotation = video.reannotations.find(reann =>
+        reann.timestamp === annotation.timestamp &&
+        reann.rule === annotation.rule &&
+        reann.details === annotation.details &&
+        reann.recommendation === annotation.recommendation
+      );
+
+      
+    } else {
+      targetAnnotation = video.annotations.find(ann =>
+        ann.timestamp === annotation.timestamp &&
+        ann.rule === annotation.rule &&
+        ann.details === annotation.details &&
+        ann.recommendation === annotation.recommendation
+      );
+    }
+
+    // if (!targetAnnotation) {
+    //   return res.status(404).json({ message: 'Annotation not found' });
+    // }
+
+    
+
+    targetAnnotation.finalacceptance.push({
+      user: email,
+      decision:decision,
+      date: new Date().toLocaleDateString(),
+      time: getCurrentDateTime(),
+    });
+
+
+    await video.save();
+
+    // res.status(200).json({ message: 'Decision added successfully' });
+  } catch (error) {
+    console.error(`Error saving decision: ${error.message}`);
+    // res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 exports.deleteVideo = async (videoId) => {
   try {
     const deletedVideo = await VideoModel.findByIdAndDelete(videoId);
@@ -102,7 +215,7 @@ exports.getSimilarProductAds = async (videoId) => {
       brand,
       product,
       variation,
-      status: { $in: ['annotated', 'unannotated', 'reannotate','pending','green','red'] },
+      status: { $in: ['annotated', 'unannotated', 'reannotate','pending','Green','Red'] },
       _id: { $ne: videoId } // Exclude the current video from the results
     });
 
@@ -117,9 +230,43 @@ exports.getSimilarProductAds = async (videoId) => {
 exports.getAll = async (req, res) => {
     return await VideoModel.find({
       brand: 'Maggi',
-      status: { $in: ['annotated', 'unannotated', 'reannotate', 'pending', 'green', 'red'] }
-    });
-  
+      status: { $in: ['annotated', 'unannotated', 'reannotate', 'pending', 'Green', 'Red'] }
+    }); 
+};
+
+exports.getPending = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status: 'pending' }
+  ); 
+};
+
+exports.getUnannotated = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status:{ $in: [ 'unannotated', 'reannotate'] }
+    });  
+};
+
+exports.getAnnotated = async (req, res) => {
+  return await VideoModel.find({
+    // brand: 'Maggi',
+    status: 'annotated' }
+  ); 
+};
+
+exports.getGreen = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status: 'Green' }
+  ); 
+};
+
+exports.getRed = async (req, res) => {
+  return await VideoModel.find({
+    brand: 'Maggi',
+    status: 'Red' }
+  ); 
 };
 
 exports.updateReview = async (videoId, panelstatus) => {
@@ -127,7 +274,7 @@ exports.updateReview = async (videoId, panelstatus) => {
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
-        $set: {
+        $push: {
           panelstatus:panelstatus,
           
         }
@@ -146,14 +293,13 @@ exports.updateReview = async (videoId, panelstatus) => {
 
 
 exports.updateFinalReview = async (videoId,finalflag ) => {
-  const finalstatus=finalflag.status;
+  // const finalstatus=finalflag.status;
   try {
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
         $set: {
           finalflag:finalflag,
-          status:finalstatus
         }
       },
       {
@@ -191,12 +337,12 @@ exports.updateFinalReview = async (videoId,finalflag ) => {
 
 
 exports.getAllRedFlagVideos= async(req,res)=>{
-  return await VideoModel.find({ status: 'red' });
+  return await VideoModel.find({ status: 'Red' });
 
 }
 
 exports.getAllGreenFlagVideos= async(req,res)=>{
-  return await VideoModel.find({ status: 'green' });
+  return await VideoModel.find({ status: 'Green' });
 
 }
 
@@ -356,6 +502,8 @@ exports.postMessage = async (videoId, comments, email, req) => {
 
 exports.postFinal = async (videoId, comments, email, req) => {
   try {
+    const video = await VideoModel.findById(videoId);
+    const finalstatus = video.finalflag;
     return await VideoModel.findByIdAndUpdate(
       videoId,
       {
@@ -367,6 +515,10 @@ exports.postFinal = async (videoId, comments, email, req) => {
             commenteddate: new Date().toLocaleDateString(),
           },
         },
+        $set: {
+          status:finalstatus,
+          // status:finalstatus
+        }
       },
       { new: true }
     );

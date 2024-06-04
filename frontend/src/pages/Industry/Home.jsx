@@ -12,7 +12,13 @@ function Home() {
 
   const navigate= useNavigate();
   const [videoData, setVideoData] = useState([]);
-  const [RuleData, setRuleData] = useState([]);
+  const [pendingVideoData, setPendingVideoData] = useState([]);
+  const [annotatedVideoData, setAnnotatedVideoData] = useState([]);
+  const [unannotatedVideoData, setUnannotatedVideoData] = useState([]);
+  const [redVideoData, setRedVideoData] = useState([]);
+  const [greenVideoData, setGreenVideoData] = useState([]);
+  let [isEnlarge, setEnlarge] = useState(true);
+ 
 
   const handleVideos = () =>{
     console.log('button clicked')
@@ -21,25 +27,6 @@ function Home() {
   const handleProducts = () =>{
     navigate('/addedproduct');
   }
-
-  const [products, setProducts] = useState([]);
-
-  // useEffect(() => {
-  //   // Fetch data when the component mounts
-  //   fetchData();
-  // }, []);
-  useEffect(()=> {
-  const fetchData = async () => {
-    try {
-      console.log("hi")
-      const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
-      setProducts(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-  fetchData();
-},[]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,22 +37,64 @@ function Home() {
   
     fetchData();
   }, []);
-  
+
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/rules/rules');
-        const data = response.data;
-        // console.log(data); // This should log the fetched data
-        setRuleData(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+       const response = await fetch('http://localhost:3000/api/videos/allPendingUploadedVideos');
+       const data = await response.json();
+       setPendingVideoData(data);
     };
   
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+       const response = await fetch('http://localhost:3000/api/videos/allUnannotatedUploadedVideos');
+       const data = await response.json();
+       setUnannotatedVideoData(data);
+    };
+  
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+       const response = await fetch('http://localhost:3000/api/videos/allAnnotatedUploadedVideos');
+       const data = await response.json();
+       setAnnotatedVideoData(data);
+    };
+  
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+       const response = await fetch('http://localhost:3000/api/videos/allRedUploadedVideos');
+       const data = await response.json();
+       setRedVideoData(data);
+    };
+  
+    fetchData();
+  }, []);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+       const response = await fetch('http://localhost:3000/api/videos/allGreenUploadedVideos');
+       const data = await response.json();
+       setGreenVideoData(data);
+    };
+  
+    fetchData();
+  }, []);
+  
+  const all= videoData.length;
+  const pending = pendingVideoData.length;
+  const unannotated = unannotatedVideoData.length;
+  const annotated = annotatedVideoData.length;
+  const green = greenVideoData.length;
+  const red = redVideoData.length;
+  
   const handleupload = () =>{
     navigate('/uploadvideo')
   }
@@ -74,58 +103,65 @@ function Home() {
     navigate('/addnewproduct');
   };
 
-  const type="industry";
-  const viewrules= () => {
-    navigate(`/rules/${type}`);
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
   };
+
+ 
 
 
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar type="industry"/>
+        <Sidebar type="industry" onValueChange={handleValueChange}/>
       </div>
-      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
+      <div className={`w-full z-10 mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <div className=''>
         <Navbar />
         </div>
-        <div className='flex ml-8'>
-        <button className="mt-24 text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        <div className='justify-center flex ml-8'>
+        <button className="mt-24 text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 "
            onClick={handleupload}>
             Upload a video
            </button>
-           <button className="mt-24 text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={addproducts}>
+           <button className="mt-24 text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2" onClick={addproducts}>
           Add a Product
       </button>
         </div>
-        <div className='flex justify-between z-9999 mt-4'>
-        <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
-           Videos
-        </h1>
-        <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleVideos}>View All Videos</button>
-        </div>
-        <HomeSwiper videoData={videoData}/>
-        <div className='flex mt-8 justify-between'>
-        <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
-        <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>View All Products</button> 
-        </div>
-        <div className='left-0'>
-        <ProductTable data={products} />
+       
+        
+        <div className='lg:pr-8 lg:pt-8 flex justify-center items-center h-full '>
+          <div className='flex flex-col items-center'>
+        <div className="mt-12 grid grid-cols-3 gap-4 p-8">
+        <div>
+        <HomeSwiper count={all} type={"All Uploaded Videos"} user={"Industry"}/>
         </div>
         <div>
-          <div className='flex mt-8 justify-between'>
-        <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Rules and Regulations</h1>
-        <button className="mt-4 text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={viewrules}>
-          View All rules
-      </button>
+        <HomeSwiper count={annotated} type={"Annotated Videos"} user={"Industry"}/>
         </div>
-        {RuleData.map((rule, index) => (
-          index<4 &&
-        <Rule key={index} rule={rule} type={"industry"}/>
-          
-      ))}
+        <div>
+          <HomeSwiper count={pending} type={"Pending Videos"} user={"Industry"} />
+        </div>
+        <div>
+          <HomeSwiper count={unannotated} type={"Unannotated Videos"} user={"Industry"}/>
+        </div>
+        <div>
+          <HomeSwiper count={red} type={"Red Flag Videos"} user={"Industry"} />
+        </div>
+        <div>
+          <HomeSwiper count={green} type={"Green Flag Videos"} user={"Industry"} />
         </div>
       </div>
+        
+        </div> 
+        </div>
+       
+        </div>
     </div>
   );
 }

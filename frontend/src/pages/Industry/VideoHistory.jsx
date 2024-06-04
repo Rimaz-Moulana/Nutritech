@@ -7,6 +7,7 @@ import Comments from '../../components/CommentSection/Comments';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import axios from 'axios';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
 
 function History() {
   const { videoId } = useParams();
@@ -37,7 +38,7 @@ function History() {
       <div className="w-full lg:w-[75%] ml-0 sm:ml-64 flex-grow"> {/* Make this div take up remaining vertical space */}
         <Navbar type='annotator' />
         <div className='w-full mt-28'>
-          <Videowithtext videoId={videoId}/>
+        <VideowithReview Id={videoId} text={"video"} type={"industry"}/>
         </div>
         <h1 className='px-3 mb-8 mt-12 text-3xl font-semibold text-sidebarGreen text-left'>
                   Annotations

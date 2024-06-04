@@ -48,321 +48,236 @@ function ViewComment({ videoId, type }) {
     if(type==="industry" || type==="annotator" ){
       if(Data.finalcomment[0] ){     
         result.push(
-          <div key={`finalcomment-${0}`} className='bg-gray-300 text-black mt-4 p-3 text-xl text-left'>
-            {/* {console.log(Data.reply[i][j].text)} */}
-    
-            <p className='text-gray-600'>{Data.finalcomment[0].commenter}</p>
-             <p className='text-gray-600 text-sm'>Final Comment :</p> 
-             {Data.finalcomment[0].text}
-
-            {Data.finalflag[0].status==="green" && (
-              <>
-              <p className='text-gray-600 text-sm'>Status :</p>
-              <div className='flex'>
-                <p>Green</p>
-                <p className='text-sm text-gray-600'>(Verified)</p>
-                <img src={green} className="h-8 w-8 ml-4" alt="" />
-                
-              </div>
-              </>
-            )}
-            {Data.finalflag[0].status==="red" && (
-              <>
-              <p className='text-gray-600 text-sm'>Status :</p>
-              <div className='flex'>
-                <p>Red</p>
-                <img src={red} className="h-8 w-8 ml-4" alt="" />
-              </div>
-              </>
-            )}
-            
-            {/* {console.log(Data.reply[i][j].text)} */}
-            <div className='flex space-x-8 text-sm mt-4'>
-              
-              <p>{Data.finalcomment[0].commenteddate}</p>
-              <p>{Data.finalcomment[0].commentedtime}</p>
-            </div>
-          </div>
+          <tr key={`finalcomment-${0}`}>
+            <td className='p-2'>{Data.finalcomment[0].commenter}</td>
+            <td className='p-2'>Final Comment</td>
+            <td className='p-2'>{Data.finalcomment[0].text}</td>
+            <td className='p-2'>
+              {Data.status === "Green" && (
+                <>
+                  <span>Green</span>
+                  {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
+                </>
+              )}
+              {Data.status === "Red" && (
+                <>
+                  <span>Red</span>
+                  {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
+                </>
+              )}
+            </td>
+            <td className='p-2'>{Data.finalcomment[0].commenteddate}</td>
+            <td className='p-2'>{Data.finalcomment[0].commentedtime}</td>
+          </tr>
         );
       }
     }
 
-    else if (userData && userData.role && userData.role=="expert head" && type!=="Industry" && type!=="annotator") {
-      // Interleave comments and replies
+    else if (userData && userData.role && userData.role === "expert head" && type !== "Industry" && type !== "annotator") {
       if(Data.comment){
-      for (let i = 0; i < Data.comment.length; i++) {
-        let status='';
-      // console.log(Data.panelstatus.lrngth);
-      for(let j=0;j<Data.panelstatus.length;j++){
-        if(Data.comment[i].commenter==Data.panelstatus[j].email){
-          status=Data.panelstatus[j].status;
+        for (let i = 0; i < Data.comment.length; i++) {
+          let status='';
+          for(let j=0;j<Data.panelstatus.length;j++){
+            if(Data.comment[i].commenter === Data.panelstatus[j].email){
+              status = Data.panelstatus[j].status;
+            }
+          }
+          result.push(
+            <tr key={`comment-${i}`}>
+              <td className='p-2'>{Data.comment[i].commenter}</td>
+              <td className='p-2'>Comment</td>
+              <td className='p-2'>{Data.comment[i].text}</td>
+              <td className='p-2'>
+                {status === "Green" && (
+                  <>
+                    <span>Green</span>
+                    {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
+                  </>
+                )}
+                {status === "Red" && (
+                  <>
+                    <span>Red</span>
+                    {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
+                  </>
+                )}
+              </td>
+              <td className='p-2'>{Data.comment[i].commenteddate}</td>
+              <td className='p-2'>{Data.comment[i].commentedtime}</td>
+            </tr>
+          );
+
+          if (Data.reply && Data.reply.length > 0 && Data.reply[i]) {
+            for (let j = 0; j < Data.reply[i].length; j++) {
+              result.push(
+                <tr key={`reply-${i}-${j}`}>
+                  <td className='p-2'>{Data.reply[i][j].replyer}</td>
+                  <td className='p-2'>Reply</td>
+                  <td className='p-2'>{Data.reply[i][j].text}</td>
+                  <td className='p-2'></td>
+                  <td className='p-2'>{Data.reply[i][j].replieddate}</td>
+                  <td className='p-2'>{Data.reply[i][j].repliedtime}</td>
+                </tr>
+              );
+            }
+          }
         }
       }
-        result.push(
-          <div key={`comment-${i}`} className='bg-darkGreen text-white mt-4 p-3 text-xl text-left'>
-            {/* {Data.comment[i] && Data.comment[i].commenter && ( */}
-              <>
-            <p className='text-gray-600'>{Data.comment[i].commenter}</p>
-            <p className='text-gray-600 text-sm'>Comment :</p>
-            {Data.comment[i].text}
-
-            {status && status==="green" && (
-             <>
-             <p className='text-gray-600 text-sm'>Status :</p>
-             <div className='flex'>
-               <p>Green</p>
-               <p className='text-sm text-gray-600'>(Verified)</p>
-               <img src={green} className="h-8 w-8 ml-4" alt="" />
-               
-             </div>
-             </>
-          )}
-
-        {status && status==="red" && (
-          <>
-          <p className='text-gray-600 text-sm'>Status :</p>
-             <div className='flex'>
-             <p>Red</p>
-             <img src={red} className="h-8 w-8 ml-4" alt="" />
-           </div>
-           </>
-          )}
-            
-            <div className='flex space-x-8 text-sm mt-4'>
-              <p>{Data.comment[i].commenteddate}</p>
-              <p>{Data.comment[i].commentedtime}</p>
-            </div>
-            </>
-            {/* )} */}
-          </div>
-        );
-
-        // Check if there are replies for this comment
-        if (Data.reply && Data.reply.length > 0 && Data.reply[i]) {
-          // Rendering replies
-          for (let j = 0; j < Data.reply[i].length; j++) {
-              result.push(
-                  <div key={`reply-${i}-${j}`} className='bg-gray-200 text-black mt-4 p-3 text-xl text-left'>
-                      {/* {console.log(Data.reply[i][j].text)} */}
-                      <p className='text-gray-600'>{Data.reply[i][j].replyer}</p>
-                      <p className='text-gray-600 text-sm'>Reply :</p> 
-                      {Data.reply[i][j].text}
-                      {/* {console.log(Data.reply[i][j].text)} */}
-                      <div className='flex space-x-8 text-sm mt-4'>
-                          {/* <p>{Data.reply[i].status}</p> */}
-                          <p>{Data.reply[i][j].replieddate}</p>
-                          <p>{Data.reply[i][j].repliedtime}</p>
-                      </div>
-                  </div>
-              );
-          }
-      }
-        // }
-      }
-    }
       if(Data.finalcomment[0] ){     
         result.push(
-          <div key={`finalcomment-${0}`} className='bg-gray-300 text-black mt-4 p-3 text-xl text-left'>
-            {/* {console.log(Data.reply[i][j].text)} */}
-    
-            <p className='text-gray-600'>{Data.finalcomment[0].commenter}</p>
-            <p className='text-gray-600 text-sm'>Final Comment :</p> 
-             {Data.finalcomment[0].text}
-            {/* {console.log(Data.reply[i][j].text)} */}
-            {/* <div className='flex space-x-8 text-sm mt-4'> */}
-            {(Data.finalflag && Data.finalflag.length>0 && Data.finalflag[0].status==="green") && (
+          <tr key={`finalcomment-${0}`}>
+            <td className='p-2'>{Data.finalcomment[0].commenter}</td>
+            <td className='p-2'>Final Comment</td>
+            <td className='p-2'>{Data.finalcomment[0].text}</td>
+            <td className='p-2'>
+              {Data.status === "Green" && (
                 <>
-                <p className='text-gray-600 text-sm'>Status :</p>
-                <div className='flex'>
-                  <p>Green</p>
-                  <p className='text-sm text-gray-600'>(Verified)</p>
-                  <img src={green} className="h-8 w-8 ml-4" alt="" />
-                  
-                </div>
+                  <span>Green</span>
+                  {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
                 </>
-             
-            ) }
-
-            {(Data.finalflag && Data.finalflag.length>0 && Data.finalflag[0].status==="red") && (
-              <>
-              <p className='text-gray-600 text-sm'>Status :</p>
-                  <div className='flex'>
-                  <p>Red</p>
-                  <img src={red} className="h-8 w-8 ml-4" alt="" />
-                </div>
-              </>
-            )}
-            <div className='flex space-x-8 text-sm mt-4'>
-              <p>{Data.finalcomment[0].commenteddate}</p>
-              <p>{Data.finalcomment[0].commentedtime}</p>
-            </div>
-          </div>
+              )}
+              {Data.status === "Red" && (
+                <>
+                  <span>Red</span>
+                  {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
+                </>
+              )}
+            </td>
+            <td className='p-2'>{Data.finalcomment[0].commenteddate}</td>
+            <td className='p-2'>{Data.finalcomment[0].commentedtime}</td>
+          </tr>
         );
       }
-    }else if(userData && userData.role && userData.role=="expert panel" && type!=="annotator" && Data.comment && Data.comment.length > 0 ){
-      // console.log("jhbfjhf ",email);
-      let usercommetIndex = -1; // Initialize to -1
+    } else if (userData && userData.role && userData.role === "expert panel" && type !== "annotator" && Data.comment && Data.comment.length > 0) {
+      let userCommentIndex = -1; 
       for (let z = 0; z < Data.comment.length; z++) {
         if (Data.comment[z].commenter === email) {
-          usercommetIndex = z;
-          break; // Break once found
+          userCommentIndex = z;
+          break; 
         }
       }
     
-      console.log("usercommetIndex ",usercommetIndex)
-      if(usercommetIndex>=0){
-      
+      if(userCommentIndex >= 0){
         let status='';
-          for(let j=0;j<Data.panelstatus.length;j++){
-          console.log("Hi");
-          // console.log(Data.panelstatus[j].email);
-          if(email===Data.panelstatus[j].email){
-            status=Data.panelstatus[j].status;   
+        for(let j=0;j<Data.panelstatus.length;j++){
+          if(email === Data.panelstatus[j].email){
+            status = Data.panelstatus[j].status;   
           }
         }
         result.push(
-          <div key={`comment-${usercommetIndex}`} className='bg-darkGreen text-white mt-4 p-3 text-xl text-left'>
-            {/* {Data.comment[usercommetIndex] && Data.comment[usercommetIndex].commenter && ( */}
-              <>
-            <p className='text-gray-600'>{Data.comment[usercommetIndex].commenter}</p> 
-            <p className='text-gray-600 text-sm'>Comment :</p> 
-            {Data.comment[usercommetIndex].text}
-            
-            {status && status==="green" && (
-             <>
-             <p className='text-gray-600 text-sm'>Status :</p>
-             <div className='flex'>
-               <p>Green</p>
-               <p className='text-sm text-gray-600'>(Verified)</p>
-               <img src={green} className="h-8 w-8 ml-4" alt="" />
-               
-             </div>
-             </>
-          )}
-
-        {status && status==="red" && (
-          <>
-
-          <p className='text-gray-600 text-sm'>Status :</p>
-             <div className='flex'>
-             <p>Red</p>
-             <img src={red} className="h-8 w-8 ml-4" alt="" />
-           </div>
-
-           </>
-          )}
-            
-            <div className='flex space-x-8 text-sm mt-4'>
-              <p>{Data.comment[usercommetIndex].commenteddate}</p>
-              <p>{Data.comment[usercommetIndex].commentedtime}</p>
-            </div>
-            </>
-            {/* )} */}
-          </div>
+          <tr key={`comment-${userCommentIndex}`}>
+            <td className='p-2'>{Data.comment[userCommentIndex].commenter}</td>
+            <td className='p-2'>Comment</td>
+            <td className='p-2'>{Data.comment[userCommentIndex].text}</td>
+            <td className='p-2'>
+              {status === "green" && (
+                <>
+                  <span>Green</span>
+                  {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
+                </>
+              )}
+              {status === "red" && (
+                <>
+                  <span>Red</span>
+                  {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
+                </>
+              )}
+            </td>
+            <td className='p-2'>{Data.comment[userCommentIndex].commenteddate}</td>
+            <td className='p-2'>{Data.comment[userCommentIndex].commentedtime}</td>
+          </tr>
         );
       }
       if(Data.finalcomment && Data.finalcomment.length > 0) {
         result.push(
-          <div key={`finalcomment-${0}`} className='bg-gray-400 text-white mt-4 p-3 text-xl text-left'>
-            {/* {Data.finalcomment[0] && Data.finalcomment[0].commenter && ( */}
-              <>
-            <p className='text-gray-600'>{Data.finalcomment[0].commenter}</p>
-            <p className='text-gray-600 text-sm'>Final Comment :</p> 
-             {Data.finalcomment[0].text}
-            {/* {console.log(Data.reply[i][j].text)} */}
-            {/* <div className='flex space-x-8 text-sm mt-4'> */}
-            {(Data.finalflag && Data.finalflag.length>0 && Data.finalflag[0].status==="green") && (
+          <tr key={`finalcomment-${0}`}>
+            <td className='p-2'>{Data.finalcomment[0].commenter}</td>
+            <td className='p-2'>Final Comment</td>
+            <td className='p-2'>{Data.finalcomment[0].text}</td>
+            <td className='p-2'>
+              {Data.status === "Green" && (
                 <>
-                <p className='text-gray-600 text-sm'>Status :</p>
-                <div className='flex'>
-                  <p>Green</p>
-                  <p className='text-sm text-gray-600'>(Verified)</p>
-                  <img src={green} className="h-8 w-8 ml-4" alt="" />
-                  
-                </div>
+                  <span>Green</span>
+                  {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
                 </>
-             
-            ) }
-
-            {(Data.finalflag && Data.finalflag.length>0 && Data.finalflag[0].status==="red") && (
-              <>
-              <p className='text-gray-600 text-sm'>Status :</p>
-                  <div className='flex'>
-                  <p>Red</p>
-                  <img src={red} className="h-8 w-8 ml-4" alt="" />
-                </div>
-              </>
-            )}
-            
-            <div className='flex space-x-8 text-sm mt-4'>
-              <p>{Data.finalcomment[0].commenteddate}</p>
-              <p>{Data.finalcomment[0].commentedtime}</p>
-            </div>
-            </>
-            {/* )} */}
-          </div>
+              )}
+              {Data.status === "Red" && (
+                <>
+                  <span>Red</span>
+                  {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
+                </>
+              )}
+            </td>
+            <td className='p-2'>{Data.finalcomment[0].commenteddate}</td>
+            <td className='p-2'>{Data.finalcomment[0].commentedtime}</td>
+          </tr>
         );
       }
     }
 
-    if(type!=="annotator"){
-      for(let i=0;i<Data.reply.length;i++){
+    if(type !== "annotator"){
+      for(let i = 0; i < Data.reply.length; i++){
         if (Data.reply && Data.reply.length > 0 && Data.reply[i]) {
-          // Interleave replies
-          // for (let j = 0; j < Data.reply.length; j++) {
-            
-            result.push(
-              <div key={`reply-${i}`} className='bg-gray-200 text-black mt-4 p-3 text-xl text-left'>
-                {/* {console.log(Data.reply[i][j].text)} */}
-        
-                <p className='text-gray-600'>{Data.reply[i].replyer}</p>
-                <p className='text-gray-600 text-sm'>Reply :</p> 
-                {Data.reply[i].text}
-                {/* {console.log(Data.reply[i][j].text)} */}
-                <div className='flex space-x-8 text-sm mt-4'>
-                  {/* <p>{Data.reply[i].status}</p> */}
-                  <p>{Data.reply[i].replieddate}</p>
-                  <p>{Data.reply[i].repliedtime}</p>
-                </div>
-              </div>
-            );
-          }
-      } 
-      
+          result.push(
+            <tr key={`reply-${i}`}>
+              <td className='p-2'>{Data.reply[i].replyer}</td>
+              <td className='p-2'>Reply</td>
+              <td className='p-2'>{Data.reply[i].text}</td>
+              <td className='p-2'></td>
+              <td className='p-2'>{Data.reply[i].replieddate}</td>
+              <td className='p-2'>{Data.reply[i].repliedtime}</td>
+            </tr>
+          );
+        }
+      }
     }
 
     return result;
   };
-  console.log(user);
+
   return (
-    <div className=' lg:w-3/4 p-3 font-semibold mx-auto text-center'>
+    <div className='mt-12 lg:w-3/4 p-3 font-semibold text-center ml-0'>
       <h1 className='text-sidebarGreen text-2xl'>Comment section</h1>
 
       {loading ? (
         <div>Loading...</div>
-      ) : renderCommentsAndReplies().length > 0 ? (
-        <>
-          {renderCommentsAndReplies()}
-
-          {((type !=="annotator" && !Data.finalcomment) ||(Data.reply.length>0 && type!="industry" && userData.role=="expert head"))&& (
-          <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
-            <Comments type={type} videoId={videoId} />
-          </div>
-          )}
-
-      {((type ==="industry" || user==="industry") && Data.finalcomment && !Data.reply.length>0) && (
-          <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
-            <Comments type={"reply"} videoId={videoId} />
-          </div>
-          )}
-        </>
       ) : (
-        <div className='bg-darkGreen text-white mt-4 p-3 text-xl text-left'>
-          Not yet reviewed this video
+        <table className="min-w-full bg-white">
+          <thead>
+            <tr>
+              <th className="w-1/4 px-4 py-2">Commenter</th>
+              <th className="w-1/4 px-4 py-2">Type</th>
+              <th className="w-1/4 px-4 py-2">Text</th>
+              <th className="w-1/4 px-4 py-2">Status</th>
+              <th className="w-1/4 px-4 py-2">Date</th>
+              <th className="w-1/4 px-4 py-2">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {renderCommentsAndReplies().length > 0 ? (
+              renderCommentsAndReplies()
+            ) : (
+              <tr>
+                <td colSpan="6" className="text-center p-4">
+                  Not yet reviewed this video
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      )}
+
+      {((type !== "annotator" && !Data.finalcomment) || (Data && Data.reply && Data.reply.length > 0 && type !== "industry")) && (
+        <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
+          <h1></h1>
+          <Comments type={type} videoId={videoId} />
         </div>
       )}
 
-
+      {((type === "industry" || user === "industry") && Data.finalcomment && !Data.reply.length > 0) && (
+        <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
+          <Comments type={"reply"} videoId={videoId} />
+        </div>
+      )}
     </div>
   );
 }

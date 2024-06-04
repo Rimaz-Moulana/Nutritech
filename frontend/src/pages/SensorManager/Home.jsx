@@ -10,6 +10,7 @@ import ProductTable from '../../components/tables/LogTable';
 function Home() {
 
   const navigate= useNavigate();
+  let [isEnlarge, setEnlarge] = useState(true);
 
   const handleVideos = () =>{
     console.log('button clicked')
@@ -24,11 +25,9 @@ function Home() {
     navigate(`/rules/${type}`);
   };
 
-
-  const [products, setProducts] = useState([]);
-  const [RuleData, setRuleData] = useState([]);
   const [VideoData, setVideoData] = useState([]);
-
+  const [unannotatedVideoData, setUnannotatedVideoData]= useState([]);
+  const [pendingVideoData, setPendingVideoData] = useState([]);
 
 
   useEffect(() => {
@@ -36,6 +35,7 @@ function Home() {
     const fetchData = async () => {
       // try {
         // Allvideos.jsx
+
         const token = localStorage.getItem('token');
         console.log("token:", token);
 
@@ -55,6 +55,9 @@ function Home() {
           withCredentials: true,
         };
         const response = await fetch('http://localhost:3000/api/videos/sensormanagerallvideos', config);
+
+        const response = await fetch('http://localhost:3000/api/videos/allUploadedVideos',config);
+
         const data = await response.json();
         setVideoData(data);
 
@@ -67,24 +70,11 @@ function Home() {
     fetchData();
   }, []);
 
-//   useEffect(() => {
-//     // Fetch data when the component mounts
-//     fetchData();
-//   }, []);
-  
-//   const fetchData = async () => {
-//     try {
-//       console.log("hi")
-//       const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
-//       setProducts(response.data);
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//     }
-//   }
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUnannotatedVideos = async () => {
       try {
+
         const token = localStorage.getItem('token');
         console.log("token:", token);
 
@@ -111,52 +101,80 @@ function Home() {
       }else{
         navigate("/")
       }
+
+        const response = await fetch('http://localhost:3000/api/videos/sensormanagerallvideos');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setUnannotatedVideoData(data);
+
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error(error);
       }
     };
   
+    fetchUnannotatedVideos();
+  }, []);
+
+  useEffect(() => {
+    // Fetch data from your backend API
+    const fetchData = async () => {
+      // try {
+        // Allvideos.jsx
+        const response = await fetch('http://localhost:3000/api/videos/sensormanagernewvideo');
+        const data = await response.json();
+        setPendingVideoData(data);
+
+    };
+
     fetchData();
   }, []);
+
+  
+  const unannotatedvideos =unannotatedVideoData.length;
+  const all =VideoData.length;
+  const newVideos = pendingVideoData.length;
+
+
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
+
 
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar type="sensormanager" />
+        <Sidebar type="sensormanager" onValueChange={handleValueChange}/>
       </div>
-      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-64">
+      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <div className='p-1'>
-        <Navbar type='annotator' />
+        <Navbar type='sensormanager' />
         </div>
-        <div className='flex justify-between z-9999 mt-12'>
-        <h1 className='ml-8 mb-8 mt-12 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
-           Videos
-        </h1>
-        <button className="text-white mt-12 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleVideos}>All Videos</button>
+        <div className='lg:pr-8 lg:pt-8 flex justify-center items-center h-full '>
+          <div className='flex flex-col items-center'>
+        <div className="mt-12 grid grid-cols-2 gap-4 p-8">
+        <div>
+        <HomeSwiper count={all} type={"All Videos"} user={"Sensor Manager"}  />
         </div>
-        <HomeSwiper videoData={VideoData}/>
-        <div className='flex mt-24 justify-between'>
-        <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
-        <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
+        <div>
+        <HomeSwiper count={unannotatedvideos} type={"Reviewed Videos"} user={"Sensor Manager"}   />
         </div>
-        <div className='mt-4 left-0'>
-        <ProductTable data={products} />
+
+        <div>
+        <HomeSwiper count={newVideos} type={"Pending Videos"} user={"Sensor Manager"}   />
         </div>
-        <div className=''>
-        <div className='flex mt-8 justify-between'>
-        <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Rules and Regulations</h1>
-        <button className="mt-4 text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={viewrules}>
-          View All rules
-      </button>
         </div>
-        {RuleData.map((rule, index) => (
-          index<4 &&
-        <Rule key={index} rule={rule} type={"sensormanagerhome"}/>
-          
-      ))}
+        </div>
         </div>
       </div>
     </div>
+   
   );
 }
 

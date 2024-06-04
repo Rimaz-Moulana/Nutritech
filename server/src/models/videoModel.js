@@ -42,14 +42,7 @@ const VideoSchema = new mongoose.Schema({
     }
   ],
 
-  finalflag:[
-    {
-      status:String,
-      email:String,
-      expertreviewedtime:String,
-      expertrevieweddate:String,
-    }
-  ],
+  finalflag: String,
 
   panelstatus:[
     {
@@ -88,6 +81,22 @@ const VideoSchema = new mongoose.Schema({
       rule: String,
       details: String,
       recommendation: String,
+      acceptance: [
+        {
+        user: String,
+        decision: String,
+        date:String,
+        time:String
+      }
+      ],
+      finalacceptance : [
+        {
+          user: String,
+          decision: String,
+          date:String,
+          time:String
+        }
+      ]
     },
   ],
 
@@ -97,6 +106,15 @@ const VideoSchema = new mongoose.Schema({
       rule: String,
       details: String,
       recommendation: String,
+
+      finalacceptance : [
+        {
+          user: String,
+          decision: String,
+          date:String,
+          time:String
+        }
+      ]
     },
   ],
 });

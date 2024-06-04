@@ -170,7 +170,7 @@ function Rules() {
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> 
       <Sidebar type={type} onValueChange={handleValueChange}/>
       </div>
-      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
+      <div className={`w-full z-10 mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='type'/>
         <div className=''>
         <h1 className=' mt-24 text-2xl font-semibold text-sidebarGreen left-0'>

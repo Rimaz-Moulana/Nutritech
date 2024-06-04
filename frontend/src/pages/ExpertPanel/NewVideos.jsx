@@ -4,6 +4,8 @@ import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
 
+
+
 function NewVideos() {
 
   const [videoData, setVideoData] = useState([]);
@@ -14,6 +16,21 @@ function NewVideos() {
   });
   const email  = localStorage.getItem('email');
 
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          setUserData(response.data); // Setting the response data to the state
+       } catch (error) {
+          console.error('Error fetching user:', error);
+       }
+    };
+  
+    fetchUser();
+}, []);
+
+
   const handleCheckboxChange = () => {
     const newCheckedState = !isChecked;
     setIsChecked(newCheckedState);
@@ -23,7 +40,56 @@ function NewVideos() {
 
   const navigate= useNavigate();
 
+  // const fetchData = async (url, email, setVideoData, setData) => {
+  //   try {
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+      
+  //     const filteredData = data.filter(video => {
+  //         return !video.panelstatus.some(status => status.email === email);
+  //       });
+  //     setVideoData(data);
+  //     setData(filteredData);
+  //     console.log(filteredData);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+  
+  // useEffect(() => {
+  //   const url = userData.role === "expert head" 
+  //     ? 'http://localhost:3000/api/videos/annotatedvideosExpert' 
+  //     : 'http://localhost:3000/api/videos/allAnnotatedUploadedVideos';
+    
+  //   fetchData(url, email, setVideoData, setData);
+  // }, [email, userData.role, setVideoData, setData]); // Add dependencies
+  
+
+  const fetchData = async (url, email, setVideoData, setData) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+  
+      // Filter videos based on the conditions
+      const filteredData = data.filter(video => {
+        // If the user is an expert head, no filtering based on panelstatus
+        if (userData.role === "expert head") {
+          return true;
+        }
+        // If the user is not an expert head, apply the filtering
+        return (video.status === "annotated" && !video.panelstatus.some(status => status.email === email));
+      });
+  
+      setVideoData(data);
+      setData(filteredData);
+      console.log(filteredData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  
   useEffect(() => {
+
     const fetchData = async () => {
       try {
         console.log("fetching session details..");
@@ -61,9 +127,15 @@ function NewVideos() {
         console.error('Error fetching data:', error);
       }
     };
+
+    const url = userData.role === "expert head" 
+      ? 'http://localhost:3000/api/videos/annotatedvideosExpert' 
+      : 'http://localhost:3000/api/videos/allAnnotatedUploadedVideos';
+
   
-    fetchData();
-  }, [email]); // Add email to the dependency array to re-fetch data when email changes
+    fetchData(url, email, setVideoData, setData);
+  }, [email, userData.role, setVideoData, setData]);
+
   
   const handleValueChange = (value) => {
     console.log(value)
@@ -73,13 +145,14 @@ function NewVideos() {
       setEnlarge(false);
     }
   };
+  console.log(Data);
 
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
       <Sidebar type="expert" onValueChange={handleValueChange}/>
       </div>
-      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
+      <div className={`w-full pr-8 mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='expert' />
         <div className='flex justify-between z-9999 mt-12'>
         <h1 className='ml-24 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
