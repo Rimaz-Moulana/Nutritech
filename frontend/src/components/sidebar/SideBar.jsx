@@ -210,7 +210,7 @@ const Sidebar = ({type,onValueChange}) => {
       } else {
         setSelected(index);
         if (index === navResearcher.findIndex((item) => item.text === 'History')) {
-          navigate('/history');
+          navigate('/industryhistory');
         } else if (index === navResearcher.findIndex((item) => item.text === 'Products')) {
           // navigate('/sensormanagerproducts');
         } else if (index === navResearcher.findIndex((item) => item.text === 'Rules & Regulations')) {
@@ -218,7 +218,7 @@ const Sidebar = ({type,onValueChange}) => {
         }  else if (index===navResearcher.findIndex((item)=>item.text === "Reports")){
     
         } else {
-          navigate('/researcherhome');
+          navigate('/industryhome');
         }
       }
     }

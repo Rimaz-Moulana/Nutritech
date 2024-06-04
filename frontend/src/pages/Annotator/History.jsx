@@ -63,7 +63,7 @@ function History() {
           <RowHistory videoId={videoId} usertype={"annotator"}/>
         </div>
 
-        <div className='px-3 center-l w-full'>
+        <div className='px-3 center-l w-full justify-center'>
           <ViewComment videoId={videoId} type={"annotator"}/>
         </div>
 
