@@ -80,47 +80,45 @@ export default function LogTable() {
   };
 
   const generateRedPDF = () => {
-    const doc = new jsPDF(); // Create a new PDF document
+    const doc = new jsPDF();
   
-    // Title Section (Formatted for Better Readability)
-    doc.setFontSize(24); // Set a larger font size for the title
-    const titleWidth = doc.getStringWidth('Red Flag Video Report'); // Calculate title width
-    const titleX = (doc.internal.pageSize.getWidth() - titleWidth) / 2; // Center the title horizontally
-    doc.text('Red Flag Video Report', titleX, 20, { align: 'center' }); // Add the title with centering
+    // Add a title
+    doc.setFontSize(20);
+    doc.text('Red Flag Video Report', 20, 20);
   
-    // Add a line break for better separation
-    doc.text('', 0, 30); // Empty text for line break
+    // Add video details with proper formatting
+    doc.setFontSize(12);
+    let yOffset = 40; // Starting Y position for details
   
-    // Video Details Section (Improved Formatting and Data Consistency)
-    doc.setFontSize(12); // Set the font size for details
-    const detailYOffset = 10; // Offset for each detail line
-    let currentY = 40; // Starting Y position for details
+    const addDetail = (label, value) => {
+      doc.text(`${label}: ${value}`, 20, yOffset);
+      yOffset += 10; // Move to the next line
+    };
   
-    // Ensure data keys are correct and consistent
-    const videoDetails = [
-      { label: 'Video Status:', value: video.status },
-      { label: 'Created Time:', value: video.createdAt },
-      { label: 'Created Date:', value: video.createdIn }, // Assuming correct data key
-      { label: 'Product Name:', value: video.product },
-      { label: 'Brand Name:', value: video.brand },
-      { label: 'Size:', value: `${video.size} ${video.unit}` }, // Combine size and unit
-      { label: 'Comment:', value: video.comment }, // Assuming correct data key
-      { label: 'Final Comment:', value: video.finalcomment }, // Assuming correct data key
-      { label: 'Panel Status:', value: video.panelstatus }, // Assuming correct data key
-      { label: 'Annotations:', value: video.annotations }, // Assuming correct data key
-      { label: 'Re-annotations:', value: video.reannotations }, // Assuming correct data key
-    ];
+    addDetail('Video Status', video.status);
+    addDetail('Created Time', video.createdAt);
+    addDetail('Created Date', video.createdIn);
+    addDetail('Product Name', video.product);
+    addDetail('Brand Name', video.brand);
+    addDetail('Size', `${video.size} ${video.unit}`);
+    addDetail('Comment', video.comment);
+    addDetail('Final Comment', video.finalcomment);
+    addDetail('Panel Status', video.panelstatus);
+    addDetail('Annotations', video.annotations.map((annotation, index) => (
+      annotation.rule !== "" && (
+        <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+          <td>{annotation.timestamp}</td>
+          <td>{annotation.rule}</td>
+          <td className="p-4 text-center" style={{ wordWrap: 'break-word' }}>{annotation.details}</td>
+          <td className="p-6 text-center" style={{ wordWrap: 'break-word' }}>{annotation.recommendation}</td>
+          </tr>
+          )) ));
+    addDetail('Reannotations', video.reannotations);
   
-    // Add video details with labels and right alignment for values
-    videoDetails.forEach((detail) => {
-      doc.text(detail.label, 20, currentY); // Add the label
-      doc.text(detail.value, doc.internal.pageSize.getWidth() - 60, currentY, { align: 'right' }); // Add the value with right alignment
-      currentY += detailYOffset; // Update Y position for the next detail
-    });
-  
-    // Save the PDF document
+    // Save the PDF
     doc.save('red_flag_video_report.pdf');
   };
+  
 
   const generateGreenPDF = () => {
     const doc = new jsPDF();
@@ -169,13 +167,13 @@ export default function LogTable() {
           </thead>
           <tbody>
           <tr className="border-b border-black">
-              <td className="py-3 text-justify whitespace-nowrap">why it was red Flag Video?</td>
+              <td className="py-3 text-justify whitespace-nowrap">that video details?</td>
               <button className='text-white bg-gradient-to-t from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2' onClick={generateRedPDF}>Generate Report</button>
             </tr>
-            <tr className="border-b border-black">
+            {/* <tr className="border-b border-black">
               <td className="py-3 text-justify whitespace-nowrap">why it was green Flag Video?</td>
               <button className='text-white bg-gradient-to-t from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2' onClick={generateGreenPDF}>Generate Report</button>
-            </tr>
+            </tr> */}
             <tr className="border-b border-black">
               <td className="py-3 text-justify whitespace-nowrap">Identify compliance with regulations. Indicate where (in which sentence) the rules are violated</td>
               <button className='text-white bg-gradient-to-t py-3 from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5  mr-2 mb-2' onClick={generatePDF}>Generate Report</button>
