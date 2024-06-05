@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 // import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import Sidebar from '../components/sidebar/SideBar';
-import Rule from './../components/Rule';
+import VideoContainer from './../components/videoContainer/VideoContainer';
 import Navbar from './../components/navbar/Navbar';
+import Rule from './../components/Rule';
+import backwardarrow from './../assets/Images/backarrowgreen.png'
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Sidebar from '../components/sidebar/SideBar';
 
 function Rules() {
   const [RuleData, setRuleData] = useState([]);
   let [isEnlarge, setEnlarge] = useState(true);
   let ruleNo,rule;
   const {type} = useParams();
-  const navigate = useNavigate();
 
   const getCurrentDateTime = () => {
     const currentDate = new Date();
@@ -81,24 +82,6 @@ function Rules() {
 
   const submit = async () => {
     try {
-      const token = localStorage.getItem('token');
-        console.log("token:", token);
-
-      setTimeout(() => {
-        // Remove token from local storage after 5 seconds
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-    }, 7200000); // 2hours
-
-
-      if (token) {
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          },
-          withCredentials: true,
-        };
       const response = await axios.post(`http://localhost:3000/api/rules/rules`, {
         ruleNumber: ruleNo,
         rule: rule,
@@ -106,13 +89,9 @@ function Rules() {
         addedIn: new Date().toLocaleDateString(),
         addedby: "Sensor Manager 01",
 
-      } , config);
+      });
 
       console.log(response)
-
-    }else{
-      navigate('/')
-    }
     } catch (error) {
       console.error('Error saving rule:', error);
     }
@@ -121,32 +100,10 @@ function Rules() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('token');
-        console.log("token:", token);
-
-      setTimeout(() => {
-        // Remove token from local storage after 5 seconds
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-    }, 7200000); // 2hours
-
-
-      if (token) {
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          },
-          withCredentials: true,
-        };
-        const response = await axios.get('http://localhost:3000/api/rules/rules' , config);
+        const response = await axios.get('http://localhost:3000/api/rules/rules');
         const data = response.data;
         // console.log(data); // This should log the fetched data
         setRuleData(data);
-
-      }else{
-        navigate('/')
-      }
       } catch (error) {
         console.error('Error fetching data:', error);
       }

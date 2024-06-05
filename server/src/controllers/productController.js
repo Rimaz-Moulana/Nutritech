@@ -327,6 +327,7 @@ exports.fetchSensorManagerReview = async (req, res) => {
     try {
           const productId = req.params.productId;
           const fact = req.body.healthfact;
+          console.log(fact);
           const productStatus = await productService.saveProduct(productId,fact);
           res.json(productStatus);
       } catch (error) {

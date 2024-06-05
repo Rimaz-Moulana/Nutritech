@@ -57,7 +57,7 @@ exports.getSensorManagerReviewVideos = async(videoId)=>{
   return await VideoModel.findOne({ _id: videoId })
 }
 
-exports.saveSensorManagerReviewStatus = async (videoId) => {
+exports.saveSensorManagerReviewStatus = async (videoId,fact) => {
   try {
     return await VideoModel.findByIdAndUpdate(
       videoId,
@@ -65,6 +65,8 @@ exports.saveSensorManagerReviewStatus = async (videoId) => {
         status: 'unannotated',
         reviewedtime: getCurrentDateTime(),
         revieweddate: new Date().toLocaleDateString(),
+        healthfact:fact,
+        
       },
       { new: true }
     );

@@ -45,10 +45,14 @@ function VideowithReview({Id,text,type,showButtons}) {
     const isFineBakeryWares = Data.productCategory === "Fine Bakery Wares";
     const isOrdinaryBakeryWares = Data.productCategory === "Bread and Ordinary Bakery Wares";
     const isCereals =Data.productCategory === "Cereals";
-    const isReadytoeatSavouries = Data.productCategory === "Ready-to-eat Savouries";
+    const isPotatocerealorstarchbasedandanimalbased = Data.productCategory === "Potato,cereal or starch-based and animal based";
     const isProcessednuts = Data.productCategory === "Processed nuts";
     const isFishbased = Data.productCategory === "Fish-based";
-    const isBeverages =Data.productCategory === "Beverages";
+    const isJuices =Data.productCategory === "Juices";
+    const isMilkanddairybaseddrinks =Data.productCategory === "Milk and dairy based drinks";
+    const isWaterbasedflavoureddrink =Data.productCategory === "Water based flavoured drink";
+    const Cerealgraintreenutbasedbeverages=Data.productCategory === "Cereal,grain, tree nut-based beverages";
+    const isBCoffeecoffeesubstitutesteaherbalinfusions =Data.productCategory === "Coffee,coffee substitutes,tea, herbal infusions";
     const isFrozendairybaseddessertsandedibleices = Data.productCategory === "Frozen dairy based desserts and edible ices";
     const isCurdeddairybaseddesserts = Data.productCategory === "Curded dairy based desserts";
     const isCheeseandanalogues = Data.productCategory === "Cheese and analogues";
@@ -100,6 +104,24 @@ function VideowithReview({Id,text,type,showButtons}) {
     }else if(isSolidformsoybeanProducts && Data.totalFat2<=12.0 && Data.sugar2<=5.0 && Data.sodium2<=0.10 ){
       fact = "healthy";
     }else if(isSaucesdipsanddressings && Data.totalFat2<=12.0 && Data.sugar2<=10.0 && Data.sodium2<=0.30){
+      fact = "healthy";
+    }else if(isPotatocerealorstarchbasedandanimalbased && Data.totalFat2<=8.0 && Data.sugar2<=0 && Data.sodium2<=0.25 && Data.energy2 <= 230 ){
+      fact = "healthy";
+    }else if(isProcessednuts && Data.sugar2<=0 && Data.sodium2<=0.05){
+      fact = "healthy";
+    }else if(isFishbased &&  Data.sugar2<=6 && Data.sodium2<=0.25 && Data.energy2 <= 230 ){
+      fact = "healthy";
+    }else if(isJuices &&  Data.sugar2<=6 ){
+      fact = "healthy";
+    }else if(isMilkanddairybaseddrinks && Data.totalFat2<=7.0 && Data.sugar2<=0 ){
+      fact = "healthy";
+    }else if(isWaterbasedflavoureddrink && Data.sugar2<=2 && Data.sodium2<=0.23 ){
+      fact = "healthy";
+    }else if(Cerealgraintreenutbasedbeverages &&  Data.sugar2<=6 && Data.sodium2<=0.2  ){
+      fact = "healthy";
+    }else if(isBCoffeecoffeesubstitutesteaherbalinfusions  && Data.sugar2<=2  ){
+      fact = "healthy";
+    }else if(isProcessedmeatpoultrygamefishandfishproducts && Data.totalFat2<=15.0 ){
       fact = "healthy";
     }else{
       fact ="unhealthy"
@@ -211,7 +233,8 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       }   
       else if (text === "video") {
        await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
-        status: 'unannotated'
+        status: 'unannotated',
+        healthfact : healthFact,
       });
     }else{
       await axios.post(`http://localhost:3000/api/product/reviewproduct/${productId}`, {
@@ -496,7 +519,7 @@ return (
             </div>
             <div className="md:w-2/3">
               <div className="shadow font-semibold text-center bg-white appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">
-                {text === "product" ? Data.productName : Data.product}
+                {Data.product}
               </div>
             </div>
           </div>
@@ -509,14 +532,14 @@ return (
             </div>
           </div>
        
-          {productData && productData.length > 0 && productData[0].healthfact && (
+          {Data && Data?.healthfact && (
             <div className="md:flex md:items-center mb-4">
               <div className="md:w-1/3">
                 <label className="block text-black font-bold text-left mb-1 md:mb-0">Status</label>
               </div>
               <div className="md:w-2/3">
                 <div className="shadow bg-white appearance-none border-2 rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">
-                  {productData[0].healthfact}
+                  {Data.healthfact}
                 </div>
               </div>
             </div>

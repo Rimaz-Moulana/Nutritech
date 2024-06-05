@@ -77,7 +77,7 @@ export default function LogTable({data}) {
             Product Name
           </th>
           <th scope="col" className="px-6 py-3 text-lg font-medium text-black uppercase tracking-wider">
-            User Type
+            Uploader
           </th>
           <th scope="col" className="px-6 py-3 text-lg font-medium text-black uppercase tracking-wider">
             Time

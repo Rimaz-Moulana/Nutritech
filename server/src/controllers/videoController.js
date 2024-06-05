@@ -169,7 +169,8 @@ exports.updateFinalDecision= async (req,res)=>{
 exports.saveSensorManagerReview= async (req,res)=>{
   try {
         const videoId = req.params.videoId;
-        const videoStatus = await VideoService.saveSensorManagerReviewStatus(videoId);
+        const fact =req.body.healthfact;
+        const videoStatus = await VideoService.saveSensorManagerReviewStatus(videoId,fact);
         res.json(videoStatus);
     } catch (error) {
         console.error(error);

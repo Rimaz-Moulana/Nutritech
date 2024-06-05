@@ -12,9 +12,6 @@ export default function LogTable() {
   const [video, setVideo] = useState([]);
   const [selectedProductIndex, setSelectedProductIndex] = useState(null);
   const [error, setError] = useState(null);
-
-
-
   
 
   useEffect(() => {

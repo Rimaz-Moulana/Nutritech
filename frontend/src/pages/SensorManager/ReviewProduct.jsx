@@ -9,7 +9,8 @@ import Sidebar from '../../components/sidebar/SideBar';
 function ReviewProduct() {
   const {productId} = useParams();
   const [responseData, setResponseData] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  let [isEnlarge, setEnlarge] = useState(true);
  
   useEffect(() => {
     const fetchReviewDetails = async () => {
@@ -48,16 +49,29 @@ function ReviewProduct() {
   
     fetchReviewDetails();
   }, [productId]);
-console.log(responseData)
+
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
+
+
   return ( 
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
           <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-          <Sidebar type="sensormanager" />
+          <Sidebar type="sensormanager" onValueChange={handleValueChange} />
           </div>
-          <div className="w-full min-w-screen sm:w-3/4 ml-0 h-full min-h-screen sm:ml-64 z-10">
+          <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
             <Navbar type='sensormanager'/>
           
-            <VideowithReview Id={productId} text={"product"}/>
+          <div className='mt-12'>
+          <VideowithReview Id={productId} text={"product"}/>
+          </div>
+            
            
             
          
