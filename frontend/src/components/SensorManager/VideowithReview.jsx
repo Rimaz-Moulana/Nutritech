@@ -108,7 +108,7 @@ function VideowithReview({Id,text,type,showButtons}) {
     
   }
 
-
+// health();
   const handleOpen = (status) => {
 // console.log(text)
     Swal.fire({
@@ -200,6 +200,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     // e.preventDefault();
     // console.log(videoId)
     const healthFact= health();
+    console.log(healthFact);
     try {
       if(text==="expert" ){
         console.log(text)
@@ -504,7 +505,7 @@ return (
               <label className="block text-black font-bold text-left mb-1 md:mb-0">Size</label>
             </div>
             <div className="md:w-2/3">
-              <div className="shadow bg-white appearance-none border-2 rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">80g</div>
+              <div className="shadow bg-white appearance-none border-2 rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">{Data.size}{Data.unit}</div>
             </div>
           </div>
        
