@@ -1,17 +1,14 @@
 import axios from 'axios';
+import { Modal } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import Annotations from '../../components/AnnotationTable/RowHistory';
 import Comments from '../../components/CommentSection/Comments';
 import ViewComment from '../../components/CommentSection/ViewComment';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { Button, Modal } from 'flowbite-react';
-import Message from '../../components/Popup/Message';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
-import MessagePopup from '../../components/Popup/MessagePopup';
 
 function ReviewVideos() {
   // const navigate= useNavigate();
@@ -22,6 +19,7 @@ function ReviewVideos() {
   const [loading, setLoading] = useState(false);
   const email  = localStorage.getItem('email');
   const [userData, setUserData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -75,6 +73,10 @@ const handleMessage = () => {
 };
 const closePopup = () => {
   setOpenModal(false);
+};
+
+const handlePoductDetails = (product, brand, size) => {
+  navigate(`/product/view/${size}${product}/${brand}`);
 };
  
 

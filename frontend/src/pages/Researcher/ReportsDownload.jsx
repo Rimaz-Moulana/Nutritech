@@ -80,29 +80,45 @@ export default function LogTable() {
   };
 
   const generateRedPDF = () => {
-    const doc = new jsPDF();
+    const doc = new jsPDF(); // Create a new PDF document
   
-    // Add a title
-    doc.setFontSize(20);
-    doc.text('Red Flag Video Report', 20, 20);
+    // Title Section (Formatted for Better Readability)
+    doc.setFontSize(24); // Set a larger font size for the title
+    const titleWidth = doc.getStringWidth('Red Flag Video Report'); // Calculate title width
+    const titleX = (doc.internal.pageSize.getWidth() - titleWidth) / 2; // Center the title horizontally
+    doc.text('Red Flag Video Report', titleX, 20, { align: 'center' }); // Add the title with centering
   
-    // Add video details
-    doc.setFontSize(12);
-    doc.text(`Video Status: ${video.status}`, 20, 50);
-    doc.text(`Created Time: ${video.createdAt}`, 20, 40);
-    doc.text(`Created Date: ${video.createdIn}`, 20, 50);
-    doc.text(`Product name: ${video.product}`, 20, 50);
-    doc.text(`Brand name: ${video.brand}`, 20, 50);
-    doc.text(`Size: ${video.size+video.unit}`, 20, 50);
-    
-    doc.setFontSize(12);
-    doc.text(`Size: ${video.comment}`, 20, 50);
-    doc.text(`Size: ${video.finalcomment}`, 20, 50);
-    doc.text(`Size: ${video.panelstatus}`, 20, 50);
-    doc.text(`Size: ${video.annotations}`, 20, 50);
-    doc.text(`Size: ${video.reannotations}`, 20, 50);
+    // Add a line break for better separation
+    doc.text('', 0, 30); // Empty text for line break
   
-    // Save the PDF
+    // Video Details Section (Improved Formatting and Data Consistency)
+    doc.setFontSize(12); // Set the font size for details
+    const detailYOffset = 10; // Offset for each detail line
+    let currentY = 40; // Starting Y position for details
+  
+    // Ensure data keys are correct and consistent
+    const videoDetails = [
+      { label: 'Video Status:', value: video.status },
+      { label: 'Created Time:', value: video.createdAt },
+      { label: 'Created Date:', value: video.createdIn }, // Assuming correct data key
+      { label: 'Product Name:', value: video.product },
+      { label: 'Brand Name:', value: video.brand },
+      { label: 'Size:', value: `${video.size} ${video.unit}` }, // Combine size and unit
+      { label: 'Comment:', value: video.comment }, // Assuming correct data key
+      { label: 'Final Comment:', value: video.finalcomment }, // Assuming correct data key
+      { label: 'Panel Status:', value: video.panelstatus }, // Assuming correct data key
+      { label: 'Annotations:', value: video.annotations }, // Assuming correct data key
+      { label: 'Re-annotations:', value: video.reannotations }, // Assuming correct data key
+    ];
+  
+    // Add video details with labels and right alignment for values
+    videoDetails.forEach((detail) => {
+      doc.text(detail.label, 20, currentY); // Add the label
+      doc.text(detail.value, doc.internal.pageSize.getWidth() - 60, currentY, { align: 'right' }); // Add the value with right alignment
+      currentY += detailYOffset; // Update Y position for the next detail
+    });
+  
+    // Save the PDF document
     doc.save('red_flag_video_report.pdf');
   };
 
