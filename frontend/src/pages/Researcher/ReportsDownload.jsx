@@ -83,37 +83,39 @@ export default function LogTable() {
     doc.setFontSize(20);
     doc.text('Red Flag Video Report', 20, 20);
   
-    // Add video details
+    // Add video details with proper formatting
     doc.setFontSize(12);
-    let y = 40; // Starting y-coordinate for the details
-    const lineHeight = 10; // Height between each line of text
-
-    doc.text(`Video Status: ${video.status}`, 20, y);
-    y += lineHeight;
-    doc.text(`Created Time: ${video.createdAt}`, 20, y);
-    y += lineHeight;
-    doc.text(`Created Date: ${video.createdIn}`, 20, y);
-    y += lineHeight;
-    doc.text(`Product name: ${video.product}`, 20, y);
-    y += lineHeight;
-    doc.text(`Brand name: ${video.brand}`, 20, y);
-    y += lineHeight;
-    doc.text(`Size: ${video.size + video.unit}`, 20, y);
-    y += lineHeight;
-    doc.text(`Comment: ${video.comment}`, 20, y);
-    y += lineHeight;
-    doc.text(`Final Comment: ${video.finalcomment}`, 20, y);
-    y += lineHeight;
-    doc.text(`Panel Status: ${video.panelstatus}`, 20, y);
-    y += lineHeight;
-    doc.text(`Annotations: ${video.annotations}`, 20, y);
-    y += lineHeight;
-    doc.text(`Reannotations: ${video.reannotations}`, 20, y);
+    let yOffset = 40; // Starting Y position for details
+  
+    const addDetail = (label, value) => {
+      doc.text(`${label}: ${value}`, 20, yOffset);
+      yOffset += 10; // Move to the next line
+    };
+  
+    addDetail('Video Status', video.status);
+    addDetail('Created Time', video.createdAt);
+    addDetail('Created Date', video.createdIn);
+    addDetail('Product Name', video.product);
+    addDetail('Brand Name', video.brand);
+    addDetail('Size', `${video.size} ${video.unit}`);
+    addDetail('Comment', video.comment);
+    addDetail('Final Comment', video.finalcomment);
+    addDetail('Panel Status', video.panelstatus);
+    addDetail('Annotations', video.annotations.map((annotation, index) => (
+      annotation.rule !== "" && (
+        <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
+          <td>{annotation.timestamp}</td>
+          <td>{annotation.rule}</td>
+          <td className="p-4 text-center" style={{ wordWrap: 'break-word' }}>{annotation.details}</td>
+          <td className="p-6 text-center" style={{ wordWrap: 'break-word' }}>{annotation.recommendation}</td>
+          </tr>
+          )) ));
+    addDetail('Reannotations', video.reannotations);
   
     // Save the PDF
     doc.save('red_flag_video_report.pdf');
-};
-
+  };
+  
 
   const generateGreenPDF = () => {
     const doc = new jsPDF();
@@ -162,13 +164,13 @@ export default function LogTable() {
           </thead>
           <tbody>
           <tr className="border-b border-black">
-              <td className="py-3 text-justify whitespace-nowrap">why it was red Flag Video?</td>
+              <td className="py-3 text-justify whitespace-nowrap">that video details?</td>
               <button className='text-white bg-gradient-to-t from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2' onClick={generateRedPDF}>Generate Report</button>
             </tr>
-            <tr className="border-b border-black">
+            {/* <tr className="border-b border-black">
               <td className="py-3 text-justify whitespace-nowrap">why it was green Flag Video?</td>
               <button className='text-white bg-gradient-to-t from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2' onClick={generateGreenPDF}>Generate Report</button>
-            </tr>
+            </tr> */}
             <tr className="border-b border-black">
               <td className="py-3 text-justify whitespace-nowrap">Identify compliance with regulations. Indicate where (in which sentence) the rules are violated</td>
               <button className='text-white bg-gradient-to-t py-3 from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5  mr-2 mb-2' onClick={generatePDF}>Generate Report</button>
