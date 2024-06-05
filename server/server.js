@@ -12,12 +12,24 @@ const authRoutes = require('./src/routes/authRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const allowedOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+
 const corsOptions = {
-  origin: 'http://127.0.0.1:5173',
-  credentials: true, // This is important for setting credentials like cookies, Authorization headers, etc.
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
 };
 
-app.use(cors(corsOptions)); // Apply CORS middleware with the specified options
+// Apply CORS middleware globally
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));  // Preflight requests
 
 mongoose.connect(config.mongoURI, {
   useNewUrlParser: true,
