@@ -8,7 +8,6 @@ import edit from '../../assets/Images/edit.png'
 import axios from 'axios';
 
 
-
 const Sidebar = ({type,onValueChange}) => {
   const [isEnlarge, setEnlarge] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
