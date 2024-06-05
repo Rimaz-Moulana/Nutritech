@@ -29,9 +29,31 @@ function ReviewVideos() {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        const token = localStorage.getItem('token');
+        console.log("token:", token);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+
+      if (token) {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true,
+        };
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`, config);
         setResponseData(response.data);
         console.log("monday:"+response.data[0].brand+responseData[0].size);
+
+      }else{
+        navigate('/')
+      }
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {

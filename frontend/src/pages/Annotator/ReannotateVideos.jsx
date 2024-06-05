@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
-import GridListView from '../../components/Toggle/GridListView';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function ReannotateVideos() {
-  
+  const navigate = useNavigate();
   const [reannotateVideoData, setreannotateVideoData] = useState([]);
   let [isEnlarge, setEnlarge] = useState(true);
   const [isChecked, setIsChecked] = useState(() => {
@@ -30,9 +30,33 @@ function ReannotateVideos() {
     const fetchData = async () => {
       // try {
         // Allvideos.jsx
-        const response = await fetch('http://localhost:3000/api/videos/reannotate-videos');
+        console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+        const response = await fetch('http://localhost:3000/api/videos/reannotate-videos', config);
         const data = await response.json();
         setreannotateVideoData(data);
+
+      }else{
+        navigate('/');
+      }
 
     };
 

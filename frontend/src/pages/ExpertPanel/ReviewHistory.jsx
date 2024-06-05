@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Annotations from '../../components/AnnotationTable/RowHistory';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
@@ -98,7 +98,7 @@ function ReviewHistory() {
 
 
 
-  console.log(allProducts)
+  // console.log(allProducts)
  
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>

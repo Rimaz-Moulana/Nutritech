@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import UploadImage from '../../components/UploadImage/UploadImageIndustry'
 import VideoUpload from '../../components/UploadVideo/VideoUploadIndustry'
@@ -17,6 +18,7 @@ import Sidebar from '../../components/sidebar/SideBar'
 
 export default function ProductDetails() {
         const currentTimeInMillis = Date.now();
+        const navigate = useNavigate();
 
         // Create a new Date object using the current timestamp
         const currentDate = new Date(currentTimeInMillis);
@@ -216,7 +218,27 @@ export default function ProductDetails() {
               console.log(formData.imagePaths)
               console.log(formData)
             //   console.log(formD)
-              const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
+
+            const authData = JSON.stringify(localStorage.getItem('token'));
+            console.log("authData:", authData);
+      
+            setTimeout(() => {
+              // Remove token from local storage after 5 seconds
+              localStorage.removeItem('token');
+              localStorage.removeItem('email');
+          }, 7200000); // 2hours
+      
+          if(authData){
+            const {accessToken} = authData;
+            console.log(accessToken);
+            const config = {
+              headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+              },
+              withCredentials: true,
+            };
+              const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD , config);
               console.log(response.data);
               setUploadStatus("Product uploaded successfully!");
               Swal.fire({
@@ -231,6 +253,9 @@ export default function ProductDetails() {
               });
               window.history.back();
     
+            }else{
+              navigate('/')
+            }
               }catch(error){
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import Navbar from '../../components/navbar/Navbar';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
-import Sidebar from '../../components/sidebar/SideBar';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import Navbar from '../../components/navbar/Navbar';
+import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
 
 function ReviewedVideos() {
   const [Data, setData] = useState([]);

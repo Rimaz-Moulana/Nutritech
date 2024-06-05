@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import DropDownWhite from '../../components/fields/dropdownWhite'
 import TextFiledsmallWhite from '../../components/fields/textFieldSmallWhite'
@@ -13,6 +13,7 @@ import Sidebar from '../../components/sidebar/SideBar'
 
 
 export default function ProductDetails() {
+    const navigate = useNavigate();
     const {productId} = useParams()
     console.log(productId)
     const currentTimeInMillis = Date.now();
@@ -88,7 +89,8 @@ export default function ProductDetails() {
         imageFront: '',
         imageBack: '',
         imageLeft: '',
-        imageRight: ''
+        imageRight: '',
+        uploader:'',
     })
 
     useEffect(() => {
@@ -111,7 +113,27 @@ export default function ProductDetails() {
         event.preventDefault();
         console.log(formData)
         try {
-            const response = await axios.put(`http://localhost:3000/api/product/industry/update/${productId}`, formData);
+            console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+            const response = await axios.put(`http://localhost:3000/api/product/industry/update/${productId}`, formData, config);
             console.log(response.data);
             setUploadStatus("New Product updated successfully!");
             Swal.fire({
@@ -128,6 +150,10 @@ export default function ProductDetails() {
     
             // Clear draft data from local storage upon successful submission
             localStorage.removeItem('productDraft');
+
+      }else{
+        navigate('/');
+      }
         } catch(error) {
             console.error('Error adding product:', error);
             setUploadStatus("Error occurred!");
@@ -199,7 +225,8 @@ export default function ProductDetails() {
             imageFront: '',
             imageBack: '',
             imageLeft: '',
-            imageRight: ''
+            imageRight: '',
+            uploader : "",
         });
     
     }
@@ -207,10 +234,34 @@ export default function ProductDetails() {
     const fetchData = async () => {
         console.log("hi")
         try {
-            const response = await axios.get(`http://localhost:3000/api/product/industry/getProduct/${productId}`);
+            console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+            const response = await axios.get(`http://localhost:3000/api/product/industry/getProduct/${productId}`, config);
             const productData = response.data;
             setFormData(productData);
             console.log(response.data);
+
+    }else{
+        navigate('/');
+    }
         } catch(error) {
             console.error('Error adding product:', error);
             setUploadStatus("Error occurred!");
