@@ -42,6 +42,10 @@ function ReviewVideos() {
   console.log(videoId)
 
   const [RuleData, setRuleData] = useState([]);
+  const handlePoductDetails = (size,product,brand,unit) =>{
+    navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
+  }
+  
 
   useEffect(()=>{
     const fetchData = async() =>{
