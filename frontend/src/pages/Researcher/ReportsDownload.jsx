@@ -94,7 +94,6 @@ export default function LogTable() {
     doc.text(`Product name: ${video.product}`, 20, 50);
     doc.text(`Brand name: ${video.brand}`, 20, 50);
     doc.text(`Size: ${video.size+video.unit}`, 20, 50);
-    doc.text(`Size: ${video.size+video.unit}`, 20, 50);
     
     doc.setFontSize(12);
     doc.text(`Size: ${video.comment}`, 20, 50);
@@ -154,11 +153,11 @@ export default function LogTable() {
           </thead>
           <tbody>
           <tr className="border-b border-black">
-              <td className="py-3 text-justify whitespace-nowrap">why it is red Flag Video?</td>
+              <td className="py-3 text-justify whitespace-nowrap">why it was red Flag Video?</td>
               <button className='text-white bg-gradient-to-t from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2' onClick={generateRedPDF}>Generate Report</button>
             </tr>
             <tr className="border-b border-black">
-              <td className="py-3 text-justify whitespace-nowrap">why it is green Flag Video?</td>
+              <td className="py-3 text-justify whitespace-nowrap">why it was green Flag Video?</td>
               <button className='text-white bg-gradient-to-t from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2' onClick={generateGreenPDF}>Generate Report</button>
             </tr>
             <tr className="border-b border-black">
