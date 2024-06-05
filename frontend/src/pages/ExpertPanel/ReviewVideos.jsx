@@ -20,6 +20,8 @@ function ReviewVideos() {
   const [loading, setLoading] = useState(false);
   const email  = localStorage.getItem('email');
   const [userData, setUserData] = useState([]);
+  const [rules, setRules] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
