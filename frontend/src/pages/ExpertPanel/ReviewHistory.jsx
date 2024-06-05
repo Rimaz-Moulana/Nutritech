@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Annotations from '../../components/AnnotationTable/RowHistory';
 import ViewComment from '../../components/CommentSection/ViewComment';
+import Decision from '../../components/Decision';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
-import Decision from '../../components/Decision';
 
 function ReviewHistory() {
 
@@ -51,8 +51,8 @@ function ReviewHistory() {
   }, [videoId]);
 
 
-  const handlePoductDetails = (product, brand, size) => {
-    navigate(`/product/view/${size}${product}/${brand}`);
+  const handlePoductDetails = (product, brand, size, unit) => {
+    navigate(`/product/view/${size}${product}/${brand}/${unit}`);
   };
 
 
@@ -124,7 +124,7 @@ function ReviewHistory() {
       </div>
         <div className="flex items-end justify-center mt-4 z-10 h-full">
           <button
-            onClick={() => handlePoductDetails(responseData.product, responseData.brand, responseData.size)}
+            onClick={() => handlePoductDetails(responseData.product, responseData.brand, responseData.size, responseData.unit)}
             className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
           >
             View Product Details

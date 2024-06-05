@@ -19,9 +19,32 @@ function Home() {
     const fetchUser = async () => {
        try {
           // const email  = localStorage.getItem('email');
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const authData = JSON.stringify(localStorage.getItem('token'));
+            console.log("authData:", authData);
+      
+            setTimeout(() => {
+              // Remove token from local storage after 5 seconds
+              localStorage.removeItem('token');
+              localStorage.removeItem('email');
+          }, 7200000); // 2hours
+      
+          if(authData){
+            const {accessToken} = authData;
+            console.log(accessToken);
+            const config = {
+              headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+              },
+              withCredentials: true,
+            };
+          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`, config);
           // console.log("response",response); // Logging the response data directly
           setUserData(response.data); // Setting the response data to the state
+
+          }else{
+            navigate('/')
+          }
        } catch (error) {
           console.error('Error fetching user:', error);
           // Handle error (e.g., set error state, show error message)
@@ -33,9 +56,32 @@ function Home() {
 
 useEffect(() => {
   const fetchData = async () => {
-     const response = await fetch('http://localhost:3000/api/videos/redflag');
+    const authData = JSON.stringify(localStorage.getItem('token'));
+            console.log("authData:", authData);
+      
+            setTimeout(() => {
+              // Remove token from local storage after 5 seconds
+              localStorage.removeItem('token');
+              localStorage.removeItem('email');
+          }, 7200000); // 2hours
+      
+          if(authData){
+            const {accessToken} = authData;
+            console.log(accessToken);
+            const config = {
+              headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+              },
+              withCredentials: true,
+            };
+     const response = await fetch('http://localhost:3000/api/videos/redflag' , config);
     const data = await response.json();
     setRedVideoData(data);
+
+          }else{
+            navigate('/')
+          }
   };
 
   fetchData();
@@ -43,10 +89,34 @@ useEffect(() => {
 
 
 useEffect(() => {
+  
   const fetchData = async () => {
-     const response = await fetch('http://localhost:3000/api/videos/greenflag');
+    const authData = JSON.stringify(localStorage.getItem('token'));
+            console.log("authData:", authData);
+      
+            setTimeout(() => {
+              // Remove token from local storage after 5 seconds
+              localStorage.removeItem('token');
+              localStorage.removeItem('email');
+          }, 7200000); // 2hours
+      
+          if(authData){
+            const {accessToken} = authData;
+            console.log(accessToken);
+            const config = {
+              headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+              },
+              withCredentials: true,
+            };
+     const response = await fetch('http://localhost:3000/api/videos/greenflag', config);
     const data = await response.json();
     setGreenVideoData(data);
+
+          }else{
+            navigate('/')
+          }
   };
 
   fetchData();
@@ -55,9 +125,32 @@ useEffect(() => {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert');
+      const authData = JSON.stringify(localStorage.getItem('token'));
+            console.log("authData:", authData);
+      
+            setTimeout(() => {
+              // Remove token from local storage after 5 seconds
+              localStorage.removeItem('token');
+              localStorage.removeItem('email');
+          }, 7200000); // 2hours
+      
+          if(authData){
+            const {accessToken} = authData;
+            console.log(accessToken);
+            const config = {
+              headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+              },
+              withCredentials: true,
+            };
+      const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert' , config);
       const data = await response.json();
       setNewVideoData(data);
+
+          }else{
+            navigate('/')
+          }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
