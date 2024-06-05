@@ -9,6 +9,8 @@ import menu from '../../assets/Images/menu.png';
 import foodproducts from '../../assets/Images/products.png';
 import video from '../../assets/Images/video.png';
 
+
+// const Sidebar = ({type,onValueChange}) => {
 const Sidebar = ({ type, onValueChange }) => {
   const [isEnlarge, setEnlarge] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -136,15 +138,15 @@ const Sidebar = ({ type, onValueChange }) => {
     } else if (type === 'researcher') {
       if (selected !== index) {
         if (index === navResearcher.findIndex((item) => item.text === 'History')) {
-          navigate('/history');
+          navigate('/industryhistory');
         } else if (index === navResearcher.findIndex((item) => item.text === 'Products')) {
-          // navigate('/sensormanagerproducts');
+          // navigate(`/addedproduct/${type}`);
         } else if (index === navResearcher.findIndex((item) => item.text === 'Rules & Regulations')) {
           navigate(`/rules/${type}`);
         } else if (index === navResearcher.findIndex((item) => item.text === 'Reports')) {
           navigate('/reports');
         } else {
-          navigate('/researcherhome');
+          navigate('/industryhome');
         }
       }
     }
@@ -191,25 +193,83 @@ const Sidebar = ({ type, onValueChange }) => {
   return (
     <div id="app" className="min-h-screen fixed bg-sidebarGreen lg:max-w-[15%] text-left">
       <header className="pos-r h-screen inline-flex flex-col justify-between bg-sidebarGreen p-6">
-        <nav className="inline-flex flex-col space-y-2">
-          <button
-            className="h-8 w-8 p-1 mb-8 hidden sm:block bg-sidebarGreen text-sidebarGreen rounded-lg mx-auto hover:border-gray-300"
-            onClick={handleEnlargeClick}
+      <nav className=" inline-flex flex-col space-y-2">
+      <button
+        className="h-8 w-8 p-1 mb-8 hidden sm:block bg-sidebarGreen text-sidebarGreen rounded-lg mx-auto hover:border-gray-300"
+        onClick={handleEnlargeClick}
+      >
+        <img src={isEnlarge ? enlarge.decrease : enlarge.enlarge} alt="Enlarge/Decrease" />
+      </button>
+      {type === "annotator" && navAnnotator.map((link, index) => (
+        <div key={index} className="relative">
+          <a
+            className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
+              isEnlarge ? 'pl-2 pr-6 rounded-lg' : 'px-2 rounded-full'
+              } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
+            onClick={(event) => handleItemClick(index, event)}
           >
-            <img src={isEnlarge ? enlarge.decrease : enlarge.enlarge} alt="Enlarge/Decrease" />
-          </button>
-          {nav.map((link, index) => (
+            <img
+              src={isEnlarge ? link.selectedIcon : link.icon}
+              alt={link.text}
+              className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-4' : ''}`}
+            />
+            {isEnlarge && <span className="font-medium select-none">{link.text}</span>}
+            {link.text === 'Video' && link.image && (
+              <img
+                src={link.image}
+                alt="Video"
+                className="w-8 h-8 p-1 ml-2 rounded-full"
+              />
+            )}
+          </a>
+          {link.text === 'Video' && isDropdownOpen && (
+            <div className="absolute top-full left-0 bg-darkGreen shadow rounded mt-2">
+              <Link
+                to="/all"
+                className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                onClick={() => handleItemClick(2)}
+              >
+                All Videos
+              </Link>
+              <Link
+                to="/annotated-videos"
+                className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                onClick={() => handleItemClick(2)}
+              >
+                Annotated Videos
+              </Link>
+              <Link
+                to="/unannotated-videos"
+                className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                onClick={() => handleItemClick(2)}
+              >
+                Unannotated Videos
+              </Link>
+              <Link
+                to="/reannotatevideos"
+                className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                onClick={() => handleItemClick(2)}
+              >
+                Reannotated Videos
+              </Link>
+              
+            </div>
+          )}
+        </div>
+      ))}
+
+          {type==="expert" && navExpert.map((link, index) => (
             <div key={index} className="relative">
               <a
-                className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen ${
-                  isEnlarge ? 'pl-2 pr-6 rounded-lg' : 'px-2 rounded-full'
+                className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
+                  isEnlarge ? 'pl-1 pr-1 rounded-lg' : 'px-1  rounded-full'
                 } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
-                onClick={(event) => handleItemClick(index, event)}
+                onClick={(event) => handleItemClick(index,event)}
               >
                 <img
                   src={isEnlarge ? link.selectedIcon : link.icon}
                   alt={link.text}
-                  className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-4' : ''}`}
+                  className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-0' : ''}`}
                 />
                 {isEnlarge && <span className="font-medium select-none">{link.text}</span>}
                 {link.text === 'Video' && link.image && (
@@ -221,55 +281,118 @@ const Sidebar = ({ type, onValueChange }) => {
                 )}
               </a>
               {link.text === 'Video' && isDropdownOpen && (
-                <div className="absolute top-full left-0 bg-darkGreen shadow rounded mt-2">
-                  {type === 'annotator' && (
-                    <>
-                      <Link
-                        to="/all"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                        onClick={() => handleItemClick(2)}
-                      >
-                        All Videos
-                      </Link>
-                      <Link
-                        to="/annotated-videos"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                        onClick={() => handleItemClick(2)}
-                      >
-                        Annotated Videos
-                      </Link>
-                      <Link
-                        to="/unannotated-videos"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                        onClick={() => handleItemClick(2)}
-                      >
-                        Unannotated Videos
-                      </Link>
-                    </>
-                  )}
-                  {type === 'expert' && (
-                    <>
-                      <Link
-                        to="/approved-videos"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                        onClick={() => handleItemClick(2)}
-                      >
-                        Approved Videos
-                      </Link>
-                      <Link
-                        to="/rejected-videos"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                        onClick={() => handleItemClick(2)}
-                      >
-                        Rejected Videos
-                      </Link>
-                    </>
-                  )}
+                <div className="absolute top-full left-0 bg-darkGreen shadow rounded mt-2 w-full">
+              <Link
+                  to="/expertpanelnew"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                  onClick={() => handleItemClick(2)}
+                >
+                  New Videos
+                </Link>
+
+                {(userData.role !=="expert head" )&& (
+                  <Link
+                  to="/reviewedvideos"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                  onClick={() => handleItemClick(2)}
+                >
+                  Reviewed Videos
+                </Link>
+                )}
+                <Link
+                  to="/red"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                  onClick={() => handleItemClick(2)}
+                >
+                  Red Flaged
+                </Link>
+                <Link
+                  to="/green"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                  onClick={() => handleItemClick(2)}
+                >
+                 Green Flaged
+                </Link>
                 </div>
               )}
             </div>
           ))}
-        </nav>
+
+          {type==="industry" && navIndustryOrSensor.map((link, index) => (
+            <div key={index} className="relative">
+              <a
+                className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
+                  isEnlarge ? 'pl-1 pr-4 rounded-lg' : 'px-1 rounded-full'
+                } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
+                onClick={(event) => handleItemClick(index, event)}
+              >
+                <img
+                  src={isEnlarge ? link.selectedIcon : link.icon}
+                  alt={link.text}
+                  className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-0' : ''}`}
+                />
+                {isEnlarge && <span className="font-medium select-none">{link.text}</span>}
+                {link.text === 'Video' && link.image && (
+                  <img
+                    src={link.image}
+                    alt="Video"
+                    className="w-8 h-8 p-1 ml-2 rounded-full"
+                  />
+                )}
+              </a>
+            </div>
+          ))}
+              {type==="sensormanager" && navIndustryOrSensor.map((link, index) => (
+            <div key={index} className="relative">
+              <a
+                className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
+                  isEnlarge ? 'pl-1 pr-3 rounded-lg' : 'px-1 rounded-full'
+                } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
+                onClick={(event) => handleItemClick(index, event)}
+              >
+                <img
+                  src={isEnlarge ? link.selectedIcon : link.icon}
+                  alt={link.text}
+                  className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-1' : ''}`}
+                />
+                {isEnlarge && <span className="font-medium select-none">{link.text}</span>}
+                {link.text === 'Video' && link.image && (
+                  <img
+                    src={link.image}
+                    alt="Video"
+                    className="w-8 h-8 p-1 ml-2 rounded-full"
+                  />
+                )}
+              </a>
+            </div>
+          ))}
+
+
+          {type==="researcher" && navResearcher.map((link, index) => (
+            <div key={index} className="relative">
+              <a
+                className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
+                  isEnlarge ? 'pl-1 pr-3 rounded-lg' : 'px-1 rounded-full'
+                } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
+                onClick={(event) => handleItemClick(index, event)}
+              >
+                <img
+                  src={isEnlarge ? link.selectedIcon : link.icon}
+                  alt={link.text}
+                  className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-1' : ''}`}
+                />
+                {isEnlarge && <span className="font-medium select-none">{link.text}</span>}
+                {link.text === 'Video' && link.image && (
+                  <img
+                    src={link.image}
+                    alt="Video"
+                    className="w-8 h-8 p-1 ml-2 rounded-full"
+                  />
+                )}
+              </a>
+            </div>
+          ))}
+    </nav>
         <footer className="inline-flex flex-col justify-end">
         <button className="py-2 px-2 flex items-center text-white hover:bg-darkGreen rounded-lg text-center font-bold text-lg" onClick={handleLogout}>
         <LogoutOutlined style={{ marginRight: '10px' }} />

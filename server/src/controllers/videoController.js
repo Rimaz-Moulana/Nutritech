@@ -55,6 +55,7 @@ exports.getAnnotatedVideos = async (req, res) => {
   exports.getAnnotatingVideo = async (req, res) => {
     try {
       const videoId = req.params.videoId;
+      console.log(videoId);
       const video = await VideoService.getAnnotationVideo(videoId);
       res.status(200).json(video);
     } catch (error) {
@@ -180,7 +181,7 @@ exports.fetchSensorManagerReview = async (req, res) => {
   try {
     const videoId = req.params.videoId;
     const video = await VideoService.getSensorManagerReviewVideos(videoId);
-    // console.log(video)
+    // console.log("video",video);
     if (!video) {
       return res.status(404).json({ success: false, message: 'Video not found' });
     }
@@ -282,7 +283,7 @@ exports.updateExpertFlagReview = async (req,res)=>{
   try {
     const videoId = req.params.videoId;
     const panelstatus = req.body.panelstatus;
-    console.log(panelstatus);
+    console.log("panel",panelstatus);
     
         const Video = await VideoService.updateReview(videoId,panelstatus);
         // console.log(Video)
@@ -360,7 +361,7 @@ exports.postFinalComment= async (req,res)=>{
     const comments = req.body.comment;
     const email = req.body.email;
         const comment = await VideoService.postFinal(videoId,comments,email);
-        console.log(comment)
+        // console.log(comment)
         res.json(comment);
     } catch (error) {
         console.error(error);
@@ -374,7 +375,7 @@ exports.postExpertMessage= async (req,res)=>{
     const comments = req.body.comment;
     const email = req.body.email;
         const comment = await VideoService.postMessage(videoId,comments,email);
-        console.log(comment);
+        // console.log(comment);
         res.json(comment);
     } catch (error) {
         console.error(error);

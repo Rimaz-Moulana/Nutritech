@@ -135,7 +135,7 @@ exports.updateDecisionForUser = async (req, res) => {
 exports.updateFinalDecisionForUser = async (req, res) => {
   const { annotation, decision, email, type } = req.body;
   const { videoId } = req.params;
-  console.log(type)
+  // console.log(type)
   
 // status
   try {
@@ -229,21 +229,21 @@ exports.getSimilarProductAds = async (videoId) => {
 
 exports.getAll = async (req, res) => {
     return await VideoModel.find({
-      brand: 'Maggi',
+      // brand: 'Maggi',
       status: { $in: ['annotated', 'unannotated', 'reannotate', 'pending', 'Green', 'Red'] }
     }); 
 };
 
 exports.getPending = async (req, res) => {
   return await VideoModel.find({
-    brand: 'Maggi',
+    // brand: 'Maggi',
     status: 'pending' }
   ); 
 };
 
 exports.getUnannotated = async (req, res) => {
   return await VideoModel.find({
-    brand: 'Maggi',
+    // brand: 'Maggi',
     status:{ $in: [ 'unannotated', 'reannotate'] }
     });  
 };
@@ -257,14 +257,14 @@ exports.getAnnotated = async (req, res) => {
 
 exports.getGreen = async (req, res) => {
   return await VideoModel.find({
-    brand: 'Maggi',
+    // brand: 'Maggi',
     status: 'Green' }
   ); 
 };
 
 exports.getRed = async (req, res) => {
   return await VideoModel.find({
-    brand: 'Maggi',
+    // brand: 'Maggi',
     status: 'Red' }
   ); 
 };

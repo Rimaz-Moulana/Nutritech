@@ -1,14 +1,15 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Navbar from '../../components/navbar/Navbar';
+import Row from '../../components/AnnotationTable/Row';
+import Videowithtext from '../../components/AnnotationTable/Videowithtext';
+import plus from '../../assets/Images/plus.png';
+import minus from '../../assets/Images/minus.png';
+import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import minus from '../../assets/Images/minus.png';
-import plus from '../../assets/Images/plus.png';
-import Row from '../../components/AnnotationTable/Row';
+import Sidebar from '../../components/sidebar/SideBar';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
-import Navbar from '../../components/navbar/Navbar';
-import Sidebar from '../../components/sidebar/SideBar';
 
 function AnnotationTable() {
   const navigate = useNavigate();
@@ -59,9 +60,7 @@ function AnnotationTable() {
     });
   };
 
-  const viewdetails = () => {
-    navigate('/product');
-  };
+ 
 
   const [addedrows, setAddedRows] = useState(() => {
     const storedrows = localStorage.getItem('addedrows');
@@ -117,35 +116,14 @@ function AnnotationTable() {
     console.log(rowsData);
     e.preventDefault();
     try {
-      console.log("fetching session details..");
-        const authData = localStorage.getItem('token');
-        // console.log(authData)
-
-        setTimeout(() => {
-          // Remove token from local storage after 5 seconds
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-      }, 7200000); // 2hours
-
-      if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
-      
       if(category==="reannotation"){
         await axios.post(`http://localhost:3000/annotations/reannotation/${videoId}`, {
         reannotations: rowsData,
-      } , config);
+      });
       }else{
         await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
         annotations: rowsData,
-      }, config);
+      });
       }
       
 
@@ -163,10 +141,6 @@ function AnnotationTable() {
       localStorage.removeItem('addedrows');
       localStorage.removeItem('rowsData');
       window.history.back();
-
-    }else{
-      navigate('/')
-    }
     } catch (error) {
       console.error('Error saving annotations:', error);
     }
@@ -175,26 +149,6 @@ function AnnotationTable() {
   const submitNone = async () => {
     // e.preventDefault();
     try {
-      console.log("fetching session details..");
-        const authData = localStorage.getItem('token');
-        // console.log(authData)
-
-        setTimeout(() => {
-          // Remove token from local storage after 5 seconds
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-      }, 7200000); // 2hours
-
-      if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
       const response = await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
         annotations: {
           timestamp: '',
@@ -202,7 +156,7 @@ function AnnotationTable() {
           details: '',
           recommendation: '',
         }
-      }, config );
+      });
   
       Swal.fire({
         icon: 'success',
@@ -215,11 +169,6 @@ function AnnotationTable() {
         iconColor: '#294B29',
       });
       window.history.back();
-
-    }
-    else{
-      navigate('/');
-    }
     } catch (error) {
       console.error('Error saving annotations:', error);
     }
@@ -230,39 +179,13 @@ function AnnotationTable() {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        console.log("fetching session details..");
-      const authData = JSON.stringify(localStorage.getItem('token'));
-      console.log("authData:", authData);
-
-      setTimeout(() => {
-        // Remove token from local storage after 5 seconds
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-    }, 7200000); // 2hours
-
-    if(authData){
-      const {accessToken} = authData;
-      console.log(accessToken);
-      const config = {
-        headers : {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        },
-        withCredentials: true,
-      };
-        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`, config);
+        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
         const video = response.data;
         console.log(video)
         setData(video);
-        console.log("Monday 2 ->", video);
         const data = response.data[0].duration;  // Access the data property directly
         console.log(data);
         setDuration(data);
-
-      }
-      else{
-          navigate('/');
-      }
       } catch (error) {
         console.error('Error fetching Video:', error);
       } 
@@ -379,12 +302,7 @@ function AnnotationTable() {
                 >
                   Save
                 </button>
-                <button
-                  className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2'
-                  onClick={viewdetails}
-                >
-                  View Product Details
-                </button>
+             
 
                 <button className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2"
                  onClick={() => window.history.back()}>
