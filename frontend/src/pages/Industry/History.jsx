@@ -42,9 +42,9 @@ function History() {
       } else if (videoFilter === "Annotated") {
         status = "annotated";
       } else if (videoFilter === "Verified") {
-        status = "green";
+        status = "Green";
       } else if (videoFilter === "Red Flaged") {
-        status = "red";
+        status = "Red";
       }
       
       // Now you can use the 'status' variable outside the if-else blocks
@@ -88,7 +88,7 @@ function History() {
     return (
       <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
         <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
-        <Sidebar type="industry" onValueChange={handleValueChange}/>
+        <Sidebar type="researcher" onValueChange={handleValueChange}/>
         </div>
         <div className={`w-full z-10 mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
           <div className='p-1'>

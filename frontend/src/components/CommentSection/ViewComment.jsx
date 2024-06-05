@@ -88,13 +88,13 @@ function ViewComment({ videoId, type }) {
               <td className='p-2'>Comment</td>
               <td className='p-2'>{Data.comment[i].text}</td>
               <td className='p-2'>
-                {status === "Green" && (
+                {status === "green" && (
                   <>
                     <span>Green</span>
                     {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
                   </>
                 )}
-                {status === "Red" && (
+                {status === "red" && (
                   <>
                     <span>Red</span>
                     {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
@@ -235,7 +235,7 @@ function ViewComment({ videoId, type }) {
   };
 
   return (
-    <div className='mt-12 lg:w-3/4 p-3 font-semibold text-center ml-0'>
+    <div className='mt-12 lg:w-3/4 p-3 justify-center font-semibold text-center'>
       <h1 className='text-sidebarGreen text-2xl'>Comment section</h1>
 
       {loading ? (

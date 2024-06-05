@@ -6,12 +6,13 @@ import ViewComment from '../../components/CommentSection/ViewComment';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import Decision from '../../components/Decision';
 
 function ReviewHistory() {
 
   const navigate = useNavigate();
   let [isEnlarge, setEnlarge] = useState(true);
-  const { videoId } = useParams(); 
+  const {videoId} = useParams(); 
   const [responseData, setResponseData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allProducts, setAllProducts] = useState([]);
@@ -96,7 +97,8 @@ function ReviewHistory() {
   // };
 
 
-  console.log(allProducts)
+
+  // console.log(allProducts)
  
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
@@ -109,11 +111,16 @@ function ReviewHistory() {
         <div className='mt-12 ml-24'>
           <Annotations videoId={videoId} usertype={"expert"} />
         </div>
-
-        <ViewComment videoId={videoId} type={"comment"} />
-        <div className="mt-16 " >
-        <h1 className='text-2xl font-bold text-sidebarGreen'>Decision for Video</h1>
-        <VideowithReview Id={videoId} text={"experthitory"} type={"expertDecision"}/>
+        <div className='flex gap-6'>
+          <div className='mt-4 ml-24'>
+          <ViewComment videoId={videoId} type={"comment"} />
+          </div>
+       
+        <div className="mt-24 ml-8 bg-gray-300 p-4 " >
+        <h1 className='text-xl font-bold text-sidebarGreen mb-8 h-fit'>Decision for Video</h1>
+        <Decision Id={videoId} text={"experthitory"} type={"expertDecision"}/>
+        </div>
+       
       </div>
         <div className="flex items-end justify-center mt-4 z-10 h-full">
           <button
