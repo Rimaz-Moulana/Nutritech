@@ -2,12 +2,26 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 function Product({productData,type}) {
     // console.log("from component",productData);
     const navigate = useNavigate();
     const [startDate, setStartDate] = useState(null);
     let fact;
+    const filterKeys = ['_id', 'createdIn', 'createdAt', '__v', 'imageLeft','imageRight','imageFront','imageBack', 'videoPath']; // Add the keys you want to filter out
+
+
+    const [products, setProducts] = useState([]);
+    const [selectedProductIndex, setSelectedProductIndex] = useState(null);
+  
+    const openDetailsModal = (index) => {
+      setSelectedProductIndex(index);
+    };
+  
+    const closeDetailsModal = () => {
+      setSelectedProductIndex(null);
+    };
   
     const [productFilter, setProductFilter] = useState(() => {
       return localStorage.getItem('productFilter') || 'all';
@@ -127,10 +141,9 @@ const filteredProducts = productData?.filter((product) => {
            {/* <td>{product.uploader}</td> */}
 
            <td>
-             <button
-               className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-4 py-2.5 "
-                //  onClick={() => handleReview(video._id)}
-             >View Details</button>
+           <button
+                  className='text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2'
+                  onClick={() => openDetailsModal(index)}>View Details</button>
           {/* )} */}
            </td>
 
@@ -149,6 +162,28 @@ const filteredProducts = productData?.filter((product) => {
      </tbody>
    </table>
    </div>
+   <Modal
+  isOpen={selectedProductIndex !== null}
+  contentLabel="Product Details"
+  className="fixed inset-0 flex items-center justify-center p-4 bg-gray-800 bg-opacity-75"
+  overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+  style={{ zIndex: 9999 }}
+>
+  {selectedProductIndex !== null && (
+    <div className="bg-white mt-8 rounded-lg p-4 w-full max-w-7xl">
+            <button className="text-white bg-gradient-to-t from-red-600 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-700 dark:focus:ring-red-700 shadow-lg shadow-red-700 dark:shadow-lg dark:shadow-red-700 font-medium rounded-lg text-sm px-5 py-1 mr-1 mb-1" onClick={closeDetailsModal}>Close</button>
+            <h1 className='font-bold text-xl mb-2'>Product Details</h1>
+            <div className="grid grid-cols-5 gap-9">
+        {Object.entries(productData[selectedProductIndex]).filter(([key]) => !filterKeys.includes(key)).map(([key, value]) => (
+          <div key={key} className='flex flex-col'>
+            <strong>{key}:</strong> <span>{value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+</Modal>
+
  </div>
   )
 }
