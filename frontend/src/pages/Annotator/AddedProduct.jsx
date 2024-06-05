@@ -19,7 +19,7 @@ export default function AddedProduct() {
   const fetchData = async () => {
     try {
       console.log("fetching session details..");
-      const authData = JSON.stringify(localStorage.getItem('token'));
+      const authData = (localStorage.getItem('token'));
       console.log("authData:", authData);
 
       setTimeout(() => {
