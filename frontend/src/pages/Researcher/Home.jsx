@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import HomeSwiper from '../../components/Annotator/HomeSwiper';
+import ProductBar from '../../components/fields/ProductBar';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
-import ProductTable from '../../components/tables/LogTable';
+import LogTable from '../../components/tables/ProductTableAnnotator';
 
 function Home() {
 
@@ -19,11 +19,13 @@ function Home() {
   }
 
   const videoupload= () => {
-    navigate('/uploadvideo');
+    navigate('/addnewproduct');
   };
 
   const [products, setProducts] = useState([]);
   const [videoData, setVideoData] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     // Fetch data when the component mounts
@@ -104,36 +106,58 @@ function Home() {
   
     fetchVideos();
   }, []);
+
+  const handleFilter = (filter) => {
+    if (filter === 'all') {
+      setFilteredProducts(products);
+    } else if (filter === 'updated') {
+      // Filter updated products based on lastUpdatedTime
+      const updatedProducts = products.filter(product => product.lastUpdatedTime !== undefined);
+      setFilteredProducts(updatedProducts);
+    } else if (filter === 'lastDay') {
+      // Filter products updated within the last day
+      const lastDayProducts = products.filter(product => {
+        const lastDay = new Date();
+        lastDay.setDate(lastDay.getDate() - 1);
+        return new Date(product.lastUpdatedTime) > lastDay;
+      });
+      setFilteredProducts(lastDayProducts);
+    } else if (filter === 'lastWeek') {
+      // Filter products updated within the last week
+      const lastWeekProducts = products.filter(product => {
+        const lastWeek = new Date();
+        lastWeek.setDate(lastWeek.getDate() - 7);
+        return new Date(product.lastUpdatedTime) > lastWeek;
+      });
+      setFilteredProducts(lastWeekProducts);
+    }
+  };
   
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
       <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
         <Sidebar type="researcher"/>
       </div>
-      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-10 sm:ml-72">
+      <div className="w-full mb-10 sm:w-3/4 ml-0 h-full z-0 sm:ml-72">
         <div className='p-5'>
         <Navbar type='researcher' />
         </div>
         <div className=' flex items-end mt-24 mr-4'>
-      <button className="text-white h- bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 "onClick={videoupload}>Upload New Video</button>
+      <button className="text-white h- bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " onClick={videoupload}>Upload New Product</button>
       </div>
-        <div className='flex justify-between z-9999 mt-4'>
-        
-        <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
-           Videos
-        </h1>
-        <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleVideos}>All Videos</button>
-        </div>
-        <HomeSwiper videoData={videoData}/>
+       
         <div className='flex mt-4 justify-between'>
         <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
-        <button className="text-white mt-4 bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2" onClick={handleProducts}>All Products</button> 
         </div>
-        <div className='mt-4 left-0'>
-        <ProductTable data={products} />
+        <div className='w-full mb-10 ml-0 h-full '>
+        <div className='z-50'>
+          <ProductBar handleFilter={handleFilter} />
+          <LogTable products={filteredProducts} />
         </div>
+      </div>   
       </div>
     </div>
+    
   );
 }
 

@@ -78,6 +78,51 @@ export default function LogTable() {
     // Save the PDF
     doc.save('report.pdf');
   };
+
+  const generateRedPDF = () => {
+    const doc = new jsPDF();
+  
+    // Add a title
+    doc.setFontSize(20);
+    doc.text('Red Flag Video Report', 20, 20);
+  
+    // Add video details
+    doc.setFontSize(12);
+    doc.text(`Video Status: ${video.status}`, 20, 50);
+    doc.text(`Created Time: ${video.createdAt}`, 20, 40);
+    doc.text(`Created Date: ${video.createdIn}`, 20, 50);
+    doc.text(`Product name: ${video.product}`, 20, 50);
+    doc.text(`Brand name: ${video.brand}`, 20, 50);
+    doc.text(`Size: ${video.size+video.unit}`, 20, 50);
+    
+    doc.setFontSize(12);
+    doc.text(`Size: ${video.comment}`, 20, 50);
+    doc.text(`Size: ${video.finalcomment}`, 20, 50);
+    doc.text(`Size: ${video.panelstatus}`, 20, 50);
+    doc.text(`Size: ${video.annotations}`, 20, 50);
+    doc.text(`Size: ${video.reannotations}`, 20, 50);
+  
+    // Save the PDF
+    doc.save('red_flag_video_report.pdf');
+  };
+
+  const generateGreenPDF = () => {
+    const doc = new jsPDF();
+
+    // Add a title
+    doc.setFontSize(20);
+    doc.text('My Report', 20, 20);
+
+    // Add some content
+    doc.setFontSize(12);
+    doc.text('This is a simple example of generating a PDF report.', 20, 30);
+
+    // Add some more content
+    doc.text('You can add more content and customize this report as needed.', 20, 40);
+
+    // Save the PDF
+    doc.save('report.pdf');
+  };
   
 
 
@@ -107,6 +152,14 @@ export default function LogTable() {
             </tr>
           </thead>
           <tbody>
+          <tr className="border-b border-black">
+              <td className="py-3 text-justify whitespace-nowrap">why it was red Flag Video?</td>
+              <button className='text-white bg-gradient-to-t from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2' onClick={generateRedPDF}>Generate Report</button>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="py-3 text-justify whitespace-nowrap">why it was green Flag Video?</td>
+              <button className='text-white bg-gradient-to-t from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2' onClick={generateGreenPDF}>Generate Report</button>
+            </tr>
             <tr className="border-b border-black">
               <td className="py-3 text-justify whitespace-nowrap">Identify compliance with regulations. Indicate where (in which sentence) the rules are violated</td>
               <button className='text-white bg-gradient-to-t py-3 from-red-700 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5  mr-2 mb-2' onClick={generatePDF}>Generate Report</button>
