@@ -211,7 +211,8 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       }   
       else if (text === "video") {
        await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
-        status: 'unannotated'
+        status: 'unannotated',
+        healthfact : healthFact,
       });
     }else{
       await axios.post(`http://localhost:3000/api/product/reviewproduct/${productId}`, {
@@ -509,14 +510,14 @@ return (
             </div>
           </div>
        
-          {productData && productData.length > 0 && productData[0].healthfact && (
+          {Data && Data?.healthfact && (
             <div className="md:flex md:items-center mb-4">
               <div className="md:w-1/3">
                 <label className="block text-black font-bold text-left mb-1 md:mb-0">Status</label>
               </div>
               <div className="md:w-2/3">
                 <div className="shadow bg-white appearance-none border-2 rounded w-full py-2 px-4 text-black font-semibold text-center leading-tight focus:outline-none focus:bg-white focus:border-sidebarGreen">
-                  {productData[0].healthfact}
+                  {Data.healthfact}
                 </div>
               </div>
             </div>

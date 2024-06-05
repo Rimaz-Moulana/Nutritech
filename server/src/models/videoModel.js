@@ -24,6 +24,7 @@ const VideoSchema = new mongoose.Schema({
   recommendation: String,
   annotatedtime:String,
   annotateddate:String,
+  healthfact:String,
   message:[
     {
       text: String,

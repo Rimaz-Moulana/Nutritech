@@ -12,6 +12,7 @@ import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import MessagePopup from '../../components/Popup/MessagePopup';
+import RulePopup from '../../components/Popup/RulePopup';
 
 function ReviewVideos() {
   // const navigate= useNavigate();
@@ -22,6 +23,8 @@ function ReviewVideos() {
   const [loading, setLoading] = useState(false);
   const email  = localStorage.getItem('email');
   const [userData, setUserData] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [rules, setRules] = useState([]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -43,6 +46,18 @@ function ReviewVideos() {
 
   const [RuleData, setRuleData] = useState([]);
 
+  useEffect(()=>{
+    const fetchData = async() =>{
+      try{
+        const response=await axios.get('http://localhost:3000/api/rules/rules');
+        const data= response.data;
+        setRules(data);
+      }catch(error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  },[])
 useEffect(() => {
   const fetchReviewDetails = async () => {
     try {
@@ -73,10 +88,16 @@ const [openModal, setOpenModal] = useState(false);
 const handleMessage = () => {
   setOpenModal(true); // Set openModal state to true to display the modal
 };
-const closePopup = () => {
-  setOpenModal(false);
-};
+
  
+const openPopup = () => {
+  setIsPopupOpen(true);
+};
+
+const closePopup = () => {
+  setIsPopupOpen(false);
+};
+
 
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
@@ -90,17 +111,24 @@ const closePopup = () => {
       <div className=' justify-between z-9999 mt-24'>
         <VideowithReview Id={videoId} text="expert"/>
       </div>
+      <div>
+    <button onClick={openPopup} className='mt-4 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2'>View Rules</button>
+   </div>
       <div className='mt-12 ml-24'>
         <Annotations videoId={videoId} usertype={"expert"}/>  
-
-
       </div>
 
+      
+
+   {isPopupOpen && (
+        <RulePopup rules={rules} onClose={closePopup} />
+      )}
+
 <div className='flex justify-center gap-[10%]'>
-  <div className='w-1/2 '>
+  <div className='w-1/2 justify-center '>
     {(userData.role ==="expert head" && videoData && videoData.reannotations && videoData.reannotations.length < 1) && (
       <button
-      className="text-white bg-gradient-to-t justify-center from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 lg:px-8 py-2.5 sm:px-2 "
+      className="text-white bg-gradient-to-t justify-center from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center mt-4 lg:px-8 py-2.5 sm:px-2 "
         onClick={() => handleMessage(videoId)}
     >Send a message to annotator for annotating again</button>
     )}
