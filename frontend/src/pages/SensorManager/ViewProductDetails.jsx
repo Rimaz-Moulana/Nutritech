@@ -78,7 +78,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Table from '../../components/tables/TableProduct';
 import BlankPage from '../../components/theme/BlankPage';
 
@@ -88,6 +88,7 @@ export default function AddedProduct() {
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // Added loading state
   const [error, setError] = useState(null); // Added error state
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchData();
@@ -97,11 +98,33 @@ export default function AddedProduct() {
     setIsLoading(true); // Set loading state to true when fetching data
     setError(null); // Reset error state before fetching data
     try {
-      const response = await axios.get(`http://localhost:3000/api/product/view/${size}/${product}/${brand}`);
+      const token = localStorage.getItem('token');
+        console.log("token:", token);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+
+      if (token) {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true,
+        };
+      const response = await axios.get(`http://localhost:3000/api/product/view/${size}/${product}/${brand}` , config);
       const result = response.data.filter(product => product.unit === unit); 
       setAllProducts(result);
       console.log(response.data);
       console.log(allProducts);
+
+      }else{
+        navigate('/')
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
       setError('Error fetching data. Please try again.'); // Set error message

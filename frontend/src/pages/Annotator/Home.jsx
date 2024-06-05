@@ -14,17 +14,17 @@ function Home() {
   let [isEnlarge, setEnlarge] = useState(true);
   
 
-  const user = localStorage.getItem('email');
-  console.log(user)
+  // const user = localStorage.getItem('email');
+  // console.log(user)
 
-  const handleVideos = () =>{
-    console.log('button clicked')
-    navigate('/all')
-  }
-  const handleProducts = () =>{
-    console.log('button clicked')
-    navigate('/addedproduct');
-  }
+  // const handleVideos = () =>{
+  //   console.log('button clicked')
+  //   navigate('/all')
+  // }
+  // const handleProducts = () =>{
+  //   console.log('button clicked')
+  //   navigate('/addedproduct');
+  // }
 
  
   useEffect(() => {
@@ -43,7 +43,7 @@ function Home() {
         // Remove token from local storage after 5 seconds
         localStorage.removeItem('token');
         localStorage.removeItem('email');
-    }, 150000); // 60 seconds
+    }, 150000); // 2 hours
 
 
       if(authData){
@@ -75,11 +75,35 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try{
+        console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
   
-       const response = await fetch('http://localhost:3000/api/videos/all');
-      const data = await response.json();
-      setVideoData(data);
-      
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+
+       const response = await fetch('http://localhost:3000/api/videos/all',config);
+        const data = await response.json();
+        setVideoData(data);
+
+      }
+      else{
+        navigate('/');  //login path when token is expired
+      }
   }catch(error){
     console.error('Error fetching data:', error);
   }
@@ -93,9 +117,36 @@ useEffect(() => {
   const fetchData = async () => {
     // try {
       // Allvideos.jsx
-      const response = await fetch('http://localhost:3000/api/videos/annotated-videos');
+      console.log("fetching session details..");
+        const authData = localStorage.getItem('token');
+        // console.log(authData)
+
+        setTimeout(() => {
+          // Remove token from local storage after 5 seconds
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+      }, 7200000); // 2hours
+
+      if(authData){
+        const {accessToken} = authData;
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+
+      const response = await fetch('http://localhost:3000/api/videos/annotated-videos', config);
       const data = await response.json();
       setAnnotatedVideoData(data);
+
+      }
+      else{
+        navigate('/');  //login path when token is expired
+      }
+
 
   };
 
@@ -105,12 +156,37 @@ useEffect(() => {
 useEffect(() => {
   const fetchUnannotatedVideos = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/videos/unannotated-videos');
+      console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+      const response = await fetch('http://localhost:3000/api/videos/unannotated-videos', config);
       if (!response.ok) {
         throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
       }
       const data = await response.json();
       setUnannotatedVideoData(data);
+
+    }
+    else{
+      navigate('/');  //login path when token is expired
+    }
     } catch (error) {
       console.error(error);
     }
@@ -125,9 +201,33 @@ useEffect(() => {
   const fetchData = async () => {
     // try {
       // Allvideos.jsx
-      const response = await fetch('http://localhost:3000/api/videos/reannotate-videos');
+      console.log("fetching session details..");
+      const authData = JSON.stringify(localStorage.getItem('token'));
+      console.log("authData:", authData);
+
+      setTimeout(() => {
+        // Remove token from local storage after 5 seconds
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+    }, 7200000); // 2hours
+
+    if(authData){
+      const {accessToken} = authData;
+      console.log(accessToken);
+      const config = {
+        headers : {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true,
+      };
+      const response = await fetch('http://localhost:3000/api/videos/reannotate-videos', config);
       const data = await response.json();
       setreannotateVideoData(data);
+      }
+      else{
+        navigate('/');
+      }
 
   };
 

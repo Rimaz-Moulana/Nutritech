@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const VideoSchema = new mongoose.Schema({
-  video_id: Number,
+  // video_id: Number,
   category: String,
   uploader: String,
   brand: String,
@@ -24,6 +24,7 @@ const VideoSchema = new mongoose.Schema({
   recommendation: String,
   annotatedtime:String,
   annotateddate:String,
+  healthfact:String,
   message:[
     {
       text: String,
@@ -42,14 +43,7 @@ const VideoSchema = new mongoose.Schema({
     }
   ],
 
-  finalflag:[
-    {
-      status:String,
-      email:String,
-      expertreviewedtime:String,
-      expertrevieweddate:String,
-    }
-  ],
+  finalflag: String,
 
   panelstatus:[
     {
@@ -92,7 +86,17 @@ const VideoSchema = new mongoose.Schema({
         {
         user: String,
         decision: String,
+        date:String,
+        time:String
       }
+      ],
+      finalacceptance : [
+        {
+          user: String,
+          decision: String,
+          date:String,
+          time:String
+        }
       ]
     },
   ],
@@ -103,6 +107,15 @@ const VideoSchema = new mongoose.Schema({
       rule: String,
       details: String,
       recommendation: String,
+
+      finalacceptance : [
+        {
+          user: String,
+          decision: String,
+          date:String,
+          time:String
+        }
+      ]
     },
   ],
 });

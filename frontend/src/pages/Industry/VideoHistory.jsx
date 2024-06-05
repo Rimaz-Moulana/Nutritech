@@ -12,6 +12,7 @@ import VideowithReview from '../../components/SensorManager/VideowithReview';
 function History() {
   const { videoId } = useParams();
   const [data, setData] = useState([]);
+  let [isEnlarge, setEnlarge] = useState(true);
 
   useEffect(() => {
     const fetchAnnotations = async () => {
@@ -28,28 +29,35 @@ function History() {
     fetchAnnotations();
   }, [videoId]);
 
-  console.log(data)
+  const handleValueChange = (value) => {
+    console.log(value)
+    if(value==true){
+      setEnlarge(true);
+    }else{
+      setEnlarge(false);
+    }
+  };
 
   return (
     <div className='bg-backgroundGreen h-full min-h-screen flex flex-col'> {/* Make the main container a flex column */}
       <div className="fixed hidden sm:flex flex-col">
-        <Sidebar type="industry" />
+        <Sidebar type="researcher" onValueChange={handleValueChange}/>
       </div>
-      <div className="w-full lg:w-[75%] ml-0 sm:ml-64 flex-grow"> {/* Make this div take up remaining vertical space */}
-        <Navbar type='annotator' />
+      <div className={`w-full z-10 mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
+        <Navbar type='researcher' />
         <div className='w-full mt-28'>
         <VideowithReview Id={videoId} text={"video"} type={"industry"}/>
         </div>
-        <h1 className='px-3 mb-8 mt-12 text-3xl font-semibold text-sidebarGreen text-left'>
+        <h1 className='px-3 mb-8 mt-12 text-3xl font-semibold text-sidebarGreen '>
                   Annotations
                 </h1>
-        <div className='px-3 mb-8 mt-10 text-sm font-semibold text-black center-l lg:w-[100%]'>
+        <div className='ml-24 mr-8 mb-8 mt-10 text-sm font-semibold text-black center-l lg:w-[100%]'>
         
           {/* Pass videoId and video to RowHistory */}
           <RowHistory videoId={videoId} usertype={"industry"}/>
         </div>
 
-        <div className='px-3 center-l w-full'>
+        <div className='ml-24 px-3 center-l w-full pr-8'>
           <ViewComment videoId={videoId} type={"industry"}/>
         </div>
 

@@ -55,6 +55,7 @@ exports.getAnnotatedVideos = async (req, res) => {
   exports.getAnnotatingVideo = async (req, res) => {
     try {
       const videoId = req.params.videoId;
+      console.log(videoId);
       const video = await VideoService.getAnnotationVideo(videoId);
       res.status(200).json(video);
     } catch (error) {
@@ -87,11 +88,10 @@ exports.getuploadhistory= async (req,res)=>{
 
 exports.addvideo = async (req, res) => {
   try {
-    // console.log(req.body);
-      const { brand, product, unit,size, category, createdIn, createdAt, duration } = req.body;
+      console.log(req.body);
+      const { brand, product, unit,size, category, createdIn, createdAt, duration , uploader } = req.body;
       const videoPath = req.file.path;
 
-      console.log(duration);
       // Convert uploaded video to text
       // const text = await convertVideoToText(videoPath);
       // console.log('hi'+text)
@@ -103,12 +103,12 @@ exports.addvideo = async (req, res) => {
           unit,
           size,
           category,
-          videoPath,
+          videoPath:videoPath,
           createdIn,
           createdAt,
           duration,
           status: 'pending',
-          uploader: 'Sirasa'
+          uploader: uploader,
       });
 
       // Save the new video
@@ -142,11 +142,35 @@ exports.getsensormanagernallvideos= async (req,res)=>{
     }
 }
 
+exports.updateDecision= async (req,res)=>{
+  
+  try {
+        const video = await VideoService.updateDecisionForUser(req);
+        res.json(video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+exports.updateFinalDecision= async (req,res)=>{
+  
+  try {
+        const video = await VideoService.updateFinalDecisionForUser(req);
+        res.json(video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
 
 exports.saveSensorManagerReview= async (req,res)=>{
   try {
         const videoId = req.params.videoId;
-        const videoStatus = await VideoService.saveSensorManagerReviewStatus(videoId);
+        const fact =req.body.healthfact;
+        const videoStatus = await VideoService.saveSensorManagerReviewStatus(videoId,fact);
         res.json(videoStatus);
     } catch (error) {
         console.error(error);
@@ -158,7 +182,7 @@ exports.fetchSensorManagerReview = async (req, res) => {
   try {
     const videoId = req.params.videoId;
     const video = await VideoService.getSensorManagerReviewVideos(videoId);
-    // console.log(video)
+    // console.log("video",video);
     if (!video) {
       return res.status(404).json({ success: false, message: 'Video not found' });
     }
@@ -260,7 +284,7 @@ exports.updateExpertFlagReview = async (req,res)=>{
   try {
     const videoId = req.params.videoId;
     const panelstatus = req.body.panelstatus;
-    console.log(panelstatus);
+    console.log("panel",panelstatus);
     
         const Video = await VideoService.updateReview(videoId,panelstatus);
         // console.log(Video)
@@ -307,6 +331,29 @@ exports.postExpertComment= async (req,res)=>{
     }
 }
 
+exports.finalCommentVideos = async(req,res)=>{
+  try{
+    const videos = await VideoService.finalCommentVideos();
+    res.json(videos);
+  }
+  catch(error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+
+}
+
+exports.videoReport = async (req,res)=>{
+  try{
+    const videoId =req.params.videoId;
+    // console.log(videoId);
+    const videoDetails = await VideoService.VideoReport(videoId);
+    res.json(videoDetails);
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
 
 
 exports.postFinalComment= async (req,res)=>{
@@ -315,7 +362,7 @@ exports.postFinalComment= async (req,res)=>{
     const comments = req.body.comment;
     const email = req.body.email;
         const comment = await VideoService.postFinal(videoId,comments,email);
-        console.log(comment)
+        // console.log(comment)
         res.json(comment);
     } catch (error) {
         console.error(error);
@@ -329,7 +376,7 @@ exports.postExpertMessage= async (req,res)=>{
     const comments = req.body.comment;
     const email = req.body.email;
         const comment = await VideoService.postMessage(videoId,comments,email);
-        console.log(comment);
+        // console.log(comment);
         res.json(comment);
     } catch (error) {
         console.error(error);

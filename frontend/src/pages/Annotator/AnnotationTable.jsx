@@ -1,14 +1,15 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Navbar from '../../components/navbar/Navbar';
+import Row from '../../components/AnnotationTable/Row';
+import Videowithtext from '../../components/AnnotationTable/Videowithtext';
+import plus from '../../assets/Images/plus.png';
+import minus from '../../assets/Images/minus.png';
+import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import minus from '../../assets/Images/minus.png';
-import plus from '../../assets/Images/plus.png';
-import Row from '../../components/AnnotationTable/Row';
+import Sidebar from '../../components/sidebar/SideBar';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
-import Navbar from '../../components/navbar/Navbar';
-import Sidebar from '../../components/sidebar/SideBar';
 
 function AnnotationTable() {
   const navigate = useNavigate();
@@ -59,9 +60,7 @@ function AnnotationTable() {
     });
   };
 
-  const viewdetails = () => {
-    navigate('/product');
-  };
+ 
 
   const [addedrows, setAddedRows] = useState(() => {
     const storedrows = localStorage.getItem('addedrows');
@@ -184,7 +183,6 @@ function AnnotationTable() {
         const video = response.data;
         console.log(video)
         setData(video);
-        console.log("Monday 2 ->", video);
         const data = response.data[0].duration;  // Access the data property directly
         console.log(data);
         setDuration(data);
@@ -217,7 +215,7 @@ function AnnotationTable() {
         <div className='w-full mt-[5%]'>
         <VideowithReview Id={videoId} text={"video"} type={"annotator"}/>
         </div>
-        <div className='mt-12 mr-8 bg-gray-300'>
+        <div className='mt-0 mr-8 bg-gray-300'>
           
         <div className=''>
         {videoData[0] && videoData[0].message && videoData[0].message.length > 0 && category === "reannotation" && (
@@ -234,12 +232,12 @@ function AnnotationTable() {
         {category === "reannotation" && (
           <div className='w-full p-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
           <h1 className='p-2'>Annotation History</h1>
-            <RowHistory videoId={videoId}/>
+            <RowHistory videoId={videoId}usertype={"annotator"}/>
         </div>
         )}
       
       </div>
-        <div className='px-3 h-full mt-10 text-sm font-semibold text-black mb-8'>
+        <div className='px-3 h-full mt-4 text-sm font-semibold text-black mb-8'>
           <div className='lg:flex-end'>
             {/* <p className='text-lg mb-4'>Does this video violated advertising rules and regulations?</p> */}
             
@@ -279,14 +277,14 @@ function AnnotationTable() {
                         handleRowChange(index, 'recommendation', value)
                       }
                     />
-                    {addedrows.includes(index) && (
+                    {/* {addedrows.includes(index) && (
                       <button
                         className='rounded-full h-12 w-12 mb-8 justify-end'
                         onClick={() => removeRow(index)}
                       >
                         <img className='mr-0 mt-0 h-12 w-12' src={minus} alt='Remove' />
                       </button>
-                    )}
+                    )} */}
                   </div>
                 ))}
               </>
@@ -304,12 +302,7 @@ function AnnotationTable() {
                 >
                   Save
                 </button>
-                <button
-                  className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2'
-                  onClick={viewdetails}
-                >
-                  View Product Details
-                </button>
+             
 
                 <button className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm p-4 text-center me-2 mb-2"
                  onClick={() => window.history.back()}>

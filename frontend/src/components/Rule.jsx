@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 function Rule({ rule , type, rules}) {
-console.log(rules)
+// console.log(rules)
   const handleDelete = async (ruleId) => {
     try {
       const response = await axios.delete(`http://localhost:3000/api/rules/rules/${ruleId}`,

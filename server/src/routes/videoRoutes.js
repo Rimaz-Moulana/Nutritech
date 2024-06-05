@@ -53,6 +53,10 @@ router.post('/comment/:videoId', videoController.postExpertComment );
 router.post('/message/:videoId', videoController.postExpertMessage );
 router.post('/reply/:videoId', videoController.postIndustryReply );
 router.post('/finalcomment/:videoId', videoController.postFinalComment);
+router.get("/finalcomment", videoController.finalCommentVideos)
+router.get("/report/:videoId", videoController.videoReport)
 router.post('/finalflag/:videoId', videoController.updateExpertHeadFlagReview );
+router.post('/decision/:videoId', videoController.updateDecision );
+router.post('/finaldecision/:videoId', videoController.updateFinalDecision );
 
 module.exports = router;
