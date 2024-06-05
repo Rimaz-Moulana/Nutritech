@@ -18,7 +18,6 @@ function ReviewVideos() {
   });
 
 
-  console.log("video_id --->"+videoId);
   const handleCheckboxChange = () => {
     const newCheckedState = !isChecked;
     setIsChecked(newCheckedState);
@@ -29,31 +28,8 @@ function ReviewVideos() {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const token = localStorage.getItem('token');
-        console.log("token:", token);
-
-      setTimeout(() => {
-        // Remove token from local storage after 5 seconds
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-    }, 7200000); // 2hours
-
-
-      if (token) {
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          },
-          withCredentials: true,
-        };
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`, config);
+        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
         setResponseData(response.data);
-        console.log("monday:"+response.data[0].brand+responseData[0].size);
-
-      }else{
-        navigate('/')
-      }
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
       } finally {
@@ -64,12 +40,12 @@ function ReviewVideos() {
     fetchReviewDetails();
   }, [videoId]);
 
-  const handlePoductDetails = (size,product,brand,unit) =>{
-    navigate(`/product/view/${size}/${product}/${brand}/${unit}`)
+  const handlePoductDetails = (size,product,brand) =>{
+    navigate(`/product/view/${size}${product}/${brand}`)
   }
   
-  console.log(responseData)
-  console.log(responseData.product,responseData.brand,responseData.size,responseData.unit)
+  // console.log(responseData)
+  // console.log(responseData.product,responseData.brand,responseData.size,responseData.unit)
   
   return (
     <div className='bg-backgroundGreen flex h-full min-h-screen w-full min-w-screen'>
@@ -110,7 +86,7 @@ function ReviewVideos() {
       </label>
 
       <div className=" flex items-end justify-center z-10 h-full"> {/* Position cancel button at the bottom */}
-        <button onClick={handlePoductDetails(responseData.product,responseData.brand,responseData.size)}
+        <button onClick={()=>handlePoductDetails(responseData.product,responseData.brand,responseData.size)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details

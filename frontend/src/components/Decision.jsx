@@ -67,9 +67,18 @@ const renderDecision = () => {
   }
     
     return (
-      <div>
+      <div className=''>
         
-        <h1>{statusvalue}</h1>  
+        <h1 className='text-xl mb-8'>Your Decision : {statusvalue}</h1>
+    {statusvalue === "red" ? (
+      <div>
+        <img src={red} className="h-8 w-8 ml-4" alt="Red status" />
+      </div>
+    ) : (
+      <div>
+        <img src={green} className="h-8 w-8 ml-4" alt="Green status" />
+      </div>
+    )}
       
       </div>
 
@@ -77,7 +86,7 @@ const renderDecision = () => {
 }
 
   return (
-    <div className="flex justify-center gap-6 text-xl  p-4  mb-12">
+    <div className="flex h-fit justify-center gap-6 text-xl  p-4  mb-12">
       
       {userData.role === "expert head" && (
   <>
@@ -94,22 +103,28 @@ const renderDecision = () => {
   </>
 )}
 
-
-        
+ 
         {userData.role !== "expert head" && (
           // <h1>hello</h1>
           <>
+        <div>
+          
           {renderDecision()}
-{!showButtons && (
+          
+        </div>
+          
+          {!showButtons && (
   <button
-  className="z-10 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+  className="z-10 mt-8 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
   onClick={handleStatus}
 >
   Change Decision
 </button>
 )}
-          
           </>
+
+          
+      
 
         )}
 

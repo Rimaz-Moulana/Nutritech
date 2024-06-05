@@ -127,6 +127,7 @@ function RowHistory({ videoId, usertype }) {
       console.error('Error submitting decision:', error);
     }
   };
+ 
 
   return (
     <div className="text-gray-500 item-center mr-12">
@@ -154,11 +155,10 @@ function RowHistory({ videoId, usertype }) {
                   <td>{annotation.rule}</td>
                   <td className="p-4 text-center" style={{ wordWrap: 'break-word' }}>{annotation.details}</td>
                   <td className="p-6 text-center" style={{ wordWrap: 'break-word' }}>{annotation.recommendation}</td>
-                  {usertype === "annotator" &&  videoData[0]?.reannotations && videoData[0].reannotations.length === 0 ? (
+                  {(usertype === "annotator" || userData.role==="expert head") &&  videoData[0]?.reannotations && videoData[0].reannotations.length === 0 ? (
                     <td>
-                      {annotation.finalacceptance[0]?.decision 
-                        && annotation.finalacceptance[0].decision 
-                       }
+                    
+                      {annotation.finalacceptance[0]?.decision }
                     </td>
                   ) : (usertype === "expert" ? (
                     annotation.acceptance.some(acc => acc.user === email) ? (

@@ -98,7 +98,7 @@ console.log(section);
         <div>
           <textarea
             placeholder={`Type ${type}...`}
-            className='w-[75%] h-24 ml-8  text-black'
+            className='w-[75%] h-24 ml-8 z-10 text-black'
             required={type !== "message"}
             value={comment}
             onChange={handleCommentChange}
