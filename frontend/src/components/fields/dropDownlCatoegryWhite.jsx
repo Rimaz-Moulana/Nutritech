@@ -6,7 +6,7 @@ export default function dropdown({ value,id,name, onChange}) {
     { value: 'Fine Bakery Wares', label: 'Fine Bakery Wares' },
     { value: 'Bread and Ordinary Bakery Wares', label: 'Bread and Ordinary Bakery Wares' },
     { value: 'Cereals', label: 'Cereals' },
-    { value: 'Potato,cereal or starch-based and animal based ', label: 'Potato,cereal or starch-based and animal based' },
+    { value: 'Potato,cereal or starch-based and animal based', label: 'Potato,cereal or starch-based and animal based' },
     { value: 'Processed nuts', label: 'Processed nuts' },
     { value: 'Fish-based', label: 'Fish-based' },
     { value: 'Juices', label: 'Juices' },

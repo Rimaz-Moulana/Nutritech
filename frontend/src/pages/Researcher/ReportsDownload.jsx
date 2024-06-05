@@ -12,9 +12,6 @@ export default function LogTable() {
   const [video, setVideo] = useState([]);
   const [selectedProductIndex, setSelectedProductIndex] = useState(null);
   const [error, setError] = useState(null);
-
-
-
   
 
   useEffect(() => {
@@ -88,23 +85,35 @@ export default function LogTable() {
   
     // Add video details
     doc.setFontSize(12);
-    doc.text(`Video Status: ${video.status}`, 20, 50);
-    doc.text(`Created Time: ${video.createdAt}`, 20, 40);
-    doc.text(`Created Date: ${video.createdIn}`, 20, 50);
-    doc.text(`Product name: ${video.product}`, 20, 50);
-    doc.text(`Brand name: ${video.brand}`, 20, 50);
-    doc.text(`Size: ${video.size+video.unit}`, 20, 50);
-    
-    doc.setFontSize(12);
-    doc.text(`Size: ${video.comment}`, 20, 50);
-    doc.text(`Size: ${video.finalcomment}`, 20, 50);
-    doc.text(`Size: ${video.panelstatus}`, 20, 50);
-    doc.text(`Size: ${video.annotations}`, 20, 50);
-    doc.text(`Size: ${video.reannotations}`, 20, 50);
+    let y = 40; // Starting y-coordinate for the details
+    const lineHeight = 10; // Height between each line of text
+
+    doc.text(`Video Status: ${video.status}`, 20, y);
+    y += lineHeight;
+    doc.text(`Created Time: ${video.createdAt}`, 20, y);
+    y += lineHeight;
+    doc.text(`Created Date: ${video.createdIn}`, 20, y);
+    y += lineHeight;
+    doc.text(`Product name: ${video.product}`, 20, y);
+    y += lineHeight;
+    doc.text(`Brand name: ${video.brand}`, 20, y);
+    y += lineHeight;
+    doc.text(`Size: ${video.size + video.unit}`, 20, y);
+    y += lineHeight;
+    doc.text(`Comment: ${video.comment}`, 20, y);
+    y += lineHeight;
+    doc.text(`Final Comment: ${video.finalcomment}`, 20, y);
+    y += lineHeight;
+    doc.text(`Panel Status: ${video.panelstatus}`, 20, y);
+    y += lineHeight;
+    doc.text(`Annotations: ${video.annotations}`, 20, y);
+    y += lineHeight;
+    doc.text(`Reannotations: ${video.reannotations}`, 20, y);
   
     // Save the PDF
     doc.save('red_flag_video_report.pdf');
-  };
+};
+
 
   const generateGreenPDF = () => {
     const doc = new jsPDF();

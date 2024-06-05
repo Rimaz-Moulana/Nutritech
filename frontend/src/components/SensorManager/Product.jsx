@@ -100,7 +100,7 @@ const filteredProducts = productData?.filter((product) => {
      {/* Table headers with filter dropdown for 'Status' and date picker for 'Uploaded Date' */}
      <thead>
        <tr>
-        <th></th>
+        
         <th>Brand {' '}</th>
          <th className=''> Product{' '}</th>
          <th className='mt-12'>Review Status</th>
@@ -117,8 +117,7 @@ const filteredProducts = productData?.filter((product) => {
      <tbody className='mt-12 text-black'>
        {filteredProducts.map((product, index) => (
          <tr key={index} className='border-b-1'>
-          <td className='w-40'>
-          </td>
+          
           <td>{product.brand}</td>
            <td>{product.product}</td>
            <td>{product.status}</td>
