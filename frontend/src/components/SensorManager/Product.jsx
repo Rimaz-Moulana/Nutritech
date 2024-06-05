@@ -120,11 +120,11 @@ const filteredProducts = productData?.filter((product) => {
           <td className='w-40'>
           </td>
           <td>{product.brand}</td>
-           <td>{product.productName}</td>
+           <td>{product.product}</td>
            <td>{product.status}</td>
            {/* <td>{product.status}</td> */}
-           <td>{product.CreatedData}</td>
-           <td>{product.createdTime}</td>
+           <td>{product.createdAt}</td>
+           <td>{product.createdIn}</td>
            {/* <td>{product.uploader}</td> */}
 
            <td>
