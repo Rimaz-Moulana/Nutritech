@@ -122,10 +122,10 @@ export default function LogTable({data}) {
   </div>
   <Modal
   isOpen={selectedProductIndex !== null}
-  onRequestClose={closeDetailsModal}
   contentLabel="Product Details"
-        className="fixed inset-0 flex items-center justify-center p-4 bg-gray-800 bg-opacity-75"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+  className="fixed inset-0 flex items-center justify-center p-4 bg-gray-800 bg-opacity-75"
+  overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+  style={{ zIndex: 9999 }}
 >
   {selectedProductIndex !== null && (
     <div className="bg-white mt-8 rounded-lg p-4 w-full max-w-7xl">

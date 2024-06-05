@@ -372,7 +372,7 @@ exports.postComment = async (videoId, comments, email, req) => {
 exports.VideoReport = async (videoId)=> {
   try {
     //console.log(videoId);
-    return await VideoModel.findOne({_id:videoId});
+    return await VideoModel.findOne({_id:videoId , status: "Red"});
 
   }catch(error){
     console.error(`Error saving comment: ${error.message}`);
