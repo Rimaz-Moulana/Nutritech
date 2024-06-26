@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
 import axios from 'axios';
+import React from 'react';
+import Swal from 'sweetalert2';
+import API from '../config/config';
 
 function Rule({ rule , type, rules}) {
 // console.log(rules)
   const handleDelete = async (ruleId) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/api/rules/rules/${ruleId}`,
+      const response = await axios.delete(`${API}/api/rules/rules/${ruleId}`,
       
       );
       // window.history.back();

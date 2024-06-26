@@ -6,6 +6,7 @@ import Videowithtext from '../../components/AnnotationTable/Videowithtext';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function History() {
   const { videoId } = useParams();
@@ -33,7 +34,7 @@ function History() {
           },
           withCredentials: true,
         };
-        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`, config);
+        const response = await axios.get(`${API}/annotations/annotationhistory/${videoId}`, config);
         setData(response.data.annotations);
 
       }else{

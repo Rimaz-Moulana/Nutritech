@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../../components/navbar/Navbar';
-import Row from '../../components/AnnotationTable/Row';
-import Videowithtext from '../../components/AnnotationTable/Videowithtext';
-import plus from '../../assets/Images/plus.png';
-import minus from '../../assets/Images/minus.png';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Sidebar from '../../components/sidebar/SideBar';
+import plus from '../../assets/Images/plus.png';
+import Row from '../../components/AnnotationTable/Row';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
+import Navbar from '../../components/navbar/Navbar';
+import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function AnnotationTable() {
   const navigate = useNavigate();
@@ -117,11 +116,11 @@ function AnnotationTable() {
     e.preventDefault();
     try {
       if(category==="reannotation"){
-        await axios.post(`http://localhost:3000/annotations/reannotation/${videoId}`, {
+        await axios.post(`${API}/annotations/reannotation/${videoId}`, {
         reannotations: rowsData,
       });
       }else{
-        await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
+        await axios.post(`${API}/annotations/annotation/${videoId}`, {
         annotations: rowsData,
       });
       }
@@ -149,7 +148,7 @@ function AnnotationTable() {
   const submitNone = async () => {
     // e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:3000/annotations/annotation/${videoId}`, {
+      const response = await axios.post(`${API}/annotations/annotation/${videoId}`, {
         annotations: {
           timestamp: '',
           rule: '',
@@ -179,7 +178,7 @@ function AnnotationTable() {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/annotation/${videoId}`);
         const video = response.data;
         console.log(video)
         setData(video);

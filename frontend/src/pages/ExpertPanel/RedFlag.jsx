@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 function RedFlag() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function RedFlag() {
         },
         withCredentials: true,
       };
-       const response = await fetch('http://localhost:3000/api/videos/redflag' , config);
+       const response = await fetch(`${API}/api/videos/redflag` , config);
       const data = await response.json();
       setVideoData(data);
     }

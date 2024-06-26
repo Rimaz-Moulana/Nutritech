@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 export default function LogTable() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function LogTable() {
           },
           withCredentials: true,
         };
-      const response = await axios.get(`http://localhost:3000/api/videos/report/${videoId}`, config);
+      const response = await axios.get(`${API}/api/videos/report/${videoId}`, config);
       setVideo(response.data);
       console.log(video);
 

@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Comments from './Comments';
-import red from '../../assets/Images/redflag.png'
-import green from '../../assets/Images/greenflag.png'
 import { useParams } from 'react-router-dom';
+import API from '../../config/config';
+import Comments from './Comments';
 
 function ViewComment({ videoId, type }) {
   const [Data, setData] = useState([]);
@@ -16,7 +15,7 @@ function ViewComment({ videoId, type }) {
   useEffect(() => {
     const fetchUser = async () => {
        try {
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
           console.error('Error fetching user:', error);
@@ -30,7 +29,7 @@ function ViewComment({ videoId, type }) {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/reviewvideo/${videoId}`);
         setData(response.data.video);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);

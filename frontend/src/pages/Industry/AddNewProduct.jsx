@@ -14,6 +14,7 @@ import TextFiledsmall from '../../components/fields/textFieldsmall'
 import TextFiled from '../../components/fields/textfield'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/SideBar'
+import API from '../../config/config'
 
 export default function ProductDetails() {
         const currentTimeInMillis = Date.now();
@@ -216,7 +217,7 @@ export default function ProductDetails() {
               console.log(formData.imagePaths)
               console.log(formData)
             //   console.log(formD)
-              const response  = await axios.post("http://localhost:3000/api/product/industry/add", formD);
+              const response  = await axios.post(`${API}/api/product/industry/add`, formD);
               console.log(response.data);
               setUploadStatus("Product uploaded successfully!");
               Swal.fire({

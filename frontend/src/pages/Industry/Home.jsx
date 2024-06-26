@@ -1,12 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
-import ProductTable from '../../components/tables/LogTable';
-import Rule from '../../components/Rule';
-import Rules from '../Rules';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function Home() {
 
@@ -30,7 +27,7 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/allUploadedVideos');
+       const response = await fetch(`${API}/api/videos/allUploadedVideos`);
        const data = await response.json();
       setVideoData(data);
     };
@@ -40,7 +37,7 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/allPendingUploadedVideos');
+       const response = await fetch(`${API}/api/videos/allPendingUploadedVideos`);
        const data = await response.json();
        setPendingVideoData(data);
     };
@@ -50,7 +47,7 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/allUnannotatedUploadedVideos');
+       const response = await fetch(`${API}/api/videos/allUnannotatedUploadedVideos`);
        const data = await response.json();
        setUnannotatedVideoData(data);
     };
@@ -60,7 +57,7 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/allAnnotatedUploadedVideos');
+       const response = await fetch(`${API}/api/videos/allAnnotatedUploadedVideos`);
        const data = await response.json();
        setAnnotatedVideoData(data);
     };
@@ -70,7 +67,7 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/allRedUploadedVideos');
+       const response = await fetch(`${API}/api/videos/allRedUploadedVideos`);
        const data = await response.json();
        setRedVideoData(data);
     };
@@ -80,7 +77,7 @@ function Home() {
   
   useEffect(() => {
     const fetchData = async () => {
-       const response = await fetch('http://localhost:3000/api/videos/allGreenUploadedVideos');
+       const response = await fetch(`${API}/api/videos/allGreenUploadedVideos`);
        const data = await response.json();
        setGreenVideoData(data);
     };

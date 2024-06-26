@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import API from '../../config/config';
 import RulePopup from '../Popup/RulePopup';
 
 function Row({
@@ -36,7 +37,7 @@ function Row({
   useEffect(()=>{
     const fetchData = async() =>{
       try{
-        const response=await axios.get('http://localhost:3000/api/rules/rules');
+        const response=await axios.get(`${API}/api/rules/rules`);
         const data= response.data;
         setRules(data);
       }catch(error) {

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 const UserList = () => {
   const navigate = useNavigate()
@@ -40,7 +41,7 @@ const UserList = () => {
           },
           withCredentials: true,
         };
-      await axios.delete(`http://localhost:3000/api/users/deleteUser/${userId}` , config);
+      await axios.delete(`${API}/api/users/deleteUser/${userId}` , config);
       fetchUsers();
 
       }else{
@@ -83,7 +84,7 @@ const UserList = () => {
           },
           withCredentials: true,
         };
-      const res = await axios.put(`http://localhost:3000/api/users/updateUser/${editedUserData._id}`, editedUserData , config);
+      const res = await axios.put(`${API}/api/users/updateUser/${editedUserData._id}`, editedUserData , config);
       setEditingUser(null);
       fetchUsers();
       console.log(res.data)

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import axios here
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import API from '../../config/config';
 
 function Comments({ videoId, type,section,onClose}) {
   const [comment, setComment] = useState('');
@@ -15,7 +16,7 @@ function Comments({ videoId, type,section,onClose}) {
     const fetchUser = async () => {
        try {
           // const email  = localStorage.getItem('email');
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
           // console.log("response",response); // Logging the response data directly
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
@@ -48,15 +49,15 @@ console.log(section);
         setLoading(true);
   
         const response = await axios.post(
-          section==="message" ? `http://localhost:3000/api/videos/message/${videoId}` :
+          section==="message" ? `${API}/api/videos/message/${videoId}` :
           
-          userData.role==="expert head" ? `http://localhost:3000/api/videos/finalcomment/${videoId}` :
+          userData.role==="expert head" ? `${API}/api/videos/finalcomment/${videoId}` :
 
           type === "comment"
             ?
-             `http://localhost:3000/api/videos/comment/${videoId}`
+             `${API}/api/videos/comment/${videoId}`
              
-            : `http://localhost:3000/api/videos/reply/${videoId}`,
+            : `${API}/api/videos/reply/${videoId}`,
           { comment, email }
         );
   

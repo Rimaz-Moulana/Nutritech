@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import Image from '../../assets/Images/NutriTech Logo-04 1.png';
 import Reg from '../../assets/Images/reg.jpg';
+import API from '../../config/config';
 
 function Register() {
   // const navigate = useNavigate();
@@ -23,7 +24,7 @@ function Register() {
       console.log(formData)
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3000/api/register', formData);
+            await axios.post(`${API}/api/register`, formData);
             // Redirect to login page or any other page after successful registration
             Swal.fire({
               icon: 'success',

@@ -26,7 +26,7 @@ function History() {
   useEffect(() => {
     const fetchITNVideos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/videos/history');
+        const response = await fetch('http://api.nutritech.lk/api/videos/history');
         if (!response.ok) {
           throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
         }

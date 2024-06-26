@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
 import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
-import Swal from 'sweetalert2';
 
 
 function UploadVideo() {
@@ -46,7 +46,7 @@ function UploadVideo() {
         try {
           console.log(formData)
           console.log(formD)
-          const response  = await axios.post("http://localhost:3000/api/videos/upload", formD);
+          const response  = await axios.post("http://api.nutritech.lk/api/videos/upload", formD);
           console.log(response.data);
           setUploadStatus("Video uploaded successfully!");
           Swal.fire({

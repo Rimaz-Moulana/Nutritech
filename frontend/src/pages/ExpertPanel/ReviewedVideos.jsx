@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 function ReviewedVideos() {
   const [Data, setData] = useState([]);
@@ -15,7 +16,7 @@ function ReviewedVideos() {
   useEffect(() => {
     const fetchUser = async () => {
        try {
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
           console.error('Error fetching user:', error);
@@ -50,8 +51,8 @@ function ReviewedVideos() {
   
   useEffect(() => {
     const url = userData.role === "expert head" 
-      ? 'http://localhost:3000/api/videos/annotatedvideosExpert' 
-      : 'http://localhost:3000/api/videos/allAnnotatedUploadedVideos';
+      ? `${API}/api/videos/annotatedvideosExpert` 
+      : `${API}/api/videos/allAnnotatedUploadedVideos`;
     
     fetchData(url, email, setData);
   }, [email, userData.role, setData]); // Add dependencies

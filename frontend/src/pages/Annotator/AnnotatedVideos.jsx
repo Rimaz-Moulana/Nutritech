@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 function AnnotatedVideos() {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ function AnnotatedVideos() {
       };
        // Replace with your actual API endpoint
            
-        const response = await fetch('http://localhost:3000/api/videos/annotated-videos',config);
+        const response = await fetch(`${API}/api/videos/annotated-videos`,config);
         console.log('Data:', response.data);
         const data = await response.json();
         setannotatedVideoData(data);

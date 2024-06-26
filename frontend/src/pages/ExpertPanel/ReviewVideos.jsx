@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Modal } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import Annotations from '../../components/AnnotationTable/RowHistory';
 import Comments from '../../components/CommentSection/Comments';
@@ -9,7 +8,7 @@ import ViewComment from '../../components/CommentSection/ViewComment';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
-import MessagePopup from '../../components/Popup/MessagePopup';
+import API from '../../config/config';
 
 function ReviewVideos() {
   // const navigate= useNavigate();
@@ -27,7 +26,7 @@ function ReviewVideos() {
     const fetchUser = async () => {
        try {
           // const email  = localStorage.getItem('email');
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
           // console.log("response",response); // Logging the response data directly
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
@@ -50,7 +49,7 @@ function ReviewVideos() {
   useEffect(()=>{
     const fetchData = async() =>{
       try{
-        const response=await axios.get('http://localhost:3000/api/rules/rules');
+        const response=await axios.get(`${API}/api/rules/rules`);
         const data= response.data;
         setRules(data);
       }catch(error) {
@@ -62,7 +61,7 @@ function ReviewVideos() {
 useEffect(() => {
   const fetchReviewDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+      const response = await axios.get(`${API}/api/videos/annotation/${videoId}`);
       console.log(response.data[0]);
       setVideoData(response.data[0]);
     } catch (error) {
