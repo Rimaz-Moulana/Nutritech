@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from "../../config/config";
 
 function Home() {
   const navigate= useNavigate();
@@ -38,7 +39,7 @@ function Home() {
               },
               withCredentials: true,
             };
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`, config);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`, config);
           // console.log("response",response); // Logging the response data directly
           setUserData(response.data); // Setting the response data to the state
 
@@ -75,7 +76,7 @@ useEffect(() => {
               },
               withCredentials: true,
             };
-     const response = await fetch('http://localhost:3000/api/videos/redflag' , config);
+     const response = await fetch(`${API}/api/videos/redflag` , config);
     const data = await response.json();
     setRedVideoData(data);
 
@@ -110,7 +111,7 @@ useEffect(() => {
               },
               withCredentials: true,
             };
-     const response = await fetch('http://localhost:3000/api/videos/greenflag', config);
+     const response = await fetch(`${API}/api/videos/greenflag`, config);
     const data = await response.json();
     setGreenVideoData(data);
 
@@ -144,7 +145,7 @@ useEffect(() => {
               },
               withCredentials: true,
             };
-      const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert' , config);
+      const response = await fetch(`${API}/api/videos/annotatedvideosExpert` , config);
       const data = await response.json();
       setNewVideoData(data);
 
@@ -191,7 +192,7 @@ useEffect(() => {
         },
         withCredentials: true,
       };
-       const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert', config);
+       const response = await fetch(`${API}/api/videos/annotatedvideosExpert`, config);
       const data = await response.json();
       setVideoData(data);
     
@@ -228,7 +229,7 @@ useEffect(() => {
       };
       
       console.log(config)
-      const response = await axios.get('http://localhost:3000/api/product/getAll', config ); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+      const response = await axios.get(`${API}/api/product/getAll`, config ); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
       setProducts(response.data);
        // Schedule token expiration check
        

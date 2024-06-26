@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function Home() {
 
@@ -52,7 +53,7 @@ function Home() {
           },
           withCredentials: true,
         };
-        const response = await fetch('http://localhost:3000/api/videos/sensormanagerallvideos', config);
+        const response = await fetch(`${API}/api/videos/sensormanagerallvideos`, config);
 
         //const response = await fetch('http://localhost:3000/api/videos/allUploadedVideos',config);
 
@@ -91,7 +92,7 @@ function Home() {
           },
           withCredentials: true,
         };
-        const response = await axios.get('http://localhost:3000/api/rules/rules', config);
+        const response = await axios.get(`${API}/api/rules/rules`, config);
         const data = response.data;
         console.log(data); // This should log the fetched data
         setRuleData(data);
@@ -100,7 +101,7 @@ function Home() {
         navigate("/")
       }
 
-        const response = await fetch('http://localhost:3000/api/videos/sensormanagerallvideos');
+        const response = await fetch(`${API}/api/videos/sensormanagerallvideos`);
         if (!response.ok) {
           throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
         }
@@ -120,7 +121,7 @@ function Home() {
     const fetchData = async () => {
       // try {
         // Allvideos.jsx
-        const response = await fetch('http://localhost:3000/api/videos/sensormanagernewvideo');
+        const response = await fetch(`${API}/api/videos/sensormanagernewvideo`);
         const data = await response.json();
         setPendingVideoData(data);
 

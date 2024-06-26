@@ -14,7 +14,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3000/api/login', formData);
+            const res = await axios.post(`http://api.nutritech.lk/api/login`, formData);
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('email', formData.email);
             // Redirect to dashboard or any other page after successful login

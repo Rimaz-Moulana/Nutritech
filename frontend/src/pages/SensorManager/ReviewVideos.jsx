@@ -5,6 +5,7 @@ import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 function ReviewVideos() {
   // const navigate = useNavigate();
@@ -29,7 +30,7 @@ function ReviewVideos() {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/brandproducts/${videoId}`);
         setResponseData(response.data);
         // console.log("Hello :", response.data[0]);
       } catch (error) {

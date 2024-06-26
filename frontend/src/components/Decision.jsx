@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import Swal from 'sweetalert2';
-import ReactPlayer from 'react-player';
-import red from '../assets/Images/redflag.png'
-import green from '../assets/Images/greenflag.png'
+import React, { useEffect, useState } from 'react';
+import green from '../assets/Images/greenflag.png';
+import red from '../assets/Images/redflag.png';
+import API from '../config/config';
 import VideowithReview from './SensorManager/VideowithReview';
 
 
@@ -21,7 +20,7 @@ function Decision({Id, text, type}) {
   useEffect(() => {
     const fetchUser = async () => {
        try {
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
           console.error('Error fetching user:', error);
@@ -34,7 +33,7 @@ function Decision({Id, text, type}) {
 useEffect(() => {
   const fetchReviewDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+      const response = await axios.get(`${API}/api/videos/reviewvideo/${videoId}`);
       setData(response.data.video);
     } catch (error) {
       console.error('Error fetching ReviewDetails:', error);

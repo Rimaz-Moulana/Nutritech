@@ -81,6 +81,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Table from '../../components/tables/TableProduct';
 import BlankPage from '../../components/theme/BlankPage';
+import API from '../../config/config';
 
 export default function AddedProduct() {
   const { product, brand, size,unit } = useParams();
@@ -116,7 +117,7 @@ export default function AddedProduct() {
           },
           withCredentials: true,
         };
-      const response = await axios.get(`http://localhost:3000/api/product/view/${size}/${product}/${brand}` , config);
+      const response = await axios.get(`${API}/api/product/view/${size}/${product}/${brand}` , config);
       const result = response.data.filter(product => product.unit === unit); 
       setAllProducts(result);
       console.log(response.data);

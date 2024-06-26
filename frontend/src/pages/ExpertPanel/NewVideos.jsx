@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 
 
@@ -20,7 +22,7 @@ function NewVideos() {
   useEffect(() => {
     const fetchUser = async () => {
        try {
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
           console.error('Error fetching user:', error);
@@ -64,7 +66,7 @@ function NewVideos() {
   //   fetchData(url, email, setVideoData, setData);
   // }, [email, userData.role, setVideoData, setData]); // Add dependencies
   
-
+useEffect(() => {
   const fetchData = async (url, email, setVideoData, setData) => {
     try {
       const response = await fetch(url);
@@ -87,6 +89,8 @@ function NewVideos() {
       console.error('Error fetching data:', error);
     }
   };
+
+},[]);
   
   useEffect(() => {
 
@@ -112,7 +116,7 @@ function NewVideos() {
         },
         withCredentials: true,
       };
-        const response = await fetch('http://localhost:3000/api/videos/annotatedvideosExpert', config);
+        const response = await fetch(`${API}/api/videos/annotatedvideosExpert`, config);
         const data = await response.json();
         const filteredData = data.filter(video => {
           return !video.comment.some(comment => comment.commenter === email);
@@ -129,8 +133,8 @@ function NewVideos() {
     };
 
     const url = userData.role === "expert head" 
-      ? 'http://localhost:3000/api/videos/annotatedvideosExpert' 
-      : 'http://localhost:3000/api/videos/allAnnotatedUploadedVideos';
+      ? `${API}/api/videos/annotatedvideosExpert`
+      : `${API}/api/videos/allAnnotatedUploadedVideos`;
 
   
     fetchData(url, email, setVideoData, setData);

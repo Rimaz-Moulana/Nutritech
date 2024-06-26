@@ -10,6 +10,7 @@ import TextFiledsmall from '../../components/fields/textFieldsmall'
 import TextFiled from '../../components/fields/textfield'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/SideBar'
+import API from '../../config/config'
 
 
 export default function ProductDetails() {
@@ -133,7 +134,7 @@ export default function ProductDetails() {
         },
         withCredentials: true,
       };
-            const response = await axios.put(`http://localhost:3000/api/product/industry/update/${productId}`, formData, config);
+            const response = await axios.put(`${API}/api/product/industry/update/${productId}`, formData, config);
             console.log(response.data);
             setUploadStatus("New Product updated successfully!");
             Swal.fire({
@@ -254,7 +255,7 @@ export default function ProductDetails() {
         },
         withCredentials: true,
       };
-            const response = await axios.get(`http://localhost:3000/api/product/industry/getProduct/${productId}`, config);
+            const response = await axios.get(`${API}/api/product/industry/getProduct/${productId}`, config);
             const productData = response.data;
             setFormData(productData);
             console.log(response.data);

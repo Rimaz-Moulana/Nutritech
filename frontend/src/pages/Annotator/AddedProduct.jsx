@@ -5,6 +5,7 @@ import AddNewProduct from '../../components/button/AddNewProductBtn';
 import ProductBar from '../../components/fields/ProductBar';
 import LogTable from '../../components/tables/ProductTableAnnotator';
 import BlankPage from '../../components/theme/BlankPage';
+import API from '../../config/config';
 
 export default function AddedProduct() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function AddedProduct() {
         },
         withCredentials: true,
       };
-      const response = await axios.get('http://localhost:3000/api/product/getAll', config);
+      const response = await axios.get(`${API}/api/product/getAll`, config);
       setAllProducts(response.data);
       setFilteredProducts(response.data); // Initially set filtered products to all products
       }

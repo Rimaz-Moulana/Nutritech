@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import RowHistory from '../../components/AnnotationTable/RowHistory';
-import Videowithtext from '../../components/AnnotationTable/Videowithtext';
 import ViewComment from '../../components/CommentSection/ViewComment';
+import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
-import VideowithReview from '../../components/SensorManager/VideowithReview';
+import API from '../../config/config';
 
 function History() {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ function History() {
         },
         withCredentials: true,
       };
-        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`, config);
+        const response = await axios.get(`${API}/annotations/annotationhistory/${videoId}`, config);
         setData(response.data.annotations);
 
       }else{

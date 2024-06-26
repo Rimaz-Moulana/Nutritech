@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 function Unannotatedvideos() {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ function Unannotatedvideos() {
         },
         withCredentials: true,
       };
-        const response = await fetch('http://localhost:3000/api/videos/unannotated-videos',config);
+        const response = await fetch(`${API}/api/videos/unannotated-videos`,config);
         if (!response.ok) {
           throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
         }

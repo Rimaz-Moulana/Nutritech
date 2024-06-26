@@ -5,6 +5,7 @@ import Product from '../../components/SensorManager/Product';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function ReviewProduct() {
   const {productId} = useParams();
@@ -33,7 +34,7 @@ function ReviewProduct() {
           },
           withCredentials: true,
         };
-        const response = await axios.get(`http://localhost:3000/api/product/similarproducts/${productId}` , config);
+        const response = await axios.get(`${API}/api/product/similarproducts/${productId}` , config);
         setResponseData(response.data);
         console.log("Respose:"+response.data[0]);
 
