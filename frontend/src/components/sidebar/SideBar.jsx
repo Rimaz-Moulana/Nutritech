@@ -146,7 +146,7 @@ const Sidebar = ({ type, onValueChange }) => {
         if (index === navResearcher.findIndex((item) => item.text === 'History')) {
           navigate('/industryhistory');
         } else if (index === navResearcher.findIndex((item) => item.text === 'Products')) {
-          // navigate(`/addedproduct/${type}`);
+          navigate(`/addedproduct/${type}`);
         } else if (index === navResearcher.findIndex((item) => item.text === 'Rules & Regulations')) {
           navigate(`/rules/${type}`);
         } else if (index === navResearcher.findIndex((item) => item.text === 'Reports')) {
