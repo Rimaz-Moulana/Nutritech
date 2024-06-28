@@ -279,7 +279,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     let data;
 
     if(type==="videoDecisionUpdate"){
-      endpoint = `http://localhost:3000/api/videos/flagupdate/${videoId}`;
+      endpoint = `${API}/api/videos/flagupdate/${videoId}`;
       data = {
         panelstatus: {
           status: "green",
