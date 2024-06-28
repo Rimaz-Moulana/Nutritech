@@ -54,7 +54,7 @@ const Sidebar = ({ type, onValueChange }) => {
     { icon: home, selectedIcon: home, text: 'Home' },
     { icon: foodproducts, selectedIcon: foodproducts, text: 'Products' },
     { icon: edit, selectedIcon: edit, text: 'Rules & Regulations' },
-    // { icon: edit, selectedIcon: edit, text: 'Reports' },
+    { icon: edit, selectedIcon: edit, text: 'Reports' },
     { icon: edit, selectedIcon: edit, text: 'History' },
   ];
 
@@ -149,8 +149,8 @@ const Sidebar = ({ type, onValueChange }) => {
           navigate(`/addedproduct/${type}`);
         } else if (index === navResearcher.findIndex((item) => item.text === 'Rules & Regulations')) {
           navigate(`/rules/${type}`);
-        // } else if (index === navResearcher.findIndex((item) => item.text === 'Reports')) {
-        //   navigate('/reports');
+        } else if (index === navResearcher.findIndex((item) => item.text === 'Reports')) {
+          navigate('/reports');
         } else {
           navigate('/industryhome');
         }

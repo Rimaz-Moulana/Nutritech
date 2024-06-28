@@ -42,7 +42,7 @@ function UploadVideo() {
           withCredentials: true,
         };
 
-      const response = await axios.get(`${API}/api/users/getUser/${email}`);
+      const response = await axios.get(`${API}/api/users/getUser/${email}`, config);
       setVideoUploader(response.data);
       console.log("userdata:", response.data.username);
       }else{
@@ -112,7 +112,7 @@ function UploadVideo() {
           withCredentials: true,
         };
 
-        const response = await axios.post(`${API}/api/videos/upload`, formD, config);
+        const response = await axios.post(`${API}/api/videos/upload`, formD , config);
         console.log(response.data);
         setUploadStatus("Video uploaded successfully!");
         Swal.fire({
