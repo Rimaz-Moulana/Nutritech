@@ -118,7 +118,7 @@ function ReviewHistory() {
        
         <div className="mt-24 ml-8 bg-gray-300 p-4 " >
         <h1 className='text-xl font-bold text-sidebarGreen mb-8 h-fit'>Decision for Video</h1>
-        <Decision Id={videoId} text={"experthitory"} type={"expertDecision"}/>
+        <Decision Id={videoId} text={"experthitory"} type={"expertDecisionhistory"}/>
         </div>
        
       </div>

@@ -292,6 +292,41 @@ exports.updateReview = async (videoId, panelstatus) => {
   }
 };
 
+exports.updateReviewUpdate = async (videoId, panelstatus) => {
+  console.log("in the service");
+  try {
+    const { email, status, expertreviewedtime, expertrevieweddate } = panelstatus;
+    
+    // Find the video document by videoId
+    const currentVideoData = await VideoModel.findOne({ _id: videoId });
+
+    if (!currentVideoData) {
+      throw new Error('Video not found');
+    }
+
+    // Find the index of the panelstatus element with the matching email
+    const panelIndex = currentVideoData.panelstatus.findIndex(item => item.email === email);
+
+    if (panelIndex !== -1) {
+      // Update the panelstatus element found by email
+      currentVideoData.panelstatus[panelIndex].status = status;
+      currentVideoData.panelstatus[panelIndex].expertreviewedtime = expertreviewedtime;
+      currentVideoData.panelstatus[panelIndex].expertrevieweddate = expertrevieweddate;
+
+      // Save the updated video document
+      const updatedVideo = await currentVideoData.save();
+
+      return updatedVideo;
+    } else {
+      throw new Error('Panel status with given email not found');
+    }
+  } catch (error) {
+    console.error(`Error saving reviews: ${error.message}`);
+    throw error;
+  }
+};
+
+
 
 
 exports.updateFinalReview = async (videoId,finalflag ) => {

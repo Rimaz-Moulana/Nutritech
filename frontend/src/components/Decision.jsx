@@ -84,7 +84,7 @@ const renderDecision = () => {
 
     ) 
 }
-
+console.log(userData.role)
   return (
     <div className="flex h-fit justify-center gap-6 text-xl  p-4  mb-12">
       
@@ -92,6 +92,7 @@ const renderDecision = () => {
   <>
     <h1>{Data.status}</h1>
     {Data.status === "Red" ? (
+      
       <div>
         <img src={red} className="h-8 w-8 ml-4" alt="Red status" />
       </div>
@@ -130,7 +131,7 @@ const renderDecision = () => {
 
 
         {showButtons && (
-          <VideowithReview Id={videoId} type={"videoDecision"} text={"expert"} showButtons={true}/>
+          <VideowithReview Id={videoId} type={"videoDecisionUpdate"} text={"expert"} showButtons={true}/>
         )}
   
   </div>

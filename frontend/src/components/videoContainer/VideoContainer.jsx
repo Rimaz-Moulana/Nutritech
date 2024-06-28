@@ -250,8 +250,8 @@ const filteredVideos = videoData?.filter((video) => {
           {video.status === 'Red' && (type==="expert" || type==="expertred"|| type==="industry") &&(
             <div className="flex h-8 w-full icon-overlay absolute top-0 mt-2 mr-2 right-0 justify-between ">
               <img src={red} alt="red" />
-              {type==="industry" && (
-                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => Viewvideohistory(video._id)}/>
+              {type==="researcher" && (
+                <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
               )}
               {(type==="expertred" || type ==="expert") && type!=="history" &&(
                 <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => handleApprove(video._id)}/>
@@ -438,7 +438,7 @@ const filteredVideos = videoData?.filter((video) => {
             {(video.status === 'annotated' || video.status==="Red" || video.status==="Green" )&& type==="industry" && type!=="reviewvideo"  && type!=="expert" && type!=="expertnew" && type!=="history" && type!=="expertreviewed" &&(
                <button
                className="text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-8 py-2.5 "
-                 onClick={() => ViewHistory(video._id)}
+                 onClick={() => ViewAnnotate(video._id)}
              >View History</button>
              )}
 
