@@ -6,6 +6,7 @@ import Videowithtext from '../../components/AnnotationTable/Videowithtext';
 import ViewComment from '../../components/CommentSection/ViewComment';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function History() {
   const { videoId } = useParams();
@@ -33,7 +34,7 @@ function History() {
           },
           withCredentials: true,
         };
-        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`, config);
+        const response = await axios.get(`${API}/annotations/annotationhistory/${videoId}`, config);
         setData(response.data.annotations);
 
       }else{
@@ -78,11 +79,11 @@ function History() {
           <Comments videoId={videoId} type={"reply"}/>
         </div> */}
       <div className=" flex items-end justify-center mt-4 z-10 h-full"> {/* Position cancel button at the bottom */}
-        <button
+        {/* <button
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
                   >
                   View Product Details
-                </button>
+                </button> */}
 
                 <button className="text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                  onClick={() => window.history.back()}>

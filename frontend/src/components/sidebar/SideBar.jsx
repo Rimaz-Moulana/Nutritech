@@ -58,6 +58,10 @@ const Sidebar = ({ type, onValueChange }) => {
     { icon: edit, selectedIcon: edit, text: 'History' },
   ];
 
+  const navAdmin = [
+    { icon: home, selectedIcon: home, text: 'Home' },
+  ];
+
   // Determine the nav array based on the type prop
   const nav = (() => {
     switch (type) {
@@ -70,6 +74,8 @@ const Sidebar = ({ type, onValueChange }) => {
         return navIndustryOrSensor;
       case 'researcher':
         return navResearcher;
+        case 'admin':
+        return navAdmin;
       default:
         return [];
     }
@@ -140,7 +146,7 @@ const Sidebar = ({ type, onValueChange }) => {
         if (index === navResearcher.findIndex((item) => item.text === 'History')) {
           navigate('/industryhistory');
         } else if (index === navResearcher.findIndex((item) => item.text === 'Products')) {
-          // navigate(`/addedproduct/${type}`);
+          navigate(`/addedproduct/${type}`);
         } else if (index === navResearcher.findIndex((item) => item.text === 'Rules & Regulations')) {
           navigate(`/rules/${type}`);
         // } else if (index === navResearcher.findIndex((item) => item.text === 'Reports')) {
@@ -149,7 +155,13 @@ const Sidebar = ({ type, onValueChange }) => {
           navigate('/industryhome');
         }
       }
+    }else if (type === 'admin') {
+      if (selected !== index) {
+        if (index === navAdmin.findIndex((item) => item.text === 'Home')) {
+          navigate('/users');
+      }
     }
+  }
   };
 
   const handleEnlargeClick = () => {
@@ -389,6 +401,24 @@ const Sidebar = ({ type, onValueChange }) => {
                     className="w-8 h-8 p-1 ml-2 rounded-full"
                   />
                 )}
+              </a>
+            </div>
+          ))}
+
+          {type==="admin" && navAdmin.map((link, index) => (
+            <div key={index} className="relative">
+              <a
+                className={`flex items-center text-white py-2 cursor-pointer hover:bg-darkGreen hover:text-sidebarGreen  ${
+                  isEnlarge ? 'pl-1 pr-3 rounded-lg' : 'px-1 rounded-full'
+                } ${selected === index ? 'bg-darkGreen text-sidebarGreen' : ''}`}
+                onClick={(event) => handleItemClick(index, event)}
+              >
+                <img
+                  src={isEnlarge ? link.selectedIcon : link.icon}
+                  alt={link.text}
+                  className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-1' : ''}`}
+                />
+{isEnlarge && <span className="font-medium select-none">{link.text}</span>}
               </a>
             </div>
           ))}

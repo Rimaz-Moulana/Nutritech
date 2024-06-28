@@ -5,6 +5,7 @@ import ProductBar from '../../components/fields/ProductBar';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import LogTable from '../../components/tables/ProductTableAnnotator';
+import API from '../../config/config';
 
 function Home() {
 
@@ -54,7 +55,7 @@ function Home() {
           },
           withCredentials: true,
         };
-      const response = await axios.get('http://localhost:3000/api/product/getAll' , config); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+      const response = await axios.get(`${API}/api/product/getAll` , config); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
       setProducts(response.data);
 
       }
@@ -89,7 +90,7 @@ function Home() {
           },
           withCredentials: true,
         };
-        const response = await fetch('http://localhost:3000/api/videos/history',config);
+        const response = await fetch(`${API}/api/videos/history`,config);
         if (!response.ok) {
           throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
         }
@@ -100,7 +101,7 @@ function Home() {
         navigate("/");
       }
       } catch (error) {
-        console.error(error);
+        console.error("error",error);
       }
     };
   

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import NavbarMediaStation from '../../components/navbar/NavbarMediaStation';
 import Navbar from '../../components/navbar/Navbar';
+import API from '../../config/config';
 
 function UploadVideo() {
   const [title, setTitle] = useState('');
@@ -32,7 +32,7 @@ function UploadVideo() {
 
     try{
       console.log(formData)
-      const response  = await axios.post("http://localhost:3000/api/videos/upload", formData);
+      const response  = await axios.post(`${API}/api/videos/upload`, formData);
       console.log(response.data);
       setUploadStatus("Video uploaded successfully!");
     }catch(error){

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Product from '../../components/SensorManager/Product';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 
 function Products() {
@@ -30,7 +31,7 @@ function Products() {
             },
             withCredentials: true,
           };
-            const response = await fetch('http://localhost:3000/api/product/sensormanagerproducts', config);
+            const response = await fetch(`${API}/api/product/sensormanagerproducts`, config);
             const data = await response.json();
             setProductData(data);
         }else{

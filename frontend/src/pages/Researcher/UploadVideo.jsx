@@ -6,6 +6,7 @@ import UploadForm from '../../components/UploadVideo/UploadForm';
 import VideoUpload from '../../components/UploadVideo/VideoUpload';
 import UploadNewVideoUIBtnSet from '../../components/button/UploadNewVideoUIBtnSet';
 import Navbar from '../../components/navbar/Navbar';
+import API from '../../config/config';
 
 function UploadVideo() {
   const padZero = (num) => (num < 10 ? `0${num}` : num);
@@ -41,7 +42,7 @@ function UploadVideo() {
           withCredentials: true,
         };
 
-      const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+      const response = await axios.get(`${API}/api/users/getUser/${email}`);
       setVideoUploader(response.data);
       console.log("userdata:", response.data.username);
       }else{
@@ -111,7 +112,7 @@ function UploadVideo() {
           withCredentials: true,
         };
 
-        const response = await axios.post("http://localhost:3000/api/videos/upload", formD, config);
+        const response = await axios.post(`${API}/api/videos/upload`, formD, config);
         console.log(response.data);
         setUploadStatus("Video uploaded successfully!");
         Swal.fire({

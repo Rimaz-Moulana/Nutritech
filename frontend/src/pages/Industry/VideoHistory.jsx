@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../../components/navbar/Navbar';
-import Videowithtext from '../../components/AnnotationTable/Videowithtext';
-import RowHistory from '../../components/AnnotationTable/RowHistory';
-import { useParams } from 'react-router-dom';
-import Comments from '../../components/CommentSection/Comments';
-import ViewComment from '../../components/CommentSection/ViewComment';
 import axios from 'axios';
-import Sidebar from '../../components/sidebar/SideBar';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import RowHistory from '../../components/AnnotationTable/RowHistory';
+import ViewComment from '../../components/CommentSection/ViewComment';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
+import Navbar from '../../components/navbar/Navbar';
+import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function History() {
   const { videoId } = useParams();
@@ -17,7 +16,7 @@ function History() {
   useEffect(() => {
     const fetchAnnotations = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`);
+        const response = await axios.get(`${API}/annotations/annotationhistory/${videoId}`);
         setData(response.data.annotations);
       } catch (error) {
         console.error('Error fetching annotations:', error);

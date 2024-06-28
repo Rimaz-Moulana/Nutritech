@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 const UserList = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
   const [editedUserData, setEditedUserData] = useState({});
@@ -14,38 +15,57 @@ const UserList = () => {
     navigate('../Register');
   };
 
+  const fetchUsers = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/');
+      return;
+    }
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true,
+      };
+      const response = await axios.get(`${API}/api/users/getAllUsers`, config);
+      setUsers(response.data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
   useEffect(() => {
     fetchUsers();
-  }, []);
 
-  const fetchUsers = async () => {
+    const timeout = setTimeout(() => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('email');
+      navigate('/');
+    }, 7200000); // 2 hours
+
+    return () => clearTimeout(timeout); // Cleanup the timeout on component unmount
+  }, [navigate]);
+
+  const deleteUser = async (userId) => {
     try {
-      console.log("fetching session details..");
-        const authData = JSON.stringify(localStorage.getItem('token'));
-        console.log("authData:", authData);
-
-        setTimeout(() => {
-          // Remove token from local storage after 5 seconds
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-      }, 7200000); // 2hours
-
-      if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
-      await axios.delete(`http://localhost:3000/api/users/deleteUser/${userId}` , config);
-      fetchUsers();
-
-      }else{
-        navigate("/");
+      const token = localStorage.getItem('token');
+      if (!token) {
+        navigate('/');
+        return;
       }
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true,
+      };
+      await axios.delete(`${API}/api/users/deleteUser/${userId}`, config);
+      setUsers(users.filter(user => user._id !== userId));
     } catch (error) {
       console.error('Error deleting user:', error);
     }
@@ -61,36 +81,23 @@ const UserList = () => {
   };
 
   const handleEditSubmit = async () => {
-    console.log(editedUserData)
     try {
-      console.log("fetching session details..");
-        const authData = JSON.stringify(localStorage.getItem('token'));
-        console.log("authData:", authData);
-
-        setTimeout(() => {
-          // Remove token from local storage after 5 seconds
-          localStorage.removeItem('token');
-          localStorage.removeItem('email');
-      }, 7200000); // 2hours
-
-      if(authData){
-        const {accessToken} = authData;
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
-      const res = await axios.put(`http://localhost:3000/api/users/updateUser/${editedUserData._id}`, editedUserData , config);
-      setEditingUser(null);
-      fetchUsers();
-      console.log(res.data)
-
-      }else{
-        navigate("/");
+      const token = localStorage.getItem('token');
+      if (!token) {
+        navigate('/');
+        return;
       }
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true,
+      };
+      await axios.put(`${API}/api/users/updateUser/${editedUserData._id}`, editedUserData, config);
+      setEditingUser(null);
+      fetchUsers(); // Refetch users after editing
     } catch (error) {
       console.error('Error updating user:', error);
     }
@@ -106,13 +113,13 @@ const UserList = () => {
       </div>
       <h1 className="mb-8 mt-24 text-3xl lg:ml-72 sm:ml-40 md:mr-50 text-left font-semibold text-sidebarGreen">Users Details</h1>
       <div className='inline-flex ml-[65%] w-[20%] h-[3%] mt-5'>
-        <button className="z-10 w-[60%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 " onClick={ handleAddNewUser } >
+        <button className="z-10 w-[60%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2" onClick={handleAddNewUser}>
           + Add New User
         </button>
       </div>
       <div className="container mx-auto mt-10 w-[100%] h-[100%] lg:ml-72 sm:ml-20 md:ml-40">
         <table className="min-w-[90%] mb-[30%] table-auto divide-y divide-gray-200 rounded-lg overflow-hidden border-b border-black">
-          <thead >
+          <thead>
             <tr>
               <th className="py-3 text-justify lg:px-10 text-lg font-medium text-black uppercase whitespace-nowrap">Username</th>
               <th className="py-3 text-justify lg:px-10 text-lg font-medium text-black uppercase whitespace-nowrap">Email</th>
@@ -154,13 +161,13 @@ const UserList = () => {
             <div className="mb-4">
               <label className="block mb-1">User Role:</label>
               <select name="role" value={editedUserData.role} onChange={handleEditChange} className="w-full border border-gray-400 p-2 rounded">
-                    <option value="annotator">Annotator</option>
-                    <option value="industry">Industry</option>
-                    <option value="expert panel">Expert Panel</option>
-                    <option value="sensor manager">Sensor Manager</option>
-                    <option value="researcher">Researcher</option>
-                    <option value="admin">Admin</option>
-                    <option value="expert head">Expert Head</option>
+                <option value="annotator">Annotator</option>
+                <option value="industry">Industry</option>
+                <option value="expert panel">Expert Panel</option>
+                <option value="sensor manager">Sensor Manager</option>
+                <option value="researcher">Researcher</option>
+                <option value="admin">Admin</option>
+                <option value="expert head">Expert Head</option>
               </select>
             </div>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleEditSubmit}>Save</button>

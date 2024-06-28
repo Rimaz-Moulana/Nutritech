@@ -33,7 +33,7 @@ function Home() {
   // const fetchData = async () => {
   //   try {
   //     console.log("hi")
-  //     const response = await axios.get('http://localhost:3000/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+  //     const response = await axios.get('http://api.nutritech.lk/api/product/getAll'); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
   //     setProducts(response.data);
   //   } catch (error) {
   //     console.error('Error fetching data:', error);
@@ -46,7 +46,7 @@ function Home() {
   // useEffect(() => {
   //   const fetchVideos = async () => {
   //     try {
-  //       const response = await fetch('http://localhost:3000/api/videos/history');
+  //       const response = await fetch('http://api.nutritech.lk/api/videos/history');
   //       if (!response.ok) {
   //         throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
   //       }

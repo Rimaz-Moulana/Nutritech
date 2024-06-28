@@ -7,6 +7,7 @@ import Decision from '../../components/Decision';
 import VideowithReview from '../../components/SensorManager/VideowithReview';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function ReviewHistory() {
 
@@ -23,7 +24,7 @@ function ReviewHistory() {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/reviewvideo/${videoId}`);
         setVideoData(response.data.video);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
@@ -38,7 +39,7 @@ function ReviewHistory() {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/brandproducts/${videoId}`);
         setResponseData(response.data);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
@@ -62,7 +63,7 @@ function ReviewHistory() {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/brandproducts/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/brandproducts/${videoId}`);
         setResponseData(response.data);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);

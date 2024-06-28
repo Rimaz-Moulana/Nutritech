@@ -32,7 +32,7 @@ function UploadVideo() {
 
     try{
       console.log(formData)
-      const response  = await axios.post("http://localhost:3000/api/videos/upload", formData);
+      const response  = await axios.post("http://api.nutritech.lk/api/videos/upload", formData);
       console.log(response.data);
       setUploadStatus("Video uploaded successfully!");
     }catch(error){

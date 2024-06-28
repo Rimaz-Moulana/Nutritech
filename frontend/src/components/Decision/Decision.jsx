@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import API from '../../config/config';
 
 function Decision() {
 
@@ -7,7 +8,7 @@ function Decision() {
         let data;
       
         if (userData.role === "expert head") {
-          endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
+          endpoint = `${API}/api/videos/finalflag/${videoId}`;
           data = {
             finalflag: {
               status: "green",
@@ -17,7 +18,7 @@ function Decision() {
             }
           };
         } else {
-          endpoint = `http://localhost:3000/api/videos/flag/${videoId}`;
+          endpoint = `${API}/api/videos/flag/${videoId}`;
           data = {
             panelstatus: {
               status: "green",

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import API from '../../config/config';
 
 function Home() {
 
@@ -96,7 +97,7 @@ function Home() {
           withCredentials: true,
         };
 
-       const response = await fetch('http://localhost:3000/api/videos/all',config);
+       const response = await fetch(`${API}/api/videos/all`,config);
         const data = await response.json();
         setVideoData(data);
 
@@ -138,7 +139,7 @@ useEffect(() => {
           withCredentials: true,
         };
 
-      const response = await fetch('http://localhost:3000/api/videos/annotated-videos', config);
+      const response = await fetch(`${API}/api/videos/annotated-videos`, config);
       const data = await response.json();
       setAnnotatedVideoData(data);
 
@@ -176,7 +177,7 @@ useEffect(() => {
         },
         withCredentials: true,
       };
-      const response = await fetch('http://localhost:3000/api/videos/unannotated-videos', config);
+      const response = await fetch(`${API}/api/videos/unannotated-videos`, config);
       if (!response.ok) {
         throw new Error(`Failed to fetch unannotated videos. Status: ${response.status}`);
       }
@@ -221,7 +222,7 @@ useEffect(() => {
         },
         withCredentials: true,
       };
-      const response = await fetch('http://localhost:3000/api/videos/reannotate-videos', config);
+      const response = await fetch(`${API}/api/videos/reannotate-videos`, config);
       const data = await response.json();
       setreannotateVideoData(data);
       }

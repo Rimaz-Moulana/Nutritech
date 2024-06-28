@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../../components/navbar/Navbar';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { all } from 'axios';
-import VideoContainer from '../../components/videoContainer/VideoContainer';
+import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
+import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 function History() {
     const navigate= useNavigate();
@@ -52,7 +52,7 @@ function History() {
     
       useEffect(() => {
         const fetchData = async () => {
-           const response = await fetch('http://localhost:3000/api/videos/allUploadedVideos');
+           const response = await fetch(`${API}/api/videos/allUploadedVideos`);
            const data = await response.json();
           setVideoData(data);
         };

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 function GreenFlag() {
 
@@ -44,7 +45,7 @@ function GreenFlag() {
         },
         withCredentials: true,
       };
-       const response = await fetch('http://localhost:3000/api/videos/greenflag', config);
+       const response = await fetch(`${API}/api/videos/greenflag`, config);
       const data = await response.json();
       setVideoData(data);
 

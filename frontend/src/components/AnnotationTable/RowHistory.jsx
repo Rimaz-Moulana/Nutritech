@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useRouteError } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import API from '../../config/config';
 
 function RowHistory({ videoId, usertype }) {
   const [annotations, setAnnotations] = useState([]);
@@ -20,7 +20,7 @@ function RowHistory({ videoId, usertype }) {
     const fetchUser = async () => {
        try {
           // const email  = localStorage.getItem('email');
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
           // console.log("response",response); // Logging the response data directly
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
@@ -35,7 +35,7 @@ function RowHistory({ videoId, usertype }) {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/annotation/${videoId}`);
         const video = response.data;
         setVideoData(video);
       } catch (error) {
@@ -49,7 +49,7 @@ function RowHistory({ videoId, usertype }) {
   useEffect(() => {
     const fetchAnnotations = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/annotations/annotationhistory/${videoId}`);
+        const response = await axios.get(`${API}/annotations/annotationhistory/${videoId}`);
         setAnnotations(response.data.annotations);
       } catch (error) {
         console.error('Error fetching annotations:', error);
@@ -85,7 +85,7 @@ function RowHistory({ videoId, usertype }) {
     
     try {
       if(userData.role==="expert head"){
-        const response = await axios.post(`http://localhost:3000/api/videos/finaldecision/${videoId}`, {
+        const response = await axios.post(`${API}/api/videos/finaldecision/${videoId}`, {
         decision,
         annotation: {
           timestamp: annotation.timestamp,
@@ -98,7 +98,7 @@ function RowHistory({ videoId, usertype }) {
       });
 
       }else{
-      const response = await axios.post(`http://localhost:3000/api/videos/decision/${videoId}`, {
+      const response = await axios.post(`${API}/api/videos/decision/${videoId}`, {
         decision,
         annotation: {
           timestamp: annotation.timestamp,

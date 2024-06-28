@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useNavigate } from 'react-router-dom';
+import API from '../../config/config';
 
 export default function LogTable() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function LogTable() {
           },
           withCredentials: true,
         };
-      const response = await axios.get(`http://localhost:3000/api/videos/finalcomment`, config);
+      const response = await axios.get(`${API}/api/videos/finalcomment`, config);
       setProducts(response.data);
       console.log(product);
 

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import VideoContainer from '../../components/videoContainer/VideoContainer';
+import API from '../../config/config';
 
 
 function History() {
@@ -48,12 +49,14 @@ function History() {
           },
           withCredentials: true,
         };
-        const response = await fetch('http://localhost:3000/api/videos/history', config);
+        const response = await fetch(`${API}/api/videos/history`, config);
         if (!response.ok) {
           throw new Error(`Failed to fetch History. Status: ${response.uploader}`);
         }
         const data = await response.json();
         setVideoData(data);
+
+
 
       }else{
         navigate('/');

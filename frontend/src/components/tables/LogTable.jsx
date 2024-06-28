@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
+import API from '../../config/config';
 
 export default function LogTable({data}) {
   const navigate = useNavigate()
@@ -46,7 +47,7 @@ export default function LogTable({data}) {
           },
           withCredentials: true,
         };
-      const response = await axios.get('http://localhost:3000/api/product/getAll' , config); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
+      const response = await axios.get(`${API}/api/product/getAll` , config); // Replace 'YOUR_API_ENDPOINT_HERE' with your actual API endpoint
       setProducts(response.data);
 
       }else{
