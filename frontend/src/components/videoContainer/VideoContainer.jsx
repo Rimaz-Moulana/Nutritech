@@ -250,7 +250,7 @@ const filteredVideos = videoData?.filter((video) => {
           {video.status === 'Red' && (type==="expert" || type==="expertred"|| type==="industry") &&(
             <div className="flex h-8 w-full icon-overlay absolute top-0 mt-2 mr-2 right-0 justify-between ">
               <img src={red} alt="red" />
-              {type==="researcher" && (
+              {type==="industry" && (
                 <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
               )}
               {(type==="expertred" || type ==="expert") && type!=="history" &&(
@@ -271,6 +271,7 @@ const filteredVideos = videoData?.filter((video) => {
               
             </div>
           )}
+
 
 
 
