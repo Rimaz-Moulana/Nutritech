@@ -277,6 +277,40 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     
     let endpoint;
     let data;
+
+    if(type==="videoDecisionUpdate"){
+      endpoint = `http://localhost:3000/api/videos/flagupdate/${videoId}`;
+      data = {
+        panelstatus: {
+          status: "green",
+          email: email,
+          expertreviewedtime: getCurrentDateTime(),
+          expertrevieweddate: new Date().toLocaleDateString()
+        }
+      };
+    
+  
+    try {
+      await axios.patch(endpoint, data);
+  
+      Swal.fire({
+        icon: 'success',
+        title: `Done`,
+        showConfirmButton: false,
+        timer: 2000,
+        customClass: {
+          popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+        },
+        iconColor: '#294B29',
+      });
+  
+      if (text !== "expert") {
+        window.history.back();
+      }
+    } catch (error) {
+      console.error("Error occurred while making the request:", error);
+    }
+    }else{
       endpoint = `${API}/api/videos/flag/${videoId}`;
       data = {
         panelstatus: {
@@ -308,6 +342,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     } catch (error) {
       console.error("Error occurred while making the request:", error);
     }
+  }
   };
   
 
@@ -317,6 +352,38 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       if (text === "expert") {
         let endpoint;
         let data;
+
+        if(type==="videoDecisionUpdate"){
+          
+          setPanelStatus("red");
+          endpoint = `http://localhost:3000/api/videos/flagupdate/${videoId}`;
+          data = {
+            panelstatus: {
+              status: "red",
+              email: email,
+              expertreviewedtime: getCurrentDateTime(),
+              expertrevieweddate: new Date().toLocaleDateString()
+            }
+          };
+
+          try {
+            await axios.patch(endpoint, data);
+        
+            Swal.fire({
+              icon: 'success',
+              title: `Done`,
+              showConfirmButton: false,
+              timer: 2000,
+              customClass: {
+                popup: 'bg-gray-300 text-sidebarGreen', // Use Tailwind CSS class directly
+              },
+              iconColor: '#294B29',
+            });
+          } catch (error) {
+            console.error(`Error declining ${text}:`, error);
+          }
+
+        }else{
     
           setPanelStatus("red");
           endpoint = `${API}/api/videos/flag/${videoId}`;
@@ -347,6 +414,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
         } catch (error) {
           console.error(`Error declining ${text}:`, error);
         }
+      }
       } else if (text === "video") {
         await axios.delete(`${API}/api/videos/reviewvideo/${videoId}`);
       } else {
@@ -482,7 +550,7 @@ return (
 
   return ( 
     <div className='mt-16 container lg:flex justify-center max-w-screen gap-[15%]'>
-  {type !== "videoDecision" && type!=="expertDecision" && (
+  {type !== "videoDecision" && type!=="expertDecision" && type!="videoDecisionUpdate" && (
     <>
       <div className='property lg:flex lg:w-1/2 justify-center'>
         <div className="image lg:w-1/2">
@@ -588,7 +656,7 @@ return (
       </div>
     </>
   )}
-{(type === "videoDecision" || type === "expertDecision") && type !== "annotator" && (
+{(type === "videoDecision" || type === "expertDecision" || type==="videoDecisionUpdate") && type !== "annotator" && (
   <>
     {showButtons && (
       <div className="flex justify-center gap-6">

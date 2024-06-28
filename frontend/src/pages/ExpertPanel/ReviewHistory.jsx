@@ -112,14 +112,14 @@ function ReviewHistory() {
         <div className='mt-12 ml-24'>
           <Annotations videoId={videoId} usertype={"expert"} />
         </div>
-        <div className='flex gap-6'>
-          <div className='mt-4 ml-24'>
+        <div className='flex'>
+          <div className='mt-4 ml-16'>
           <ViewComment videoId={videoId} type={"comment"} />
           </div>
        
-        <div className="mt-24 ml-8 bg-gray-300 p-4 " >
+        <div className="mt-24 bg-gray-300 p-4 " >
         <h1 className='text-xl font-bold text-sidebarGreen mb-8 h-fit'>Decision for Video</h1>
-        <Decision Id={videoId} text={"experthitory"} type={"expertDecision"}/>
+        <Decision Id={videoId} text={"experthitory"} type={"expertDecisionhistory"}/>
         </div>
        
       </div>

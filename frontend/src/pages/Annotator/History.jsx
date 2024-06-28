@@ -18,6 +18,8 @@ function History() {
 
   if(user==="annotated"){
     user="annotator"
+  }else if(user==="industry"){
+    user="researcher"
   }
 
   useEffect(() => {
@@ -78,20 +80,23 @@ function History() {
         <Sidebar type={user} onValueChange={handleValueChange}  />
       </div>
       <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}> {/* Make this div take up remaining vertical space */}
-        <Navbar type='annotator' />
-        <div className='max-w-screen mt-28'>
+        <Navbar type='user' />
+        <div className='max-w-screen mt-20'>
         <VideowithReview Id={videoId} text={"video"} type={"annotator"}/>
         </div>
-        <h1 className='px-3 mb-8 mt-12 text-2xl font-semibold text-sidebarGreen'>
+       
+
+        
+        <h1 className='ml-12 justify-center px-3 mb-8 mt-12 text-2xl font-semibold text-sidebarGreen'>
                   Annotations
                 </h1>
-        <div className='pr-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
+        <div className='justify-center ml-12 pr-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
         
           {/* Pass videoId and video to RowHistory */}
-          <RowHistory videoId={videoId} usertype={"annotator"}/>
+          <RowHistory videoId={videoId} usertype={user}/>
         </div>
 
-        <div className='px-3 center-l w-full justify-center'>
+        <div className='ml-24 px-3 justify-center w-full'>
           <ViewComment videoId={videoId} type={"annotator"}/>
         </div>
 
@@ -111,8 +116,7 @@ function History() {
                 </button>
       </div>
       </div>
-     
-    </div>
+      </div>
   );
 }
 

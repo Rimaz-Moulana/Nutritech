@@ -54,7 +54,7 @@ const Sidebar = ({ type, onValueChange }) => {
     { icon: home, selectedIcon: home, text: 'Home' },
     { icon: foodproducts, selectedIcon: foodproducts, text: 'Products' },
     { icon: edit, selectedIcon: edit, text: 'Rules & Regulations' },
-    { icon: edit, selectedIcon: edit, text: 'Reports' },
+    // { icon: edit, selectedIcon: edit, text: 'Reports' },
     { icon: edit, selectedIcon: edit, text: 'History' },
   ];
 
@@ -117,18 +117,18 @@ const Sidebar = ({ type, onValueChange }) => {
           navigate('/expertpanelhome');
         }
       }
-    } else if (type === 'industry') {
-      if (selected !== index) {
-        if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Videos')) {
-          navigate('/industryhistory');
-        } else if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Products')) {
-          navigate(`/addedproduct/${type}`);
-        } else if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Rules & Regulations')) {
-          navigate(`/rules/${type}`);
-        } else {
-          navigate('/industryhome');
-        }
-      }
+    // } else if (type === 'industry') {
+    //   if (selected !== index) {
+    //     if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Videos')) {
+    //       navigate('/industryhistory');
+    //     } else if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Products')) {
+    //       navigate(`/addedproduct/${type}`);
+    //     } else if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Rules & Regulations')) {
+    //       navigate(`/rules/${type}`);
+    //     } else {
+    //       navigate('/industryhome');
+    //     }
+    //   }
     } else if (type === 'sensormanager') {
       if (selected !== index) {
         if (index === navIndustryOrSensor.findIndex((item) => item.text === 'Videos')) {
@@ -141,7 +141,7 @@ const Sidebar = ({ type, onValueChange }) => {
           navigate('/sensormanagerhome');
         }
       }
-    } else if (type === 'researcher') {
+    } else if (type === 'researcher'|| type==="industry") {
       if (selected !== index) {
         if (index === navResearcher.findIndex((item) => item.text === 'History')) {
           navigate('/industryhistory');
@@ -149,8 +149,8 @@ const Sidebar = ({ type, onValueChange }) => {
           navigate(`/addedproduct/${type}`);
         } else if (index === navResearcher.findIndex((item) => item.text === 'Rules & Regulations')) {
           navigate(`/rules/${type}`);
-        } else if (index === navResearcher.findIndex((item) => item.text === 'Reports')) {
-          navigate('/reports');
+        // } else if (index === navResearcher.findIndex((item) => item.text === 'Reports')) {
+        //   navigate('/reports');
         } else {
           navigate('/industryhome');
         }
