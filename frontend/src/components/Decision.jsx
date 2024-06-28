@@ -57,7 +57,7 @@ const renderDecision = () => {
   // console.log("hello");
   let statusvalue = '';
   if (Data.panelstatus && Data.panelstatus.length > 0) {
-    console.log("hello");
+   
     
     for (let i = 0; i < Data.panelstatus.length; i++) {
       if (Data.panelstatus[i].email === email) {
@@ -86,7 +86,7 @@ const renderDecision = () => {
 }
 console.log(userData.role)
   return (
-    <div className="flex h-fit justify-center gap-6 text-xl  p-4  mb-12">
+    <div className="flex h-fit justify-center gap-4 text-xl  p-4  mb-12">
       
       {userData.role === "expert head" && (
   <>
