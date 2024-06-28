@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
+import API from '../../config/config';
 
 function Videowithtext({videoId}) {
   console.log(videoId)
@@ -10,7 +11,7 @@ function Videowithtext({videoId}) {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/annotation/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/annotation/${videoId}`);
         const data = response.data;  // Access the data property directly
         setVideoData(data);
         setConversionResult(response.data.text);

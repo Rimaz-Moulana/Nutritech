@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
-import red from '../../assets/Images/redflag.png'
-import green from '../../assets/Images/greenflag.png'
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import green from '../../assets/Images/greenflag.png';
+import red from '../../assets/Images/redflag.png';
+import API from '../../config/config';
 
 function VideowithReview({Id,text,type,showButtons}) {
   console.log("Id",Id);
+  const navigate = useNavigate();
 
   const videoId = Id;
  const productId =Id;
@@ -27,7 +30,7 @@ function VideowithReview({Id,text,type,showButtons}) {
   useEffect(() => {
     const fetchUser = async () => {
        try {
-          const response = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
           setUserData(response.data); // Setting the response data to the state
        } catch (error) {
           console.error('Error fetching user:', error);
@@ -188,7 +191,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+        const response = await axios.get(`${API}/api/videos/reviewvideo/${videoId}`);
         setData(response.data.video);
         console.log(response.data.video);
       } catch (error) {
@@ -204,7 +207,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   useEffect(() => {
     const fetchReviewDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/product/reviewproduct/${productId}`);
+        const response = await axios.get(`${API}/api/product/reviewproduct/${productId}`);
         setData(response.data.product);
       } catch (error) {
         console.error('Error fetching ReviewDetails:', error);
@@ -228,16 +231,16 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
         console.log(text)
         await axios.post(
          
-          `http://localhost:3000/api/videos/greenflag/${videoId}`,{email});
+          `${API}/api/videos/greenflag/${videoId}`,{email});
   
       }   
       else if (text === "video") {
-       await axios.post(`http://localhost:3000/api/videos/reviewvideo/${videoId}`, {
+       await axios.post(`${API}/api/videos/reviewvideo/${videoId}`, {
         status: 'unannotated',
         healthfact : healthFact,
       });
     }else{
-      await axios.post(`http://localhost:3000/api/product/reviewproduct/${productId}`, {
+      await axios.post(`${API}/api/product/reviewproduct/${productId}`, {
         healthfact : healthFact,
       });
     }
@@ -274,7 +277,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
     
     let endpoint;
     let data;
-      endpoint = `http://localhost:3000/api/videos/flag/${videoId}`;
+      endpoint = `${API}/api/videos/flag/${videoId}`;
       data = {
         panelstatus: {
           status: "green",
@@ -316,7 +319,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
         let data;
     
           setPanelStatus("red");
-          endpoint = `http://localhost:3000/api/videos/flag/${videoId}`;
+          endpoint = `${API}/api/videos/flag/${videoId}`;
           data = {
             panelstatus: {
               status: "red",
@@ -345,9 +348,9 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
           console.error(`Error declining ${text}:`, error);
         }
       } else if (text === "video") {
-        await axios.delete(`http://localhost:3000/api/videos/reviewvideo/${videoId}`);
+        await axios.delete(`${API}/api/videos/reviewvideo/${videoId}`);
       } else {
-        await axios.delete(`http://localhost:3000/api/product/reviewproduct/${productId}`);
+        await axios.delete(`${API}/api/product/reviewproduct/${productId}`);
       }
       
       if (text !== "expert") {
@@ -384,7 +387,7 @@ useEffect(() => {
         productName= Data.product;
       }
       let brand = Data.brand;
-      const response = await axios.get(`http://localhost:3000/api/product/productdetails/${productName}/${brand}`);
+      const response = await axios.get(`${API}/api/product/productdetails/${productName}/${brand}`);
       setProductData(response.data);
     } catch (error) {
       console.error('Error fetching ReviewDetails:', error);
@@ -423,20 +426,20 @@ if (Data.panelstatus && Data.panelstatus.length > 0 && userData.role==="expert h
   }
 
   if (redCount > greenCount) {
-    endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
+    endpoint = `${API}/api/videos/finalflag/${videoId}`;
     data = {
       finalflag: "Red",
     };
     status="Red"
 
   } else if (greenCount > redCount) {
-    endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
+    endpoint = `${API}/api/videos/finalflag/${videoId}`;
     data = {
       finalflag: "Green",
     };
     status="Green"
   }else{
-    endpoint = `http://localhost:3000/api/videos/finalflag/${videoId}`;
+    endpoint = `${API}/api/videos/finalflag/${videoId}`;
     data = {
       finalflag: "No flag"
     };
