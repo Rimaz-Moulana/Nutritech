@@ -132,7 +132,7 @@ function Rules() {
         <h1 className=' mt-24 text-2xl font-semibold text-sidebarGreen left-0'>
         GAZETTE EXTRAORDINARY OF THE DEMOCRATIC SOCIALIST REPUBLIC OF SRI LANKA - 14.02.2023
         </h1>
-        {(type === "sensormanager" || type === "expert") && (
+        {(type === "sensormanager" ) && (
         <button
           className="flex-end text-white mt-4 mr-20 bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           onClick={handleOpen}  // Add parentheses to call the function
