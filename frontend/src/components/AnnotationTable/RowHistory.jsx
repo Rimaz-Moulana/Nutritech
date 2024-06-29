@@ -219,7 +219,7 @@ function RowHistory({ videoId, usertype }) {
                       <th>Time Stamp</th>
                       <th>Regulation</th>
                       <th>Details</th>
-                      <th>Recommendation</th>
+                      <th>Comments</th>
                       {usertype !== "annotator" && usertype !== "industry" && userData.role!=="expert panel" && (
                                 <th className='w-[20%]'>Decision</th>
                       )}
