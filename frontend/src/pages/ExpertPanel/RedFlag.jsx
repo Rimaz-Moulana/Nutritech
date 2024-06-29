@@ -77,7 +77,7 @@ function RedFlag() {
            Red Flag Videos
         </h1>
 
-        <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white '>
+        <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white mr-12 '>
         <input
           type='checkbox'
           className='sr-only'

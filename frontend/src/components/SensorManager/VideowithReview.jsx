@@ -7,7 +7,7 @@ import green from '../../assets/Images/greenflag.png';
 import red from '../../assets/Images/redflag.png';
 import API from '../../config/config';
 
-function VideowithReview({Id,text,type,showButtons}) {
+function VideowithReview({Id,text,type,page,showButtons}) {
   console.log("Id",Id);
   const navigate = useNavigate();
 

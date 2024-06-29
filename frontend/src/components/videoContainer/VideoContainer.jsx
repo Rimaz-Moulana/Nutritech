@@ -74,7 +74,7 @@ const Viewvideohistory=(videoId) => {
 
 
   const handleReview = (videoId) => {
-    console.log("hello");
+    
     navigate(`/reviewvideo/${videoId}`);
   };
 
@@ -513,7 +513,15 @@ console.log(userData.role);
              >View Details</button>
              )}
              
-
+             {(video.status === 'annotated' && type==="expertreviewed") &&(
+          
+              <button
+               className="z-10 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-12 py-2.5 "
+                 onClick={() => ViewReviewHistory(video._id)}
+             >View History</button>
+             
+            
+          )}
 
              {video.status === 'pending' && type!=="reviewvideo" && type!=="history" && type!=="industry" &&(
              <button

@@ -185,6 +185,7 @@ function RowHistory({ videoId, usertype }) {
                     annotation.acceptance.some(acc => acc.user === email) ? (
                       <td>{annotation.acceptance.find(acc => acc.user === email).decision}</td>
                     ) : (
+                     
                       usertype !== "industry" && videoData && (!videoData[0]?.reannotations || videoData[0]?.reannotations.length === 0) && (
                         <td className="flex items-end justify-center mt-4 z-10 h-full">
                           <button
