@@ -237,7 +237,7 @@ function ViewComment({ videoId, type }) {
     <div className='mt-12 font-semibold text-center table-responsive'>
       <div className='container'>
     <div className='w-full table table-bordered'>
-      <h1 className='text-sidebarGreen text-2xl'>Comment section</h1>
+      <h1 className='text-sidebarGreen text-xl justify-center'>Comment section</h1>
   
       {loading ? (
         <div>Loading...</div>
