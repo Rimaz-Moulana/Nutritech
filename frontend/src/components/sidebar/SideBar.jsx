@@ -312,16 +312,6 @@ const Sidebar = ({ type, onValueChange }) => {
                 </Link>
                 )}
 
-              {(userData.role ==="expert head" )&& (
-                  <Link
-                  to="/repliedvideos"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
-                  onClick={() => handleItemClick(2)}
-                >
-                  Replied Videos
-                </Link>
-                )}
-
                 <Link
                   to="/red"
                   className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
