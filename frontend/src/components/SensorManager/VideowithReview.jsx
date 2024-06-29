@@ -153,12 +153,15 @@ function VideowithReview({Id,text,type,page,showButtons}) {
       if (result.isConfirmed) {
         // console.log(text)
         setButtonDisabled(true);
+        
         // console.log(text)
         if(text==="expert"){
           // console.log("hey there")
           if (status==="red") {
+            showButtons=false;
             handleDelete(text);
           }else{
+            showButtons=false;
             handleApprove(text);
           }         
         }else{
@@ -303,7 +306,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
         },
         iconColor: '#294B29',
       });
-  
+     
       if (text !== "expert") {
         window.history.back();
       }
@@ -311,6 +314,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       console.error("Error occurred while making the request:", error);
     }
     }else{
+      
       endpoint = `${API}/api/videos/flag/${videoId}`;
       data = {
         panelstatus: {

@@ -175,6 +175,7 @@ const closePopup = () => {
           
       <h1 className='text-xl font-bold mb-4 w-full text-sidebarGreen '>Decision for Video</h1>
       <div className='mt-8 h-full'>
+        
       <VideowithReview Id={videoId} text="expert" type="videoDecision" showButtons={userData.role !== "expert head"} />
   
       </div>

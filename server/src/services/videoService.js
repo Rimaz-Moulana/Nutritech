@@ -293,7 +293,7 @@ exports.updateReview = async (videoId, panelstatus) => {
 };
 
 exports.updateReviewUpdate = async (videoId, panelstatus) => {
-  console.log("in the service");
+
   try {
     const { email, status, expertreviewedtime, expertrevieweddate } = panelstatus;
     

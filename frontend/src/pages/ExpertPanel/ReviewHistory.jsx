@@ -121,7 +121,7 @@ function ReviewHistory() {
       </div>
       <div className="mt-16 ml-24 w-[50%] justify-center items-center bg-gray-300 p-4 " >
         <h1 className='text-xl font-bold text-sidebarGreen mb-8 h-fit'>Decision for Video</h1>
-        <Decision Id={videoId} text={"experthitory"} type={"expertDecisionhistory"}/>
+        <Decision Id={videoId} text={"experthistory"} type={"expertDecisionhistory"}/>
         </div>
         <div className="flex items-end justify-center mt-4 z-10 h-full">
         {/* <button onClick={() => handlePoductDetails(responseData[0].size,responseData[0].product,responseData[0].brand,responseData[0].unit)}
