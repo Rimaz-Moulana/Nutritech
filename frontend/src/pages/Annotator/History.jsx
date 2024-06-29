@@ -90,13 +90,13 @@ function History() {
         <h1 className='ml-12 justify-center px-3 mb-8 mt-12 text-2xl font-semibold text-sidebarGreen'>
                   Annotations
                 </h1>
-        <div className='justify-center ml-12 pr-8 mb-8 text-sm font-semibold text-black center-l lg:w-[100%]'>
+        <div className='justify-center ml-12 pr-8  text-sm font-semibold text-black center-l lg:w-[100%]'>
         
           {/* Pass videoId and video to RowHistory */}
           <RowHistory videoId={videoId} usertype={user}/>
         </div>
 
-        <div className='ml-24 px-3 justify-center w-full'>
+        <div className='ml-12 mr-8 px-3 pr-8 justify-center w-[95%]'>
           <ViewComment videoId={videoId} type={"annotator"}/>
         </div>
 

@@ -54,7 +54,7 @@ const Sidebar = ({ type, onValueChange }) => {
     { icon: home, selectedIcon: home, text: 'Home' },
     { icon: foodproducts, selectedIcon: foodproducts, text: 'Products' },
     { icon: edit, selectedIcon: edit, text: 'Rules & Regulations' },
-    { icon: edit, selectedIcon: edit, text: 'Reports' },
+    // { icon: edit, selectedIcon: edit, text: 'Reports' },
     { icon: edit, selectedIcon: edit, text: 'History' },
   ];
 
@@ -311,6 +311,17 @@ const Sidebar = ({ type, onValueChange }) => {
                   Reviewed Videos
                 </Link>
                 )}
+
+              {(userData.role ==="expert head" )&& (
+                  <Link
+                  to="/repliedvideos"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:text-white"
+                  onClick={() => handleItemClick(2)}
+                >
+                  Replied Videos
+                </Link>
+                )}
+
                 <Link
                   to="/red"
                   className="block px-4 py-2 text-sm text-gray-700 hover:text-white"

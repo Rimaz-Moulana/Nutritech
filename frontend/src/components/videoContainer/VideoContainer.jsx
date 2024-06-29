@@ -11,13 +11,15 @@ import green from '../../assets/Images/greenflag.png';
 import red from '../../assets/Images/redflag.png';
 import white from '../../assets/Images/white.png';
 import yellow from '../../assets/Images/yellow.png';
+import axios from 'axios';
+import API from '../../config/config';
 
 function VideoContainer({ type,videoData,viewType,videotype }) {
   // console.log(viewType)
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   // const [productFilter, setProductFilter] = useState('all');
-
+  const email = localStorage.getItem('email');
   const [productFilter, setProductFilter] = useState(() => {
     // Retrieve from localStorage, default to 'all' if not found
     return localStorage.getItem('productFilter') || 'all';
@@ -26,6 +28,23 @@ function VideoContainer({ type,videoData,viewType,videotype }) {
   const [Data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const [userData, setUserData] = useState([]);
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          // const email  = localStorage.getItem('email');
+          const response = await axios.get(`${API}/api/users/getUser/${email}`);
+          // console.log("response",response); // Logging the response data directly
+          setUserData(response.data); // Setting the response data to the state
+       } catch (error) {
+          console.error('Error fetching user:', error);
+          // Handle error (e.g., set error state, show error message)
+       }
+    };
+  
+    fetchUser();
+}, []);
 
   useEffect(() => {
     // Update localStorage when productFilter changes
@@ -55,7 +74,7 @@ const Viewvideohistory=(videoId) => {
 
 
   const handleReview = (videoId) => {
-    console.log("hello");
+    
     navigate(`/reviewvideo/${videoId}`);
   };
 
@@ -101,7 +120,7 @@ const filteredVideos = videoData?.filter((video) => {
 });
 
 
-
+console.log(userData.role);
   return (
     <div className='w-full ml-auto pr-2 pl-2'> 
     {viewType=== 'Grid'  &&(
@@ -241,7 +260,7 @@ const filteredVideos = videoData?.filter((video) => {
             </div>
           )}
 
-{(video.status === 'annotated' && type==="expertreviewed") &&(
+          {(video.status === 'annotated' && type==="expertreviewed") &&(
             <div className="h-24 w-8 icon-overlay absolute top-0 mt-2 mr-2 right-0 cursor-pointer ">
               <img src={history} alt="Annotated" onClick={() => ViewReviewHistory(video._id)}/>
             </div>
@@ -250,6 +269,11 @@ const filteredVideos = videoData?.filter((video) => {
           {video.status === 'Red' && (type==="expert" || type==="expertred"|| type==="industry") &&(
             <div className="flex h-8 w-full icon-overlay absolute top-0 mt-2 mr-2 right-0 justify-between ">
               <img src={red} alt="red" />
+              {
+                (userData.role==="expert head" && video.reply && video.reply.length===1 && video.finalcomment && video.finalcomment.length<2 ) &&  (
+                  <p className='p-1 bg-white'>Replied by researcher</p>
+                )
+              }
               {type==="industry" && (
                 <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
               )}
@@ -262,6 +286,11 @@ const filteredVideos = videoData?.filter((video) => {
           {video.status === 'Green' && type!=="history" && (type==="expert"|| type==="expertgreen"||type==="industry") &&(
             <div className="flex justify-between ml-4 h-8 w-full icon-overlay absolute top-0 mt-2 mr-2 right-0 ">
               <img src={green} alt="green" />
+              {
+                userData.role === "expert head" && video.reply && video.reply.length===1 && video.finalcomment && video.finalcomment.length<2 && (
+                  <p className='bg-white p-1'>Replied by researcher</p>
+                )
+              }
               {type==="industry" && (
                 <img className='cursor-pointer'src={history} alt="Annotated" onClick={() => ViewAnnotate(video._id)}/>
               )}
@@ -484,7 +513,15 @@ const filteredVideos = videoData?.filter((video) => {
              >View Details</button>
              )}
              
-
+             {(video.status === 'annotated' && type==="expertreviewed") &&(
+          
+              <button
+               className="z-10 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center me-2 mb-2 px-12 py-2.5 "
+                 onClick={() => ViewReviewHistory(video._id)}
+             >View History</button>
+             
+            
+          )}
 
              {video.status === 'pending' && type!=="reviewvideo" && type!=="history" && type!=="industry" &&(
              <button
