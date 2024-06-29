@@ -11,6 +11,7 @@ function VideowithReview({Id,text,type,page,showButtons}) {
   console.log("Id",Id);
   const navigate = useNavigate();
 
+  
   const videoId = Id;
  const productId =Id;
  const email  = localStorage.getItem('email');
@@ -153,6 +154,8 @@ function VideowithReview({Id,text,type,page,showButtons}) {
       if (result.isConfirmed) {
         // console.log(text)
         setButtonDisabled(true);
+        
+        localStorage.setItem('buttonDisabled', 'true');
         
         // console.log(text)
         if(text==="expert"){
@@ -551,6 +554,7 @@ return (
 
 }
 
+const btn=localStorage.getItem('buttonDisabled');
 
   return ( 
     <div className='mt-16 container lg:flex justify-center max-w-screen gap-[15%]'>
@@ -662,12 +666,13 @@ return (
   )}
 {(type === "videoDecision" || type === "expertDecision" || type==="videoDecisionUpdate") && type !== "annotator" && (
   <>
-    {showButtons && (
+    {showButtons && !btn && (
       <div className="flex justify-center gap-6">
         <button
           className={`text-white w-auto flex ${buttonDisabled ? "z-10 bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} z-10 focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2`}
           type="button"
           onClick={() => { if (!buttonDisabled) handleOpen("red") }}
+          disabled={buttonDisabled || loading}
         >
           {text === "expert" && (
             <div className="flex items-center w-full">
@@ -680,7 +685,7 @@ return (
           className={`text-white w-auto flex ${buttonDisabled ? "z-10 bg-gray-500" : "bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br"} z-10 focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-8 py-2.5 text-center mb-2`}
           type="button"
           onClick={() => handleOpen("green")}
-          disabled={loading}
+          disabled={buttonDisabled || loading}
         >
           {text === "expert" && (
             <div className="flex w-full">

@@ -10,7 +10,7 @@ function Comments({ videoId, type,section,onClose}) {
   const email  = localStorage.getItem('email');
   
   let text;
-
+  
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     const fetchUser = async () => {

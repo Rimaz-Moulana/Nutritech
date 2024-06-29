@@ -10,7 +10,7 @@ import Sidebar from '../../components/sidebar/SideBar';
 import API from '../../config/config';
 
 function ReviewHistory() {
-
+  localStorage.removeItem('buttonDisabled');
   const navigate = useNavigate();
   let [isEnlarge, setEnlarge] = useState(true);
   const {videoId} = useParams(); 
