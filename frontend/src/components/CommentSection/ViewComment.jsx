@@ -69,7 +69,26 @@ function ViewComment({ videoId, type }) {
             <td className='p-2'>{Data.finalcomment[0].commentedtime}</td>
           </tr>
         );
+
+        
       }
+
+      if (Data.reply && Data.reply.length > 0 && Data.reply[0]) {
+      
+          result.push(
+            <tr key={`reply-${0}`}>
+              <td className='p-2'>{Data.reply[0].replyer}</td>
+              <td className='p-2'>Reply</td>
+              <td className='p-2'>{Data.reply[0].text}</td>
+              <td className='p-2'></td>
+              <td className='p-2'>{Data.reply[0].replieddate}</td>
+              <td className='p-2'>{Data.reply[0].repliedtime}</td>
+            </tr>
+          );
+        
+      }
+
+      
     }
 
     else if (userData && userData.role && userData.role === "expert head" && type !== "Industry" && type !== "annotator") {
@@ -230,11 +249,41 @@ function ViewComment({ videoId, type }) {
       }
     }
 
+
+
+    if(Data.finalcomment[1]){
+      result.push(
+        <tr key={`finalcomment-${0}`}>
+          <td className='p-2'>{Data.finalcomment[1].commenter}</td>
+          <td className='p-2'>Final Comment for the reply</td>
+          <td className='p-2'>{Data.finalcomment[1].text}</td>
+          <td className='p-2'>
+            {Data.status === "Green" && (
+              <>
+                <span>Green</span>
+                {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
+              </>
+            )}
+            {Data.status === "Red" && (
+              <>
+                <span>Red</span>
+                {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
+              </>
+            )}
+          </td>
+          <td className='p-2'>{Data.finalcomment[1].commenteddate}</td>
+          <td className='p-2'>{Data.finalcomment[1].commentedtime}</td>
+        </tr>
+      );
+    }
+
     return result;
   };
 
+  console.log(Data.finalcomment?.length);
   return (
-    <div className='mt-12 font-semibold text-center table-responsive'>
+    <div>
+    <div className='mt-12 font-semibold text-center table-responsive z-10'>
       <div className='container'>
     <div className='w-full table table-bordered'>
       <h1 className='text-sidebarGreen text-xl justify-center'>Comment section</h1>
@@ -267,22 +316,32 @@ function ViewComment({ videoId, type }) {
         </table>
       )}
   
-      {((type !== "annotator" && !Data.finalcomment) || (Data && Data.reply && Data.reply.length > 0 && type !== "industry")) && (
-        <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
-          <h1></h1>
-          <Comments type={type} videoId={videoId} />
-        </div>
-      )}
-  
-      {((type === "industry" || user === "industry") && Data.finalcomment && !Data.reply.length > 0) && (
+      
+    </div>
+    </div>
+
+    
+    
+      
+  </div>
+
+  <div>
+    {((type === "industry" || user === "industry" || userData.role==="researcher" ) && Data.finalcomment && Data.reply.length < 1) && (
         <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
           <Comments type={"reply"} videoId={videoId} />
         </div>
       )}
+
+
+
+      {((type !== "annotator"&& userData.role==="researcher" && Data.finalcomment && Data.finalcomment.length===0) || (Data && Data.reply && Data.reply.length > 0 && type !== "industry" && userData.role!=="researcher" && userData.role==="expert head" && Data.finalcomment && Data.finalcomment.length<2)) && (
+        <div className='bg-gray-300 text-white p-3 mt-12 text-xl text-left z-99999'>  
+          <Comments type={type} videoId={videoId} />  
+        </div>
+      )}
     </div>
-    </div>
-  </div>
   
+  </div>
   );
 }
 

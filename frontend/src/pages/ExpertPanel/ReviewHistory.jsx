@@ -102,11 +102,11 @@ function ReviewHistory() {
   // console.log(allProducts)
  
   return (
-    <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
+    <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen z-10'>
       <div className="w-full fixed h-full hidden sm:flex flex-col">
         <Sidebar type="expert" onValueChange={handleValueChange} />
       </div>
-      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
+      <div className={`z-10 w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='expert' />
         <VideowithReview Id={videoId} text={"experthistory"} />
         <div className='mt-12 ml-24'>
@@ -114,12 +114,10 @@ function ReviewHistory() {
           <Annotations videoId={videoId} usertype={"expert"} />
         </div>
         <div className=''>
-          <div className='m-12'>
+          <div className='m-12 z-10'>
           <ViewComment videoId={videoId} type={"comment"} />
           </div>
-       
-       
-       
+        
       </div>
       <div className="mt-16 ml-24 w-[50%] justify-center items-center bg-gray-300 p-4 " >
         <h1 className='text-xl font-bold text-sidebarGreen mb-8 h-fit'>Decision for Video</h1>
