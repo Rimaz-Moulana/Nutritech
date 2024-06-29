@@ -14,7 +14,7 @@ function RowHistory({ videoId, usertype }) {
     // return JSON.parse(localStorage.getItem('isChecked')) || false;
   });
 
-  console.log("usertypebhjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",usertype)
+
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     const fetchUser = async () => {

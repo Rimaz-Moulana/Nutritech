@@ -84,7 +84,7 @@ function ViewComment({ videoId, type }) {
           result.push(
             <tr key={`comment-${i}`}>
               <td className='p-2'>{Data.comment[i].commenter}</td>
-              <td className='p-2'>Comment</td>
+              <td className='p-2 w-[20%]'>Comment</td>
               <td className='p-2'>{Data.comment[i].text}</td>
               <td className='p-2'>
                 {status === "green" && (
@@ -234,21 +234,23 @@ function ViewComment({ videoId, type }) {
   };
 
   return (
-    <div className='mt-12 lg:w-3/4 p-3 justify-center font-semibold text-center'>
+    <div className='mt-12 font-semibold text-center table-responsive'>
+      <div className='container'>
+    <div className='w-full table table-bordered'>
       <h1 className='text-sidebarGreen text-2xl'>Comment section</h1>
-
+  
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <table className="min-w-full bg-white">
+        <table className="min-w-full w-full bg-white">
           <thead>
             <tr>
-              <th className="w-1/4 px-4 py-2">Commenter</th>
-              <th className="w-1/4 px-4 py-2">Type</th>
-              <th className="w-1/4 px-4 py-2">Text</th>
-              <th className="w-1/4 px-4 py-2">Status</th>
-              <th className="w-1/4 px-4 py-2">Date</th>
-              <th className="w-1/4 px-4 py-2">Time</th>
+              <th className="w-1/6 px-4 py-2">Commenter</th>
+              <th className="w-1/6 px-4 py-2">Type</th>
+              <th className="w-2/6 px-4 py-2">Comment</th>
+              <th className="w-1/6 px-4 py-2">Status</th>
+              <th className="w-1/6 px-4 py-2">Date</th>
+              <th className="w-1/6 px-4 py-2">Time</th>
             </tr>
           </thead>
           <tbody>
@@ -264,20 +266,23 @@ function ViewComment({ videoId, type }) {
           </tbody>
         </table>
       )}
-
+  
       {((type !== "annotator" && !Data.finalcomment) || (Data && Data.reply && Data.reply.length > 0 && type !== "industry")) && (
         <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
           <h1></h1>
           <Comments type={type} videoId={videoId} />
         </div>
       )}
-
+  
       {((type === "industry" || user === "industry") && Data.finalcomment && !Data.reply.length > 0) && (
         <div className='bg-gray-300 text-white p-3 mt-4 text-xl text-left'>
           <Comments type={"reply"} videoId={videoId} />
         </div>
       )}
     </div>
+    </div>
+  </div>
+  
   );
 }
 

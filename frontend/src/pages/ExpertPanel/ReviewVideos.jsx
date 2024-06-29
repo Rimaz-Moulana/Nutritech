@@ -104,11 +104,11 @@ const closePopup = () => {
     <div className="w-full fixed h-full hidden sm:flex flex-col"> {/* Show on screens larger than sm */}
       <Sidebar type="expert" onValueChange={handleValueChange}/>
     </div>
-    <div className={`w-full z-10 mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
+    <div className={`w-full z-10 mb-10 min-w-screen center-l md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
       
       <Navbar type='expert' />
       
-      <div className=' justify-between z-9999 mt-24'>
+      <div className='w-full justify-between z-9999 mt-24'>
         <VideowithReview Id={videoId} text="expert"/>
       </div>
       <div>
@@ -123,7 +123,7 @@ const closePopup = () => {
    {isPopupOpen && (
         <RulePopup rules={rules} onClose={closePopup} />
       )}
-
+<div>
 <div className='flex justify-center gap-[10%]'>
   <div className='w-1/2 justify-center '>
     {(userData.role ==="expert head" && videoData && videoData.reannotations && videoData.reannotations.length < 1) && (
@@ -147,20 +147,34 @@ const closePopup = () => {
         // <Message videoId={videoId} onClose={closePopup}/>
         )}
 
-        <ViewComment videoId={videoId} type={"comment"}/>
-          <div className='mt-8 w-full'>
-          <Comments videoId={videoId} type={"comment"}/>
-        </div>
+
+        
     
 
-      <div>
-        
+     
       </div>
-      </div>
-      <div className="mt-16 p-4 bg-gray-200 rounded h-fit border-gray-800" >
-      <h1 className='text-2xl font-bold text-sidebarGreen'>Decision for Video</h1>
-      <VideowithReview Id={videoId} text="expert" type="videoDecision" showButtons={userData.role !== "expert head"} />
+     
+
 </div>
+<div className='m-12'>
+<ViewComment videoId={videoId} type={"comment"}/>
+</div>
+        
+
+<div className=' w-full flex gap-6 h-[150%] justify-center'>
+          <div className='mt-20 w-full'>
+          <Comments videoId={videoId} type={"comment"}/>
+          </div>
+          
+          <div className="mt-16 p-4 flex bg-gray-200 rounded h-fit border-gray-800" >
+          
+      <h1 className='text-2xl font-bold text-sidebarGreen '>Decision for Video</h1>
+      <div className='mt-8'>
+      <VideowithReview Id={videoId} text="expert" type="videoDecision" showButtons={userData.role !== "expert head"} />
+  
+      </div>
+       </div>
+        </div>
 
 </div>
    
