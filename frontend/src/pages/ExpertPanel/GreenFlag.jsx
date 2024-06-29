@@ -75,12 +75,12 @@ function GreenFlag() {
         
         <Navbar type='expert' />
         
-        <div className='flex justify-between z-9999 mt-12'>
+        <div className='flex justify-between z-9999 mt-12 '>
         <h1 className='ml-24 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
            Green Flag Videos
         </h1>
 
-        <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white '>
+        <label className='themeSwitcherTwo shadow-card relative mt-32 h-10  inline-flex  cursor-pointer select-none rounded-md bg-white mr-12 '>
         <input
           type='checkbox'
           className='sr-only'

@@ -56,11 +56,10 @@ const renderDecision = () => {
   // console.log("hello");
   let statusvalue = '';
   if (Data.panelstatus && Data.panelstatus.length > 0) {
-    console.log("hello");
-    
     for (let i = 0; i < Data.panelstatus.length; i++) {
       if (Data.panelstatus[i].email === email) {
         statusvalue = Data.panelstatus[i].status;
+        console.log(statusvalue);
       }
     }
   }
@@ -83,14 +82,15 @@ const renderDecision = () => {
 
     ) 
 }
-
+console.log(userData.role)
   return (
-    <div className="flex h-fit justify-center gap-6 text-xl  p-4  mb-12">
+    <div className="flex h-fit justify-center gap-4 text-xl  p-4  mb-12">
       
       {userData.role === "expert head" && (
   <>
     <h1>{Data.status}</h1>
     {Data.status === "Red" ? (
+      
       <div>
         <img src={red} className="h-8 w-8 ml-4" alt="Red status" />
       </div>
@@ -112,13 +112,15 @@ const renderDecision = () => {
           
         </div>
           
-          {!showButtons && (
+          {!showButtons && Data.status!=="Red"  && (
+            <>
   <button
   className="z-10 mt-8 text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
   onClick={handleStatus}
 >
   Change Decision
 </button>
+</>
 )}
           </>
 
@@ -129,7 +131,7 @@ const renderDecision = () => {
 
 
         {showButtons && (
-          <VideowithReview Id={videoId} type={"videoDecision"} text={"expert"} showButtons={true}/>
+          <VideowithReview Id={videoId} type={"videoDecisionUpdate"} text={"expert"}  showButtons={true}/>
         )}
   
   </div>

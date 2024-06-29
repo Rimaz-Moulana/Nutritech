@@ -1,6 +1,7 @@
-import React from 'react'
+import axios from 'axios';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import API from '../../config/config';
 
 function Buttons() {
   const navigate = useNavigate(); 
@@ -9,7 +10,7 @@ function Buttons() {
   };
   const submit =(e)=>{
     e.preventDefault();
-    axios.post("http://localhost:3001/annotation",)
+    axios.post(`${API}/annotation`,)
   }
   return (
     <div className='flex'>

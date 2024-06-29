@@ -14,6 +14,7 @@ function RowHistory({ videoId, usertype }) {
     // return JSON.parse(localStorage.getItem('isChecked')) || false;
   });
 
+
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     const fetchUser = async () => {
@@ -141,15 +142,17 @@ function RowHistory({ videoId, usertype }) {
                   <th>Regulation</th>
                   <th className='w-[30%]'>Details</th>
                   <th className='w-[30%]'>Comments</th>
-                  {usertype !== "industry" && videoData && (!videoData[0]?.reannotations || videoData[0]?.reannotations.length === 0) && (
+                  {usertype !== "researcher" && videoData && (!videoData[0]?.reannotations || videoData[0]?.reannotations.length === 0) && (
                     <th className='w-[20%]'>Decision</th>
                   )}
                 
                 </tr>
               </thead>
               <tbody>
+                {/* {(usertype==="annotator" || (usertype==="industry" && videoData && videoData[0].reannotations && videoData[0].reannotations.length>0 )) && ( */}
               {annotations.map((annotation, index) => (
               annotation.rule !== "" && (
+
                 <tr key={`annotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
                   <td>{annotation.timestamp}</td>
                   <td>{annotation.rule}</td>
@@ -182,6 +185,7 @@ function RowHistory({ videoId, usertype }) {
                     annotation.acceptance.some(acc => acc.user === email) ? (
                       <td>{annotation.acceptance.find(acc => acc.user === email).decision}</td>
                     ) : (
+                     
                       usertype !== "industry" && videoData && (!videoData[0]?.reannotations || videoData[0]?.reannotations.length === 0) && (
                         <td className="flex items-end justify-center mt-4 z-10 h-full">
                           <button
@@ -215,7 +219,7 @@ function RowHistory({ videoId, usertype }) {
                       <th>Time Stamp</th>
                       <th>Regulation</th>
                       <th>Details</th>
-                      <th>Recommendation</th>
+                      <th>Comments</th>
                       {usertype !== "annotator" && usertype !== "industry" && userData.role!=="expert panel" && (
                                 <th className='w-[20%]'>Decision</th>
                       )}
@@ -229,7 +233,7 @@ function RowHistory({ videoId, usertype }) {
       <td className='p-4'>{reannotation.rule}</td>
       <td className='p-4' style={{ wordWrap: 'break-word' }}>{reannotation.details}</td>
       <td className='p-4'>{reannotation.recommendation}</td>
-      {usertype === "annotator" ? (
+      {usertype === "annotator" || usertype ==="researcher" ? (
                     <td>
                       {reannotation.finalacceptance[0]?.decision 
                         ? reannotation.finalacceptance[0].decision 

@@ -68,7 +68,7 @@ function History() {
         <div className='px-3 mb-8 mt-10 text-sm font-semibold text-black center-l lg:w-[100%]'>
         
           {/* Pass videoId and video to RowHistory */}
-          <RowHistory videoId={videoId} usertype={"industry"}/>
+          <RowHistory videoId={videoId} usertype={"researcher"}/>
         </div>
 
         <div className='px-3 center-l w-full'>

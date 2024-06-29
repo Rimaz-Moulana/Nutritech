@@ -58,5 +58,7 @@ router.get("/report/:videoId", videoController.videoReport)
 router.post('/finalflag/:videoId', videoController.updateExpertHeadFlagReview );
 router.post('/decision/:videoId', videoController.updateDecision );
 router.post('/finaldecision/:videoId', videoController.updateFinalDecision );
+router.patch('/flagupdate/:videoId', videoController.updateExpertFlagReviewUpdate );
+
 
 module.exports = router;

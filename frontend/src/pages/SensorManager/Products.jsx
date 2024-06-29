@@ -51,11 +51,8 @@ console.log(productData)
         <div className='p-5'>
         <Navbar type='sensormanager' />
         </div>
-        <h1 className=' mb-8 ml-24 mt-32 text-3xl font-semibold text-sidebarGreen'>
-               Products
-            </h1>
        
-        <div className='flex mt-4 justify-between'>
+        <div className='flex mt-16 justify-between'>
         <h1 className='ml-8 mb-8 mt-4 h-4 text-3xl font-semibold text-sidebarGreen left-0'>Products</h1>
         </div>
         <div className='w-full mb-10 ml-0 h-full '>

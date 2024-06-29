@@ -102,27 +102,27 @@ function ReviewHistory() {
   // console.log(allProducts)
  
   return (
-    <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
+    <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen z-10'>
       <div className="w-full fixed h-full hidden sm:flex flex-col">
         <Sidebar type="expert" onValueChange={handleValueChange} />
       </div>
-      <div className={`w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
+      <div className={`z-10 w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='expert' />
         <VideowithReview Id={videoId} text={"experthistory"} />
         <div className='mt-12 ml-24'>
+          <h1 className='justify-center text-sidebarGreen text-xl font-semibold'>Annotations</h1>
           <Annotations videoId={videoId} usertype={"expert"} />
         </div>
-        <div className='flex gap-6'>
-          <div className='mt-4 ml-24'>
+        <div className=''>
+          <div className='m-12 z-10'>
           <ViewComment videoId={videoId} type={"comment"} />
           </div>
-       
-        <div className="mt-24 ml-8 bg-gray-300 p-4 " >
-        <h1 className='text-xl font-bold text-sidebarGreen mb-8 h-fit'>Decision for Video</h1>
-        <Decision Id={videoId} text={"experthitory"} type={"expertDecision"}/>
-        </div>
-       
+        
       </div>
+      <div className="mt-16 ml-24 w-[50%] justify-center items-center bg-gray-300 p-4 " >
+        <h1 className='text-xl font-bold text-sidebarGreen mb-8 h-fit'>Decision for Video</h1>
+        <Decision Id={videoId} text={"experthitory"} type={"expertDecisionhistory"}/>
+        </div>
         <div className="flex items-end justify-center mt-4 z-10 h-full">
         {/* <button onClick={() => handlePoductDetails(responseData[0].size,responseData[0].product,responseData[0].brand,responseData[0].unit)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'

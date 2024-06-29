@@ -126,6 +126,7 @@ exports.getpendingvideos= async (req,res)=>{
   try {
         const pendingVideos = await VideoService.getsensormanagernewvideos();
         res.json(pendingVideos);
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -152,6 +153,10 @@ exports.updateDecision= async (req,res)=>{
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
+
+
+
 
 exports.updateFinalDecision= async (req,res)=>{
   
@@ -294,6 +299,25 @@ exports.updateExpertFlagReview = async (req,res)=>{
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
+exports.updateExpertFlagReviewUpdate = async (req,res)=>{
+  console.log("updated");
+  try {
+    
+    const videoId = req.params.videoId;
+    const panelstatus = req.body.panelstatus;
+    // console.log("panel",panelstatus);
+    
+        const Video = await VideoService.updateReviewUpdate(videoId,panelstatus);
+        // console.log(Video)
+        res.json(Video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
 
 exports.AllRedFlagVideos = async (req, res) => {
   
