@@ -127,12 +127,20 @@ const closePopup = () => {
 <div>
 <div className='flex justify-center gap-[10%]'>
   <div className='w-1/2 justify-center '>
-    {(userData.role ==="expert head" && videoData && videoData.reannotations && videoData.reannotations.length < 1) && (
+    {(userData.role ==="expert head" && videoData && videoData.reannotations && videoData.reannotations.length < 1 && videoData.finalcomment && videoData.finalcomment.length<1) && (
       <button
       className="text-white bg-gradient-to-t justify-center from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen rounded-lg text-sm text-center mt-4 lg:px-8 py-2.5 sm:px-2 "
         onClick={() => handleMessage(videoId)}
     >Send a message to annotator for annotating again</button>
     )}
+{videoData.message && videoData.message.length>0 &&
+<div className='p-2'>
+  <p className="text-sidebarGreen text-xl"><strong>Your message for annotator</strong></p>
+  {videoData.message?.map((msg, index) => (
+    <p key={index}>{msg.text}</p>
+  ))}
+</div>
+}
 {openModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
         <div className="flex items-center justify-center min-h-screen">
@@ -166,11 +174,12 @@ const closePopup = () => {
         
 
 <div className=' w-full flex gap-4  justify-center'>
+  {userData.role==="expert head" && videoData.message && videoData.message.length<1 || (userData.role==="expert head" && videoData.reannotations && videoData.reannotations.length>0) &&
           <div className='mt-12 w-full'>
             <h1>Add your comment(This is important to display your decision)</h1>
           <Comments videoId={videoId} type={"comment"}/>
           </div>
-          
+}       
           <div className="mt-8 mr-16 p-4  bg-gray-200 rounded h-fit border-gray-800" >
           
       <h1 className='text-xl font-bold mb-4 w-full text-sidebarGreen '>Decision for Video</h1>

@@ -214,15 +214,18 @@ function AnnotationTable() {
         <div className='w-full mt-[5%]'>
         <VideowithReview Id={videoId} text={"video"} type={"annotator"}/>
         </div>
-        <div className='mt-0 mr-8 bg-gray-300'>
+        <div className='mt-8 mr-8 bg-gray-300'>
           
         <div className=''>
         {videoData[0] && videoData[0].message && videoData[0].message.length > 0 && category === "reannotation" && (
           <div>
           <div className='p-2'>
-          <p className="text-sidebarGreen text-xl"><strong>Message from expert head</strong></p>
-            <p>{videoData[0].message[0].text}</p>  
+              <p className="text-sidebarGreen text-xl"><strong>Message from expert head</strong></p>
+              {videoData[0].message.map((msg, index) => (
+                <p key={index}>{msg.text}</p>
+              ))}
           </div>
+
           
           </div>
         )}
