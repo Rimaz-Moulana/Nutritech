@@ -82,7 +82,7 @@ console.log(filteredProducts);
   //console.log("hi"+handleFilter);
   return (
     <div className='w-full min-h-screen overflow-x-auto xl:overflow-hidden bg-backgroundGreen place-items-center'>
-      <BlankPage type="annotator" />
+      <BlankPage type={type} />
       <div className='inline-flex ml-[11%] w-[80%]'>
         <h1 className="mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Product</h1>
         <AddNewProduct />

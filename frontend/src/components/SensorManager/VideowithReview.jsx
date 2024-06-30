@@ -40,7 +40,7 @@ function VideowithReview({Id,text,type,page,showButtons}) {
     fetchUser();
 }, []);
 
-
+console.log("Data   aaaaaaaaaaaaaaaaaaaaaaaaaaaa",Data);
 
   const health = ()=>{
     let fact;
@@ -274,11 +274,19 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
   const padZero = (num) => (num < 10 ? `0${num}` : num);
 
   const handleApprove = async (text) => {
-    
+  
+  let availability=false;
+  for(let i=0;i<Data.panelstatus?.length;i++){
+    if(Data.panelstatus[i].email===email){
+      availability=true;
+      break;
+    }
+  }
+    console.log("availabilitynnnnnnnnnnnnnnnnnnn",availability);
     let endpoint;
     let data;
 
-    if(type==="videoDecisionUpdate"){
+    if(type==="videoDecisionUpdate" || availability===true){
       endpoint = `${API}/api/videos/flagupdate/${videoId}`;
       data = {
         panelstatus: {
@@ -353,7 +361,15 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
         let endpoint;
         let data;
 
-        if(type==="videoDecisionUpdate"){
+        let availability=false;
+        for(let i=0;i<Data.panelstatus?.length;i++){
+          if(Data.panelstatus[i].email===email){
+            availability=true;
+            break;
+          }
+        }
+
+        if(type==="videoDecisionUpdate"|| availability===true){
           
           setPanelStatus("red");
           endpoint = `http://localhost:3000/api/videos/flagupdate/${videoId}`;
