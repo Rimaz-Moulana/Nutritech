@@ -134,14 +134,14 @@ const closePopup = () => {
         onClick={() => handleMessage(videoId)}
     >Send a message to annotator for annotating again</button>
     )}
-{videoData.message && videoData.message.length>0 &&
+{/* {videoData.message && videoData.message.length>0 &&
 <div className='p-2'>
   <p className="text-sidebarGreen text-xl"><strong>Your message for annotator</strong></p>
   {videoData.message?.map((msg, index) => (
     <p key={index}>{msg.text}</p>
   ))}
 </div>
-}
+} */}
 {openModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
         <div className="flex items-center justify-center min-h-screen">

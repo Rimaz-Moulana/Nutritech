@@ -217,7 +217,7 @@ function AnnotationTable() {
         <div className='mt-8 mr-8 bg-gray-300'>
           
         <div className=''>
-        {videoData[0] && videoData[0].message && videoData[0].message.length > 0 && category === "reannotation" && (
+        {/* {videoData[0] && videoData[0].message && videoData[0].message.length > 0 && category === "reannotation" && (
           <div>
           <div className='p-2'>
               <p className="text-sidebarGreen text-xl"><strong>Message from expert head</strong></p>
@@ -228,7 +228,7 @@ function AnnotationTable() {
 
           
           </div>
-        )}
+        )} */}
      
       </div>  
         {category === "reannotation" && (
