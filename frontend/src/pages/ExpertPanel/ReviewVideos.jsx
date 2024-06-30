@@ -167,7 +167,7 @@ const closePopup = () => {
 
 <div className=' w-full flex gap-4  justify-center'>
           <div className='mt-12 w-full'>
-            <h1>Add your comment(This important to display your decision)</h1>
+            <h1>Add your comment(This is important to display your decision)</h1>
           <Comments videoId={videoId} type={"comment"}/>
           </div>
           
