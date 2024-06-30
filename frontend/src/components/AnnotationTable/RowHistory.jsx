@@ -207,8 +207,25 @@ function RowHistory({ videoId, usertype }) {
             ))}
 
               </tbody>
+
             </table>
+
+     
+
+       
+
+
+
           </div>
+
+          {videoData[0] && videoData[0].message && videoData[0].message.length>0 &&
+<div className='p-2 mt-4'>
+  <p className="text-sidebarGreen text-sm"><strong>Message for annotator from expert head</strong></p>
+  {videoData[0].message?.map((msg, index) => (
+    <p key={index}>{msg.text}</p>
+  ))}
+</div>
+}
           {videoData && videoData[0]?.reannotations && videoData[0].reannotations.length > 0 && (
             <>
               <h2 className="text-center mt-8">New Annotations</h2>
@@ -226,6 +243,9 @@ function RowHistory({ videoId, usertype }) {
                     </tr>
                   </thead>
                   <tbody>
+
+                    
+
                   {videoData[0].reannotations.map((reannotation, index) => (
   reannotation.rule !== "" && (
     <tr key={`reannotation_${index}`} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'}>
@@ -266,7 +286,11 @@ function RowHistory({ videoId, usertype }) {
                   </tbody>
                 </table>
               </div>
+
+
             </>
+
+            
           )}
         </div>
       )}

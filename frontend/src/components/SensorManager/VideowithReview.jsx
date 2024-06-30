@@ -282,7 +282,6 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       break;
     }
   }
-    console.log("availabilitynnnnnnnnnnnnnnnnnnn",availability);
     let endpoint;
     let data;
 
@@ -451,7 +450,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
       console.log('Video data is still loading');
       return null;
     } else {
-      const url = inputurl.replace(/\\/g, '/');
+      const url = inputurl?.replace(/\\/g, '/');
       const desiredPart = url.split('/').pop();
       const videourl = `/videos/${desiredPart}`;
       console.log('Video URL:', videourl);

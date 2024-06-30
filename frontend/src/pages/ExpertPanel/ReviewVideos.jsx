@@ -98,7 +98,8 @@ const openPopup = () => {
 const closePopup = () => {
   setIsPopupOpen(false);
 };
- 
+
+
 
   return (
     <div className='bg-backgroundGreen lg:overflow-x-hidden flex min-h-screen'>
@@ -174,7 +175,7 @@ const closePopup = () => {
         
 
 <div className=' w-full flex gap-4  justify-center'>
-  {userData.role==="expert head" && videoData.message && videoData.message.length<1 || (userData.role==="expert head" && videoData.reannotations && videoData.reannotations.length>0) &&
+  { (videoData.message && videoData.message.length<1 && videoData.finalcomment && videoData.finalcomment.length<1 || (videoData.reannotations && videoData.reannotations.length>0 && videoData.finalcomment.length<1)|| (videoData.reply && videoData.reply.length>0 && videoData.finalcomment.length<1) || (userData.role==="expert panel")) &&
           <div className='mt-12 w-full'>
             <h1>Add your comment(This is important to display your decision)</h1>
           <Comments videoId={videoId} type={"comment"}/>
