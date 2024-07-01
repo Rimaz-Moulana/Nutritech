@@ -226,6 +226,12 @@ function RowHistory({ videoId, usertype }) {
   ))}
 </div>
 }
+
+{
+  userData.role==="annotator" && (
+    <p className='text-red-800 mt-4'>Although expert head agree on some annotations, you have to rewrite those annotations in the reannotations.</p>
+  )
+}
           {videoData && videoData[0]?.reannotations && videoData[0].reannotations.length > 0 && (
             <>
               <h2 className="text-center mt-8">New Annotations</h2>

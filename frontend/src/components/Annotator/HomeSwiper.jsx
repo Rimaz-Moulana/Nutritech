@@ -70,6 +70,27 @@ const HomeSwiper = ({count,type,user,handlepath}) => {
   
       )}
 
+{(user=="expert head" || user == "expert panel") && type=="Red Flag Videos"&& (
+      <p className='mt-4'>Contain Red Flag Videos. These videos are based on unhealthy products or violated food advertisement regulations</p>
+  
+      )}
+
+{user=="expert panel" && type == "Reviewed Videos" && (
+      <p className='mt-4'>Contain reviewed videos </p>
+  
+      )}
+
+{(user=="expert head" || user == "expert panel") && type == "Green Flag Videos" && (
+      <p className='mt-4'>Contain verified videos </p>
+  
+      )}
+
+{(user=="expert head" || user == "expert panel") && type == "New Videos" && (
+      <p className='mt-4'>Contain annotated videos that need to be reviewed by expert panel</p>
+  
+      )}
+
+
 
       {/* <button className="bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen text-white font-medium rounded-lg text-sm px-5 py-2.5">View {type}</button> */}
     </div>

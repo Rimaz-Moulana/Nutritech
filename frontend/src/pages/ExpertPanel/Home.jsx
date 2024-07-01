@@ -5,6 +5,7 @@ import HomeSwiper from '../../components/Annotator/HomeSwiper';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/SideBar';
 import API from "../../config/config";
+import ReviewedVideos from './ReviewedVideos';
 
 function Home() {
   const navigate= useNavigate();
@@ -12,6 +13,7 @@ function Home() {
   const [newVideoData, setNewVideoData]= useState([]);
   const [redVideoData, setRedVideoData]= useState([]);
   const [greenVideoData, setGreenVideoData]=useState([]);
+  const [reviewedData, setReviewedData]=useState([]);
   const email  = localStorage.getItem('email');
   const [userData, setUserData] = useState([]);
   let [isEnlarge, setEnlarge] = useState(true);
@@ -54,6 +56,30 @@ function Home() {
   
     fetchUser();
 }, []);
+
+console.log("Revuuuuuuuuuuuuuuuuuuuuuuuu",reviewedData);
+useEffect(() => {
+  const fetchData = async (url, email, setReviewedData) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      const filteredData = data.filter(video => 
+        video.panelstatus.some(status => status.email === email)
+      );
+
+      setReviewedData(filteredData);
+      console.log(filteredData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const url = `${API}/api/videos/allAnnotatedUploadedVideos`;
+  fetchData(url, email, setReviewedData);
+}, [email, API, setReviewedData, userData.role]); // Ensure all dependencies are included
+
+
 
 useEffect(() => {
   const fetchData = async () => {
@@ -242,9 +268,12 @@ useEffect(() => {
     }
   }
  
+  const reviewedVideos = reviewedData.length;
   const newVideos = newVideoData.length;
+  const newV = newVideos-reviewedVideos;
   const redVideos = redVideoData.length;
   const greenVideos = greenVideoData.length;
+ 
 
   const handlepath = (type) =>{
     console.log(type);
@@ -278,16 +307,33 @@ useEffect(() => {
         <div className='flex justify-between z-9999 mt-12'>
         </div>
         <div className="mt-12 grid grid-cols-2 gap-4 p-8">
+          {
+            userData.role==="expert head" &&
+            <div>
+            <HomeSwiper user={userData.role}  count={newVideos} type={"New Videos"}  handlepath={() => handlepath("New Videos")}/>
+            </div>
+          }
+       
+       {
+            userData.role==="expert panel" &&
+            <div>
+            <HomeSwiper user={userData.role} count={newV} type={"New Videos"}  handlepath={() => handlepath("New Videos")}/>
+            </div>
+          }
+
+{
+            userData.role==="expert panel" &&
+            <div>
+            <HomeSwiper user={userData.role} count={reviewedVideos} type={"Reviewed Videos"}  handlepath={() => handlepath("New Videos")}/>
+            </div>
+          }
+       
         <div>
-        <HomeSwiper count={newVideos} type={"New Videos"}  handlepath={() => handlepath("New Videos")}/>
+        <HomeSwiper user={userData.role} count={redVideos} type={"Red Flag Videos"}  handlepath={() => handlepath("Red flag Videos")}/>
         </div>
 
         <div>
-        <HomeSwiper count={redVideos} type={"Red flag Videos"}  handlepath={() => handlepath("Red flag Videos")}/>
-        </div>
-
-        <div>
-        <HomeSwiper count={greenVideos} type={"Green flag videos"}  handlepath={() => handlepath("Green flag Videos")}/>
+        <HomeSwiper user={userData.role} count={greenVideos} type={"Green Flag Videos"}  handlepath={() => handlepath("Green flag Videos")}/>
         </div>
         </div>
         
