@@ -86,7 +86,8 @@ function History() {
         </div>
        
 
-        
+
+
         <h1 className='ml-12 justify-center px-3 mb-8 mt-12 text-2xl font-semibold text-sidebarGreen'>
                   Annotations
                 </h1>

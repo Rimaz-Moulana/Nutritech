@@ -169,67 +169,68 @@ function ViewComment({ videoId, type }) {
       let userCommentIndex = -1; 
       for (let z = 0; z < Data.comment.length; z++) {
         if (Data.comment[z].commenter === email) {
-          userCommentIndex = z;
-          break; 
+          userCommentIndex = z; 
+
+          if(userCommentIndex >= 0){
+            let status='';
+            for(let j=0;j<Data.panelstatus.length;j++){
+              if(email === Data.panelstatus[j].email){
+                status = Data.panelstatus[j].status;   
+              }
+            }
+            result.push(
+              <tr key={`comment-${userCommentIndex}`}>
+                <td className='p-2'>{Data.comment[userCommentIndex].commenter}</td>
+                <td className='p-2'>Comment</td>
+                <td className='p-2'>{Data.comment[userCommentIndex].text}</td>
+                <td className='p-2'>
+                  {status === "green" && (
+                    <>
+                      <span>Green</span>
+                      {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
+                    </>
+                  )}
+                  {status === "red" && (
+                    <>
+                      <span>Red</span>
+                      {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
+                    </>
+                  )}
+                </td>
+                <td className='p-2'>{Data.comment[userCommentIndex].commenteddate}</td>
+                <td className='p-2'>{Data.comment[userCommentIndex].commentedtime}</td>
+              </tr>
+            );
+          }
         }
       }
     
-      if(userCommentIndex >= 0){
-        let status='';
-        for(let j=0;j<Data.panelstatus.length;j++){
-          if(email === Data.panelstatus[j].email){
-            status = Data.panelstatus[j].status;   
-          }
-        }
-        result.push(
-          <tr key={`comment-${userCommentIndex}`}>
-            <td className='p-2'>{Data.comment[userCommentIndex].commenter}</td>
-            <td className='p-2'>Comment</td>
-            <td className='p-2'>{Data.comment[userCommentIndex].text}</td>
-            <td className='p-2'>
-              {status === "green" && (
-                <>
-                  <span>Green</span>
-                  {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
-                </>
-              )}
-              {status === "red" && (
-                <>
-                  <span>Red</span>
-                  {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
-                </>
-              )}
-            </td>
-            <td className='p-2'>{Data.comment[userCommentIndex].commenteddate}</td>
-            <td className='p-2'>{Data.comment[userCommentIndex].commentedtime}</td>
-          </tr>
-        );
-      }
-      if(Data.finalcomment && Data.finalcomment.length > 0) {
-        result.push(
-          <tr key={`finalcomment-${0}`}>
-            <td className='p-2'>{Data.finalcomment[0].commenter}</td>
-            <td className='p-2'>Final Comment</td>
-            <td className='p-2'>{Data.finalcomment[0].text}</td>
-            <td className='p-2'>
-              {Data.status === "Green" && (
-                <>
-                  <span>Green</span>
-                  {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
-                </>
-              )}
-              {Data.status === "Red" && (
-                <>
-                  <span>Red</span>
-                  {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
-                </>
-              )}
-            </td>
-            <td className='p-2'>{Data.finalcomment[0].commenteddate}</td>
-            <td className='p-2'>{Data.finalcomment[0].commentedtime}</td>
-          </tr>
-        );
-      }
+   
+      // if(Data.finalcomment && Data.finalcomment.length > 0) {
+      //   result.push(
+      //     <tr key={`finalcomment-${0}`}>
+      //       <td className='p-2'>{Data.finalcomment[0].commenter}</td>
+      //       <td className='p-2'>Final Comment</td>
+      //       <td className='p-2'>{Data.finalcomment[0].text}</td>
+      //       <td className='p-2'>
+      //         {Data.status === "Green" && (
+      //           <>
+      //             <span>Green</span>
+      //             {/* <img src={green} className="h-8 w-8 ml-4" alt="" /> */}
+      //           </>
+      //         )}
+      //         {Data.status === "Red" && (
+      //           <>
+      //             <span>Red</span>
+      //             {/* <img src={red} className="h-8 w-8 ml-4" alt="" /> */}
+      //           </>
+      //         )}
+      //       </td>
+      //       <td className='p-2'>{Data.finalcomment[0].commenteddate}</td>
+      //       <td className='p-2'>{Data.finalcomment[0].commentedtime}</td>
+      //     </tr>
+      //   );
+      // }
     }
 
     if(type !== "annotator"){
