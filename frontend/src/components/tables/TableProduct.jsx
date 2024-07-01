@@ -18,7 +18,7 @@ export default function LogTable({ Products }) {
   };
 
   const handleurl = (inputurl) => {
-    const url = inputurl.replace(/\\/g, '/');
+    const url = inputurl?.replace(/\\/g, '/');
     const desiredPart = url.split('/').pop();
     const cleanedPart = desiredPart.replace(/^\d+-/, '');
     const videourl = `/videos/${cleanedPart}`;
@@ -27,9 +27,9 @@ export default function LogTable({ Products }) {
   };
 
   const handleUrlImage = (inputurl) => {
-    const url = inputurl.replace(/\\/g, '/');
-    const desiredPart = url.split('/').pop();
-    const cleanedPart = desiredPart.replace(/^\d+-/, '');
+    const url = inputurl?.replace(/\\/g, '/');
+    const desiredPart = url?.split('/').pop();
+    const cleanedPart = desiredPart?.replace(/^\d+-/, '');
     const imageurl = `/${cleanedPart}`;
     console.log('Image URL:', imageurl);
     return imageurl;

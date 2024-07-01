@@ -57,7 +57,7 @@ function Home() {
     fetchUser();
 }, []);
 
-console.log("Revuuuuuuuuuuuuuuuuuuuuuuuu",reviewedData);
+
 useEffect(() => {
   const fetchData = async (url, email, setReviewedData) => {
     try {

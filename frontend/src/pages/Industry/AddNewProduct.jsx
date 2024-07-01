@@ -236,7 +236,6 @@ export default function ProductDetails() {
                 console.error('Error uploading video:', error);
                 setUploadStatus('Error uploading video.');
               }
-
               
           };
 

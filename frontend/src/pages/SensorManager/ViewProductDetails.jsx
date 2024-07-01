@@ -89,6 +89,48 @@ export default function AddedProduct() {
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // Added loading state
   const [error, setError] = useState(null); // Added error state
+
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+       try {
+          // const email  = localStorage.getItem('email');
+          const authData = JSON.stringify(localStorage.getItem('token'));
+            console.log("authData:", authData);
+      
+            setTimeout(() => {
+              // Remove token from local storage after 5 seconds
+              localStorage.removeItem('token');
+              localStorage.removeItem('email');
+          }, 7200000); // 2hours
+      
+          if(authData){
+            const {accessToken} = authData;
+            console.log(accessToken);
+            const config = {
+              headers : {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+              },
+              withCredentials: true,
+            };
+          const response = await axios.get(`${API}/api/users/getUser/${email}`, config);
+          // console.log("response",response); // Logging the response data directly
+          setUserData(response.data); // Setting the response data to the state
+
+          }else{
+            navigate('/')
+          }
+       } catch (error) {
+          console.error('Error fetching user:', error);
+          // Handle error (e.g., set error state, show error message)
+       }
+    };
+  
+    fetchUser();
+}, []);
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -137,7 +179,7 @@ export default function AddedProduct() {
   return (
     <div className='w-full min-h-screen overflow-x-auto xl:overflow-hidden bg-backgroundGreen place-items-center'>
 
-      <BlankPage type="annotator" />
+      <BlankPage type={userData.role} />
       <div className='inline-flex ml-[11%] w-[80%]'>
         <h1 className="mb-8 mt-24 text-3xl font-semibold text-sidebarGreen">Existing Product Details</h1>
         

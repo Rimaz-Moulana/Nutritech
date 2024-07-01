@@ -228,7 +228,7 @@ function RowHistory({ videoId, usertype }) {
 }
 
 {
-  userData.role==="annotator" && (
+  (userData.role==="annotator" && videoData[0].message && videoData[0].message.length>0 && videoData[0].reannotations && videoData[0].reannotations.length<1) && (
     <p className='text-red-800 mt-4'>Although expert head agree on some annotations, you have to rewrite those annotations in the reannotations.</p>
   )
 }

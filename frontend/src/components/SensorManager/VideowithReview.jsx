@@ -8,11 +8,10 @@ import red from '../../assets/Images/redflag.png';
 import API from '../../config/config';
 
 function VideowithReview({Id,text,type,page,showButtons}) {
-  console.log("Id",Id);
   const navigate = useNavigate();
 
   
-  const videoId = Id;
+const videoId = Id;
  const productId =Id;
  const email  = localStorage.getItem('email');
  console.log(email);
@@ -41,7 +40,6 @@ function VideowithReview({Id,text,type,page,showButtons}) {
     fetchUser();
 }, []);
 
-console.log("Data   aaaaaaaaaaaaaaaaaaaaaaaaaaaa",Data);
 
   const health = ()=>{
     let fact;
@@ -378,7 +376,7 @@ if (text==="video"|| text==="expert" || text==='experthistory')  {
         if(type==="videoDecisionUpdate"|| availability===true){
           
           setPanelStatus("red");
-          endpoint = `http://localhost:3000/api/videos/flagupdate/${videoId}`;
+          endpoint = `${API}/api/videos/flagupdate/${videoId}`;
           data = {
             panelstatus: {
               status: "red",
@@ -495,7 +493,6 @@ const handlePoductDetails = (size,product,brand,unit) =>{
 
 
 
-console.log(email);
 const userPanelStatus = Data.panelstatus?.some(status => status.email === email);
 
 const renderStatus = ()=>{
