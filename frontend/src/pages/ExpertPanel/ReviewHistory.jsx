@@ -94,10 +94,13 @@ function ReviewHistory() {
           </div>
         
       </div>
-      <div className="mt-16 ml-24 w-[50%] justify-center items-center bg-gray-300 p-4 " >
-        <h1 className='text-xl font-bold text-sidebarGreen mb-8 h-fit'>Decision for Video</h1>
-        <Decision Id={videoId} text={"experthistory"} type={"expertDecisionhistory"}/>
-        </div>
+      <div className="flex justify-center items-center">
+  <div className="mt-0 w-[50%] bg-gray-300 p-4">
+    <h1 className="text-xl font-bold text-sidebarGreen mb-8 h-fit">Decision for Video</h1>
+    <Decision Id={videoId} text={"experthistory"} type={"expertDecisionhistory"} />
+  </div>
+</div>
+
         <div className="flex items-end justify-center mt-4 z-10 h-full">
         {/* <button onClick={() => handlePoductDetails(responseData[0].size,responseData[0].product,responseData[0].brand,responseData[0].unit)}
                   className='text-white bg-gradient-to-t from-buttonGreen  to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'

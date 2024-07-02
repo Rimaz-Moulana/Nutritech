@@ -84,7 +84,7 @@ const renderDecision = () => {
 }
 
   return (
-    <div className="flex h-fit justify-center gap-4 text-xl  p-4  mb-12">
+    <div className="flex h-fit justify-center gap-4 text-xl  p-4 ">
       
       {userData.role === "expert head" && (
   <>
