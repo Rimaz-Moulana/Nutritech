@@ -96,7 +96,8 @@ function RowHistory({ videoId, usertype }) {
         email,
         type,
       });
-
+      
+      location.reload();
       }else{
       const response = await axios.post(`${API}/api/videos/decision/${videoId}`, {
         decision,
@@ -119,14 +120,17 @@ function RowHistory({ videoId, usertype }) {
             acceptance: [...ann.acceptance, { user: email, decision }]
           };
         }
+        
         return ann;
       });
-
+      console.log(updatedAnnotations);
       setAnnotations(updatedAnnotations);
       alert('Decision submitted successfully');
     } catch (error) {
       console.error('Error submitting decision:', error);
     }
+
+    
   };
  
 
@@ -177,8 +181,7 @@ function RowHistory({ videoId, usertype }) {
                           </button>
                         </td>
                     ))
-                    )
-                    
+                    ) 
                        }
                     </td>
                   ) : (usertype === "expert" ? (
@@ -209,12 +212,6 @@ function RowHistory({ videoId, usertype }) {
               </tbody>
 
             </table>
-
-     
-
-       
-
-
 
           </div>
 
@@ -249,8 +246,6 @@ function RowHistory({ videoId, usertype }) {
                     </tr>
                   </thead>
                   <tbody>
-
-                    
 
                   {videoData[0].reannotations.map((reannotation, index) => (
   reannotation.rule !== "" && (
@@ -365,9 +360,6 @@ function RowHistory({ videoId, usertype }) {
         </div>
       )}
     </div>
-
-
-
   );
 }
 

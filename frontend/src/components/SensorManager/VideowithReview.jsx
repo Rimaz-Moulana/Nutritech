@@ -160,9 +160,12 @@ const videoId = Id;
           // console.log("hey there")
           if (status==="red") {
             showButtons=false;
+            location.reload();
             handleDelete(text);
+
           }else{
             showButtons=false;
+            location.reload();
             handleApprove(text);
           }         
         }else{

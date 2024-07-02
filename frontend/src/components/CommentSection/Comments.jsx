@@ -86,7 +86,7 @@ console.log(section);
       setLoading(false);
     }
 
-
+    location.reload();
   };
   
 
