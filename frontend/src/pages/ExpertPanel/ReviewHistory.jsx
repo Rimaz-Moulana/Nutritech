@@ -84,7 +84,7 @@ function ReviewHistory() {
       <div className={`z-10 w-full mb-10 min-w-screen center-l lg md:w-[75%] sm:w-auto ml-0 sm:ml-auto flex flex-col ${isEnlarge ? 'lg:w-[85%] md:w-[75%]' : 'lg:w-[90%] md:w-[100%]'}`}>
         <Navbar type='expert' />
         <VideowithReview Id={videoId} text={"experthistory"} />
-        <div className='mt-12 ml-24'>
+        <div className='mt-12 ml-8'>
           <h1 className='justify-center text-sidebarGreen text-xl font-semibold'>Annotations</h1>
           <Annotations videoId={videoId} usertype={"expert"} />
         </div>

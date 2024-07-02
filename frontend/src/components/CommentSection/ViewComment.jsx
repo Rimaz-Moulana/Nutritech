@@ -284,7 +284,7 @@ function ViewComment({ videoId, type }) {
   console.log(Data.finalcomment?.length);
   return (
     <div>
-    <div className='mt-12 font-semibold text-center table-responsive z-10'>
+    <div className='mt-12 ml-12 font-semibold text-center table-responsive z-10'>
       <div className='container'>
     <div className='w-full table table-bordered'>
       <h1 className='text-sidebarGreen text-xl justify-center'>Comment section</h1>

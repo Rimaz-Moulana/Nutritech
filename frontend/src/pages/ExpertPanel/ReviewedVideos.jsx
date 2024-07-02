@@ -76,7 +76,7 @@ function ReviewedVideos() {
         <Navbar type='expert' />
       
         <div className='flex justify-between z-9999 mt-12'>
-        <h1 className='ml-24 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
+        <h1 className='ml-12 mb-8 mt-24 h-4 text-3xl font-semibold text-sidebarGreen left-0'>
            Reviewed Videos By You
         </h1>
 

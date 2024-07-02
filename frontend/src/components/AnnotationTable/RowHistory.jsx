@@ -135,7 +135,7 @@ function RowHistory({ videoId, usertype }) {
  
 
   return (
-    <div className="text-gray-500 item-center mr-12">
+    <div className="text-gray-500 item-center mr-12 ">
       {usertype !== "industry" && (
         <div className="container">
           <div className="table-responsive">
