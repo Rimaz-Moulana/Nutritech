@@ -229,7 +229,7 @@ export default function ProductDetails() {
             imageRight: '',
             uploader : "",
         });
-    
+        window.history.back();
     }
 
     const fetchData = async () => {
@@ -267,6 +267,8 @@ export default function ProductDetails() {
             console.error('Error adding product:', error);
             setUploadStatus("Error occurred!");
         }
+
+
     }
 
   return (
@@ -386,13 +388,13 @@ export default function ProductDetails() {
                 </button>
                 </div>
             </div>
-            <div className='inline-block w-44'>
+            {/* <div className='inline-block w-44'>
             <div className='flex text-center'>
                 <button onClick={handleDraftSave} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
                     Draft
                 </button>
-                </div>
-            </div>
+                </div> 
+            </div> */}
             <div className='inline-block w-44'>
             <div className='flex text-center'>
                 <button onClick={handleSubmit} type='submit' className="z-10 w-[100%] text-white bg-gradient-to-t from-buttonGreen to-darkGreen hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-darkGreen dark:focus:ring-darkGreen shadow-lg shadow-darkGreen dark:shadow-lg dark:shadow-darkGreen font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 ">
