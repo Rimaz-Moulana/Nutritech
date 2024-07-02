@@ -122,7 +122,7 @@ function Rules() {
 
 
   return (
-    <div className='bg-backgroundGreen flex h-full min-h-screen'>
+    <div className='bg-backgroundGreen flex h-full min-h-screen text-black'>
       <div className="w-2/8 fixed h-full hidden sm:flex flex-col"> 
       <Sidebar type={type} onValueChange={handleValueChange}/>
       </div>

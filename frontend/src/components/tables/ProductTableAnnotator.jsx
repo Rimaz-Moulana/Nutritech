@@ -25,7 +25,7 @@ export default function LogTable({ products }) {
   return (
     <div className='w-full sm:text-sm sm:p-2'>
       <div className="overflow-x-auto">
-        <table className="min-w-full table-auto divide-y divide-gray-200">
+        <table className="min-w-full table-auto divide-y divide-gray-200 text-black">
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-lg font-medium text-black uppercase tracking-wider">
@@ -45,7 +45,7 @@ export default function LogTable({ products }) {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-gray-200 text-black">
             {products.map((product, index) => (
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">
@@ -83,10 +83,10 @@ export default function LogTable({ products }) {
   style={{ zIndex: 9999 }}
       >
         {selectedProduct && (
-          <div className="bg-white mt-12 rounded-lg p-4 w-full max-w-7xl z-50">
+          <div className="bg-white mt-12 rounded-lg p-4 w-full max-w-7xl z-50 text-black">
             <button className="text-white bg-gradient-to-t from-red-600 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-700 dark:focus:ring-red-700 shadow-lg shadow-red-700 dark:shadow-lg dark:shadow-red-700 font-medium rounded-lg text-sm px-5 py-1 mr-1 mb-1" onClick={closeDetailsModal}>Close</button>
-            <h1 className='font-bold text-xl mb-2'>Product Details</h1>
-            <div className="grid grid-cols-5 gap-9">
+            <h1 className='font-bold text-xl mb-2 text-black'>Product Details</h1>
+            <div className="grid grid-cols-5 gap-9 text-black">
               {Object.entries(selectedProduct).filter(([key]) => !filterKeys.includes(key)).map(([key, value]) => (
                 <div key={key} className='flex flex-col'>
                   <strong>{key}:</strong> <span>{value}</span>

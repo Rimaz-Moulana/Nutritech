@@ -5,8 +5,8 @@ export default function Log() {
   return (
     <div className='bg-backgroundGreen h-screen'>
     <BlankPage />
-            <table className="min-w-full divide-y mt-28 divide-gray-200">
-                <thead className="bg-gray-50 text-center">
+            <table className="min-w-full divide-y mt-28 divide-gray-200 text-black">
+                <thead className="bg-gray-50 text-center ">
                     <tr>
                     <th scope="col" className="px-6 py-3  text-xs font-medium text-black uppercase tracking-wider">
                         Usertype
@@ -22,7 +22,7 @@ export default function Log() {
                     </th>
                     </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y divide-gray-200 text-black">
                     <tr>
                     <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">Admin</div>
