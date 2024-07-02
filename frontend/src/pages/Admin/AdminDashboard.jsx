@@ -118,7 +118,7 @@ const UserList = () => {
         </button>
       </div>
       <div className="container mx-auto mt-10 w-[100%] h-[100%] lg:ml-72 sm:ml-20 md:ml-40">
-        <table className="min-w-[90%] mb-[30%] table-auto divide-y divide-gray-200 rounded-lg overflow-hidden border-b border-black">
+        <table className="min-w-[90%] mb-[30%] table-auto divide-y divide-gray-200 rounded-lg overflow-hidden border-b border-black text-black">
           <thead>
             <tr>
               <th className="py-3 text-justify lg:px-10 text-lg font-medium text-black uppercase whitespace-nowrap">Username</th>

@@ -40,7 +40,7 @@ export default function LogTable({ Products }) {
   return (
     <div className='w-full sm:text-sm sm:p-2'>
       <div className="overflow-x-auto">
-        <table className="min-w-full table-auto divide-y divide-gray-200">
+        <table className="min-w-full table-auto divide-y divide-gray-200 text-black">
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-lg font-medium text-black uppercase tracking-wider">

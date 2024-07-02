@@ -95,7 +95,7 @@ export default function Login() {
     return (
         <div className="md:flex">
             <div className="flex-inline md:w-1/2 justify-center items-center">
-                <img className='h-screen w-full' src={Image1} alt="login image" />
+                <img className='h-screen w-auto' src={Image1} alt="login image" />
             </div>
             <div className="space-y-4 md:w-1/2 h-screen justify-center items-center bg-gradient-to-br from-[#B8C294] to-white">
                 <img className="block pt-8 w-[40%] justify-center items-center ml-[29.5%]" src={Image} alt="logo image" />
